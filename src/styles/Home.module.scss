@@ -1,0 +1,142 @@
+// src/styles/Home.module.scss
+
+.home {
+  position: relative;
+  font-family: "Arial", sans-serif;
+  padding: 2rem;
+  background-color: #fffaf7;
+  color: #2d2d2d;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+
+  .heroText {
+    flex: 1;
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+    }
+
+    .heroButtons {
+      display: flex;
+      gap: 1rem;
+
+      .learnMore {
+        background-color: #f94f4f;
+        color: white;
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .collection {
+        border: 1px solid #333;
+        padding: 0.7rem 1.2rem;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .heroImage {
+    flex: 1;
+    img {
+      max-width: 100%;
+      border-radius: 1rem;
+    }
+  }
+}
+
+.luxury {
+  margin-top: 4rem;
+
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: #f7f4f0;
+    padding: 2rem;
+    border-radius: 1rem;
+
+    img {
+      width: 150px;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #555;
+    }
+  }
+}
+
+.infoCards {
+  margin-top: 4rem;
+  display: flex;
+  gap: 2rem;
+
+  .cardPink {
+    flex: 1;
+    background-color: #ffe3e3;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  }
+
+  .cardCircle {
+    flex: 1;
+    background-color: #f3f0ec;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+
+    .circle {
+      width: 60px;
+      height: 60px;
+      background-color: #d9d9d9;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
+}

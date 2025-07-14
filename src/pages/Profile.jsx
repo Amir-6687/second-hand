@@ -1,0 +1,170 @@
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../lib/api";
+
+export default function Profile() {
+  const { user, loading: authLoading } = useAuth();
+  const [profile, setProfile] = useState({
+    username: "",
+    first_name: "",
+    last_name: "",
+    phone: "",
+    address: "",
+  });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authLoading) return;
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+    const loadProfile = async () => {
+      try {
+        const res = await apiFetch("/profile", {
+          method: "GET",
+        });
+        if (!res.ok) throw new Error("Fehler beim Laden des Profils");
+        const data = await res.json();
+        setProfile(data);
+      } catch (err) {
+        alert("❌ Error loading profile: " + err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProfile();
+  }, [user, authLoading]);
+
+  const handleChange = (e) => {
+    setProfile({ ...profile, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      const res = await apiFetch("/profile", {
+        method: "PUT",
+        body: JSON.stringify(profile),
+      });
+      if (!res.ok) throw new Error("Fehler beim Aktualisieren des Profils");
+      alert("✅ Profile updated successfully");
+    } catch (err) {
+      alert("❌ Error updating profile: " + err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!window.confirm("Are you sure you want to delete your account?")) {
+      return;
+    }
+    try {
+      const res = await apiFetch("/profile", {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Fehler beim Löschen des Accounts");
+      alert("✅ Account deleted successfully");
+      navigate("/");
+    } catch (error) {
+      alert("❌ Error deleting account: " + error.message);
+    }
+  };
+
+  if (authLoading) {
+    return <p className="p-4 text-center">Loading authentication...</p>;
+  }
+
+  if (!user) {
+    return (
+      <p className="p-4 text-center">Please log in to view your profile.</p>
+    );
+  }
+
+  if (loading) {
+    return <p className="p-4 text-center">Loading profile...</p>;
+  }
+
+  return (
+    <div className="max-w-md mx-auto p-6 bg-white rounded shadow">
+      <h2 className="text-2xl font-bold mb-6 text-center">Profile</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block mb-1 text-sm font-medium">Username</label>
+          <input
+            name="username"
+            value={profile.username}
+            onChange={handleChange}
+            placeholder="Username"
+            className="w-full border border-gray-300 rounded px-3 py-2"
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-1 text-sm font-medium">First Name</label>
+          <input
+            name="first_name"
+            value={profile.first_name}
+            onChange={handleChange}
+            placeholder="First Name"
+            className="w-full border border-gray-300 rounded px-3 py-2"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 text-sm font-medium">Last Name</label>
+          <input
+            name="last_name"
+            value={profile.last_name}
+            onChange={handleChange}
+            placeholder="Last Name"
+            className="w-full border border-gray-300 rounded px-3 py-2"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 text-sm font-medium">Phone Number</label>
+          <input
+            name="phone"
+            value={profile.phone}
+            onChange={handleChange}
+            placeholder="Phone Number"
+            className="w-full border border-gray-300 rounded px-3 py-2"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 text-sm font-medium">Address</label>
+          <input
+            name="address"
+            value={profile.address}
+            onChange={handleChange}
+            placeholder="Address"
+            className="w-full border border-gray-300 rounded px-3 py-2"
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={saving}
+          className={`w-full py-2 px-4 rounded text-white font-medium ${
+            saving
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-pink-500 hover:bg-pink-600"
+          } transition`}
+        >
+          {saving ? "Saving..." : "Save Changes"}
+        </button>
+      </form>
+      <div className="mt-6 border-t pt-4 text-center">
+        <button
+          onClick={handleDeleteAccount}
+          className="text-red-500 hover:underline text-sm"
+        >
+          Delete Account
+        </button>
+      </div>
+    </div>
+  );
+}
