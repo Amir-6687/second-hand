@@ -15,6 +15,7 @@ export default function Admin() {
   });
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
+  const [imageUrls, setImageUrls] = useState([]); // for multiple images
 
   // گرفتن لیست محصولات
   useEffect(() => {
@@ -44,7 +45,8 @@ export default function Admin() {
           name: form.name,
           price: parseFloat(form.price),
           description: form.description,
-          image: imageUrl, // ← این خط باید باشد!
+          image: imageUrls[0] || imageUrl, // main image for backward compatibility
+          images: imageUrls, // all images
         }),
       });
       if (!res.ok) throw new Error("Error adding product");
@@ -82,12 +84,12 @@ export default function Admin() {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
-        // مهم: Content-Type را اینجا نگذار! (خود fetch برای FormData می‌سازد)
       },
       body: formData,
     });
     const data = await res.json();
     setImageUrl(data.imageUrl);
+    setImageUrls((prev) => [...prev, data.imageUrl]);
   };
 
   return (
@@ -121,8 +123,23 @@ export default function Admin() {
         <button type="button" onClick={handleImageUpload}>
           Upload Image
         </button>
-        {imageUrl && (
-          <img src={BASE_URL + imageUrl} alt="Preview" width={100} />
+        {imageUrls.length > 0 && (
+          <div className="flex gap-2 flex-wrap">
+            {imageUrls.map((url, idx) => (
+              <div key={idx} className="relative">
+                <img src={BASE_URL + url} alt="Preview" width={60} />
+                <button
+                  type="button"
+                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                  onClick={() =>
+                    setImageUrls((prev) => prev.filter((u, i) => i !== idx))
+                  }
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
         )}
         <button
           type="submit"
@@ -145,13 +162,17 @@ export default function Admin() {
                   onSubmit={async (e) => {
                     e.preventDefault();
                     try {
+                      const updateData = {
+                        name: editForm.name,
+                        price: parseFloat(editForm.price),
+                        description: editForm.description,
+                        image:
+                          (editForm.images && editForm.images[0]) || p.image,
+                        images: editForm.images || [],
+                      };
                       await apiFetch(`/products/${p._id}`, {
                         method: "PUT",
-                        body: JSON.stringify({
-                          name: editForm.name,
-                          price: parseFloat(editForm.price),
-                          description: editForm.description,
-                        }),
+                        body: JSON.stringify(updateData),
                       });
                       setEditId(null);
                       fetchProducts();
@@ -188,6 +209,54 @@ export default function Admin() {
                       }))
                     }
                   />
+                  {/* Image upload for edit */}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={async (e) => {
+                      const files = Array.from(e.target.files);
+                      for (const file of files) {
+                        const formData = new FormData();
+                        formData.append("image", file);
+                        const res = await fetch(BASE_URL + "/products/upload", {
+                          method: "POST",
+                          headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                              "token"
+                            )}`,
+                          },
+                          body: formData,
+                        });
+                        const data = await res.json();
+                        setEditForm((f) => ({
+                          ...f,
+                          images: [...(f.images || []), data.imageUrl],
+                        }));
+                      }
+                    }}
+                  />
+                  {editForm.images && editForm.images.length > 0 && (
+                    <div className="flex gap-2 flex-wrap">
+                      {editForm.images.map((url, idx) => (
+                        <div key={idx} className="relative">
+                          <img src={BASE_URL + url} alt="Preview" width={60} />
+                          <button
+                            type="button"
+                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                            onClick={() =>
+                              setEditForm((f) => ({
+                                ...f,
+                                images: f.images.filter((u, i) => i !== idx),
+                              }))
+                            }
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div className="flex gap-2 mt-1">
                     <button
                       type="submit"

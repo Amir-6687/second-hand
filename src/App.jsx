@@ -21,9 +21,50 @@ import MobileBottomNav from "./components/MobileBottomNav";
 import { WishlistProvider } from "./context/WishlistContext";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
-import { HiOutlineUser } from "react-icons/hi"; // Heroicons
-// یا
-// import { FaUserCircle } from "react-icons/fa"; // FontAwesome
+import { CiUser } from "react-icons/ci";
+import { RiAdminLine, RiUserLine } from "react-icons/ri";
+
+// import { HiOutlineUser } from "react-icons/hi";
+
+// Tooltip for Admin icon (desktop only)
+function AdminIconWithTooltip() {
+  const [show, setShow] = useState(false);
+  return (
+    <div
+      className="relative flex items-center md:flex hidden"
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      tabIndex={0}
+    >
+      <RiAdminLine size={18} className="cursor-pointer" />
+      {show && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/70 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
+          Admin
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Tooltip for User icon (desktop only)
+function UserIconWithTooltip() {
+  const [show, setShow] = useState(false);
+  return (
+    <div
+      className="relative flex items-center md:flex hidden"
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      tabIndex={0}
+    >
+      <RiUserLine className="w-5 h-5 cursor-pointer" />
+      {show && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/70 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
+          User
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Navigation() {
   const { user, username, role, logout } = useAuth();
@@ -60,11 +101,11 @@ function Navigation() {
             const names = [
               "Home",
               "Services",
-              "Produkte",
-              "Über Uns",
+              "Products",
+              "About Us",
               "Checkout",
-              "Warenkorb",
-              "Favoriten", // ← این را اضافه کن
+              "Cart", // ← English
+              "Favorites", // ← English
             ];
             return (
               <NavLink
@@ -91,13 +132,17 @@ function Navigation() {
                 onClick={closeMenu}
                 className="hover:text-pink-600 flex items-center gap-1"
               >
-                <HiOutlineUser className="w-5 h-5" />
+                <UserIconWithTooltip />
                 {username || "Profile"}
               </NavLink>
 
               {role === "admin" && (
-                <NavLink to="/admin" onClick={closeMenu}>
-                  Admin
+                <NavLink
+                  to="/admin"
+                  onClick={closeMenu}
+                  className="md:flex hidden"
+                >
+                  <AdminIconWithTooltip />
                 </NavLink>
               )}
               <button
@@ -189,10 +234,10 @@ function Navigation() {
               const names = [
                 "Home",
                 "Services",
-                "Produkte",
-                "Über Uns",
+                "Products",
+                "About Us",
                 "Checkout",
-                "Warenkorb",
+                "Cart",
               ];
               return (
                 <NavLink
@@ -219,12 +264,12 @@ function Navigation() {
                   onClick={closeMenu}
                   className="hover:text-pink-600 flex items-center gap-1"
                 >
-                  <HiOutlineUser className="w-5 h-5" />
+                  <CiUser className="w-5 h-5" />
                   {username || "Profile"}
                 </NavLink>
                 {role === "admin" && (
                   <NavLink to="/admin" onClick={closeMenu}>
-                    Admin
+                    <RiAdminLine />
                   </NavLink>
                 )}
                 <button

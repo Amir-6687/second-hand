@@ -43,8 +43,8 @@ router.post("/", authMiddleware, async (req, res) => {
   try {
     if (req.user.role !== "admin")
       return res.status(403).json({ error: "Access denied" });
-    const { name, price, description, image } = req.body;
-    const product = new Product({ name, price, description, image });
+    const { name, price, description, image, images } = req.body;
+    const product = new Product({ name, price, description, image, images });
     await product.save();
     res.status(201).json(product);
   } catch (err) {
@@ -99,10 +99,10 @@ router.put("/:id", authMiddleware, async (req, res) => {
   try {
     if (req.user.role !== "admin")
       return res.status(403).json({ error: "Access denied" });
-    const { name, price, description, image } = req.body;
+    const { name, price, description, image, images } = req.body;
     const product = await Product.findByIdAndUpdate(
       req.params.id,
-      { name, price, description, image },
+      { name, price, description, image, images },
       { new: true, runValidators: true }
     );
     if (!product) return res.status(404).json({ error: "Product not found" });

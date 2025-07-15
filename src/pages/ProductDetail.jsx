@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import StarRating from "../components/StarRating";
 import { apiFetch } from "../lib/api";
 import { BASE_URL } from "../lib/api";
+import StarRating from "../components/StarRating";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -53,47 +53,74 @@ export default function ProductDetail() {
       if (!res.ok) throw new Error(data.error || "Failed to submit rating");
       setUserRating(rating);
       setFeedback("Thank you for your rating!");
-      // (اختیاری) می‌توانی دوباره محصول را fetch کنی تا avgRating آپدیت شود
     } catch (err) {
       setFeedback(err.message);
     }
   };
 
-  if (loading) return <div>Loading product...</div>;
-  if (!product) return <div>Product not found.</div>;
+  if (loading) return <div className="text-center py-20">Loading...</div>;
+  if (!product)
+    return <div className="text-center py-20">Product not found.</div>;
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white rounded shadow">
-      {product.image && (
-        <img
-          src={BASE_URL + product.image}
-          alt={product.name}
-          className="w-full h-64 object-cover mb-4 rounded"
-        />
-      )}
-      <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
-      <p className="text-gray-600 mb-4">{product.description}</p>
-      <div className="mb-4">
-        <span className="font-semibold">Average rating: </span>
-        <StarRating value={avgRating || 0} disabled onChange={() => {}} />
-        <span className="ml-2 text-sm text-gray-500">
-          {avgRating ? `${avgRating} / 5` : "No ratings yet"}
-        </span>
-      </div>
-      <div className="mb-4">
-        <span className="font-semibold">Your rating: </span>
-        <StarRating
-          value={userRating}
-          onChange={hasBought ? handleRate : () => {}}
-          disabled={!hasBought}
-        />
-        {!hasBought && (
-          <span className="ml-2 text-xs text-gray-400">
-            (You can only rate products you have purchased)
-          </span>
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
+      <div className="max-w-4xl w-full flex flex-col md:flex-row items-center md:items-start gap-10 py-12">
+        {/* مشخصات سمت چپ */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start order-2 md:order-1 md:mt-80">
+          <h1 className="text-3xl font-bold mb-4 text-center md:text-left">
+            {product.name}
+          </h1>
+          <p className="text-lg text-gray-700 mb-6 text-center md:text-left">
+            {product.description}
+          </p>
+          <div className="text-2xl font-semibold text-gray-900 mb-8 text-center md:text-left">
+            €{product.price}
+          </div>
+        </div>
+        {/* عکس محصول سمت راست */}
+        {product.image && (
+          <div className="w-full md:w-1/2 flex justify-center md:justify-end order-1 md:order-2">
+            <img
+              src={BASE_URL + product.image}
+              alt={product.name}
+              className="w-full max-w-md object-contain rounded-lg shadow"
+              style={{ background: "#f8f8f8" }}
+            />
+          </div>
         )}
       </div>
-      {feedback && <div className="mt-2 text-sm text-blue-600">{feedback}</div>}
+      {/* Average and user rating at the bottom center */}
+      <div className="flex flex-col items-center mt-2 mb-8">
+        <div className="mb-2 flex flex-col items-center">
+          <span className="font-semibold mb-1">Average rating:</span>
+          <StarRating
+            value={avgRating || 0}
+            disabled
+            onChange={() => {}}
+            size={20}
+          />
+          <span className="text-xs text-gray-500 mt-1">
+            {avgRating ? `${avgRating} / 5` : "No ratings yet"}
+          </span>
+        </div>
+        <div className="mb-2 flex flex-col items-center">
+          <span className="font-semibold mb-1">Your rating:</span>
+          <StarRating
+            value={userRating}
+            onChange={hasBought ? handleRate : () => {}}
+            disabled={!hasBought}
+            size={20}
+          />
+          {!hasBought && (
+            <span className="ml-2 text-xs text-gray-400">
+              (You can only rate products you have purchased)
+            </span>
+          )}
+        </div>
+        {feedback && (
+          <div className="mt-2 text-sm text-blue-600">{feedback}</div>
+        )}
+      </div>
     </div>
   );
 }
