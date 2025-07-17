@@ -21,7 +21,13 @@ import MobileBottomNav from "./components/MobileBottomNav";
 import { WishlistProvider } from "./context/WishlistContext";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
-import { CiUser } from "react-icons/ci";
+import {
+  CiUser,
+  CiLogin,
+  CiLogout,
+  CiSearch,
+  CiShoppingBasket,
+} from "react-icons/ci";
 import { RiAdminLine, RiUserLine } from "react-icons/ri";
 
 // import { HiOutlineUser } from "react-icons/hi";
@@ -66,9 +72,102 @@ function UserIconWithTooltip() {
   );
 }
 
+// Tooltip for Logout icon (desktop only)
+function LogoutIconWithTooltip({ onClick }) {
+  const [show, setShow] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      className="relative flex items-center text-red-500 hover:underline md:flex hidden"
+      style={{ background: "none", border: "none", padding: 0 }}
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      tabIndex={0}
+      type="button"
+    >
+      <CiLogout size={28} />
+      {show && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
+          Logout
+        </div>
+      )}
+    </button>
+  );
+}
+
+// Tooltip for Login icon (desktop only)
+function LoginIconWithTooltip() {
+  const [show, setShow] = useState(false);
+  return (
+    <NavLink
+      to="/login"
+      className="relative flex items-center md:flex hidden"
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      tabIndex={0}
+    >
+      <CiLogin size={28} />
+      {show && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
+          Login
+        </div>
+      )}
+    </NavLink>
+  );
+}
+
+// Tooltip for Search icon (desktop only)
+function SearchIconWithTooltip({ onClick }) {
+  const [show, setShow] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      className="relative flex items-center md:flex hidden"
+      style={{ background: "none", border: "none", padding: 0, marginRight: 4 }}
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      tabIndex={0}
+      type="button"
+    >
+      <CiSearch size={28} />
+      {show && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
+          Search
+        </div>
+      )}
+    </button>
+  );
+}
+
+// Tooltip for Shop/Cart icon (desktop only)
+function ShopIconWithTooltip({ onClick }) {
+  const [show, setShow] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      className="relative flex items-center md:flex hidden"
+      style={{ background: "none", border: "none", padding: 0, marginLeft: 4 }}
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      tabIndex={0}
+      type="button"
+    >
+      <CiShoppingBasket size={28} />
+      {show && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
+          Shop
+        </div>
+      )}
+    </button>
+  );
+}
+
 function Navigation() {
   const { user, username, role, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = window.location
+    ? (path) => (window.location.href = path)
+    : () => {};
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
@@ -89,41 +188,33 @@ function Navigation() {
 
         {/* منو - فقط دسکتاپ */}
         <div className="hidden md:flex items-center gap-6">
-          {[
-            "/",
-            "/services",
-            "/products",
-            "/about",
-            "/checkout",
-            "/cart",
-            "/favorites",
-          ].map((path, idx) => {
-            const names = [
-              "Home",
-              "Services",
-              "Products",
-              "About Us",
-              "Checkout",
-              "Cart", // ← English
-              "Favorites", // ← English
-            ];
-            return (
-              <NavLink
-                key={path}
-                to={path}
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "underline font-semibold" : ""
-                  } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
-                }
-              >
-                {names[idx]}
-              </NavLink>
-            );
-          })}
+          {["/", "/services", "/about", "/cart", "/favorites"].map(
+            (path, idx) => {
+              const names = [
+                "Home",
+                "Services",
+                "About Us",
+                "Cart",
+                "Favorites",
+              ];
+              return (
+                <NavLink
+                  key={path}
+                  to={path}
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "underline font-semibold" : ""
+                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
+                  }
+                >
+                  {names[idx]}
+                </NavLink>
+              );
+            }
+          )}
         </div>
 
-        {/* Login/Register - دسکتاپ */}
+        {/* Login/Search/Cart - دسکتاپ */}
         <div className="hidden md:flex items-center gap-4 text-sm">
           {user ? (
             <>
@@ -145,24 +236,18 @@ function Navigation() {
                   <AdminIconWithTooltip />
                 </NavLink>
               )}
-              <button
+              <LogoutIconWithTooltip
                 onClick={() => {
                   logout();
                   closeMenu();
                 }}
-                className="text-red-500 hover:underline"
-              >
-                Logout
-              </button>
+              />
             </>
           ) : (
             <>
-              <NavLink to="/login" onClick={closeMenu}>
-                Login
-              </NavLink>
-              <NavLink to="/register" onClick={closeMenu}>
-                Registrieren
-              </NavLink>
+              <SearchIconWithTooltip onClick={() => navigate("/search")} />
+              <LoginIconWithTooltip />
+              <ShopIconWithTooltip onClick={() => navigate("/cart")} />
             </>
           )}
         </div>
@@ -229,34 +314,25 @@ function Navigation() {
       pt-24 md:hidden
     `}
         >
-          {["/", "/services", "/products", "/about", "/checkout", "/cart"].map(
-            (path, idx) => {
-              const names = [
-                "Home",
-                "Services",
-                "Products",
-                "About Us",
-                "Checkout",
-                "Cart",
-              ];
-              return (
-                <NavLink
-                  key={path}
-                  to={path}
-                  onClick={closeMenu}
-                  className={({ isActive }) =>
-                    `${
-                      isActive ? "underline font-semibold" : ""
-                    } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
-                  }
-                >
-                  {names[idx]}
-                </NavLink>
-              );
-            }
-          )}
+          {["/", "/services", "/about", "/cart"].map((path, idx) => {
+            const names = ["Home", "Services", "About Us", "Cart"];
+            return (
+              <NavLink
+                key={path}
+                to={path}
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "underline font-semibold" : ""
+                  } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
+                }
+              >
+                {names[idx]}
+              </NavLink>
+            );
+          })}
 
-          <div className="mt-4 flex flex-col items-center gap-2 text-sm">
+          <div className="mt-4 flex flex-col items-center gap-2 text-sm justify-center">
             {user ? (
               <>
                 <NavLink
@@ -277,18 +353,20 @@ function Navigation() {
                     logout();
                     closeMenu();
                   }}
-                  className="text-red-500 hover:underline"
+                  className="text-red-500 hover:underline flex items-center justify-center mt-6"
+                  style={{ background: "none", border: "none", padding: 0 }}
                 >
-                  Logout
+                  <CiLogout size={28} />
                 </button>
               </>
             ) : (
               <>
-                <NavLink to="/login" onClick={closeMenu}>
-                  Login
-                </NavLink>
-                <NavLink to="/register" onClick={closeMenu}>
-                  Registrieren
+                <NavLink
+                  to="/login"
+                  onClick={closeMenu}
+                  className="flex items-center justify-center"
+                >
+                  <CiLogin size={28} />
                 </NavLink>
               </>
             )}
@@ -315,10 +393,10 @@ export default function App() {
               <div className="hidden md:block absolute top-0 bottom-0 right-[15%] w-px bg-gray-300 z-10" />
 
               {/* محتوای اصلی با فاصله ۱۵٪ از چپ و راست */}
-              <div className="px-4 md:px-[15%]">
+              <div className="px-0 md:px-[15%]">
                 <Navigation />
 
-                <main className="py-6">
+                <main>
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/services" element={<Services />} />

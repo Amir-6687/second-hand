@@ -1,13 +1,87 @@
-// src/styles/Home.module.scss
-
 .home {
   position: relative;
   font-family: "Arial", sans-serif;
-  padding: 2rem;
+  padding: 0;
   background-color: #fffaf7;
   color: #2d2d2d;
 }
 
+// === Banner Section ===
+.bannerSection {
+  position: relative;
+  width: 100%;
+  height: 470px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  .bannerImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: brightness(0.85);
+  }
+
+  .bannerBox {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 320px;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    .bannerMainBtn {
+      background: #00897b;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.8rem 2.5rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #00695c;
+      }
+    }
+
+    .bannerSecondaryBtn {
+      background: transparent;
+      color: #00897b;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: underline;
+      width: 100%;
+
+      &:hover {
+        color: #00695c;
+      }
+    }
+  }
+}
+
+// === Hero Section ===
 .hero {
   display: flex;
   justify-content: space-between;
@@ -55,6 +129,7 @@
 
   .heroImage {
     flex: 1;
+
     img {
       max-width: 100%;
       border-radius: 1rem;
@@ -62,6 +137,7 @@
   }
 }
 
+// === Luxury Section ===
 .luxury {
   margin-top: 4rem;
 
@@ -91,6 +167,7 @@
   }
 }
 
+// === Info Cards ===
 .infoCards {
   margin-top: 4rem;
   display: flex;
@@ -138,5 +215,200 @@
       font-size: 1rem;
       font-weight: 600;
     }
+  }
+}
+
+.suggestedSection {
+  margin: 2.5rem 0 1.5rem 0;
+  text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+.suggestedSectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  text-align: left;
+  color: #222;
+}
+.suggestedTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+.suggestedGrid {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+  width: 100%;
+  max-width: 100%;
+  min-height: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.suggestedCard {
+  width: 220px;
+  min-width: 150px;
+  height: 340px;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s;
+  &:hover {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.suggestedImageWrapper {
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
+  position: relative;
+}
+.suggestedImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.suggestedImageFade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.suggestedCard:hover .suggestedImageFade,
+.suggestedCard:focus .suggestedImageFade {
+  opacity: 1;
+}
+.suggestedCard:hover .suggestedImage,
+.suggestedCard:focus .suggestedImage {
+  transform: scale(1.07);
+}
+
+.suggestedAllBtn {
+  display: block;
+  margin: 7rem auto 7rem auto;
+  background: linear-gradient(90deg, #00897b 0%, #00bfae 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 340px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  &:hover {
+    background: linear-gradient(90deg, #00bfae 0%, #00897b 100%);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
+  }
+}
+
+@media (max-width: 768px) {
+  .bannerSection {
+    height: 470px; // ارتفاع کمتر برای موبایل
+
+    .bannerBox {
+      min-width: 200px;
+      max-width: 90vw;
+      padding: 1.2rem 1rem;
+      top: 75%; // پایین‌تر
+      left: 70%;
+      transform: translate(-50%, -50%);
+      border-radius: 0.8rem;
+
+      h2 {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .hero {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding-top: 100px;
+
+    .heroText {
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 0.7rem;
+        text-align: left;
+      }
+      p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+      .heroButtons {
+        flex-direction: column;
+        gap: 0.7rem;
+        align-items: stretch;
+        button,
+        a button {
+          width: 100%;
+          font-size: 1rem;
+          padding: 0.7rem 0;
+        }
+      }
+    }
+
+    .heroImage {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 0.5rem;
+      img {
+        width: 260px;
+        height: 260px;
+        object-fit: cover;
+        // border-radius: 1.5rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
+
+  .suggestedGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    justify-items: center;
+    margin-bottom: 1.2rem;
+    width: 100%;
+    max-width: 100vw;
+    min-height: 260px;
+  }
+  .suggestedCard {
+    width: 95%;
+    min-width: 0;
+    max-width: 220px;
+    height: 240px;
+  }
+  .suggestedImageWrapper {
+    height: 75%;
+  }
+}
+
+@media (min-width: 769px) {
+  .suggestedCard {
+    width: 286px; // 220px * 1.3
+    height: 442px; // 340px * 1.3
+  }
+  .suggestedImageWrapper {
+    height: 104%; // 80% * 1.3 = 104%
   }
 }
