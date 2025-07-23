@@ -137,6 +137,41 @@ export default function ProductDetail() {
           <div className="text-2xl font-semibold text-gray-900 mb-8 text-center md:text-left">
             €{product.price}
           </div>
+
+          {/* جزئیات محصول */}
+          <div className="bg-gray-50 rounded-lg p-4 mb-8 w-full max-w-lg mx-auto md:mx-0">
+            <div className="mb-2">
+              <span className="font-bold">Zustand:</span>{" "}
+              <span>{product.zustand || "-"}</span>
+            </div>
+            <div className="mb-2">
+              <span className="font-bold">Size (cm):</span>{" "}
+              <span>
+                {product.width || "-"} x {product.depth || "-"} x{" "}
+                {product.height || "-"}
+              </span>
+            </div>
+            <div className="mb-2">
+              <span className="font-bold">Brand:</span>{" "}
+              <span>{product.brand || "-"}</span>
+            </div>
+            <div className="mb-2">
+              <span className="font-bold">Model:</span>{" "}
+              <span>{product.model || "-"}</span>
+            </div>
+            <div className="mb-2">
+              <span className="font-bold">Color:</span>{" "}
+              <span>{product.color || "-"}</span>
+            </div>
+            <div className="mb-2">
+              <span className="font-bold">Material:</span>{" "}
+              <span>{product.material || "-"}</span>
+            </div>
+            <div className="mb-2">
+              <span className="font-bold">Pattern:</span>{" "}
+              <span>{product.pattern || "-"}</span>
+            </div>
+          </div>
         </div>
 
         {/* بخش تصاویر سمت راست */}

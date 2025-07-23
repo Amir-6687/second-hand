@@ -6,7 +6,20 @@ export default function Admin() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [form, setForm] = useState({ name: "", price: "", description: "" });
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    description: "",
+    zustand: "",
+    width: "",
+    depth: "",
+    height: "",
+    brand: "",
+    model: "",
+    color: "",
+    material: "",
+    pattern: "",
+  });
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({
     name: "",
@@ -45,6 +58,15 @@ export default function Admin() {
           name: form.name,
           price: parseFloat(form.price),
           description: form.description,
+          zustand: form.zustand,
+          width: form.width,
+          depth: form.depth,
+          height: form.height,
+          brand: form.brand,
+          model: form.model,
+          color: form.color,
+          material: form.material,
+          pattern: form.pattern,
           image: imageUrls[0] || imageUrl, // main image for backward compatibility
           images: imageUrls, // all images
         }),
@@ -96,6 +118,7 @@ export default function Admin() {
     <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow mt-10">
       <h2 className="text-2xl font-bold mb-4">Product Management</h2>
       <form onSubmit={handleAdd} className="mb-6 space-y-2">
+        <div className="font-bold">Product Name</div>
         <input
           className="w-full border p-2 rounded"
           placeholder="Product Name"
@@ -103,6 +126,8 @@ export default function Admin() {
           onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
           required
         />
+
+        <div className="font-bold">Price</div>
         <input
           className="w-full border p-2 rounded"
           placeholder="Price"
@@ -111,6 +136,8 @@ export default function Admin() {
           onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))}
           required
         />
+
+        <div className="font-bold">Description</div>
         <textarea
           className="w-full border p-2 rounded"
           placeholder="Description"
@@ -119,6 +146,80 @@ export default function Admin() {
             setForm((f) => ({ ...f, description: e.target.value }))
           }
         />
+
+        <div className="font-bold">Zustand</div>
+        <select
+          className="w-full border p-2 rounded"
+          value={form.zustand}
+          onChange={(e) => setForm((f) => ({ ...f, zustand: e.target.value }))}
+          required
+        >
+          <option value="">Select Zustand</option>
+          <option value="New">New</option>
+          <option value="Like New">Like New</option>
+          <option value="Very Good">Very Good</option>
+          <option value="Good">Good</option>
+          <option value="Acceptable">Acceptable</option>
+          <option value="For Parts / Not Working">For Parts / Not Working</option>
+        </select>
+
+        <div className="font-bold">Size (cm)</div>
+        <div className="flex gap-2">
+          <input
+            className="border p-2 rounded w-1/3"
+            placeholder="Width"
+            type="number"
+            value={form.width}
+            onChange={(e) => setForm((f) => ({ ...f, width: e.target.value }))}
+          />
+          <input
+            className="border p-2 rounded w-1/3"
+            placeholder="Depth"
+            type="number"
+            value={form.depth}
+            onChange={(e) => setForm((f) => ({ ...f, depth: e.target.value }))}
+          />
+          <input
+            className="border p-2 rounded w-1/3"
+            placeholder="Height"
+            type="number"
+            value={form.height}
+            onChange={(e) => setForm((f) => ({ ...f, height: e.target.value }))}
+          />
+        </div>
+
+        <div className="font-bold">Details</div>
+        <input
+          className="w-full border p-2 rounded"
+          placeholder="Brand"
+          value={form.brand}
+          onChange={(e) => setForm((f) => ({ ...f, brand: e.target.value }))}
+        />
+        <input
+          className="w-full border p-2 rounded"
+          placeholder="Model"
+          value={form.model}
+          onChange={(e) => setForm((f) => ({ ...f, model: e.target.value }))}
+        />
+        <input
+          className="w-full border p-2 rounded"
+          placeholder="Color"
+          value={form.color}
+          onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
+        />
+        <input
+          className="w-full border p-2 rounded"
+          placeholder="Material"
+          value={form.material}
+          onChange={(e) => setForm((f) => ({ ...f, material: e.target.value }))}
+        />
+        <input
+          className="w-full border p-2 rounded"
+          placeholder="Pattern"
+          value={form.pattern}
+          onChange={(e) => setForm((f) => ({ ...f, pattern: e.target.value }))}
+        />
+
         <input type="file" accept="image/*" onChange={handleImageChange} />
         <button type="button" onClick={handleImageUpload}>
           Upload Image
