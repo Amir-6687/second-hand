@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  NavLink,
+  useLocation,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import About from "./pages/About";
@@ -380,6 +386,48 @@ function Navigation() {
   );
 }
 
+// --- Breadcrumb Component ---
+function Breadcrumb() {
+  const location = useLocation();
+  const pathnames = location.pathname.split("/").filter((x) => x);
+  return (
+    <nav
+      className="text-xs sm:text-sm px-4 py-2 bg-gray-50 text-gray-500"
+      aria-label="breadcrumb"
+    >
+      <ol className="list-none flex flex-wrap gap-1">
+        <li>
+          <NavLink to="/" className="hover:underline text-pink-500">
+            Home
+          </NavLink>
+          {pathnames.length > 0 && <span className="mx-1">/</span>}
+        </li>
+        {pathnames.map((name, idx) => {
+          const routeTo = "/" + pathnames.slice(0, idx + 1).join("/");
+          const isLast = idx === pathnames.length - 1;
+          return (
+            <li key={routeTo} className="flex items-center">
+              {!isLast ? (
+                <NavLink
+                  to={routeTo}
+                  className="hover:underline text-pink-500 capitalize"
+                >
+                  {decodeURIComponent(name)}
+                </NavLink>
+              ) : (
+                <span className="capitalize text-gray-700">
+                  {decodeURIComponent(name)}
+                </span>
+              )}
+              {!isLast && <span className="mx-1">/</span>}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+}
+
 export default function App() {
   return (
     <AuthProvider>
@@ -395,7 +443,7 @@ export default function App() {
               {/* محتوای اصلی با فاصله ۱۵٪ از چپ و راست */}
               <div className="px-0 md:px-[15%]">
                 <Navigation />
-
+                <Breadcrumb />
                 <main>
                   <Routes>
                     <Route path="/" element={<Home />} />

@@ -6,6 +6,8 @@ import { useWishlist } from "../context/WishlistContext";
 import { FiChevronDown } from "react-icons/fi";
 import { RiArrowRightWideFill, RiArrowLeftWideFill } from "react-icons/ri";
 
+const SHIPPING_COST = 4.99; // هزینه ثابت ارسال
+
 export default function Cart() {
   const {
     items,
@@ -16,10 +18,12 @@ export default function Cart() {
   } = useCart();
   const { toggleWishlist } = useWishlist();
 
-  const total = items.reduce(
+  const subtotal = items.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
   );
+  const shippingCost = subtotal > 0 ? SHIPPING_COST : 0;
+  const total = subtotal + shippingCost;
 
   if (items.length === 0) {
     return (
@@ -44,10 +48,10 @@ export default function Cart() {
         <span className="text-xl font-bold">Cart</span>
         <Link
           to="/checkout"
-          className="bg-[#e11d48] hover:bg-[#be123c] text-white font-semibold rounded-lg px-6 py-2 text-base shadow transition"
+          className="bg-[#DC2525] hover:bg-[#be123c] text-white font-semibold rounded-lg px-3 py-3 text-base shadow transition"
           style={{ minWidth: 120, textAlign: "center" }}
         >
-          Checkout
+          Checkout <RiArrowRightWideFill className="inline ml-1" size={20} />
         </Link>
       </div>
 
@@ -177,15 +181,29 @@ export default function Cart() {
         <hr className="border-t-4 border-gray-300 mb-6" />
       </div>
 
-      <div className="mt-6 flex justify-between items-center pt-4">
-        <p className="text-lg font-bold">Total: €{total.toFixed(2)}</p>
+      <div className="mt-6 space-y-2 pt-4">
+        <div className="flex justify-between">
+          <p className="text-gray-600">Subtotal:</p>
+          <p className="font-medium">€{subtotal.toFixed(2)}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-gray-600">Shipping costs:</p>
+          <p className="font-medium">€{shippingCost.toFixed(2)}</p>
+        </div>
+        <div className="flex justify-between border-t border-gray-300 pt-2 mt-2">
+          <p className="text-lg font-bold">Total:</p>
+          <p className="text-lg font-bold">€{total.toFixed(2)}</p>
+          <p className="text-xs font-light text-gray-500 text-center mt-1">
+            All prices are in euros and include VAT
+          </p>
+        </div>
       </div>
 
       {/* Mobile bottom action buttons */}
       <div className="md:hidden mt-6 flex flex-col gap-4">
         <Link
           to="/checkout"
-          className="w-full flex items-center justify-between bg-[#e11d48] hover:bg-[#be123c] text-white font-bold text-lg rounded-2xl py-4 px-6 shadow transition"
+          className="w-full flex items-center justify-between bg-[#DC2525] hover:bg-[#be123c] text-white font-bold text-lg rounded-2xl py-4 px-6 shadow transition"
           style={{ minHeight: 56 }}
         >
           <span className="mx-auto">Checkout</span>
