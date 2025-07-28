@@ -58,4 +58,28 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// ایجاد کاربر ادمین (فقط برای تست)
+router.post("/create-admin", async (req, res) => {
+  try {
+    const { username, email, password, first_name, last_name } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser)
+      return res.status(400).json({ error: "Email already exists" });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({
+      username,
+      email,
+      password: hashedPassword,
+      first_name,
+      last_name,
+      role: "admin",
+    });
+    await user.save();
+    res.status(201).json({ message: "Admin user created successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

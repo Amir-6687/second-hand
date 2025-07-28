@@ -33,6 +33,9 @@ app.use("/profile", profileRoutes);
 const wishlistRoutes = require("./routes/wishlist");
 app.use("/wishlist", wishlistRoutes);
 
+const userRoutes = require("./routes/users");
+app.use("/users", userRoutes);
+
 app.post("/create-payment-intent", async (req, res) => {
   const { amount } = req.body;
 

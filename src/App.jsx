@@ -19,6 +19,7 @@ import Register from "./pages/Register";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Admin from "./pages/Admin";
+import AdminDashboard from "./pages/AdminDashboard";
 import Footer from "./components/Footer";
 import logo from "./assets/logo.png";
 import Profile from "./pages/Profile";
@@ -234,13 +235,22 @@ function Navigation() {
               </NavLink>
 
               {role === "admin" && (
-                <NavLink
-                  to="/admin"
-                  onClick={closeMenu}
-                  className="md:flex hidden"
-                >
-                  <AdminIconWithTooltip />
-                </NavLink>
+                <>
+                  <NavLink
+                    to="/admin"
+                    onClick={closeMenu}
+                    className="md:flex hidden"
+                  >
+                    <AdminIconWithTooltip />
+                  </NavLink>
+                  <NavLink
+                    to="/admin-dashboard"
+                    onClick={closeMenu}
+                    className="md:flex hidden text-blue-600 hover:text-blue-800"
+                  >
+                    Dashboard
+                  </NavLink>
+                </>
               )}
               <LogoutIconWithTooltip
                 onClick={() => {
@@ -350,9 +360,18 @@ function Navigation() {
                   {username || "Profile"}
                 </NavLink>
                 {role === "admin" && (
-                  <NavLink to="/admin" onClick={closeMenu}>
-                    <RiAdminLine />
-                  </NavLink>
+                  <>
+                    <NavLink to="/admin" onClick={closeMenu}>
+                      <RiAdminLine />
+                    </NavLink>
+                    <NavLink
+                      to="/admin-dashboard"
+                      onClick={closeMenu}
+                      className="text-blue-600"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </>
                 )}
                 <button
                   onClick={() => {
@@ -470,6 +489,14 @@ export default function App() {
                       element={
                         <ProtectedRoute requiredRole="admin">
                           <Admin />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/admin-dashboard"
+                      element={
+                        <ProtectedRoute requiredRole="admin">
+                          <AdminDashboard />
                         </ProtectedRoute>
                       }
                     />

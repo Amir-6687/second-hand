@@ -25,6 +25,16 @@ export default function Admin() {
     name: "",
     price: "",
     description: "",
+    zustand: "",
+    width: "",
+    depth: "",
+    height: "",
+    brand: "",
+    model: "",
+    color: "",
+    material: "",
+    pattern: "",
+    images: [],
   });
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -160,7 +170,9 @@ export default function Admin() {
           <option value="Very Good">Very Good</option>
           <option value="Good">Good</option>
           <option value="Acceptable">Acceptable</option>
-          <option value="For Parts / Not Working">For Parts / Not Working</option>
+          <option value="For Parts / Not Working">
+            For Parts / Not Working
+          </option>
         </select>
 
         <div className="font-bold">Size (cm)</div>
@@ -267,6 +279,15 @@ export default function Admin() {
                         name: editForm.name,
                         price: parseFloat(editForm.price),
                         description: editForm.description,
+                        zustand: editForm.zustand,
+                        width: editForm.width,
+                        depth: editForm.depth,
+                        height: editForm.height,
+                        brand: editForm.brand,
+                        model: editForm.model,
+                        color: editForm.color,
+                        material: editForm.material,
+                        pattern: editForm.pattern,
                         image:
                           (editForm.images && editForm.images[0]) || p.image,
                         images: editForm.images || [],
@@ -308,6 +329,93 @@ export default function Admin() {
                         ...f,
                         description: e.target.value,
                       }))
+                    }
+                  />
+                  <select
+                    className="border p-1 rounded"
+                    value={editForm.zustand}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, zustand: e.target.value }))
+                    }
+                    required
+                  >
+                    <option value="">Select Zustand</option>
+                    <option value="New">New</option>
+                    <option value="Like New">Like New</option>
+                    <option value="Very Good">Very Good</option>
+                    <option value="Good">Good</option>
+                    <option value="Acceptable">Acceptable</option>
+                    <option value="For Parts / Not Working">
+                      For Parts / Not Working
+                    </option>
+                  </select>
+                  <div className="flex gap-2">
+                    <input
+                      className="border p-1 rounded w-1/3"
+                      placeholder="Width"
+                      type="number"
+                      value={editForm.width}
+                      onChange={(e) =>
+                        setEditForm((f) => ({ ...f, width: e.target.value }))
+                      }
+                    />
+                    <input
+                      className="border p-1 rounded w-1/3"
+                      placeholder="Depth"
+                      type="number"
+                      value={editForm.depth}
+                      onChange={(e) =>
+                        setEditForm((f) => ({ ...f, depth: e.target.value }))
+                      }
+                    />
+                    <input
+                      className="border p-1 rounded w-1/3"
+                      placeholder="Height"
+                      type="number"
+                      value={editForm.height}
+                      onChange={(e) =>
+                        setEditForm((f) => ({ ...f, height: e.target.value }))
+                      }
+                    />
+                  </div>
+                  <input
+                    className="border p-1 rounded"
+                    placeholder="Brand"
+                    value={editForm.brand}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, brand: e.target.value }))
+                    }
+                  />
+                  <input
+                    className="border p-1 rounded"
+                    placeholder="Model"
+                    value={editForm.model}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, model: e.target.value }))
+                    }
+                  />
+                  <input
+                    className="border p-1 rounded"
+                    placeholder="Color"
+                    value={editForm.color}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, color: e.target.value }))
+                    }
+                  />
+                  <input
+                    className="border p-1 rounded"
+                    placeholder="Material"
+                    value={editForm.material}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, material: e.target.value }))
+                    }
+                  />
+                  <input
+                    className="border p-1 rounded"
+                    placeholder="Pattern"
+                    value={editForm.pattern}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, pattern: e.target.value }))
                     }
                   />
                   {/* Image upload for edit */}
@@ -391,6 +499,16 @@ export default function Admin() {
                           name: p.name,
                           price: p.price,
                           description: p.description,
+                          zustand: p.zustand || "",
+                          width: p.width || "",
+                          depth: p.depth || "",
+                          height: p.height || "",
+                          brand: p.brand || "",
+                          model: p.model || "",
+                          color: p.color || "",
+                          material: p.material || "",
+                          pattern: p.pattern || "",
+                          images: p.images || [],
                         });
                       }}
                       className="text-blue-600 hover:underline"
