@@ -21,6 +21,7 @@ export default function ProductDetail() {
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
   const [showZoomModal, setShowZoomModal] = useState(false);
   const [modalImage, setModalImage] = useState("");
+  const [showFullDesc, setShowFullDesc] = useState(false);
   const mainSliderRef = useRef(null);
   const zoomImageRef = useRef(null);
 
@@ -112,6 +113,11 @@ export default function ProductDetail() {
     setZoomPosition({ x, y });
   };
 
+  const truncatedDesc =
+    product?.description?.length > 70
+      ? product.description.substring(0, 70) + "..."
+      : product?.description;
+
   if (loading) return <div className="text-center py-20">Loading...</div>;
   if (!product)
     return <div className="text-center py-20">Product not found.</div>;
@@ -131,9 +137,19 @@ export default function ProductDetail() {
           <h1 className="text-3xl font-bold mb-4 text-center md:text-left">
             {product.name}
           </h1>
-          <p className="text-lg text-gray-700 mb-6 text-center md:text-left">
-            {product.description}
-          </p>
+          {product.description && (
+            <div className="text-lg text-gray-700 mb-6 text-center md:text-left">
+              {showFullDesc ? product.description : truncatedDesc}
+              {product.description?.length > 70 && (
+                <button
+                  className="text-pink-500 ml-2 hover:underline font-medium"
+                  onClick={() => setShowFullDesc(!showFullDesc)}
+                >
+                  {showFullDesc ? "less" : "more"}
+                </button>
+              )}
+            </div>
+          )}
           <div className="text-2xl font-semibold text-gray-900 mb-8 text-center md:text-left">
             €{product.price}
           </div>
