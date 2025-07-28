@@ -4,7 +4,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useWishlist } from "../context/WishlistContext";
 import { apiFetch } from "../lib/api";
 import StarRating from "../components/StarRating";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 
 // BASE_URL را از lib/api.js ایمپورت کن
@@ -14,9 +14,12 @@ export default function Products() {
   const { addToCart } = useCart();
   const { wishlist, toggleWishlist } = useWishlist();
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [userRatings, setUserRatings] = useState({});
+  const [searchParams] = useSearchParams();
+  const searchTerm = searchParams.get("search") || "";
 
   useEffect(() => {
     async function fetchProducts() {
@@ -35,6 +38,19 @@ export default function Products() {
     }
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (searchTerm) {
+      const filtered = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.description?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [products, searchTerm]);
 
   const handleAdd = (product) => {
     const item = { ...product, quantity: 1 };
@@ -62,14 +78,29 @@ export default function Products() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 mt-10 mb-16 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {loading && <p>Lade Produkte...</p>}
-        {error && <p className="text-red-500">{error}</p>}
-        {!loading &&
-          !error &&
-          products.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
+      <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 mt-10 mb-16">
+        {/* Search Results Header */}
+        {searchTerm && (
+          <div className="mb-6 text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Search Results
+            </h2>
+            <p className="text-gray-600">
+              Found {filteredProducts.length} product
+              {filteredProducts.length !== 1 ? "s" : ""} for "{searchTerm}"
+            </p>
+          </div>
+        )}
+
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {loading && <p>Lade Produkte...</p>}
+          {error && <p className="text-red-500">{error}</p>}
+          {!loading &&
+            !error &&
+            filteredProducts.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+        </div>
       </div>
     </div>
   );

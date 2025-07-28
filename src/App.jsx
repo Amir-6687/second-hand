@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -36,8 +36,54 @@ import {
   CiShoppingBasket,
 } from "react-icons/ci";
 import { RiAdminLine, RiUserLine } from "react-icons/ri";
+import { IoClose } from "react-icons/io5";
 
 // import { HiOutlineUser } from "react-icons/hi";
+
+// SearchBox Component
+const SearchBox = React.forwardRef(
+  ({ isOpen, onClose, searchTerm, setSearchTerm, onSubmit }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-40 transform transition-all duration-300 ease-in-out"
+        style={{
+          transform: isOpen ? "translateY(0)" : "translateY(-100%)",
+          opacity: isOpen ? 1 : 0,
+          pointerEvents: isOpen ? "auto" : "none",
+        }}
+      >
+        <form onSubmit={onSubmit} className="p-4">
+          <div className="flex items-center bg-gray-50 rounded-full px-4 py-2 max-w-md mx-auto">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search products..."
+              className="flex-1 bg-transparent outline-none text-gray-900"
+              autoFocus
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className="ml-2 p-1 hover:bg-gray-200 rounded-full transition-colors"
+              >
+                <IoClose size={16} className="text-gray-500" />
+              </button>
+            )}
+            <button
+              type="submit"
+              className="ml-2 p-1 hover:bg-gray-200 rounded-full transition-colors"
+            >
+              <CiSearch size={18} className="text-gray-600" />
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+);
 
 // Tooltip for Admin icon (desktop only)
 function AdminIconWithTooltip() {
@@ -124,7 +170,7 @@ function LoginIconWithTooltip() {
 }
 
 // Tooltip for Search icon (desktop only)
-function SearchIconWithTooltip({ onClick }) {
+function SearchIconWithTooltip({ onClick, isOpen }) {
   const [show, setShow] = useState(false);
   return (
     <button
@@ -135,11 +181,17 @@ function SearchIconWithTooltip({ onClick }) {
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
       type="button"
+      data-search-icon
     >
-      <CiSearch size={28} />
+      <CiSearch
+        size={28}
+        className={`transition-colors ${
+          isOpen ? "text-pink-500" : "text-gray-700 hover:text-pink-500"
+        }`}
+      />
       {show && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
-          Search
+          {isOpen ? "Close Search" : "Search"}
         </div>
       )}
     </button>
@@ -172,12 +224,50 @@ function ShopIconWithTooltip({ onClick }) {
 function Navigation() {
   const { user, username, role, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchRef = useRef(null);
   const navigate = window.location
     ? (path) => (window.location.href = path)
     : () => {};
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchTerm.trim())}`);
+      setSearchTerm("");
+      setSearchOpen(false);
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
+
+  // Close search box when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        // Check if click is on search icon
+        const searchIcon = event.target.closest("[data-search-icon]");
+        if (searchIcon) {
+          return; // Don't close if clicking on search icon
+        }
+        setSearchOpen(false);
+      }
+    };
+
+    if (searchOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [searchOpen]);
 
   return (
     <>
@@ -223,6 +313,10 @@ function Navigation() {
 
         {/* Login/Search/Cart - دسکتاپ */}
         <div className="hidden md:flex items-center gap-4 text-sm">
+          <SearchIconWithTooltip
+            onClick={() => setSearchOpen(!searchOpen)}
+            isOpen={searchOpen}
+          />
           {user ? (
             <>
               <NavLink
@@ -261,12 +355,21 @@ function Navigation() {
             </>
           ) : (
             <>
-              <SearchIconWithTooltip onClick={() => navigate("/search")} />
               <LoginIconWithTooltip />
               <ShopIconWithTooltip onClick={() => navigate("/cart")} />
             </>
           )}
         </div>
+
+        {/* SearchBox */}
+        <SearchBox
+          isOpen={searchOpen}
+          onClose={() => setSearchOpen(false)}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          onSubmit={handleSearch}
+          ref={searchRef}
+        />
 
         {/* دکمه موبایل */}
         <div className="md:hidden z-50">
