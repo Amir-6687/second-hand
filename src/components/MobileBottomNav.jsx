@@ -4,11 +4,21 @@ import { PiShoppingBagThin, PiHeartStraightThin } from "react-icons/pi";
 import { CiSearch, CiHome, CiUser } from "react-icons/ci";
 import { IoClose } from "react-icons/io5";
 import { useState, useEffect, useRef } from "react";
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 
 export default function MobileBottomNav() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const searchRef = useRef(null);
+  const { items } = useCart();
+  const { wishlist } = useWishlist();
+
+  const cartItemCount = items.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0
+  );
+  const wishlistItemCount = wishlist.length;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -62,15 +72,25 @@ export default function MobileBottomNav() {
         </button>
         <NavLink
           to="/cart"
-          className="flex flex-col items-center justify-center hover:text-pink-600"
+          className="flex flex-col items-center justify-center hover:text-pink-600 relative"
         >
           <PiShoppingBagThin size={28} />
+          {cartItemCount > 0 && (
+            <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+              {cartItemCount}
+            </div>
+          )}
         </NavLink>
         <NavLink
           to="/favorites"
-          className="flex flex-col items-center justify-center hover:text-pink-600"
+          className="flex flex-col items-center justify-center hover:text-pink-600 relative"
         >
           <PiHeartStraightThin size={28} />
+          {wishlistItemCount > 0 && (
+            <div className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+              {wishlistItemCount}
+            </div>
+          )}
         </NavLink>
         <NavLink
           to="/profile"

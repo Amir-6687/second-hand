@@ -12,7 +12,7 @@ import About from "./pages/About";
 import Products from "./pages/Products";
 import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
-import { CartProvider } from "./context/CartContext";
+import { CartProvider, useCart } from "./context/CartContext";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -25,7 +25,7 @@ import logo from "./assets/logo.png";
 import Profile from "./pages/Profile";
 import UpdatePassword from "./pages/UpdatePassword";
 import MobileBottomNav from "./components/MobileBottomNav";
-import { WishlistProvider } from "./context/WishlistContext";
+import { WishlistProvider, useWishlist } from "./context/WishlistContext";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import {
@@ -35,6 +35,7 @@ import {
   CiSearch,
   CiShoppingBasket,
 } from "react-icons/ci";
+import { PiHeartStraightThin } from "react-icons/pi";
 import { RiAdminLine, RiUserLine } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 
@@ -201,6 +202,13 @@ function SearchIconWithTooltip({ onClick, isOpen }) {
 // Tooltip for Shop/Cart icon (desktop only)
 function ShopIconWithTooltip({ onClick }) {
   const [show, setShow] = useState(false);
+  const { items } = useCart();
+
+  const cartItemCount = items.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0
+  );
+
   return (
     <button
       onClick={onClick}
@@ -212,9 +220,46 @@ function ShopIconWithTooltip({ onClick }) {
       type="button"
     >
       <CiShoppingBasket size={28} />
+      {cartItemCount > 0 && (
+        <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+          {cartItemCount}
+        </div>
+      )}
       {show && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
           Shop
+        </div>
+      )}
+    </button>
+  );
+}
+
+// Tooltip for Favorites/Wishlist icon (desktop only)
+function FavoritesIconWithTooltip({ onClick }) {
+  const [show, setShow] = useState(false);
+  const { wishlist } = useWishlist();
+
+  const wishlistItemCount = wishlist.length;
+
+  return (
+    <button
+      onClick={onClick}
+      className="relative flex items-center md:flex hidden"
+      style={{ background: "none", border: "none", padding: 0, marginLeft: 4 }}
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      tabIndex={0}
+      type="button"
+    >
+      <PiHeartStraightThin size={28} />
+      {wishlistItemCount > 0 && (
+        <div className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+          {wishlistItemCount}
+        </div>
+      )}
+      {show && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
+          Favorites
         </div>
       )}
     </button>
@@ -272,8 +317,28 @@ function Navigation() {
   return (
     <>
       <nav className="bg-white text-gray-900 p-4 shadow-md flex items-center justify-between relative">
-        {/* لوگو */}
-        <div className="text-xl font-bold flex items-center gap-2">
+        {/* منو سمت چپ - فقط دسکتاپ */}
+        <div className="hidden md:flex items-center gap-6 ml-16">
+          {["/", "/services"].map((path, idx) => {
+            const names = ["Home", "Services"];
+            return (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "underline font-semibold" : ""
+                  } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
+                }
+              >
+                {names[idx]}
+              </NavLink>
+            );
+          })}
+        </div>
+
+        {/* لوگو در وسط */}
+        <div className="text-xl font-bold flex items-center justify-center mx-7">
           <NavLink to="/" aria-label="Home">
             <img
               src={logo}
@@ -283,32 +348,24 @@ function Navigation() {
           </NavLink>
         </div>
 
-        {/* منو - فقط دسکتاپ */}
-        <div className="hidden md:flex items-center gap-6">
-          {["/", "/services", "/about", "/cart", "/favorites"].map(
-            (path, idx) => {
-              const names = [
-                "Home",
-                "Services",
-                "About Us",
-                "Cart",
-                "Favorites",
-              ];
-              return (
-                <NavLink
-                  key={path}
-                  to={path}
-                  className={({ isActive }) =>
-                    `${
-                      isActive ? "underline font-semibold" : ""
-                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
-                  }
-                >
-                  {names[idx]}
-                </NavLink>
-              );
-            }
-          )}
+        {/* منو سمت راست - فقط دسکتاپ */}
+        <div className="hidden md:flex items-center gap-6 mr16">
+          {["/about", "/products"].map((path, idx) => {
+            const names = ["About Us", "Products"];
+            return (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "underline font-semibold" : ""
+                  } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
+                }
+              >
+                {names[idx]}
+              </NavLink>
+            );
+          })}
         </div>
 
         {/* Login/Search/Cart - دسکتاپ */}
@@ -340,12 +397,16 @@ function Navigation() {
                   <NavLink
                     to="/admin-dashboard"
                     onClick={closeMenu}
-                    className="md:flex hidden text-blue-600 hover:text-blue-800"
+                    className="md:flex hidden bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out font-medium"
                   >
                     Dashboard
                   </NavLink>
                 </>
               )}
+              <ShopIconWithTooltip onClick={() => navigate("/cart")} />
+              <FavoritesIconWithTooltip
+                onClick={() => navigate("/favorites")}
+              />
               <LogoutIconWithTooltip
                 onClick={() => {
                   logout();
@@ -470,7 +531,7 @@ function Navigation() {
                     <NavLink
                       to="/admin-dashboard"
                       onClick={closeMenu}
-                      className="text-blue-600"
+                      className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out font-medium"
                     >
                       Dashboard
                     </NavLink>
@@ -556,14 +617,10 @@ export default function App() {
       <CartProvider>
         <WishlistProvider>
           <BrowserRouter>
-            {/* محفظه اصلی با فاصله چپ/راست و خطوط باریک کناری */}
+            {/* محفظه اصلی */}
             <div className="relative min-h-screen bg-white">
-              {/* خطوط باریک عمودی (فقط دسکتاپ) */}
-              <div className="hidden md:block absolute top-0 bottom-0 left-[15%] w-px bg-gray-300 z-10" />
-              <div className="hidden md:block absolute top-0 bottom-0 right-[15%] w-px bg-gray-300 z-10" />
-
-              {/* محتوای اصلی با فاصله ۱۵٪ از چپ و راست */}
-              <div className="px-0 md:px-[15%]">
+              {/* محتوای اصلی */}
+              <div className="px-0">
                 <Navigation />
                 <Breadcrumb />
                 <main>
