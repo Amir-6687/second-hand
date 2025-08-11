@@ -6,7 +6,6 @@ export default function Register() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -19,6 +18,18 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Function to generate username from first_name and last_name
+  const generateUsername = (firstName, lastName) => {
+    if (!firstName || !lastName) return "";
+
+    // Remove special characters and spaces, convert to lowercase
+    const cleanFirstName = firstName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+    const cleanLastName = lastName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+
+    // Generate username: firstname.lastname
+    return `${cleanFirstName}.${cleanLastName}`;
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     if (errors[e.target.name]) {
@@ -28,12 +39,20 @@ export default function Register() {
 
   const validateForm = () => {
     const newErrors = {};
+
+    if (!form.first_name.trim()) {
+      newErrors.first_name = "Vorname ist erforderlich";
+    }
+    if (!form.last_name.trim()) {
+      newErrors.last_name = "Nachname ist erforderlich";
+    }
     if (form.password !== form.confirmPassword) {
       newErrors.confirmPassword = "Passwörter stimmen nicht überein";
     }
     if (form.password.length < 6) {
       newErrors.password = "Passwort muss mindestens 6 Zeichen lang sein";
     }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -43,11 +62,18 @@ export default function Register() {
     if (!validateForm()) return;
     setLoading(true);
     setErrors({});
+
     try {
+      // Generate username from first_name and last_name
+      const generatedUsername = generateUsername(
+        form.first_name,
+        form.last_name
+      );
+
       const res = await apiFetch("/auth/register", {
         method: "POST",
         body: JSON.stringify({
-          username: form.username,
+          username: generatedUsername,
           email: form.email,
           password: form.password,
           first_name: form.first_name,
@@ -81,16 +107,6 @@ export default function Register() {
           {errors.general}
         </div>
       )}
-      <div>
-        <input
-          name="username"
-          placeholder="Username"
-          required
-          value={form.username}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-        />
-      </div>
       <div>
         <input
           type="email"
@@ -138,19 +154,31 @@ export default function Register() {
         <input
           name="first_name"
           placeholder="Vorname"
+          required
           value={form.first_name}
           onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
+          className={`w-full border px-3 py-2 rounded ${
+            errors.first_name ? "border-red-500" : ""
+          }`}
         />
+        {errors.first_name && (
+          <p className="text-red-500 text-xs mt-1">{errors.first_name}</p>
+        )}
       </div>
       <div>
         <input
           name="last_name"
           placeholder="Nachname"
+          required
           value={form.last_name}
           onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
+          className={`w-full border px-3 py-2 rounded ${
+            errors.last_name ? "border-red-500" : ""
+          }`}
         />
+        {errors.last_name && (
+          <p className="text-red-500 text-xs mt-1">{errors.last_name}</p>
+        )}
       </div>
       <div>
         <input
