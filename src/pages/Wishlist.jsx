@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 import { AiFillHeart } from "react-icons/ai";
+import { RiDeleteBin3Line } from "react-icons/ri";
 import { apiFetch, BASE_URL } from "../lib/api";
 import { Link } from "react-router-dom";
 import StarRating from "../components/StarRating";
@@ -50,20 +51,21 @@ export default function Wishlist() {
                 }
               >
                 {/* Image + delivery */}
-                <div className="flex flex-col items-center justify-center w-24 flex-shrink-0">
+                <div className="flex flex-col items-center justify-center w-32 sm:w-24 flex-shrink-0">
                   <img
                     src={BASE_URL + product.image}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded border"
+                    className="w-28 h-28 sm:w-20 sm:h-20 object-cover rounded border"
                   />
                   <div className="text-xs text-gray-600 mt-2 flex items-center gap-1">
                     📦 <span>Available - 2-3 working days</span>
                   </div>
                   <button
                     onClick={() => toggleWishlist(product._id)}
-                    className="flex items-center gap-1 text-gray-600 border border-gray-300 rounded px-4 py-2 mt-2 w-full sm:w-auto justify-center hover:bg-gray-100 transition text-sm"
+                    className="flex items-center gap-2 text-white border border-gray-300 rounded px-3 py-1 mt-10 w-auto sm:w-auto justify-center bg-gray-800 hover:bg-gray-700 transition text-sm"
                   >
-                    🗑 Remove
+                    <RiDeleteBin3Line />
+                    Remove
                   </button>
                 </div>
                 {/* Product Info */}
@@ -84,14 +86,14 @@ export default function Wishlist() {
                     </div>
                   </div>
                   {/* Buttons + price */}
-                  <div className="flex flex-col sm:flex-row justify-between items-center sm:items-end gap-2 mt-4">
-                    <div className="flex flex-col items-center sm:items-end">
+                  <div className="flex flex-col sm:flex-row justify-end items-end gap-2 mt-9 sm:mt-12">
+                    <div className="flex flex-col items-end">
                       <span className="text-lg font-bold text-[#DC2525] mb-1">
                         €{product.price.toFixed(2)}
                       </span>
                       <button
                         onClick={() => addToCart(product)}
-                        className="w-full sm:w-auto px-4 py-2 bg-[#DC2525] text-white rounded hover:bg-[#b71c1c] transition text-sm font-semibold"
+                        className="w-full sm:w-auto px-3 py-1 bg-[#DC2525] text-white rounded hover:bg-[#b71c1c] transition text-sm font-semibold"
                       >
                         Add to Cart
                       </button>
