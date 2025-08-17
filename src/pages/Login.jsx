@@ -39,10 +39,47 @@ export default function Login() {
     }
   };
 
-  const handleSocialLogin = (provider) => {
-    // TODO: Implement social login logic
-    console.log(`Logging in with ${provider}`);
-    alert(`${provider} login will be implemented soon!`);
+  const handleSocialLogin = async (provider) => {
+    if (provider === "Google") {
+      await handleGoogleLogin();
+    } else {
+      console.log(`${provider} login will be implemented soon!`);
+      alert(`${provider} login will be implemented soon!`);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const GOOGLE_CLIENT_ID =
+        "302616575801-l6933ks6nbc8oom4md7jm6p0mbomsv6b.apps.googleusercontent.com";
+      const REDIRECT_URI = `${window.location.origin}/auth-success`;
+
+      const googleAuthUrl =
+        `https://accounts.google.com/oauth/authorize?` +
+        `client_id=${GOOGLE_CLIENT_ID}` +
+        `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
+        `&scope=email profile` +
+        `&response_type=code` +
+        `&access_type=offline`;
+
+      // Open Google OAuth popup
+      const popup = window.open(
+        googleAuthUrl,
+        "googleAuth",
+        "width=500,height=600,scrollbars=yes,resizable=yes"
+      );
+
+      // Remove the problematic interval check
+      // const checkClosed = setInterval(() => {
+      //   if (popup.closed) {
+      //     clearInterval(checkClosed);
+      //     console.log("Google OAuth popup closed");
+      //   }
+      // }, 1000);
+    } catch (error) {
+      console.error("Google login error:", error);
+      alert("Google login failed. Please try again.");
+    }
   };
 
   return (
@@ -168,14 +205,24 @@ export default function Login() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm">
-            <span className="text-white/80">Don't have an account? </span>
-            <Link
-              to="/register"
-              className="text-white hover:text-white/80 underline transition-colors"
-            >
-              Sign up
-            </Link>
+          <div className="mt-6 text-center text-sm space-y-2">
+            <div>
+              <span className="text-white/80">Don't have an account? </span>
+              <Link
+                to="/register"
+                className="text-white hover:text-white/80 underline transition-colors"
+              >
+                Sign up
+              </Link>
+            </div>
+            <div>
+              <Link
+                to="/forget-password"
+                className="text-white/70 hover:text-white underline transition-colors text-xs"
+              >
+                Forgot your password?
+              </Link>
+            </div>
           </div>
 
           {/* Social Login Section */}

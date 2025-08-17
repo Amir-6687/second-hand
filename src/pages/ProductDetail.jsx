@@ -7,9 +7,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FiZoomIn, FiZoomOut } from "react-icons/fi";
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 
 export default function ProductDetail() {
   const { id } = useParams();
+  const { addToCart } = useCart();
+  const { wishlist, toggleWishlist } = useWishlist();
   const [product, setProduct] = useState(null);
   const [userRating, setUserRating] = useState(0);
   const [avgRating, setAvgRating] = useState(null);
@@ -152,6 +156,28 @@ export default function ProductDetail() {
           )}
           <div className="text-2xl font-semibold text-gray-900 mb-8 text-center md:text-left">
             €{product.price}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-8 w-full max-w-lg mx-auto md:mx-0">
+            <button
+              onClick={() => addToCart({ ...product, quantity: 1 })}
+              className="flex-1 bg-[#DC2525] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#b71c1c] hover:scale-105 active:scale-95 transition-all duration-200"
+            >
+              Add to Cart
+            </button>
+            <button
+              onClick={() => toggleWishlist(product._id)}
+              className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
+                wishlist.includes(product._id)
+                  ? "bg-pink-500 text-white hover:bg-pink-600"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              {wishlist.includes(product._id)
+                ? "Remove from Wishlist"
+                : "Add to Wishlist"}
+            </button>
           </div>
 
           {/* جزئیات محصول */}

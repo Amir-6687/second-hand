@@ -39,12 +39,16 @@ export const AuthProvider = ({ children }) => {
     loadUserFromToken();
   };
 
-  // logout: توکن را حذف کن و user را پاک کن
+  // logout: فقط توکن را حذف کن، Cart و Wishlist را نگه دار
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("cartItems");
-    localStorage.removeItem("wishlistItems");
+    // Cart و Wishlist را نگه می‌داریم تا بعد از login بعدی در دسترس باشند
+    // localStorage.removeItem("cartItems");        // این خط حذف شد
+    // localStorage.removeItem("wishlistItems");   // این خط حذف شد
     setUser(null);
+
+    // کاربر را به صفحه Home هدایت کن
+    window.location.href = "/";
   };
 
   return (

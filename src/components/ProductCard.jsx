@@ -8,6 +8,7 @@ import {
   AiOutlineSearch,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
+import { CiShoppingBasket } from "react-icons/ci";
 import { BASE_URL } from "../lib/api";
 import {
   FaFacebookF,
@@ -285,7 +286,7 @@ const ProductCard = ({ product }) => {
         setShowSearchTip(false);
         setShowHeartTip(false);
         setBlurHovered(false);
-        setShowActions(false); // این خط اضافه شود
+        setShowActions(false);
       }}
     >
       {/* Feedback effect overlay */}
@@ -361,29 +362,14 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
 
-          {/* Blur overlay bottom with animation */}
-          <div
-            className={`absolute bottom-0 left-0 w-full h-12 flex items-center justify-center
-        transition-all duration-300
-        ${
-          hovered || (isMobile() && showActions)
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-6"
-        }
-      `}
-            onMouseEnter={() => setBlurHovered(true)}
-            onMouseLeave={() => setBlurHovered(false)}
-          >
+          {/* Cart Icon fixed at bottom */}
+          <div className="absolute bottom-[-09px] left-1/2 transform -translate-x-1/2">
             <button
-              className="w-full h-full flex items-center justify-center text-lg font-semibold text-gray-800 select-none focus:outline-none"
-              tabIndex={-1}
               onClick={handleAddToCart}
+              className="text-gray-600 hover:text-pink-500 transition-colors cursor-pointer"
+              title="Add to Cart"
             >
-              {blurHovered ? (
-                <AiOutlineShoppingCart size={26} className="text-pink-400" />
-              ) : (
-                <span>Select</span>
-              )}
+              <CiShoppingBasket size={24} />
             </button>
           </div>
         </div>

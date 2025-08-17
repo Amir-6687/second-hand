@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const axios = require("axios");
 
 // ثبت‌نام
 router.post("/register", async (req, res) => {
@@ -79,6 +80,178 @@ router.post("/create-admin", async (req, res) => {
     res.status(201).json({ message: "Admin user created successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// Google OAuth callback
+router.get("/google/callback", async (req, res) => {
+  try {
+    const { code } = req.query;
+
+    if (!code) {
+      return res.status(400).json({ error: "Authorization code not provided" });
+    }
+
+    // Exchange code for access token
+    const tokenResponse = await axios.post(
+      "https://oauth2.googleapis.com/token",
+      {
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        code,
+        grant_type: "authorization_code",
+        redirect_uri: `${process.env.FRONTEND_URL}/auth-success`,
+      }
+    );
+
+    const { access_token } = tokenResponse.data;
+
+    // Get user info from Google
+    const userInfoResponse = await axios.get(
+      "https://www.googleapis.com/oauth2/v2/userinfo",
+      {
+        headers: { Authorization: `Bearer ${access_token}` },
+      }
+    );
+
+    const {
+      email,
+      given_name,
+      family_name,
+      picture,
+      id: googleId,
+    } = userInfoResponse.data;
+
+    // Check if user exists
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // Create new user
+      user = new User({
+        username: `${given_name.toLowerCase()}.${family_name.toLowerCase()}`,
+        email,
+        first_name: given_name,
+        last_name: family_name,
+        role: "user",
+        googleId: googleId,
+      });
+      await user.save();
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    // Redirect to frontend with token
+    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+    res.redirect(`${frontendUrl}/auth-success?token=${token}`);
+  } catch (error) {
+    console.error("Google OAuth error:", error);
+    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+    res.redirect(`${frontendUrl}/auth-error?error=Google+login+failed`);
+  }
+});
+
+// Forget Password - Send reset email
+router.post("/forget-password", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      // Don't reveal if user exists or not (security)
+      return res.json({ message: "If email exists, reset link will be sent" });
+    }
+
+    // Generate reset token (valid for 1 hour)
+    const resetToken = jwt.sign(
+      { userId: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    // Store reset token in user document (optional - for additional security)
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    // Create reset link
+    const resetLink = `${
+      process.env.FRONTEND_URL || "http://localhost:5173"
+    }/reset-password?token=${resetToken}`;
+
+    // For now, just return the reset link (in production, send email)
+    res.json({
+      message: "Password reset link generated successfully",
+      resetLink: resetLink, // Remove this in production
+    });
+  } catch (error) {
+    console.error("Forget password error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Reset Password - Set new password
+router.post("/reset-password", async (req, res) => {
+  try {
+    const { token, password } = req.body;
+
+    if (!token || !password) {
+      return res.status(400).json({ error: "Token and password are required" });
+    }
+
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ error: "Password must be at least 6 characters long" });
+    }
+
+    // Verify token
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      return res.status(400).json({ error: "Invalid or expired reset token" });
+    }
+
+    // Find user
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    // Check if token is expired (additional check)
+    if (user.resetPasswordExpires && Date.now() > user.resetPasswordExpires) {
+      return res.status(400).json({ error: "Reset token has expired" });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+
+    // Clear reset token fields
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+
+    res.json({ message: "Password reset successfully" });
+  } catch (error) {
+    console.error("Reset password error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import { useState, useEffect, useRef } from "react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function MobileBottomNav() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -13,6 +14,7 @@ export default function MobileBottomNav() {
   const searchRef = useRef(null);
   const { items } = useCart();
   const { wishlist } = useWishlist();
+  const { user } = useAuth();
 
   const cartItemCount = items.reduce(
     (total, item) => total + (item.quantity || 1),
@@ -75,7 +77,7 @@ export default function MobileBottomNav() {
           className="flex flex-col items-center justify-center hover:text-pink-600 relative"
         >
           <PiShoppingBagThin size={28} />
-          {cartItemCount > 0 && (
+          {user && cartItemCount > 0 && (
             <div className="absolute -top-1 -right-1 md:-right-1 -right-3 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
               {cartItemCount}
             </div>
@@ -86,7 +88,7 @@ export default function MobileBottomNav() {
           className="flex flex-col items-center justify-center hover:text-pink-600 relative"
         >
           <PiHeartStraightThin size={28} />
-          {wishlistItemCount > 0 && (
+          {user && wishlistItemCount > 0 && (
             <div className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
               {wishlistItemCount}
             </div>

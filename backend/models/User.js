@@ -9,7 +9,10 @@ const userSchema = new mongoose.Schema({
   phone: String,
   address: String,
   role: { type: String, default: "user" },
+  googleId: String, // For Google OAuth
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+  resetPasswordToken: String, // For password reset
+  resetPasswordExpires: Date, // Token expiration date
 });
 
 module.exports = mongoose.model("User", userSchema);

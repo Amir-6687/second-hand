@@ -28,6 +28,10 @@ import MobileBottomNav from "./components/MobileBottomNav";
 import { WishlistProvider, useWishlist } from "./context/WishlistContext";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
+
+import AuthSuccess from "./pages/AuthSuccess";
+import ForgetPassword from "./pages/ForgetPassword";
+import ResetPassword from "./pages/ResetPassword";
 import {
   CiUser,
   CiLogin,
@@ -317,28 +321,8 @@ function Navigation() {
   return (
     <>
       <nav className="bg-white text-gray-900 p-4 shadow-md flex items-center justify-between relative">
-        {/* منو سمت چپ - فقط دسکتاپ */}
-        <div className="hidden md:flex items-center gap-6 ml-16">
-          {["/", "/services"].map((path, idx) => {
-            const names = ["Home", "Services"];
-            return (
-              <NavLink
-                key={path}
-                to={path}
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "underline font-semibold" : ""
-                  } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
-                }
-              >
-                {names[idx]}
-              </NavLink>
-            );
-          })}
-        </div>
-
-        {/* لوگو در وسط */}
-        <div className="text-xl font-bold flex items-center justify-center mx-7">
+        {/* لوگو در سمت چپ */}
+        <div className="text-xl font-bold flex items-center justify-start">
           <NavLink to="/" aria-label="Home">
             <img
               src={logo}
@@ -348,10 +332,10 @@ function Navigation() {
           </NavLink>
         </div>
 
-        {/* منو سمت راست - فقط دسکتاپ */}
-        <div className="hidden md:flex items-center gap-6 mr16">
-          {["/about", "/products"].map((path, idx) => {
-            const names = ["About Us", "Products"];
+        {/* منو در وسط */}
+        <div className="hidden md:flex items-center gap-6 mx-auto">
+          {["/", "/services", "/about", "/products"].map((path, idx) => {
+            const names = ["Home", "Services", "About Us", "Products"];
             return (
               <NavLink
                 key={path}
@@ -674,6 +658,13 @@ export default function App() {
                     />
                     <Route path="/favorites" element={<Wishlist />} />
                     <Route path="/products/:id" element={<ProductDetail />} />
+
+                    <Route path="/auth-success" element={<AuthSuccess />} />
+                    <Route
+                      path="/forget-password"
+                      element={<ForgetPassword />}
+                    />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                   </Routes>
                 </main>
 

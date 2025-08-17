@@ -93,7 +93,7 @@ export default function Wishlist() {
                       </span>
                       <button
                         onClick={() => addToCart(product)}
-                        className="w-full sm:w-auto px-3 py-1 bg-[#DC2525] text-white rounded hover:bg-[#b71c1c] transition text-sm font-semibold"
+                        className="w-full sm:w-auto px-3 py-1 bg-[#DC2525] text-white rounded hover:bg-[#b71c1c] hover:scale-105 hover:shadow-lg active:scale-95 active:bg-[#8e0000] transform transition-all duration-200 ease-in-out text-sm font-semibold"
                       >
                         Add to Cart
                       </button>
