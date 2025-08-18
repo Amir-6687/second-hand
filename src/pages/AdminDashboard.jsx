@@ -432,21 +432,114 @@ export default function AdminDashboard() {
       {activeTab === "orders" && <OrdersView />}
       {activeTab === "users" && <UsersView />}
       {activeTab === "products" && (
-        <div className="bg-white p-8 rounded-xl shadow-lg text-center">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-            Product Management
-          </h3>
-          <p className="text-gray-600 mb-6">
-            Go to the main admin panel to manage products.
-          </p>
-          <a
-            href="/admin"
-            className="inline-flex items-center space-x-2 px-6 py-3 rounded-lg text-white font-medium transition-colors hover:opacity-90"
-            style={{ backgroundColor: colors.brightPink }}
-          >
-            <FaBox size={16} />
-            <span>Manage Products</span>
-          </a>
+        <div className="space-y-6">
+          {/* Product Management Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Add Product Card */}
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div
+                  className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: colors.lightPink }}
+                >
+                  <FaBox size={24} style={{ color: colors.darkTeal }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Add New Product
+                </h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  Create and add new products to your store
+                </p>
+                <a
+                  href="/admin"
+                  className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg text-white font-medium transition-colors hover:opacity-90"
+                  style={{ backgroundColor: colors.brightPink }}
+                >
+                  <FaBox size={16} />
+                  <span>Add Product</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Manage Products Card */}
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div
+                  className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: colors.lightPink }}
+                >
+                  <FaBox size={24} style={{ color: colors.darkTeal }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Manage Products
+                </h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  Edit, delete and manage existing products
+                </p>
+                <a
+                  href="/admin"
+                  className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg text-white font-medium transition-colors hover:opacity-90"
+                  style={{ backgroundColor: colors.orange }}
+                >
+                  <FaBox size={16} />
+                  <span>Manage</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Product Analytics Card */}
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div
+                  className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: colors.lightPink }}
+                >
+                  <FaChartLine size={24} style={{ color: colors.darkTeal }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Product Analytics
+                </h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  View detailed analytics and insights
+                </p>
+                <button
+                  onClick={() => setActiveTab("dashboard")}
+                  className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg text-white font-medium transition-colors hover:opacity-90"
+                  style={{ backgroundColor: colors.darkTeal }}
+                >
+                  <FaChartLine size={16} />
+                  <span>View Analytics</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              Quick Actions
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <button
+                onClick={() => window.open("/admin", "_blank")}
+                className="flex items-center justify-center space-x-2 p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-pink-400 hover:bg-pink-50 transition-all duration-300"
+              >
+                <FaBox size={20} style={{ color: colors.brightPink }} />
+                <span className="font-medium text-gray-700">
+                  Open Product Manager
+                </span>
+              </button>
+              <button
+                onClick={() => setActiveTab("dashboard")}
+                className="flex items-center justify-center space-x-2 p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-pink-400 hover:bg-pink-50 transition-all duration-300"
+              >
+                <FaChartLine size={20} style={{ color: colors.brightPink }} />
+                <span className="font-medium text-gray-700">
+                  View Dashboard
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

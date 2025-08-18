@@ -37,11 +37,13 @@ import {
   CiLogin,
   CiLogout,
   CiSearch,
-  CiShoppingBasket,
+  CiShoppingCart,
 } from "react-icons/ci";
 import { PiHeartStraightThin } from "react-icons/pi";
 import { RiAdminLine, RiUserLine } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
+import { FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 // import { HiOutlineUser } from "react-icons/hi";
 
@@ -223,7 +225,7 @@ function ShopIconWithTooltip({ onClick }) {
       tabIndex={0}
       type="button"
     >
-      <CiShoppingBasket size={28} />
+      <CiShoppingCart size={28} />
       {cartItemCount > 0 && (
         <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
           {cartItemCount}
@@ -320,39 +322,80 @@ function Navigation() {
 
   return (
     <>
-      <nav className="bg-white text-gray-900 p-4 shadow-md flex items-center justify-between relative">
-        {/* لوگو در سمت چپ */}
-        <div className="text-xl font-bold flex items-center justify-start">
-          <NavLink to="/" aria-label="Home">
-            <img
-              src={logo}
-              alt="Shop Logo"
-              className="h-32 w-auto cursor-pointer"
-            />
-          </NavLink>
+      <nav className="bg-white text-gray-900 py-8 px-4 shadow-md flex items-center justify-between relative">
+        {/* Left side - Social media icons */}
+        <div className="hidden md:flex items-center gap-4 text-sm">
+          <a
+            href="https://www.instagram.com/the_grrrls_club?igsh=YWFybzVzNWtrZTB0"
+            aria-label="Instagram"
+            className="hover:text-pink-600 transition-colors"
+          >
+            <FaInstagram size={25} />
+          </a>
+          <a
+            href="https://facebook.com"
+            aria-label="Facebook"
+            className="hover:text-blue-600 transition-colors"
+          >
+            <FaFacebook size={25} />
+          </a>
+          <a
+            href="https://twitter.com"
+            aria-label="Twitter"
+            className="hover:text-sky-400 transition-colors"
+          >
+            <FaTwitter size={25} />
+          </a>
+
+          <FavoritesIconWithTooltip onClick={() => navigate("/favorites")} />
+          <ShopIconWithTooltip onClick={() => navigate("/cart")} />
         </div>
 
-        {/* منو در وسط */}
-        <div className="hidden md:flex items-center gap-6 mx-auto">
-          {["/", "/services", "/about", "/products"].map((path, idx) => {
-            const names = ["Home", "Services", "About Us", "Products"];
-            return (
-              <NavLink
-                key={path}
-                to={path}
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "underline font-semibold" : ""
-                  } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
-                }
-              >
-                {names[idx]}
-              </NavLink>
-            );
-          })}
+        {/* Center - Logo and Menu */}
+        <div className="flex flex-col items-center">
+          {/* Logo */}
+          <div className="text-xl font-bold flex items-center justify-center mb-6">
+            <NavLink to="/" aria-label="Home">
+              <img
+                src={logo}
+                alt="Shop Logo"
+                className="h-32 w-auto cursor-pointer"
+              />
+            </NavLink>
+          </div>
+
+          {/* Menu below logo */}
+          <div className="hidden md:flex items-center gap-6">
+            {["/", "/services", "/about", "/products"].map((path, idx) => {
+              const names = ["HOME", "SERVICES", "ABOUT US", "PRODUCTS"];
+              return (
+                <div key={path} className="relative">
+                  <NavLink
+                    to={path}
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "font-semibold" : ""
+                      } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
+                    }
+                  >
+                    {names[idx]}
+                  </NavLink>
+                  {/* Active indicator line above menu item */}
+                  <NavLink
+                    to={path}
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "block" : "hidden"
+                      } absolute -top-2 left-1/2 transform -translate-x-1/2 w-full h-0.5 bg-pink-500`
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Login/Search/Cart - دسکتاپ */}
+        {/* Right side - Search, Login, etc. */}
         <div className="hidden md:flex items-center gap-4 text-sm">
           <SearchIconWithTooltip
             onClick={() => setSearchOpen(!searchOpen)}
@@ -370,27 +413,14 @@ function Navigation() {
               </NavLink>
 
               {role === "admin" && (
-                <>
-                  <NavLink
-                    to="/admin"
-                    onClick={closeMenu}
-                    className="md:flex hidden"
-                  >
-                    <AdminIconWithTooltip />
-                  </NavLink>
-                  <NavLink
-                    to="/admin-dashboard"
-                    onClick={closeMenu}
-                    className="md:flex hidden bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out font-medium"
-                  >
-                    Dashboard
-                  </NavLink>
-                </>
+                <NavLink
+                  to="/admin-dashboard"
+                  onClick={closeMenu}
+                  className="md:flex hidden bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out font-medium"
+                >
+                  Dashboard
+                </NavLink>
               )}
-              <ShopIconWithTooltip onClick={() => navigate("/cart")} />
-              <FavoritesIconWithTooltip
-                onClick={() => navigate("/favorites")}
-              />
               <LogoutIconWithTooltip
                 onClick={() => {
                   logout();
@@ -401,7 +431,6 @@ function Navigation() {
           ) : (
             <>
               <LoginIconWithTooltip />
-              <ShopIconWithTooltip onClick={() => navigate("/cart")} />
             </>
           )}
         </div>
@@ -417,7 +446,7 @@ function Navigation() {
         />
 
         {/* دکمه موبایل */}
-        <div className="md:hidden z-50">
+        <div className="md:hidden z-50 absolute top-8 right-4">
           <button
             onClick={toggleMenu}
             aria-label="Toggle menu"
@@ -478,8 +507,8 @@ function Navigation() {
       pt-24 md:hidden
     `}
         >
-          {["/", "/services", "/about", "/cart"].map((path, idx) => {
-            const names = ["Home", "Services", "About Us", "Cart"];
+          {["/", "/services", "/about", "/products"].map((path, idx) => {
+            const names = ["HOME", "SERVICES", "ABOUT US", "PRODUCTS"];
             return (
               <NavLink
                 key={path}
@@ -487,8 +516,8 @@ function Navigation() {
                 onClick={closeMenu}
                 className={({ isActive }) =>
                   `${
-                    isActive ? "underline font-semibold" : ""
-                  } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out`
+                    isActive ? "font-semibold" : ""
+                  } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
                 }
               >
                 {names[idx]}
@@ -508,18 +537,13 @@ function Navigation() {
                   {username || "Profile"}
                 </NavLink>
                 {role === "admin" && (
-                  <>
-                    <NavLink to="/admin" onClick={closeMenu}>
-                      <RiAdminLine />
-                    </NavLink>
-                    <NavLink
-                      to="/admin-dashboard"
-                      onClick={closeMenu}
-                      className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out font-medium"
-                    >
-                      Dashboard
-                    </NavLink>
-                  </>
+                  <NavLink
+                    to="/admin-dashboard"
+                    onClick={closeMenu}
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out font-medium"
+                  >
+                    Dashboard
+                  </NavLink>
                 )}
                 <button
                   onClick={() => {
@@ -543,6 +567,31 @@ function Navigation() {
                 </NavLink>
               </>
             )}
+          </div>
+
+          {/* Social media icons at the bottom of mobile menu */}
+          <div className="mt-auto pt-8 flex items-center justify-center gap-4">
+            <a
+              href="https://www.instagram.com/the_grrrls_club?igsh=YWFybzVzNWtrZTB0"
+              aria-label="Instagram"
+              className="hover:text-pink-600 transition-colors"
+            >
+              <FaInstagram size={20} />
+            </a>
+            <a
+              href="https://twitter.com"
+              aria-label="Twitter"
+              className="hover:text-sky-400 transition-colors"
+            >
+              <FaTwitter size={20} />
+            </a>
+            <a
+              href="https://facebook.com"
+              aria-label="Facebook"
+              className="hover:text-blue-600 transition-colors"
+            >
+              <FaFacebook size={20} />
+            </a>
           </div>
         </div>
       </nav>
@@ -670,6 +719,17 @@ export default function App() {
 
                 <Footer />
                 <MobileBottomNav />
+
+                {/* Floating WhatsApp Icon */}
+                <a
+                  href="https://wa.me/4952194932874"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="fixed bottom-6 right-6 md:bottom-6 md:right-6 bottom-20 right-6 z-50 bg-green-500/90 hover:bg-green-600/95 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110"
+                  aria-label="Contact us on WhatsApp"
+                >
+                  <FaWhatsapp size={28} />
+                </a>
               </div>
             </div>
           </BrowserRouter>

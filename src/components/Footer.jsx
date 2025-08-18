@@ -25,9 +25,10 @@ export default function Footer() {
         </div>
         <div className="flex gap-4 items-center justify-end z-20">
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/the_grrrls_club?igsh=YWFybzVzNWtrZTB0"
             target="_blank"
             rel="noopener noreferrer"
+            className="text-gray-400 hover:text-pink-500 transition-colors"
             aria-label="Instagram"
           >
             <FaInstagram className="w-6 h-6 hover:text-pink-500 transition" />

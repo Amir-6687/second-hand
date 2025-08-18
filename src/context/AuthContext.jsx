@@ -39,12 +39,13 @@ export const AuthProvider = ({ children }) => {
     loadUserFromToken();
   };
 
-  // logout: فقط توکن را حذف کن، Cart و Wishlist را نگه دار
+  // logout: توکن را حذف کن ولی Cart/Wishlist را نگه دار
   const logout = () => {
     localStorage.removeItem("token");
-    // Cart و Wishlist را نگه می‌داریم تا بعد از login بعدی در دسترس باشند
-    // localStorage.removeItem("cartItems");        // این خط حذف شد
-    // localStorage.removeItem("wishlistItems");   // این خط حذف شد
+
+    // Cart و Wishlist کاربر فعلی را نگه می‌داریم
+    // تا بعد از login مجدد در دسترس باشند
+
     setUser(null);
 
     // کاربر را به صفحه Home هدایت کن

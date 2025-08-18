@@ -7,6 +7,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [stayLoggedIn, setStayLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -28,7 +29,12 @@ export default function Login() {
       if (!res.ok) {
         setError(data.error || "Login failed");
       } else {
-        login(data.token); // ← این خط مهم است!
+        login(data.token);
+        if (stayLoggedIn) {
+          localStorage.setItem("token", data.token);
+        } else {
+          sessionStorage.setItem("token", data.token);
+        }
         alert("Welcome back! ✅");
         navigate("/");
       }
@@ -185,7 +191,12 @@ export default function Login() {
 
             <div className="flex justify-between items-center">
               <label className="flex items-center">
-                <input type="checkbox" className="mr-2 accent-white/70" />
+                <input
+                  type="checkbox"
+                  className="mr-2 accent-gray-800"
+                  checked={stayLoggedIn}
+                  onChange={(e) => setStayLoggedIn(e.target.checked)}
+                />
                 <span className="text-sm text-white/90 drop-shadow-sm">
                   Stay logged in
                 </span>

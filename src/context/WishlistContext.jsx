@@ -7,6 +7,8 @@ const WishlistContext = createContext();
 export const useWishlist = () => useContext(WishlistContext);
 
 export const WishlistProvider = ({ children }) => {
+  const { user } = useAuth();
+
   // مقدار اولیه را از localStorage بخوان
   const [wishlist, setWishlist] = useState(() => {
     const saved = localStorage.getItem("wishlistItems");
