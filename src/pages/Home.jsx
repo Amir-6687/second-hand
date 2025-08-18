@@ -18,7 +18,7 @@ export default function Home() {
   const suggestedProducts = [
     {
       id: "1",
-      title: "Brown Faux Leather Clutch",
+      title: "Brown Faux Clutch",
       price: "€6.99",
       image1: product1a,
       image2: product1b,
