@@ -173,7 +173,21 @@ const QuickViewModal = ({ product, open, onClose }) => {
         <div className="flex-1 flex flex-col justify-start">
           <h2 className="text-3xl font-bold mb-2">{product.name}</h2>
           <div className="text-pink-500 text-2xl font-semibold mb-4">
-            ${product.price.toLocaleString()}
+            {product.isDiscounted && product.originalPrice ? (
+              <div className="flex items-center gap-3">
+                <span className="line-through text-red-500 text-xl">
+                  €{product.originalPrice.toLocaleString()}
+                </span>
+                <span className="text-pink-500">
+                  €{product.price.toLocaleString()}
+                </span>
+                <span className="bg-red-500 text-white px-3 py-1 rounded text-sm font-medium">
+                  {product.discountLabel || "Last Chance"}
+                </span>
+              </div>
+            ) : (
+              <span>€{product.price.toLocaleString()}</span>
+            )}
           </div>
 
           {/* Size selector */}
@@ -384,7 +398,21 @@ const ProductCard = ({ product }) => {
           {product.name}
         </div>
         <div className="text-pink-400 text-lg font-bold mt-1">
-          ${product.price.toLocaleString()}
+          {product.isDiscounted && product.originalPrice ? (
+            <div className="flex flex-col items-center gap-1">
+              <span className="line-through text-red-500 text-sm">
+                €{product.originalPrice.toLocaleString()}
+              </span>
+              <span className="text-pink-400">
+                €{product.price.toLocaleString()}
+              </span>
+              <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+                {product.discountLabel || "Last Chance"}
+              </span>
+            </div>
+          ) : (
+            <span>€{product.price.toLocaleString()}</span>
+          )}
         </div>
       </div>
 

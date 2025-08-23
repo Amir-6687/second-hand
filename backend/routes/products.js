@@ -44,6 +44,9 @@ router.post("/", authMiddleware, async (req, res) => {
     const {
       name,
       price,
+      originalPrice,
+      isDiscounted,
+      discountLabel,
       description,
       zustand,
       width,
@@ -60,6 +63,9 @@ router.post("/", authMiddleware, async (req, res) => {
     const product = new Product({
       name,
       price,
+      originalPrice,
+      isDiscounted,
+      discountLabel,
       description,
       zustand,
       width,
@@ -130,6 +136,9 @@ router.put("/:id", authMiddleware, async (req, res) => {
     const {
       name,
       price,
+      originalPrice,
+      isDiscounted,
+      discountLabel,
       description,
       zustand,
       width,
@@ -148,6 +157,9 @@ router.put("/:id", authMiddleware, async (req, res) => {
       {
         name,
         price,
+        originalPrice,
+        isDiscounted,
+        discountLabel,
         description,
         zustand,
         width,

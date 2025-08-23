@@ -28,6 +28,7 @@ import MobileBottomNav from "./components/MobileBottomNav";
 import { WishlistProvider, useWishlist } from "./context/WishlistContext";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
+import Commission from "./pages/Commission";
 
 import AuthSuccess from "./pages/AuthSuccess";
 import ForgetPassword from "./pages/ForgetPassword";
@@ -324,53 +325,30 @@ function Navigation() {
     <>
       <nav
         className="text-gray-900 py-8 px-4 shadow-md flex items-center justify-between relative"
-        style={{ backgroundColor: "#E9944c" }}
+        style={{ backgroundColor: "#EDDCD9" }}
       >
-        {/* Left side - Social media icons */}
-        <div className="hidden md:flex items-center gap-4 text-sm">
-          <a
-            href="https://www.instagram.com/the_grrrls_club?igsh=YWFybzVzNWtrZTB0"
-            aria-label="Instagram"
-            className="hover:text-pink-600 transition-colors"
-          >
-            <FaInstagram size={25} />
-          </a>
-          <a
-            href="https://facebook.com"
-            aria-label="Facebook"
-            className="hover:text-blue-600 transition-colors"
-          >
-            <FaFacebook size={25} />
-          </a>
-          <a
-            href="https://twitter.com"
-            aria-label="Twitter"
-            className="hover:text-sky-400 transition-colors"
-          >
-            <FaTwitter size={25} />
-          </a>
-
-          <FavoritesIconWithTooltip onClick={() => navigate("/favorites")} />
-          <ShopIconWithTooltip onClick={() => navigate("/cart")} />
+        {/* Left side - Logo */}
+        <div className="text-xl font-bold flex items-center justify-start">
+          <NavLink to="/" aria-label="Home">
+            <img
+              src={logo}
+              alt="Shop Logo"
+              className="h-32 w-auto cursor-pointer"
+            />
+          </NavLink>
         </div>
 
-        {/* Center - Logo and Menu */}
-        <div className="flex flex-col items-center">
-          {/* Logo */}
-          <div className="text-xl font-bold flex items-center justify-center mb-6">
-            <NavLink to="/" aria-label="Home">
-              <img
-                src={logo}
-                alt="Shop Logo"
-                className="h-32 w-auto cursor-pointer"
-              />
-            </NavLink>
-          </div>
-
-          {/* Menu below logo */}
-          <div className="hidden md:flex items-center gap-6">
-            {["/", "/services", "/about", "/products"].map((path, idx) => {
-              const names = ["HOME", "SERVICES", "ABOUT US", "PRODUCTS"];
+        {/* Center - Menu */}
+        <div className="flex items-center gap-6">
+          {["/", "/services", "/about", "/products", "/commission"].map(
+            (path, idx) => {
+              const names = [
+                "HOME",
+                "SERVICES",
+                "ABOUT US",
+                "PRODUCTS",
+                "COMMISSION",
+              ];
               return (
                 <div key={path} className="relative">
                   <NavLink
@@ -394,12 +372,14 @@ function Navigation() {
                   />
                 </div>
               );
-            })}
-          </div>
+            }
+          )}
         </div>
 
-        {/* Right side - Search, Login, etc. */}
+        {/* Right side - Wishlist, Cart, Search, Login, etc. */}
         <div className="hidden md:flex items-center gap-4 text-sm">
+          <FavoritesIconWithTooltip onClick={() => navigate("/favorites")} />
+          <ShopIconWithTooltip onClick={() => navigate("/cart")} />
           <SearchIconWithTooltip
             onClick={() => setSearchOpen(!searchOpen)}
             isOpen={searchOpen}
@@ -510,23 +490,31 @@ function Navigation() {
       pt-24 md:hidden
     `}
         >
-          {["/", "/services", "/about", "/products"].map((path, idx) => {
-            const names = ["HOME", "SERVICES", "ABOUT US", "PRODUCTS"];
-            return (
-              <NavLink
-                key={path}
-                to={path}
-                onClick={closeMenu}
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "font-semibold" : ""
-                  } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
-                }
-              >
-                {names[idx]}
-              </NavLink>
-            );
-          })}
+          {["/", "/services", "/about", "/products", "/commission"].map(
+            (path, idx) => {
+              const names = [
+                "HOME",
+                "SERVICES",
+                "ABOUT US",
+                "PRODUCTS",
+                "COMMISSION",
+              ];
+              return (
+                <NavLink
+                  key={path}
+                  to={path}
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "font-semibold" : ""
+                    } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
+                  }
+                >
+                  {names[idx]}
+                </NavLink>
+              );
+            }
+          )}
 
           <div className="mt-4 flex flex-col items-center gap-2 text-sm justify-center">
             {user ? (
@@ -710,6 +698,7 @@ export default function App() {
                     />
                     <Route path="/favorites" element={<Wishlist />} />
                     <Route path="/products/:id" element={<ProductDetail />} />
+                    <Route path="/commission" element={<Commission />} />
 
                     <Route path="/auth-success" element={<AuthSuccess />} />
                     <Route

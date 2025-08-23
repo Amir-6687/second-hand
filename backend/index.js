@@ -33,6 +33,9 @@ app.use("/profile", profileRoutes);
 const wishlistRoutes = require("./routes/wishlist");
 app.use("/wishlist", wishlistRoutes);
 
+const commissionRoutes = require("./routes/commission");
+app.use("/commission", commissionRoutes);
+
 const userRoutes = require("./routes/users");
 app.use("/users", userRoutes);
 
