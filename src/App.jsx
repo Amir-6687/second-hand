@@ -5,6 +5,7 @@ import {
   Route,
   NavLink,
   useLocation,
+  Link,
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -338,8 +339,8 @@ function Navigation() {
           </NavLink>
         </div>
 
-        {/* Center - Menu */}
-        <div className="flex items-center gap-6">
+        {/* Center - Menu (Desktop Only) */}
+        <div className="hidden md:flex items-center gap-6">
           {["/", "/services", "/about", "/products", "/commission"].map(
             (path, idx) => {
               const names = [
