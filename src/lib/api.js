@@ -1,5 +1,5 @@
 // آدرس IP کامپیوترت را اینجا بگذار
-export const BASE_URL = "http://192.168.178.113:4242";
+export const BASE_URL = "https://thegrrrlsclub-backend.onrender.com";
 
 export async function apiFetch(url, options = {}) {
   const token = localStorage.getItem("token");
