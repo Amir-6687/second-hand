@@ -75,6 +75,42 @@ const UsersView = () => {
     setCurrentPage(1); // Reset to first page when search changes
   };
 
+  const exportUsers = () => {
+    // Export functionality
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      "Username,Email\n" +
+      users.map((user) => `${user.username},${user.email}`).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "users.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const changeUserRole = async (userId, newRole) => {
+    try {
+      const response = await apiFetch(`/users/${userId}/role`, {
+        method: "PUT",
+        body: JSON.stringify({ role: newRole }),
+      });
+
+      if (response.ok) {
+        // Refresh users list
+        fetchUsers();
+        alert(`User role changed to ${newRole} successfully!`);
+      } else {
+        alert("Failed to change user role");
+      }
+    } catch (error) {
+      console.error("Error changing user role:", error);
+      alert("Error changing user role");
+    }
+  };
+
   if (usersLoading)
     return (
       <div className="flex items-center justify-center py-12">
@@ -86,33 +122,29 @@ const UsersView = () => {
     );
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-      <div className="p-6 border-b border-gray-200">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-gray-900">
-            User Management
-          </h3>
-          <div className="flex items-center space-x-4">
-            <input
-              type="text"
-              placeholder="Search users..."
-              value={searchTerm}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg text-white text-sm font-medium transition-colors"
-              style={{ backgroundColor: "#DE5499" }}
-            >
-              <FaDownload size={14} />
-              <span>Export</span>
-            </button>
-          </div>
+    <div className="bg-white rounded-xl shadow-lg p-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+        <h3 className="text-xl font-semibold text-gray-900">User Management</h3>
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          <input
+            type="text"
+            placeholder="Search users..."
+            className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 w-full sm:w-64"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button
+            onClick={exportUsers}
+            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap"
+          >
+            Export Users
+          </button>
         </div>
       </div>
 
+      {/* Table with responsive design */}
       <div className="overflow-x-auto">
-        <table className="min-w-full">
+        <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -144,16 +176,15 @@ const UsersView = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {user.first_name} {user.last_name}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      user.role === "admin"
-                        ? "bg-red-100 text-red-800"
-                        : "bg-blue-100 text-blue-800"
-                    }`}
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <select
+                    value={user.role || "user"}
+                    onChange={(e) => changeUserRole(user._id, e.target.value)}
+                    className="border border-gray-300 rounded px-2 py-1 text-sm"
                   >
-                    {user.role}
-                  </span>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div className="flex items-center space-x-2">

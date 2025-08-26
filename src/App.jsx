@@ -571,13 +571,6 @@ function Navigation() {
               <FaInstagram size={20} />
             </a>
             <a
-              href="https://twitter.com"
-              aria-label="Twitter"
-              className="hover:text-sky-400 transition-colors"
-            >
-              <FaTwitter size={20} />
-            </a>
-            <a
               href="https://facebook.com"
               aria-label="Facebook"
               className="hover:text-blue-600 transition-colors"

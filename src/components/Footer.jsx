@@ -23,31 +23,20 @@ export default function Footer() {
             Privacy Policy
           </a>
         </div>
-        <div className="flex gap-4 items-center justify-end z-20">
+        <div className="flex space-x-6">
           <a
             href="https://www.instagram.com/the_grrrls_club?igsh=YWFybzVzNWtrZTB0"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-pink-500 transition-colors"
+            className="text-gray-400 hover:text-pink-600 transition-colors"
             aria-label="Instagram"
           >
-            <FaInstagram className="w-6 h-6 hover:text-pink-500 transition" />
+            <FaInstagram size={20} />
           </a>
           <a
             href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-blue-600 transition-colors"
             aria-label="Facebook"
           >
-            <FaFacebook className="w-6 h-6 hover:text-blue-600 transition" />
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter"
-          >
-            <FaTwitter className="w-6 h-6 hover:text-sky-400 transition" />
+            <FaFacebook size={20} />
           </a>
         </div>
       </div>

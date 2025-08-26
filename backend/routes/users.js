@@ -67,6 +67,43 @@ router.put("/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// PUT /users/:userId/role - Change user role (Admin only)
+router.put("/:userId/role", authMiddleware, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { role } = req.body;
+
+    // Check if current user is admin
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ error: "Admin access required" });
+    }
+
+    // Validate role
+    if (!["user", "admin"].includes(role)) {
+      return res.status(400).json({ error: "Invalid role" });
+    }
+
+    // Update user role
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { role: role },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({
+      message: "User role updated successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating user role:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // حذف کاربر (فقط ادمین)
 router.delete("/:id", authMiddleware, adminMiddleware, async (req, res) => {
   try {
