@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { apiFetch } from "../lib/api";
+import loginBg from "../assets/login-background.jpg";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -92,7 +93,7 @@ export default function Login() {
     <div
       className="min-h-screen flex items-center justify-center py-20 px-4"
       style={{
-        backgroundImage: "url(/src/assets/login-background.jpg)",
+        backgroundImage: `url(${loginBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
