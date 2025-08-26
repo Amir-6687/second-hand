@@ -718,7 +718,7 @@ export default function App() {
                   href="https://wa.me/4952194932874"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="fixed bottom-6 right-6 md:bottom-6 md:right-6 bottom-16 right-6 z-50 bg-green-500/90 hover:bg-green-600/95 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110"
+                  className="fixed bottom-6 right-6 md:bottom-6 md:right-6 bottom-20 right-6 z-50 bg-green-500/90 hover:bg-green-600/95 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110"
                   aria-label="Contact us on WhatsApp"
                 >
                   <FaWhatsapp size={28} />
