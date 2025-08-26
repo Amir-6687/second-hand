@@ -399,7 +399,7 @@ export default function AdminDashboard() {
 
       {/* Navigation Tabs */}
       <div className="mb-8">
-        <nav className="flex space-x-8">
+        <nav className="flex space-x-2 md:space-x-8 overflow-x-auto">
           {[
             { id: "dashboard", label: "Dashboard", icon: <FaChartLine /> },
             { id: "orders", label: "Orders", icon: <FaShoppingCart /> },
@@ -409,7 +409,7 @@ export default function AdminDashboard() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center space-x-2 py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
+              className={`flex items-center space-x-1 md:space-x-2 py-3 px-2 md:px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${
                 activeTab === tab.id
                   ? `border-b-2 font-semibold`
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
@@ -421,7 +421,7 @@ export default function AdminDashboard() {
               }
             >
               {tab.icon}
-              <span>{tab.label}</span>
+              <span className="text-xs md:text-sm">{tab.label}</span>
             </button>
           ))}
         </nav>
