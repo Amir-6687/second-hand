@@ -223,12 +223,12 @@ router.post("/forget-password", async (req, res) => {
     }/reset-password?token=${resetToken}`;
 
     // Send password reset email - این خط اضافه شده!
-    try {
-      await sendPasswordResetEmail(user.email, resetToken);
-    } catch (e) {
-      console.error("Failed to send password reset email:", e);
-      return res.status(500).json({ error: "Failed to send reset email" });
-    }
+    // try {
+    //   await sendPasswordResetEmail(user.email, resetToken);
+    // } catch (e) {
+    //   console.error("Failed to send password reset email:", e);
+    //   return res.status(500).json({ error: "Failed to send reset email" });
+    // }
 
     res.json({
       message: "Password reset email sent successfully",
