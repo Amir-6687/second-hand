@@ -76,4 +76,9 @@ app.post("/create-payment-intent", async (req, res) => {
   }
 });
 
-app.listen(4242, "0.0.0.0", () => console.log("Server läuft auf Port 4242"));
+// app.listen(4242, "0.0.0.0", () => console.log("Server läuft auf Port 4242"));
+const PORT = process.env.PORT || 4242; // اگر Render پورتی داد، همونو استفاده کن
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server läuft auf Port ${PORT}`);
+});
