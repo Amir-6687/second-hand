@@ -10,8 +10,7 @@ const transporter = nodemailer.createTransport({
 
 // Email verification function
 const sendVerificationEmail = async (email, verificationToken) => {
-  const backendBase =
-    process.env.BACKEND_URL || "https://thegrrrlsclub-backend.onrender.com";
+  const backendBase = process.env.BACKEND_URL || "https://api.thegrrrlsclub.de";
   const verificationUrl = `${backendBase}/auth/verify/${verificationToken}`;
 
   const mailOptions = {
