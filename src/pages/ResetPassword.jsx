@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiFetch } from "../lib/api";
+import loginBg from "../assets/login-background.jpg";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -92,7 +93,7 @@ export default function ResetPassword() {
     <div
       className="min-h-screen flex items-center justify-center py-20 px-4"
       style={{
-        backgroundImage: "url(/src/assets/login-background.jpg)",
+        backgroundImage: `url(${loginBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -123,7 +124,7 @@ export default function ResetPassword() {
               </label>
               <div className="relative">
                 <input
-                  className="w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 p-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                  className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter new password"
                   value={password}
@@ -187,7 +188,7 @@ export default function ResetPassword() {
               </label>
               <div className="relative">
                 <input
-                  className="w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 p-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                  className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm new password"
                   value={confirmPassword}

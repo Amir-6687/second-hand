@@ -219,10 +219,12 @@ router.post("/forget-password", async (req, res) => {
       process.env.FRONTEND_URL || "http://localhost:5173"
     }/reset-password?token=${resetToken}`;
 
-    // For now, just return the reset link (in production, send email)
+    // Send reset email
+    const { sendPasswordResetEmail } = require("../config/email");
+    await sendPasswordResetEmail(email, resetToken);
+
     res.json({
-      message: "Password reset link generated successfully",
-      resetLink: resetLink, // Remove this in production
+      message: "Password reset email sent successfully",
     });
   } catch (error) {
     console.error("Forget password error:", error);
