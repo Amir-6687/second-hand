@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema({
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
   resetPasswordToken: String, // For password reset
   resetPasswordExpires: Date, // Token expiration date
+  emailVerified: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: String,
+  verificationExpires: Date,
 });
 
 module.exports = mongoose.model("User", userSchema);
