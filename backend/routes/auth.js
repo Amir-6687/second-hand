@@ -30,7 +30,23 @@ router.post("/register", async (req, res) => {
       role: "user",
     });
     await user.save();
-    res.status(201).json({ message: "User registered" });
+
+    // Generate verification token
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    user.verificationToken = verificationToken;
+    user.verificationExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+    await user.save();
+
+    // Send verification email
+    try {
+      await sendVerificationEmail(user.email, verificationToken);
+    } catch (e) {
+      console.error("Failed to send verification email:", e);
+    }
+
+    res
+      .status(201)
+      .json({ message: "User registered. Verification email sent." });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -45,6 +61,13 @@ router.post("/login", async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
+
+    // Enforce email verification before login
+    if (!user.emailVerified) {
+      return res
+        .status(403)
+        .json({ error: "Please verify your email before logging in." });
+    }
 
     const token = jwt.sign(
       {
