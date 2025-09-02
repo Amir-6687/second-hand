@@ -7,7 +7,7 @@ const User = require("../models/User");
 const axios = require("axios");
 const { sendVerificationEmail, sendPasswordResetEmail } = require("../config/email");
 const crypto = require("crypto");
-const authMiddleware = require("../middleware/authMiddleware");
+const { authMiddleware } = require("../middleware/auth");
 
 // ثبت‌نام
 router.post("/register", async (req, res) => {
