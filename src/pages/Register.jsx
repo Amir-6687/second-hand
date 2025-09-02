@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { apiFetch } from "../lib/api";
+import loginBg from "../assets/login-background.jpg";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -106,7 +107,7 @@ export default function Register() {
     <div
       className="min-h-screen flex items-center justify-center py-20 px-4"
       style={{
-        backgroundImage: "url(/src/assets/login-background.jpg)",
+        backgroundImage: `url(${loginBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
