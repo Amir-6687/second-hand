@@ -134,7 +134,7 @@ export default function Register() {
                 required
                 value={form.email}
                 onChange={handleChange}
-                className="w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
               />
             </div>
             <div>
@@ -145,7 +145,7 @@ export default function Register() {
                 required
                 value={form.password}
                 onChange={handleChange}
-                className={`w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all ${
+                className={`w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all ${
                   errors.password ? "border-red-400" : ""
                 }`}
               />
@@ -163,7 +163,7 @@ export default function Register() {
                 required
                 value={form.confirmPassword}
                 onChange={handleChange}
-                className={`w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all ${
+                className={`w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all ${
                   errors.confirmPassword ? "border-red-400" : ""
                 }`}
               />
@@ -180,7 +180,7 @@ export default function Register() {
                 required
                 value={form.first_name}
                 onChange={handleChange}
-                className={`w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all ${
+                className={`w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all ${
                   errors.first_name ? "border-red-400" : ""
                 }`}
               />
@@ -197,7 +197,7 @@ export default function Register() {
                 required
                 value={form.last_name}
                 onChange={handleChange}
-                className={`w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all ${
+                className={`w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all ${
                   errors.last_name ? "border-red-400" : ""
                 }`}
               />
@@ -213,7 +213,7 @@ export default function Register() {
                 placeholder="Telefonnummer"
                 value={form.phone}
                 onChange={handleChange}
-                className="w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
               />
             </div>
             <div>
@@ -222,7 +222,7 @@ export default function Register() {
                 placeholder="Adresse"
                 value={form.address}
                 onChange={handleChange}
-                className="w-full border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
               />
             </div>
             <button
