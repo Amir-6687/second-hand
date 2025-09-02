@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const axios = require("axios");
-const { sendVerificationEmail } = require("../config/email");
+const { sendVerificationEmail, sendPasswordResetEmail } = require("../config/email");
 const crypto = require("crypto");
 const authMiddleware = require("../middleware/authMiddleware");
 
@@ -219,9 +219,6 @@ router.post("/forget-password", async (req, res) => {
       process.env.FRONTEND_URL || "http://localhost:5173"
     }/reset-password?token=${resetToken}`;
 
-    // Send reset email
-    const { sendPasswordResetEmail } = require("../config/email");
-    await sendPasswordResetEmail(email, resetToken);
 
     res.json({
       message: "Password reset email sent successfully",
