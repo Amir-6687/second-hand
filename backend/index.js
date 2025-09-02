@@ -14,15 +14,24 @@ const allowedOrigins = [
   "https://www.thegrrrlsclub.de",
   "http://localhost:5173",
 ];
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     optionsSuccessStatus: 204,
+//   })
+// );
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "*", // همه origins را قبول می‌کند - فقط برای debug!
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    optionsSuccessStatus: 204,
   })
 );
+
 app.options("*", cors({ origin: allowedOrigins, credentials: true }));
 
 app.use(express.json());
