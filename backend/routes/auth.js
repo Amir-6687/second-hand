@@ -66,11 +66,11 @@ router.post("/login", async (req, res) => {
     if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
     // Enforce email verification before login
-    if (!user.emailVerified) {
-      return res
-        .status(403)
-        .json({ error: "Please verify your email before logging in." });
-    }
+    // if (!user.emailVerified) {
+    //   return res
+    //     .status(403)
+    //     .json({ error: "Please verify your email before logging in." });
+    // }
 
     const token = jwt.sign(
       {
