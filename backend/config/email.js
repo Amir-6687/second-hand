@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
@@ -10,7 +10,9 @@ const transporter = nodemailer.createTransporter({
 
 // Email verification function
 const sendVerificationEmail = async (email, verificationToken) => {
-  const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
+  const backendBase =
+    process.env.BACKEND_URL || "https://thegrrrlsclub-backend.onrender.com";
+  const verificationUrl = `${backendBase}/auth/verify/${verificationToken}`;
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
