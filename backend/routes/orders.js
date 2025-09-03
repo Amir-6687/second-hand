@@ -14,6 +14,19 @@ router.get("/", authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
+
+// گرفتن سفارشات کاربر فعلی
+router.get("/user/my-orders", authMiddleware, async (req, res) => {
+  try {
+    const orders = await Order.find({ userId: req.user.userId })
+      .populate("items.productId")
+      .sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // گرفتن یک سفارش با id (فقط ادمین یا صاحب سفارش)
 router.get("/:id", authMiddleware, async (req, res) => {
   try {

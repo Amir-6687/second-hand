@@ -42,6 +42,30 @@ router.put("/:id", authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
+
+// کاهش موجودی محصول بعد از خرید
+router.post("/:productId/decrease", authMiddleware, async (req, res) => {
+  try {
+    const { quantity } = req.body;
+    const inventory = await Inventory.findOne({ productId: req.params.productId });
+    
+    if (!inventory) {
+      return res.status(404).json({ error: "Product inventory not found" });
+    }
+    
+    if (inventory.quantity < quantity) {
+      return res.status(400).json({ error: "Insufficient inventory" });
+    }
+    
+    inventory.quantity -= quantity;
+    await inventory.save();
+    
+    res.json({ message: "Inventory updated successfully", inventory });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // حذف موجودی (فقط ادمین)
 router.delete("/:id", authMiddleware, adminMiddleware, async (req, res) => {
   try {

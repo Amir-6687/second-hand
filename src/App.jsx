@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Products from "./pages/Products";
 import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentError from "./pages/PaymentError";
 import { CartProvider, useCart } from "./context/CartContext";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
@@ -659,6 +660,8 @@ export default function App() {
                     <Route
                       path="/payment-success"
                       element={<PaymentSuccess />}
+                    />
+                    <Route path="/payment-error" element={<PaymentError />} />
                     />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/login" element={<Login />} />

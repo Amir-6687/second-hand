@@ -4,6 +4,7 @@ import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../lib/api";
+import OrderHistory from "../components/OrderHistory";
 
 export default function Profile() {
   const { user, loading: authLoading, logout } = useAuth();
@@ -11,7 +12,7 @@ export default function Profile() {
   const { clearWishlist } = useWishlist();
   const [profile, setProfile] = useState({
     username: "",
-    email: "", // اضافه کردن email
+    email: "",
     first_name: "",
     last_name: "",
     phone: "",
@@ -19,6 +20,7 @@ export default function Profile() {
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [activeTab, setActiveTab] = useState("profile");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,146 +56,161 @@ export default function Profile() {
     try {
       const res = await apiFetch("/profile", {
         method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profile),
       });
-      if (!res.ok) throw new Error("Fehler beim Aktualisieren des Profils");
-      alert("✅ Profile updated successfully");
+      if (!res.ok) throw new Error("Fehler beim Speichern");
+      alert("✅ Profile updated successfully!");
     } catch (err) {
-      alert("❌ Error updating profile: " + err.message);
+      alert("❌ Error saving profile: " + err.message);
     } finally {
       setSaving(false);
     }
   };
 
   const handleDeleteAccount = async () => {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete your account? This action cannot be undone."
-      )
-    ) {
+    if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
       return;
     }
     try {
-      const res = await apiFetch("/profile", {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Fehler beim Löschen des Accounts");
-
-      // Clear all user data
-      clearCart(); // Clear cart
-      clearWishlist(); // Clear wishlist
-
-      // Logout user (this will also clear localStorage and redirect to home)
+      const res = await apiFetch("/profile", { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to delete account");
+      clearCart();
+      clearWishlist();
       logout();
-
-      alert("✅ Account deleted successfully");
-    } catch (error) {
-      alert("❌ Error deleting account: " + error.message);
+      navigate("/");
+    } catch (err) {
+      alert("❌ Error deleting account: " + err.message);
     }
   };
 
-  if (authLoading) {
-    return <p className="p-4 text-center">Loading authentication...</p>;
-  }
-
-  if (!user) {
-    return (
-      <p className="p-4 text-center">Please log in to view your profile.</p>
-    );
-  }
-
-  if (loading) {
+  if (authLoading || loading) {
     return <p className="p-4 text-center">Loading profile...</p>;
   }
 
+  if (!user) {
+    return <p className="p-4 text-center">Please log in to view your profile.</p>;
+  }
+
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-6 text-center">Profile</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block mb-1 text-sm font-medium">Username</label>
-          <input
-            name="username"
-            value={profile.username}
-            onChange={handleChange}
-            placeholder="Username"
-            className="w-full border border-gray-300 rounded px-3 py-2"
-            required
-          />
-        </div>
-        <div>
-          <label className="block mb-1 text-sm font-medium">Email</label>
-          <input
-            name="email"
-            type="email"
-            value={profile.email}
-            onChange={handleChange}
-            placeholder="Email"
-            className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            disabled
-            title="Email cannot be changed"
-          />
-        </div>
-        <div>
-          <label className="block mb-1 text-sm font-medium">First Name</label>
-          <input
-            name="first_name"
-            value={profile.first_name}
-            onChange={handleChange}
-            placeholder="First Name"
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1 text-sm font-medium">Last Name</label>
-          <input
-            name="last_name"
-            value={profile.last_name}
-            onChange={handleChange}
-            placeholder="Last Name"
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1 text-sm font-medium">Phone Number</label>
-          <input
-            name="phone"
-            value={profile.phone}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1 text-sm font-medium">Address</label>
-          <input
-            name="address"
-            value={profile.address}
-            onChange={handleChange}
-            placeholder="Address"
-            className="w-full border border-gray-300 rounded px-3 py-2"
-          />
-        </div>
+    <div className="max-w-4xl mx-auto p-6">
+      {/* Tab Navigation */}
+      <div className="flex border-b border-gray-200 mb-6">
         <button
-          type="submit"
-          disabled={saving}
-          className={`w-full py-2 px-4 rounded text-white font-medium ${
-            saving
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-pink-500 hover:bg-pink-600"
-          } transition`}
+          onClick={() => setActiveTab("profile")}
+          className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+            activeTab === "profile"
+              ? "border-pink-500 text-pink-600"
+              : "border-transparent text-gray-500 hover:text-gray-700"
+          }`}
         >
-          {saving ? "Saving..." : "Save Changes"}
+          Profile Settings
         </button>
-      </form>
-      <div className="mt-6 border-t pt-4 text-center">
         <button
-          onClick={handleDeleteAccount}
-          className="text-red-500 hover:underline text-sm"
+          onClick={() => setActiveTab("orders")}
+          className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+            activeTab === "orders"
+              ? "border-pink-500 text-pink-600"
+              : "border-transparent text-gray-500 hover:text-gray-700"
+          }`}
         >
-          Delete Account
+          Order History
         </button>
       </div>
+
+      {/* Tab Content */}
+      {activeTab === "profile" ? (
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h1 className="text-2xl font-bold mb-6">Profile Settings</h1>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block mb-1 text-sm font-medium">Username</label>
+              <input
+                name="username"
+                value={profile.username}
+                onChange={handleChange}
+                placeholder="Username"
+                className="w-full border border-gray-300 rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-sm font-medium">Email</label>
+              <input
+                name="email"
+                value={profile.email}
+                onChange={handleChange}
+                placeholder="Email"
+                className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-not-allowed"
+                disabled
+                title="Email cannot be changed"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block mb-1 text-sm font-medium">First Name</label>
+                <input
+                  name="first_name"
+                  value={profile.first_name}
+                  onChange={handleChange}
+                  placeholder="First Name"
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                />
+              </div>
+              <div>
+                <label className="block mb-1 text-sm font-medium">Last Name</label>
+                <input
+                  name="last_name"
+                  value={profile.last_name}
+                  onChange={handleChange}
+                  placeholder="Last Name"
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block mb-1 text-sm font-medium">Phone Number</label>
+              <input
+                name="phone"
+                value={profile.phone}
+                onChange={handleChange}
+                placeholder="Phone Number"
+                className="w-full border border-gray-300 rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-sm font-medium">Address</label>
+              <input
+                name="address"
+                value={profile.address}
+                onChange={handleChange}
+                placeholder="Address"
+                className="w-full border border-gray-300 rounded px-3 py-2"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={saving}
+              className={`w-full py-2 px-4 rounded text-white font-medium ${
+                saving
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-pink-500 hover:bg-pink-600"
+              } transition`}
+            >
+              {saving ? "Saving..." : "Save Changes"}
+            </button>
+          </form>
+          <div className="mt-6 border-t pt-4 text-center">
+            <button
+              onClick={handleDeleteAccount}
+              className="text-red-500 hover:underline text-sm"
+            >
+              Delete Account
+            </button>
+          </div>
+        </div>
+      ) : (
+        <OrderHistory />
+      )}
     </div>
   );
 }
