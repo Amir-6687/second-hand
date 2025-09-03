@@ -1,3 +1,5 @@
+import SkipLinks from "./components/SkipLinks";
+import { HelmetProvider } from "react-helmet-async";
 import ErrorBoundary from "./components/ErrorBoundary";
 import React, { useState, useEffect, useRef } from "react";
 import {
@@ -637,7 +639,7 @@ export default function App() {
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
-          <ErrorBoundary><BrowserRouter>
+          <HelmetProvider><ErrorBoundary><SkipLinks /><BrowserRouter>
             {/* محفظه اصلی */}
             <div className="relative min-h-screen bg-white">
               {/* محتوای اصلی */}
@@ -722,7 +724,7 @@ export default function App() {
                 </a>
               </div>
             </div>
-          </BrowserRouter></ErrorBoundary>
+          </BrowserRouter></ErrorBoundary></HelmetProvider>
         </WishlistProvider>
       </CartProvider>
     </AuthProvider>

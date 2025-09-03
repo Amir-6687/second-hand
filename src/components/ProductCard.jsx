@@ -388,7 +388,7 @@ const ProductCard = ({ product, linkPath = null }) => {
             <button
               onClick={handleAddToCart}
               className="text-gray-600 hover:text-pink-500 transition-colors cursor-pointer"
-              title="Add to Cart"
+              title="Add to Cart" aria-label="Add Test Product to cart"
             >
               <CiShoppingBasket size={24} />
             </button>
