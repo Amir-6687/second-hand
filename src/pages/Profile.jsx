@@ -11,6 +11,7 @@ export default function Profile() {
   const { clearWishlist } = useWishlist();
   const [profile, setProfile] = useState({
     username: "",
+    email: "", // اضافه کردن email
     first_name: "",
     last_name: "",
     phone: "",
@@ -118,6 +119,19 @@ export default function Profile() {
             placeholder="Username"
             className="w-full border border-gray-300 rounded px-3 py-2"
             required
+          />
+        </div>
+        <div>
+          <label className="block mb-1 text-sm font-medium">Email</label>
+          <input
+            name="email"
+            type="email"
+            value={profile.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
+            disabled
+            title="Email cannot be changed"
           />
         </div>
         <div>
