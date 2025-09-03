@@ -1,3 +1,4 @@
+import ErrorBoundary from "./components/ErrorBoundary";
 import React, { useState, useEffect, useRef } from "react";
 import {
   BrowserRouter,
@@ -636,7 +637,7 @@ export default function App() {
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
-          <BrowserRouter>
+          <ErrorBoundary><BrowserRouter>
             {/* محفظه اصلی */}
             <div className="relative min-h-screen bg-white">
               {/* محتوای اصلی */}
@@ -660,8 +661,6 @@ export default function App() {
                     <Route
                       path="/payment-success"
                       element={<PaymentSuccess />}
-                    />
-                    <Route path="/payment-error" element={<PaymentError />} />
                     />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/login" element={<Login />} />
@@ -723,7 +722,7 @@ export default function App() {
                 </a>
               </div>
             </div>
-          </BrowserRouter>
+          </BrowserRouter></ErrorBoundary>
         </WishlistProvider>
       </CartProvider>
     </AuthProvider>

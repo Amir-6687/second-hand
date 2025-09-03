@@ -1,30 +1,42 @@
-// آدرس IP کامپیوترت را اینجا بگذار
-// export const BASE_URL = "https://thegrrrlsclub-backend.onrender.com";
+// src/lib/api.js
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.thegrrrlsclub.de';
 
-// export async function apiFetch(url, options = {}) {
-//   const token = localStorage.getItem("token");
-//   const headers = {
-//     ...(options.headers || {}),
-//     ...(token ? { Authorization: `Bearer ${token}` } : {}),
-//     "Content-Type": "application/json",
-//   };
-// اگر url کامل نبود، BASE_URL را اضافه کن
-//   const fullUrl = url.startsWith("http") ? url : BASE_URL + url;
-//   return fetch(fullUrl, { ...options, headers });
-// }
+export { BASE_URL };
 
-// استفاده از environment variable با fallback به URL جدید
-export const BASE_URL =
-  import.meta.env.VITE_API_URL || "https://api.thegrrrlsclub.de";
-
-export async function apiFetch(url, options = {}) {
-  const token = localStorage.getItem("token");
-  const headers = {
-    ...(options.headers || {}),
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    "Content-Type": "application/json",
+export const apiFetch = async (endpoint, options = {}) => {
+  const url = `${BASE_URL}${endpoint}`;
+  
+  const defaultOptions = {
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
   };
-  // اگر url کامل نبود، BASE_URL را اضافه کن
-  const fullUrl = url.startsWith("http") ? url : BASE_URL + url;
-  return fetch(fullUrl, { ...options, headers });
-}
+
+  const config = {
+    ...defaultOptions,
+    ...options,
+    headers: {
+      ...defaultOptions.headers,
+      ...options.headers,
+    },
+  };
+
+  try {
+    const response = await fetch(url, config);
+    return response;
+  } catch (error) {
+    console.error('API Fetch Error:', error);
+    throw error;
+  }
+};
+
+// Environment info for debugging
+export const getEnvironmentInfo = () => {
+  return {
+    baseUrl: BASE_URL,
+    environment: import.meta.env.VITE_APP_ENVIRONMENT || 'development',
+    version: import.meta.env.VITE_APP_VERSION || '1.0.0',
+    appName: import.meta.env.VITE_APP_NAME || 'The Grrrls Club'
+  };
+};

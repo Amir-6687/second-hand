@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { stripePromise } from "../lib/stripe";
 import CheckoutForm from "../components/CheckoutForm";
 import { apiFetch } from "../lib/api";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const stripePromise = loadStripe(
-  "pk_test_51RdaawIHmfIW1XwW1vpUdbnY3i9lqzR8X8KfCqXzM3wgIAHGnLjOj12TzCQjq1SuBbTMVp78VwWtRqkKCOv1LC2K00ZSm5SxXl"
-);
 
 const SHIPPING_COST = 4.99;
 

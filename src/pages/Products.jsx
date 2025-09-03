@@ -6,6 +6,7 @@ import { apiFetch } from "../lib/api";
 import StarRating from "../components/StarRating";
 import { Link, useSearchParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 // BASE_URL را از lib/api.js ایمپورت کن
 import { BASE_URL } from "../lib/api";
@@ -93,7 +94,7 @@ export default function Products() {
         )}
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {loading && <p>Lade Produkte...</p>}
+          {loading && <SkeletonLoader type="product" count={8} />}
           {error && <p className="text-red-500">{error}</p>}
           {!loading &&
             !error &&
