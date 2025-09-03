@@ -5,7 +5,7 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // user: { userId, email, role }
+  const [user, setUser] = useState(null); // user: { userId, email, role, username }
   const [loading, setLoading] = useState(true);
 
   // توکن را از localStorage بخوان و decode کن
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         setUser({
           userId: decoded.userId,
           email: decoded.email,
-          username: decoded.username, // ← این خط باید باشد
+          username: decoded.username,
           role: decoded.role,
         });
       } catch (err) {
@@ -27,6 +27,14 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
     }
     setLoading(false);
+  };
+
+  // Update user data (for profile updates)
+  const updateUser = (userData) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      ...userData
+    }));
   };
 
   useEffect(() => {
@@ -47,24 +55,18 @@ export const AuthProvider = ({ children }) => {
     // تا بعد از login مجدد در دسترس باشند
 
     setUser(null);
-
-    // کاربر را به صفحه Home هدایت کن
-    window.location.href = "/";
   };
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        role: user?.role || null,
-        email: user?.email || null,
-        username: user?.username || null, // ← این خط باید باشد
-        loading,
-        login,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  const value = {
+    user,
+    loading,
+    login,
+    logout,
+    updateUser, // Add this method
+    // Add role for backward compatibility
+    role: user?.role,
+    username: user?.username,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

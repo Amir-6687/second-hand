@@ -7,7 +7,7 @@ import { apiFetch } from "../lib/api";
 import OrderHistory from "../components/OrderHistory";
 
 export default function Profile() {
-  const { user, loading: authLoading, logout } = useAuth();
+  const { user, loading: authLoading, logout, updateUser } = useAuth();
   const { clearCart } = useCart();
   const { clearWishlist } = useWishlist();
   const [profile, setProfile] = useState({
@@ -23,12 +23,14 @@ export default function Profile() {
   const [activeTab, setActiveTab] = useState("profile");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [usernameError, setUsernameError] = useState("");
   const navigate = useNavigate();
 
   const loadProfile = async () => {
     try {
       setError("");
       setSuccess("");
+      setUsernameError("");
       const res = await apiFetch("/profile");
       if (!res.ok) {
         if (res.status === 401) {
@@ -65,7 +67,13 @@ export default function Profile() {
   }, [user, authLoading, logout, navigate]);
 
   const handleChange = (e) => {
-    setProfile({ ...profile, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setProfile({ ...profile, [name]: value });
+    
+    // Clear username error when user starts typing
+    if (name === "username") {
+      setUsernameError("");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -73,6 +81,7 @@ export default function Profile() {
     setSaving(true);
     setError("");
     setSuccess("");
+    setUsernameError("");
     
     try {
       console.log("Submitting profile data:", profile); // Debug log
@@ -88,7 +97,14 @@ export default function Profile() {
           navigate("/login");
           return;
         }
-        throw new Error(`HTTP ${res.status}: Failed to update profile`);
+        
+        const errorData = await res.json();
+        if (res.status === 400 && errorData.error.includes("Username")) {
+          setUsernameError(errorData.error);
+          return;
+        }
+        
+        throw new Error(`HTTP ${res.status}: ${errorData.error || "Failed to update profile"}`);
       }
       
       const data = await res.json();
@@ -96,6 +112,13 @@ export default function Profile() {
       
       // Update profile state with the response data
       setProfile(data);
+      
+      // Update AuthContext with new username
+      updateUser({
+        username: data.username,
+        email: data.email
+      });
+      
       setSuccess("✅ Profile updated successfully!");
       
       // Clear success message after 3 seconds
@@ -235,15 +258,25 @@ export default function Profile() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Username
+                      Username *
                     </label>
                     <input
                       type="text"
                       name="username"
                       value={profile.username || ""}
                       onChange={handleChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 ${
+                        usernameError ? "border-red-500" : "border-gray-300"
+                      }`}
+                      placeholder="Enter your username"
+                      required
                     />
+                    {usernameError && (
+                      <p className="text-red-500 text-sm mt-1">{usernameError}</p>
+                    )}
+                    <p className="text-xs text-gray-500 mt-1">
+                      Choose a unique username that others can use to find you
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">

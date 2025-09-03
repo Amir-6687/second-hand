@@ -21,14 +21,24 @@ router.put("/", authMiddleware, async (req, res) => {
     const { username, first_name, last_name, phone, address } = req.body;
     
     // Validate required fields
-    if (!username) {
+    if (!username || username.trim() === "") {
       return res.status(400).json({ error: "Username is required" });
+    }
+    
+    // Check if username is already taken by another user
+    const existingUser = await User.findOne({ 
+      username: username.trim(), 
+      _id: { $ne: req.user.userId } 
+    });
+    
+    if (existingUser) {
+      return res.status(400).json({ error: "Username is already taken" });
     }
     
     const user = await User.findByIdAndUpdate(
       req.user.userId,
       { 
-        username, 
+        username: username.trim(), 
         first_name: first_name || "", 
         last_name: last_name || "", 
         phone: phone || "", 
@@ -43,6 +53,12 @@ router.put("/", authMiddleware, async (req, res) => {
     res.json(user);
   } catch (err) {
     console.error("Profile update error:", err); // Debug log
+    
+    // Handle specific MongoDB errors
+    if (err.code === 11000) {
+      return res.status(400).json({ error: "Username is already taken" });
+    }
+    
     res.status(500).json({ error: err.message });
   }
 });

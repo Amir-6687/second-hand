@@ -279,7 +279,7 @@ function FavoritesIconWithTooltip({ onClick }) {
 }
 
 function Navigation() {
-  const { user, username, role, logout } = useAuth();
+  const { user, role, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -397,7 +397,7 @@ function Navigation() {
                 className="hover:text-pink-600 flex items-center gap-1"
               >
                 <UserIconWithTooltip />
-                {username || "Profile"}
+                {user?.username || "Profile"}
               </NavLink>
 
               {role === "admin" && (
@@ -530,7 +530,7 @@ function Navigation() {
                   className="hover:text-pink-600 flex items-center gap-1"
                 >
                   <CiUser className="w-5 h-5" />
-                  {username || "Profile"}
+                  {user?.username || "Profile"}
                 </NavLink>
                 {role === "admin" && (
                   <NavLink

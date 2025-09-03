@@ -44,13 +44,6 @@ export default function ProductDetail() {
     beforeChange: (current, next) => setCurrentSlide(next),
   };
 
-  // Fallback images for missing product images
-  const fallbackImages = [
-    "/line-woman01.jpg",
-    "/line-woman02.jpg", 
-    "/line-woman03.jpg"
-  ];
-
   useEffect(() => {
     async function fetchProduct() {
       setLoading(true);
@@ -126,7 +119,7 @@ export default function ProductDetail() {
       ? product.images
       : product.image
       ? [product.image]
-      : fallbackImages;
+      : [];
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
@@ -221,37 +214,39 @@ export default function ProductDetail() {
         <div className="w-full md:w-1/2 flex flex-row-reverse gap-6 order-1 md:order-2">
           {/* اسلایدر اصلی */}
           <div className="w-4/5 relative">
-            <Slider
-              {...mainSliderSettings}
-              initialSlide={currentSlide}
-              ref={mainSliderRef}
-            >
-              {images.map((image, index) => (
-                <div key={index} className="relative">
-                  <img
-                    src={image.startsWith('/') ? image : BASE_URL + image}
-                    alt={`${product.name} - ${index + 1}`}
-                    className="w-full h-auto max-h-[500px] object-contain rounded-lg shadow"
-                    style={{ background: "#f8f8f8" }}
-                    onClick={() => handleImageClick(image)}
-                    onError={(e) => {
-                      // Fallback to public folder images
-                      e.target.src = fallbackImages[index % fallbackImages.length];
-                    }}
-                  />
-                  {!isMobile() && (
-                    <div
-                      className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200 cursor-zoom-in"
+            {images.length > 0 ? (
+              <Slider
+                {...mainSliderSettings}
+                initialSlide={currentSlide}
+                ref={mainSliderRef}
+              >
+                {images.map((image, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      src={BASE_URL + image}
+                      alt={`${product.name} - ${index + 1}`}
+                      className="w-full h-auto max-h-[500px] object-contain rounded-lg shadow"
+                      style={{ background: "#f8f8f8" }}
                       onClick={() => handleImageClick(image)}
-                    >
-                      <div className="bg-black bg-opacity-50 rounded-full p-3">
-                        <FiZoomIn className="text-white text-2xl" />
+                    />
+                    {!isMobile() && (
+                      <div
+                        className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200 cursor-zoom-in"
+                        onClick={() => handleImageClick(image)}
+                      >
+                        <div className="bg-black bg-opacity-50 rounded-full p-3">
+                          <FiZoomIn className="text-white text-2xl" />
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </Slider>
+                    )}
+                  </div>
+                ))}
+              </Slider>
+            ) : (
+              <div className="w-full h-[500px] bg-gray-100 rounded-lg flex items-center justify-center">
+                <p className="text-gray-500">No images available</p>
+              </div>
+            )}
           </div>
 
           {/* گالری تصاویر عمودی */}
@@ -267,13 +262,9 @@ export default function ProductDetail() {
                 onClick={() => handleThumbnailClick(index)}
               >
                 <img
-                  src={image.startsWith('/') ? image : BASE_URL + image}
+                  src={BASE_URL + image}
                   alt={`Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover aspect-square"
-                  onError={(e) => {
-                    // Fallback to public folder images
-                    e.target.src = fallbackImages[index % fallbackImages.length];
-                  }}
                 />
               </div>
             ))}
