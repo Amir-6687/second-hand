@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../lib/api";
+import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/ProductCard";
 
 export default function Commission() {
   const [products, setProducts] = useState([]);
@@ -235,84 +237,16 @@ export default function Commission() {
         </p>
       </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {/* Products Grid - Using ProductCard Component */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
-          <div
-            key={product._id}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
-            onClick={() => navigate(`/commission/${product._id}`)}
-          >
-            {/* Product Image */}
-            <div className="aspect-square overflow-hidden relative">
-              <img
-                src={
-                  product.images && product.images.length > 0
-                    ? BASE_URL + product.images[0]
-                    : "/placeholder-image.jpg"
-                }
-                alt={product.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-
-              {/* Partner Badge */}
-              <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
-                {product.partnerLogo && (
-                  <img
-                    src={BASE_URL + product.partnerLogo}
-                    alt={product.partnerName}
-                    className="w-4 h-4 rounded-full"
-                  />
-                )}
-                <span className="text-xs font-medium text-gray-700">
-                  {product.partnerName}
-                </span>
-              </div>
-            </div>
-
-            {/* Product Info */}
-            <div className="p-4">
-              {/* Product Name */}
-              <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
-                {product.name}
-              </h3>
-
-              {/* Price */}
-              <div className="text-lg font-bold text-pink-600 mb-2">
-                {product.isDiscounted && product.originalPrice ? (
-                  <div className="flex flex-col gap-1">
-                    <span className="line-through text-red-500 text-sm">
-                      €{product.originalPrice.toLocaleString()}
-                    </span>
-                    <span className="text-pink-600">
-                      €{product.price.toLocaleString()}
-                    </span>
-                    <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-medium w-fit">
-                      {product.discountLabel || "Last Chance"}
-                    </span>
-                  </div>
-                ) : (
-                  <span>€{product.price.toLocaleString()}</span>
-                )}
-              </div>
-
-              {/* Commission Rate */}
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-gray-500">
-                  Kommission: {product.commissionRate}%
-                </div>
-                <div className="text-xs text-gray-400">
-                  {product.category && `• ${product.category}`}
-                </div>
-              </div>
-            </div>
-          </div>
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
 
       {filteredProducts.length === 0 && (
         <div className="text-center py-12">
-          <div className="text-gray-400 text-6xl mb-4">🛍️</div>
+          <div className="text-gray-400 text-6xl mb-4"></div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">
             Keine Produkte gefunden
           </h3>
