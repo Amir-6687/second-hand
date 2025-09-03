@@ -70,7 +70,7 @@ router.post("/login", async (req, res) => {
     //   return res
     //     .status(403)
     //     .json({ error: "Please verify your email before logging in." });
-    }
+    // }
 
     const token = jwt.sign(
       {
