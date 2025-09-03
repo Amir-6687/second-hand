@@ -6,120 +6,144 @@
   color: #2d2d2d;
 }
 
-// Hero Section
-.heroSection {
+// Banner Section with Line Woman
+.bannerSection {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   padding: 4rem 2rem;
-  text-align: center;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
 }
 
-.heroContent {
+.bannerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.bannerText {
+  text-align: left;
+}
+
+.bannerTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #333;
+  line-height: 1.2;
+}
+
+.bannerSubtitle {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.bannerHashtag {
+  color: #00bfae;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.bannerImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lineWomanImage {
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+// Welcome Section
+.welcomeSection {
+  text-align: center;
+  margin: 3rem 0;
+  padding: 0 2rem;
+}
+
+.welcomeContent {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.heroTitle {
-  font-size: 3rem;
+.welcomeTitle {
+  font-size: 2.1rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #333;
+  color: #00897b;
 }
 
-.heroSubtitle {
-  font-size: 1.3rem;
-  margin-bottom: 2rem;
-  color: #666;
-}
-
-.heroButtons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.bannerPrimaryBtn {
-  background: #DE5499;
-  color: white;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 8px;
+.welcomeText {
   font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #c44569;
-    transform: translateY(-2px);
-  }
+  color: #444;
+  font-weight: 500;
 }
 
-.bannerSecondaryBtn {
-  background: transparent;
-  color: #DE5499;
-  padding: 1rem 2rem;
-  border: 2px solid #DE5499;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #DE5499;
-    color: white;
-    transform: translateY(-2px);
-  }
+.welcomeHashtag {
+  color: #00bfae;
+  font-weight: 700;
 }
 
 // Suggested Products Section
 .suggestedSection {
-  margin: 2.5rem 0 1.5rem 0;
-  text-align: center;
+  margin: 4rem 0;
+  padding: 0 2rem;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 1rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .suggestedSectionTitle {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 0.7rem;
-  text-align: left;
   color: #222;
+  margin: 0;
+}
+
+.sectionIcon {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #DE5499;
 }
 
 .suggestedGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  justify-items: center;
-  margin-bottom: 1.2rem;
-  width: 100%;
-  max-width: 100%;
-  min-height: 440px;
-  margin-left: auto;
-  margin-right: auto;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .suggestedItem {
-  width: 220px;
-  min-width: 150px;
-  height: 340px;
-  cursor: pointer;
   background: #fff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.2s;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
-  display: block;
-  border-radius: 8px;
-  overflow: hidden;
 
   &:hover {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     text-decoration: none;
     color: inherit;
   }
@@ -127,7 +151,7 @@
 
 .suggestedImageWrapper {
   width: 100%;
-  height: 80%;
+  height: 250px;
   overflow: hidden;
   position: relative;
 }
@@ -136,33 +160,28 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s;
+  transition: transform 0.4s ease;
 }
 
 .suggestedItem:hover .suggestedImage {
-  transform: scale(1.07);
+  transform: scale(1.05);
 }
 
 .suggestedInfo {
-  padding: 0.8rem;
-  height: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 1.5rem;
   text-align: center;
 }
 
 .suggestedTitle {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  text-align: center;
   color: #333;
+  line-height: 1.3;
 }
 
 .suggestedPrice {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #DE5499;
   margin: 0;
@@ -171,7 +190,7 @@
 // Features Section
 .featuresSection {
   margin: 4rem 0;
-  padding: 0 1rem;
+  padding: 0 2rem;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
@@ -182,7 +201,7 @@
 }
 
 .featuresTitle {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 3rem;
   color: #333;
@@ -190,32 +209,38 @@
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 2rem;
 }
 
 .featureItem {
-  text-align: center;
-  padding: 2rem;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
   }
 }
 
+.featureImage {
+  margin-bottom: 1.5rem;
+}
+
 .featureIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #DE5499;
 }
 
 .featureTitle {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 1rem;
   color: #333;
@@ -232,25 +257,34 @@
   background: linear-gradient(135deg, #DE5499 0%, #8B5CF6 100%);
   color: white;
   padding: 4rem 2rem;
-  text-align: center;
   margin: 4rem 0 0 0;
 }
 
 .ctaContent {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.ctaText {
+  text-align: left;
 }
 
 .ctaTitle {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
 }
 
 .ctaDescription {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.9;
+  line-height: 1.5;
 }
 
 .ctaButton {
@@ -270,52 +304,59 @@
   }
 }
 
+.ctaImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctaIllustration {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 12px;
+  filter: brightness(1.1);
+}
+
 // Mobile Responsive
 @media (max-width: 768px) {
-  .heroTitle {
+  .bannerContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .bannerTitle {
     font-size: 2rem;
   }
 
-  .heroSubtitle {
+  .bannerSubtitle {
     font-size: 1.1rem;
   }
 
-  .heroButtons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .bannerPrimaryBtn,
-  .bannerSecondaryBtn {
-    width: 100%;
-    max-width: 300px;
+  .lineWomanImage {
+    max-height: 250px;
   }
 
   .suggestedGrid {
-    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    justify-items: center;
-    margin-bottom: 1.2rem;
-    width: 100%;
-    max-width: 100vw;
-    min-height: 260px;
   }
 
-  .suggestedItem {
-    width: 95%;
-    min-width: 0;
-    max-width: 220px;
-    height: 240px;
-  }
-
-  .suggestedImage {
-    height: 75%;
+  .suggestedImageWrapper {
+    height: 200px;
   }
 
   .featuresGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  .ctaContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
   }
 
   .ctaTitle {
@@ -325,10 +366,22 @@
   .ctaDescription {
     font-size: 1rem;
   }
+
+  .ctaIllustration {
+    max-height: 200px;
+  }
 }
 
 // Tablet Responsive
 @media (min-width: 769px) and (max-width: 1279px) {
+  .bannerContent {
+    gap: 2rem;
+  }
+
+  .bannerTitle {
+    font-size: 2.2rem;
+  }
+
   .suggestedGrid {
     grid-template-columns: repeat(3, 1fr);
   }

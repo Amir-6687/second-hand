@@ -1,39 +1,135 @@
+import React from "react";
+
+import lineWoman11 from "../assets/line-woman11.jpg";
+import SEOHead from "../components/SEOHead";
+
 const services = [
   {
     title: "Aufräumhilfe",
     description:
       "Professionelle Unterstützung beim Aufräumen und Organisieren.",
+    image: "/src/assets/line-woman11.jpg"
   },
   {
     title: "Alltagsbegleitung",
     description:
       "Begleitung und Unterstützung im Alltag für mehr Lebensqualität.",
+    image: "/src/assets/line-woman12.jpg"
   },
   {
     title: "Umzugsvorpacken",
     description: "Hilfe beim Vorbereiten und Packen für den Umzug.",
+    image: "/src/assets/line-woman13.jpg"
   },
   {
     title: "Gesellschaftlerin",
     description: "Gesellschaft leisten und soziale Kontakte fördern.",
+    image: "/src/assets/line-woman11.jpg"
   },
 ];
 
 export default function Services() {
   return (
-    <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-6">Unsere Dienstleistungen</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {services.map(({ title, description }) => (
-          <div
-            key={title}
-            className="border p-4 rounded shadow hover:shadow-lg transition"
-          >
-            <h3 className="text-xl font-bold mb-2">{title}</h3>
-            <p className="text-gray-700">{description}</p>
+    <>
+      <SEOHead 
+        title="Services - The Grrrls Club" 
+        description="Professional services including organization help, daily assistance, moving preparation, and companionship at The Grrrls Club." 
+        keywords="services, organization, assistance, moving, companionship, support" 
+      />
+      
+      <main className="min-h-screen bg-white">
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-br from-pink-50 to-purple-50 py-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
+                  Our Services
+                </h1>
+                <p className="text-xl text-gray-600 mb-8">
+                  Professional support services to make your life easier and more organized.
+                </p>
+                <div className="flex items-center gap-4">
+                  <img 
+                    src="/src/assets/line-woman11.jpg" 
+                    alt="Service illustration" 
+                    className="w-16 h-16 rounded-full object-cover border-4 border-pink-300"
+                  />
+                  <span className="text-lg font-semibold text-gray-700">
+                    Quality Service Guaranteed
+                  </span>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <img 
+                  src="/src/assets/line-woman11.jpg" 
+                  alt="Services illustration" 
+                  className="max-w-full h-auto max-h-96 object-contain"
+                />
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
+        </section>
+
+        {/* Services Grid */}
+        <section className="py-16 bg-white">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                What We Offer
+              </h2>
+              <p className="text-lg text-gray-600">
+                Comprehensive services tailored to your needs
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {services.map((service, index) => (
+                <div 
+                  key={index}
+                  className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-6 text-center"
+                >
+                  <div className="mb-4">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-20 h-20 mx-auto rounded-full object-cover border-4 border-pink-200"
+                    />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-gradient-to-r from-pink-500 to-purple-600">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <div className="flex justify-center mb-6">
+              <img 
+                src="/src/assets/line-woman13.jpg" 
+                alt="Contact illustration" 
+                className="w-24 h-24 rounded-full object-cover border-4 border-white"
+              />
+            </div>
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Ready to Get Started?
+            </h2>
+            <p className="text-xl text-white/90 mb-8">
+              Contact us today to learn more about our services
+            </p>
+            <button className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              Contact Us
+            </button>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
