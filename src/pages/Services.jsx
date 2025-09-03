@@ -1,6 +1,7 @@
 import React from "react";
-
 import lineWoman11 from "../assets/line-woman11.jpg";
+import lineWoman12 from "../assets/line-woman12.jpg";
+import lineWoman13 from "../assets/line-woman13.jpg";
 import SEOHead from "../components/SEOHead";
 
 const services = [
@@ -8,23 +9,23 @@ const services = [
     title: "Aufräumhilfe",
     description:
       "Professionelle Unterstützung beim Aufräumen und Organisieren.",
-    image: "/src/assets/line-woman11.jpg"
+    image: lineWoman11
   },
   {
     title: "Alltagsbegleitung",
     description:
       "Begleitung und Unterstützung im Alltag für mehr Lebensqualität.",
-    image: "/src/assets/line-woman12.jpg"
+    image: lineWoman12
   },
   {
     title: "Umzugsvorpacken",
     description: "Hilfe beim Vorbereiten und Packen für den Umzug.",
-    image: "/src/assets/line-woman13.jpg"
+    image: lineWoman13
   },
   {
     title: "Gesellschaftlerin",
     description: "Gesellschaft leisten und soziale Kontakte fördern.",
-    image: "/src/assets/line-woman11.jpg"
+    image: lineWoman11
   },
 ];
 
@@ -51,7 +52,7 @@ export default function Services() {
                 </p>
                 <div className="flex items-center gap-4">
                   <img 
-                    src="/src/assets/line-woman11.jpg" 
+                    src={lineWoman11} 
                     alt="Service illustration" 
                     className="w-16 h-16 rounded-full object-cover border-4 border-pink-300"
                   />
@@ -62,7 +63,7 @@ export default function Services() {
               </div>
               <div className="flex justify-center">
                 <img 
-                  src="/src/assets/line-woman11.jpg" 
+                  src={lineWoman12} 
                   alt="Services illustration" 
                   className="max-w-full h-auto max-h-96 object-contain"
                 />
@@ -108,25 +109,41 @@ export default function Services() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-pink-500 to-purple-600">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <div className="flex justify-center mb-6">
-              <img 
-                src="/src/assets/line-woman13.jpg" 
-                alt="Contact illustration" 
-                className="w-24 h-24 rounded-full object-cover border-4 border-white"
-              />
+        {/* CTA Section with improved positioning and blur effect */}
+        <section className="relative py-16 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
+          {/* Background blur effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600"></div>
+          
+          <div className="relative max-w-6xl mx-auto px-4">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+              {/* Text content */}
+              <div className="text-center lg:text-left lg:flex-1">
+                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                  Ready to Get Started?
+                </h2>
+                <p className="text-xl text-white/90 mb-8">
+                  Contact us today to learn more about our services
+                </p>
+                <button className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                  Contact Us
+                </button>
+              </div>
+              
+              {/* Image with blur background effect */}
+              <div className="relative lg:flex-shrink-0">
+                <div className="relative">
+                  {/* Blur background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full blur-sm scale-110"></div>
+                  
+                  {/* Main image */}
+                  <img 
+                    src={lineWoman13} 
+                    alt="Contact illustration" 
+                    className="relative w-32 h-32 lg:w-40 lg:h-40 rounded-full object-cover border-4 border-white/30 backdrop-blur-sm"
+                  />
+                </div>
+              </div>
             </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Ready to Get Started?
-            </h2>
-            <p className="text-xl text-white/90 mb-8">
-              Contact us today to learn more about our services
-            </p>
-            <button className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              Contact Us
-            </button>
           </div>
         </section>
       </main>

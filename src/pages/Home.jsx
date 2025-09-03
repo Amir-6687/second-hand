@@ -71,7 +71,14 @@ export default function Home() {
 
         {/* Newest Favorites Section - Dynamic */}
         <section className={styles.suggestedSection}>
-          <h2 className={styles.suggestedSectionTitle}>Newest Favorites</h2>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.suggestedSectionTitle}>Newest Favorites</h2>
+            <img 
+              src="/line-woman02.jpg" 
+              alt="Fashion illustration" 
+              className={styles.sectionIcon}
+            />
+          </div>
           {loading ? (
             <div className={styles.suggestedGrid}>
               {[...Array(4)].map((_, index) => (
@@ -105,6 +112,78 @@ export default function Home() {
               ))}
             </div>
           )}
+        </section>
+
+        {/* Features Section with Line Women */}
+        <section className={styles.featuresSection}>
+          <div className={styles.featuresContainer}>
+            <h2 className={styles.featuresTitle}>Why Choose The Grrrls Club?</h2>
+            <div className={styles.featuresGrid}>
+              <div className={styles.featureItem}>
+                <div className={styles.featureImage}>
+                  <img 
+                    src="/line-woman03.jpg" 
+                    alt="Sustainable fashion" 
+                    className={styles.featureIcon}
+                  />
+                </div>
+                <h3 className={styles.featureTitle}>Sustainable Fashion</h3>
+                <p className={styles.featureDescription}>
+                  Give clothes a second life and help save the environment
+                </p>
+              </div>
+              <div className={styles.featureItem}>
+                <div className={styles.featureImage}>
+                  <img 
+                    src="/line-woman04.jpg" 
+                    alt="Unique finds" 
+                    className={styles.featureIcon}
+                  />
+                </div>
+                <h3 className={styles.featureTitle}>Unique Finds</h3>
+                <p className={styles.featureDescription}>
+                  Discover one-of-a-kind pieces you won't find anywhere else
+                </p>
+              </div>
+              <div className={styles.featureItem}>
+                <div className={styles.featureImage}>
+                  <img 
+                    src="/line-woman06.jpg" 
+                    alt="Fast shipping" 
+                    className={styles.featureIcon}
+                  />
+                </div>
+                <h3 className={styles.featureTitle}>Fast Shipping</h3>
+                <p className={styles.featureDescription}>
+                  Quick and reliable delivery to your doorstep
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section with Line Woman */}
+        <section className={styles.ctaSection}>
+          <div className={styles.ctaContent}>
+            <div className={styles.ctaText}>
+              <h2 className={styles.ctaTitle}>Ready to Start Shopping?</h2>
+              <p className={styles.ctaDescription}>
+                Join thousands of fashion lovers who have discovered their style at The Grrrls Club
+              </p>
+              <Link to="/products">
+                <button className={styles.ctaButton}>
+                  Explore Our Collection
+                </button>
+              </Link>
+            </div>
+            <div className={styles.ctaImage}>
+              <img 
+                src="/line-woman09.jpg" 
+                alt="Shopping illustration" 
+                className={styles.ctaIllustration}
+              />
+            </div>
+          </div>
         </section>
       </main>
     </>
