@@ -16,6 +16,7 @@ export default function Home() {
           const products = await res.json();
           // Get the 4 newest products
           const newest = products.slice(0, 4);
+          console.log("Newest products:", newest);
           setNewestProducts(newest);
         }
       } catch (error) {
