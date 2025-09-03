@@ -6,9 +6,13 @@ export { BASE_URL };
 export const apiFetch = async (endpoint, options = {}) => {
   const url = `${BASE_URL}${endpoint}`;
   
+  // Get token from localStorage
+  const token = localStorage.getItem('token');
+  
   const defaultOptions = {
     headers: {
       'Content-Type': 'application/json',
+      ...(token && { 'Authorization': `Bearer ${token}` }),
       ...options.headers,
     },
   };

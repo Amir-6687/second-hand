@@ -21,30 +21,44 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (authLoading) return;
     if (!user) {
       setLoading(false);
+      navigate("/login");
       return;
     }
     const loadProfile = async () => {
       try {
-        const res = await apiFetch("/profile", {
-          method: "GET",
-        });
-        if (!res.ok) throw new Error("Fehler beim Laden des Profils");
+        setError("");
+        const res = await apiFetch("/profile");
+        if (!res.ok) {
+          if (res.status === 401) {
+            // Token expired or invalid
+            logout();
+            navigate("/login");
+            return;
+          }
+          throw new Error(`HTTP ${res.status}: Failed to load profile`);
+        }
         const data = await res.json();
         setProfile(data);
       } catch (err) {
-        alert("❌ Error loading profile: " + err.message);
+        console.error("Profile loading error:", err);
+        setError("Failed to load profile: " + err.message);
+        if (err.message.includes("401") || err.message.includes("Unauthorized")) {
+          logout();
+          navigate("/login");
+        }
       } finally {
         setLoading(false);
       }
     };
     loadProfile();
-  }, [user, authLoading]);
+  }, [user, authLoading, logout, navigate]);
 
   const handleChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
@@ -53,16 +67,30 @@ export default function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
+    setError("");
     try {
       const res = await apiFetch("/profile", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profile),
       });
-      if (!res.ok) throw new Error("Fehler beim Speichern");
+      if (!res.ok) {
+        if (res.status === 401) {
+          logout();
+          navigate("/login");
+          return;
+        }
+        throw new Error(`HTTP ${res.status}: Failed to update profile`);
+      }
+      const data = await res.json();
+      setProfile(data);
       alert("✅ Profile updated successfully!");
     } catch (err) {
-      alert("❌ Error saving profile: " + err.message);
+      console.error("Profile update error:", err);
+      setError("Failed to update profile: " + err.message);
+      if (err.message.includes("401") || err.message.includes("Unauthorized")) {
+        logout();
+        navigate("/login");
+      }
     } finally {
       setSaving(false);
     }
@@ -73,144 +101,230 @@ export default function Profile() {
       return;
     }
     try {
-      const res = await apiFetch("/profile", { method: "DELETE" });
-      if (!res.ok) throw new Error("Failed to delete account");
+      const res = await apiFetch("/profile", {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        if (res.status === 401) {
+          logout();
+          navigate("/login");
+          return;
+        }
+        throw new Error(`HTTP ${res.status}: Failed to delete account`);
+      }
+      alert("Account deleted successfully");
+      logout();
       clearCart();
       clearWishlist();
-      logout();
       navigate("/");
     } catch (err) {
-      alert("❌ Error deleting account: " + err.message);
+      console.error("Account deletion error:", err);
+      setError("Failed to delete account: " + err.message);
+      if (err.message.includes("401") || err.message.includes("Unauthorized")) {
+        logout();
+        navigate("/login");
+      }
     }
   };
 
+  const handleLogout = () => {
+    logout();
+    clearCart();
+    clearWishlist();
+    navigate("/");
+  };
+
   if (authLoading || loading) {
-    return <p className="p-4 text-center">Loading profile...</p>;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading profile...</p>
+        </div>
+      </div>
+    );
   }
 
   if (!user) {
-    return <p className="p-4 text-center">Please log in to view your profile.</p>;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Please log in</h2>
+          <button
+            onClick={() => navigate("/login")}
+            className="bg-pink-500 text-white px-6 py-2 rounded-lg hover:bg-pink-600"
+          >
+            Go to Login
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      {/* Tab Navigation */}
-      <div className="flex border-b border-gray-200 mb-6">
-        <button
-          onClick={() => setActiveTab("profile")}
-          className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
-            activeTab === "profile"
-              ? "border-pink-500 text-pink-600"
-              : "border-transparent text-gray-500 hover:text-gray-700"
-          }`}
-        >
-          Profile Settings
-        </button>
-        <button
-          onClick={() => setActiveTab("orders")}
-          className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
-            activeTab === "orders"
-              ? "border-pink-500 text-pink-600"
-              : "border-transparent text-gray-500 hover:text-gray-700"
-          }`}
-        >
-          Order History
-        </button>
-      </div>
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-8">
+            <h1 className="text-3xl font-bold text-white mb-2">My Profile</h1>
+            <p className="text-white/90">Manage your account settings and preferences</p>
+          </div>
 
-      {/* Tab Content */}
-      {activeTab === "profile" ? (
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h1 className="text-2xl font-bold mb-6">Profile Settings</h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block mb-1 text-sm font-medium">Username</label>
-              <input
-                name="username"
-                value={profile.username}
-                onChange={handleChange}
-                placeholder="Username"
-                className="w-full border border-gray-300 rounded px-3 py-2"
-              />
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mx-6 mt-4 rounded">
+              {error}
             </div>
-            <div>
-              <label className="block mb-1 text-sm font-medium">Email</label>
-              <input
-                name="email"
-                value={profile.email}
-                onChange={handleChange}
-                placeholder="Email"
-                className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-not-allowed"
-                disabled
-                title="Email cannot be changed"
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
+          )}
+
+          {/* Tabs */}
+          <div className="border-b border-gray-200">
+            <nav className="flex space-x-8 px-6">
+              <button
+                onClick={() => setActiveTab("profile")}
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === "profile"
+                    ? "border-pink-500 text-pink-600"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                }`}
+              >
+                Profile Information
+              </button>
+              <button
+                onClick={() => setActiveTab("orders")}
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === "orders"
+                    ? "border-pink-500 text-pink-600"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                }`}
+              >
+                Order History
+              </button>
+            </nav>
+          </div>
+
+          {/* Tab Content */}
+          <div className="p-6">
+            {activeTab === "profile" && (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      name="username"
+                      value={profile.username}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={profile.email}
+                      disabled
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      name="first_name"
+                      value={profile.first_name}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      name="last_name"
+                      value={profile.last_name}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={profile.phone}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Address
+                    </label>
+                    <textarea
+                      name="address"
+                      value={profile.address}
+                      onChange={handleChange}
+                      rows={3}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                  <button
+                    type="submit"
+                    disabled={saving}
+                    className="flex-1 bg-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {saving ? "Saving..." : "Save Changes"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex-1 bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-600"
+                  >
+                    Logout
+                  </button>
+                </div>
+
+                <div className="pt-6 border-t border-gray-200">
+                  <h3 className="text-lg font-semibold text-red-600 mb-4">Danger Zone</h3>
+                  <button
+                    type="button"
+                    onClick={handleDeleteAccount}
+                    className="bg-red-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600"
+                  >
+                    Delete Account
+                  </button>
+                  <p className="text-sm text-gray-500 mt-2">
+                    This action cannot be undone. All your data will be permanently deleted.
+                  </p>
+                </div>
+              </form>
+            )}
+
+            {activeTab === "orders" && (
               <div>
-                <label className="block mb-1 text-sm font-medium">First Name</label>
-                <input
-                  name="first_name"
-                  value={profile.first_name}
-                  onChange={handleChange}
-                  placeholder="First Name"
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                />
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Order History</h3>
+                <OrderHistory />
               </div>
-              <div>
-                <label className="block mb-1 text-sm font-medium">Last Name</label>
-                <input
-                  name="last_name"
-                  value={profile.last_name}
-                  onChange={handleChange}
-                  placeholder="Last Name"
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block mb-1 text-sm font-medium">Phone Number</label>
-              <input
-                name="phone"
-                value={profile.phone}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                className="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-            <div>
-              <label className="block mb-1 text-sm font-medium">Address</label>
-              <input
-                name="address"
-                value={profile.address}
-                onChange={handleChange}
-                placeholder="Address"
-                className="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={saving}
-              className={`w-full py-2 px-4 rounded text-white font-medium ${
-                saving
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-pink-500 hover:bg-pink-600"
-              } transition`}
-            >
-              {saving ? "Saving..." : "Save Changes"}
-            </button>
-          </form>
-          <div className="mt-6 border-t pt-4 text-center">
-            <button
-              onClick={handleDeleteAccount}
-              className="text-red-500 hover:underline text-sm"
-            >
-              Delete Account
-            </button>
+            )}
           </div>
         </div>
-      ) : (
-        <OrderHistory />
-      )}
+      </div>
     </div>
   );
 }
