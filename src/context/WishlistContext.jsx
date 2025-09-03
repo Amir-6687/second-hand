@@ -28,8 +28,12 @@ export const WishlistProvider = ({ children }) => {
     );
   };
 
+  const clearWishlist = () => setWishlist([]);
+
   return (
-    <WishlistContext.Provider value={{ wishlist, toggleWishlist }}>
+    <WishlistContext.Provider
+      value={{ wishlist, toggleWishlist, clearWishlist }}
+    >
       {children}
     </WishlistContext.Provider>
   );

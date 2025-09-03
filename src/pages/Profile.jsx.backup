@@ -65,11 +65,7 @@ export default function Profile() {
   };
 
   const handleDeleteAccount = async () => {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete your account? This action cannot be undone."
-      )
-    ) {
+    if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
       return;
     }
     try {
@@ -77,15 +73,8 @@ export default function Profile() {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Fehler beim Löschen des Accounts");
-
-      // Clear all user data
-      clearCart(); // Clear cart
-      clearWishlist(); // Clear wishlist
-
-      // Logout user (this will also clear localStorage and redirect to home)
-      logout();
-
       alert("✅ Account deleted successfully");
+      navigate("/");
     } catch (error) {
       alert("❌ Error deleting account: " + error.message);
     }
