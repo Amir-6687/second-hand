@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/Home.module.scss";
 import SEOHead from "../components/SEOHead";
+import { apiFetch } from "../lib/api";
+import { BASE_URL } from "../lib/api";
 
 export default function Home() {
+  const [newestProducts, setNewestProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNewestProducts = async () => {
+      try {
+        const res = await apiFetch("/products");
+        if (res.ok) {
+          const products = await res.json();
+          // Get the 4 newest products
+          const newest = products.slice(0, 4);
+          setNewestProducts(newest);
+        }
+      } catch (error) {
+        console.error("Error fetching newest products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNewestProducts();
+  }, []);
+
   return (
     <>
       <SEOHead 
@@ -57,47 +82,42 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Suggested Products Section */}
+        {/* Newest Favorites Section */}
         <section className={styles.suggestedSection}>
           <h2 className={styles.suggestedSectionTitle}>Newest Favorites</h2>
-          <div className={styles.suggestedGrid}>
-            <div className={styles.suggestedItem}>
-              <img
-                src="/src/assets/p1-1.webp"
-                alt="Product 1"
-                className={styles.suggestedImage}
-              />
-              <h3 className={styles.suggestedTitle}>Vintage Denim Jacket</h3>
-              <p className={styles.suggestedPrice}>€45.00</p>
+          {loading ? (
+            <div className={styles.suggestedGrid}>
+              {[...Array(4)].map((_, index) => (
+                <div key={index} className={styles.suggestedItem}>
+                  <div className="animate-pulse bg-gray-200 h-48 rounded"></div>
+                  <div className="animate-pulse bg-gray-200 h-4 rounded mt-2"></div>
+                  <div className="animate-pulse bg-gray-200 h-4 rounded mt-1 w-2/3"></div>
+                </div>
+              ))}
             </div>
-            <div className={styles.suggestedItem}>
-              <img
-                src="/src/assets/p2-1.webp"
-                alt="Product 2"
-                className={styles.suggestedImage}
-              />
-              <h3 className={styles.suggestedTitle}>Bohemian Dress</h3>
-              <p className={styles.suggestedPrice}>€65.00</p>
+          ) : (
+            <div className={styles.suggestedGrid}>
+              {newestProducts.map((product) => (
+                <Link 
+                  key={product._id} 
+                  to={`/products/${product._id}`}
+                  className={styles.suggestedItem}
+                >
+                  <div className={styles.suggestedImageWrapper}>
+                    <img
+                      src={BASE_URL + (product.images?.[0] || product.image)}
+                      alt={product.name}
+                      className={styles.suggestedImage}
+                    />
+                  </div>
+                  <div className={styles.suggestedInfo}>
+                    <h3 className={styles.suggestedTitle}>{product.name}</h3>
+                    <p className={styles.suggestedPrice}>€{product.price.toFixed(2)}</p>
+                  </div>
+                </Link>
+              ))}
             </div>
-            <div className={styles.suggestedItem}>
-              <img
-                src="/src/assets/p3-1.webp"
-                alt="Product 3"
-                className={styles.suggestedImage}
-              />
-              <h3 className={styles.suggestedTitle}>Leather Handbag</h3>
-              <p className={styles.suggestedPrice}>€85.00</p>
-            </div>
-            <div className={styles.suggestedItem}>
-              <img
-                src="/src/assets/p4-1.webp"
-                alt="Product 4"
-                className={styles.suggestedImage}
-              />
-              <h3 className={styles.suggestedTitle}>Silk Scarf</h3>
-              <p className={styles.suggestedPrice}>€25.00</p>
-            </div>
-          </div>
+          )}
         </section>
 
         {/* Features Section */}
