@@ -22,7 +22,37 @@ export default function Profile() {
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+
+  const loadProfile = async () => {
+    try {
+      setError("");
+      setSuccess("");
+      const res = await apiFetch("/profile");
+      if (!res.ok) {
+        if (res.status === 401) {
+          // Token expired or invalid
+          logout();
+          navigate("/login");
+          return;
+        }
+        throw new Error(`HTTP ${res.status}: Failed to load profile`);
+      }
+      const data = await res.json();
+      console.log("Loaded profile data:", data); // Debug log
+      setProfile(data);
+    } catch (err) {
+      console.error("Profile loading error:", err);
+      setError("Failed to load profile: " + err.message);
+      if (err.message.includes("401") || err.message.includes("Unauthorized")) {
+        logout();
+        navigate("/login");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (authLoading) return;
@@ -31,32 +61,6 @@ export default function Profile() {
       navigate("/login");
       return;
     }
-    const loadProfile = async () => {
-      try {
-        setError("");
-        const res = await apiFetch("/profile");
-        if (!res.ok) {
-          if (res.status === 401) {
-            // Token expired or invalid
-            logout();
-            navigate("/login");
-            return;
-          }
-          throw new Error(`HTTP ${res.status}: Failed to load profile`);
-        }
-        const data = await res.json();
-        setProfile(data);
-      } catch (err) {
-        console.error("Profile loading error:", err);
-        setError("Failed to load profile: " + err.message);
-        if (err.message.includes("401") || err.message.includes("Unauthorized")) {
-          logout();
-          navigate("/login");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
     loadProfile();
   }, [user, authLoading, logout, navigate]);
 
@@ -68,11 +72,16 @@ export default function Profile() {
     e.preventDefault();
     setSaving(true);
     setError("");
+    setSuccess("");
+    
     try {
+      console.log("Submitting profile data:", profile); // Debug log
+      
       const res = await apiFetch("/profile", {
         method: "PUT",
         body: JSON.stringify(profile),
       });
+      
       if (!res.ok) {
         if (res.status === 401) {
           logout();
@@ -81,9 +90,17 @@ export default function Profile() {
         }
         throw new Error(`HTTP ${res.status}: Failed to update profile`);
       }
+      
       const data = await res.json();
+      console.log("Updated profile response:", data); // Debug log
+      
+      // Update profile state with the response data
       setProfile(data);
-      alert("✅ Profile updated successfully!");
+      setSuccess("✅ Profile updated successfully!");
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => setSuccess(""), 3000);
+      
     } catch (err) {
       console.error("Profile update error:", err);
       setError("Failed to update profile: " + err.message);
@@ -171,6 +188,13 @@ export default function Profile() {
             <p className="text-white/90">Manage your account settings and preferences</p>
           </div>
 
+          {/* Success Message */}
+          {success && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mx-6 mt-4 rounded">
+              {success}
+            </div>
+          )}
+
           {/* Error Message */}
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mx-6 mt-4 rounded">
@@ -216,7 +240,7 @@ export default function Profile() {
                     <input
                       type="text"
                       name="username"
-                      value={profile.username}
+                      value={profile.username || ""}
                       onChange={handleChange}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
                     />
@@ -227,7 +251,7 @@ export default function Profile() {
                     </label>
                     <input
                       type="email"
-                      value={profile.email}
+                      value={profile.email || ""}
                       disabled
                       className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500"
                     />
@@ -240,7 +264,7 @@ export default function Profile() {
                     <input
                       type="text"
                       name="first_name"
-                      value={profile.first_name}
+                      value={profile.first_name || ""}
                       onChange={handleChange}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
                     />
@@ -252,7 +276,7 @@ export default function Profile() {
                     <input
                       type="text"
                       name="last_name"
-                      value={profile.last_name}
+                      value={profile.last_name || ""}
                       onChange={handleChange}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
                     />
@@ -264,7 +288,7 @@ export default function Profile() {
                     <input
                       type="tel"
                       name="phone"
-                      value={profile.phone}
+                      value={profile.phone || ""}
                       onChange={handleChange}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
                     />
@@ -275,7 +299,7 @@ export default function Profile() {
                     </label>
                     <textarea
                       name="address"
-                      value={profile.address}
+                      value={profile.address || ""}
                       onChange={handleChange}
                       rows={3}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"

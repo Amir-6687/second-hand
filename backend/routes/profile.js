@@ -19,14 +19,30 @@ router.get("/", authMiddleware, async (req, res) => {
 router.put("/", authMiddleware, async (req, res) => {
   try {
     const { username, first_name, last_name, phone, address } = req.body;
+    
+    // Validate required fields
+    if (!username) {
+      return res.status(400).json({ error: "Username is required" });
+    }
+    
     const user = await User.findByIdAndUpdate(
       req.user.userId,
-      { username, first_name, last_name, phone, address },
+      { 
+        username, 
+        first_name: first_name || "", 
+        last_name: last_name || "", 
+        phone: phone || "", 
+        address: address || "" 
+      },
       { new: true, runValidators: true }
     ).select("-password");
+    
     if (!user) return res.status(404).json({ error: "User not found" });
+    
+    console.log("Updated user:", user); // Debug log
     res.json(user);
   } catch (err) {
+    console.error("Profile update error:", err); // Debug log
     res.status(500).json({ error: err.message });
   }
 });
