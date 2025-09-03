@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/Home.module.scss";
 import SEOHead from "../components/SEOHead";
-import { apiFetch } from "../lib/api";
-import { BASE_URL } from "../lib/api";
+import { apiFetch, BASE_URL } from "../lib/api";
 
 export default function Home() {
   const [newestProducts, setNewestProducts] = useState([]);
