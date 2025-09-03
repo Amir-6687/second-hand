@@ -44,6 +44,13 @@ export default function ProductDetail() {
     beforeChange: (current, next) => setCurrentSlide(next),
   };
 
+  // Fallback images for missing product images
+  const fallbackImages = [
+    "/line-woman01.jpg",
+    "/line-woman02.jpg", 
+    "/line-woman03.jpg"
+  ];
+
   useEffect(() => {
     async function fetchProduct() {
       setLoading(true);
@@ -100,27 +107,15 @@ export default function ProductDetail() {
     if (isMobile()) return; // غیرفعال برای موبایل
     setModalImage(BASE_URL + image);
     setShowZoomModal(true);
-    setIsZoomed(false);
   };
 
-  const handleZoomToggle = () => {
-    setIsZoomed(!isZoomed);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isZoomed || !zoomImageRef.current) return;
-
-    const { left, top, width, height } =
-      zoomImageRef.current.getBoundingClientRect();
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
+  const handleZoom = (e) => {
+    if (!zoomImageRef.current) return;
+    const rect = zoomImageRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
     setZoomPosition({ x, y });
   };
-
-  const truncatedDesc =
-    product?.description?.length > 70
-      ? product.description.substring(0, 70) + "..."
-      : product?.description;
 
   if (loading) return <div className="text-center py-20">Loading...</div>;
   if (!product)
@@ -131,22 +126,28 @@ export default function ProductDetail() {
       ? product.images
       : product.image
       ? [product.image]
-      : [];
+      : fallbackImages;
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
       <div className="max-w-6xl w-full flex flex-col md:flex-row items-center md:items-start gap-10 py-12">
         {/* مشخصات سمت چپ */}
         <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start order-2 md:order-1">
-          <h1 className="text-3xl font-bold mb-4 text-center md:text-left">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center md:text-left">
             {product.name}
           </h1>
           {product.description && (
-            <div className="text-lg text-gray-700 mb-6 text-center md:text-left">
-              {showFullDesc ? product.description : truncatedDesc}
-              {product.description?.length > 70 && (
+            <div className="mb-6 w-full max-w-lg mx-auto md:mx-0">
+              <p className="text-gray-600 leading-relaxed">
+                {showFullDesc
+                  ? product.description
+                  : product.description.length > 150
+                  ? product.description.substring(0, 150) + "..."
+                  : product.description}
+              </p>
+              {product.description.length > 150 && (
                 <button
-                  className="text-pink-500 ml-2 hover:underline font-medium"
+                  className="text-blue-600 hover:text-blue-800 font-medium mt-2"
                   onClick={() => setShowFullDesc(!showFullDesc)}
                 >
                   {showFullDesc ? "less" : "more"}
@@ -228,11 +229,15 @@ export default function ProductDetail() {
               {images.map((image, index) => (
                 <div key={index} className="relative">
                   <img
-                    src={BASE_URL + image}
+                    src={image.startsWith('/') ? image : BASE_URL + image}
                     alt={`${product.name} - ${index + 1}`}
                     className="w-full h-auto max-h-[500px] object-contain rounded-lg shadow"
                     style={{ background: "#f8f8f8" }}
                     onClick={() => handleImageClick(image)}
+                    onError={(e) => {
+                      // Fallback to public folder images
+                      e.target.src = fallbackImages[index % fallbackImages.length];
+                    }}
                   />
                   {!isMobile() && (
                     <div
@@ -262,9 +267,13 @@ export default function ProductDetail() {
                 onClick={() => handleThumbnailClick(index)}
               >
                 <img
-                  src={BASE_URL + image}
+                  src={image.startsWith('/') ? image : BASE_URL + image}
                   alt={`Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover aspect-square"
+                  onError={(e) => {
+                    // Fallback to public folder images
+                    e.target.src = fallbackImages[index % fallbackImages.length];
+                  }}
                 />
               </div>
             ))}
@@ -301,49 +310,53 @@ export default function ProductDetail() {
           )}
         </div>
         {feedback && (
-          <div className="mt-2 text-sm text-blue-600">{feedback}</div>
+          <div
+            className={`text-sm mt-2 px-3 py-2 rounded ${
+              feedback.includes("Thank you")
+                ? "bg-green-100 text-green-800"
+                : "bg-red-100 text-red-800"
+            }`}
+          >
+            {feedback}
+          </div>
         )}
       </div>
 
-      {/* مودال بزرگنمایی تصویر (فقط برای دسکتاپ) */}
-      {showZoomModal && !isMobile() && (
+      {/* مودال زوم */}
+      {showZoomModal && (
         <div
-          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
           onClick={() => setShowZoomModal(false)}
         >
-          <div
-            className="relative max-w-full max-h-full"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="relative max-w-4xl max-h-full p-4">
+            <button
+              className="absolute top-4 right-4 text-white text-2xl z-10"
+              onClick={() => setShowZoomModal(false)}
+            >
+              ×
+            </button>
             <img
               ref={zoomImageRef}
               src={modalImage}
               alt="Zoomed product"
-              className={`max-w-[90vw] max-h-[90vh] object-contain transition-transform duration-200 ${
-                isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"
-              }`}
+              className="max-w-full max-h-full object-contain"
+              onMouseMove={handleZoom}
               style={{
                 transform: isZoomed
-                  ? `scale(2) translate(${-zoomPosition.x + 50}%, ${
-                      -zoomPosition.y + 50
-                    }%)`
-                  : "none",
+                  ? `scale(2) translate(-${zoomPosition.x}%, -${zoomPosition.y}%)`
+                  : "scale(1)",
+                transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                transition: isZoomed ? "none" : "transform 0.3s ease",
               }}
-              onClick={handleZoomToggle}
-              onMouseMove={handleMouseMove}
             />
-            <button
-              className="absolute top-4 right-4 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition"
-              onClick={() => setShowZoomModal(false)}
-            >
-              &times;
-            </button>
-            <button
-              className="absolute bottom-4 right-4 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition"
-              onClick={handleZoomToggle}
-            >
-              {isZoomed ? <FiZoomOut size={20} /> : <FiZoomIn size={20} />}
-            </button>
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+              <button
+                className="bg-white bg-opacity-20 text-white px-4 py-2 rounded mr-2"
+                onClick={() => setIsZoomed(!isZoomed)}
+              >
+                {isZoomed ? <FiZoomOut /> : <FiZoomIn />}
+              </button>
+            </div>
           </div>
         </div>
       )}
