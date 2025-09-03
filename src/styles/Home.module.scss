@@ -9,7 +9,7 @@
 // Banner Section
 .bannerSection {
   position: relative;
-  height: 600px;
+  height: 80vh;
   background-image: url("/src/assets/Background.jpg");
   background-size: cover;
   background-position: center;
@@ -139,7 +139,7 @@
 // Mobile Responsive
 @media (max-width: 768px) {
   .bannerSection {
-    height: 550px;
+    height: 70vh;
     .bannerBox {
       min-width: 200px;
       max-width: 90vw;
