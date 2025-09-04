@@ -7,7 +7,15 @@ const cors = require("cors");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const connectDB = require("./db");
 const path = require("path");
+const cloudinary = require('cloudinary').v2;
 connectDB();
+
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // CORS Configuration
 const allowedOrigins = [
@@ -41,29 +49,6 @@ app.use(
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-// Serve uploaded files statically with proper MIME types
-app.use("/uploads", (req, res, next) => {
-  const filePath = path.join(__dirname, "uploads", req.path);
-  const ext = path.extname(filePath).toLowerCase();
-  
-  // Set proper Content-Type for different image formats
-  const mimeTypes = {
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.png': 'image/png',
-    '.gif': 'image/gif',
-    '.webp': 'image/webp',
-    '.avif': 'image/avif',
-    '.svg': 'image/svg+xml'
-  };
-  
-  if (mimeTypes[ext]) {
-    res.setHeader('Content-Type', mimeTypes[ext]);
-  }
-  
-  next();
-}, express.static(path.join(__dirname, "uploads")));
-
 // Health check endpoint
 app.get("/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
@@ -80,13 +65,13 @@ app.use("/commission", require("./routes/commission"));
 app.use("/profile", require("./routes/profile"));
 app.use("/wishlist", require("./routes/wishlist"));
 
-// File upload endpoint
+// File upload endpoint - Cloudinary
 app.post("/upload", (req, res) => {
   const multer = require("multer");
   const path = require("path");
   const fs = require("fs");
 
-  // Ensure uploads directory exists
+  // Ensure uploads directory exists (temporary)
   const uploadsDir = path.join(__dirname, "uploads");
   if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true });
@@ -104,7 +89,7 @@ app.post("/upload", (req, res) => {
 
   const upload = multer({ storage: storage });
 
-  upload.single("image")(req, res, (err) => {
+  upload.single("image")(req, res, async (err) => {
     if (err) {
       return res.status(400).json({ error: err.message });
     }
@@ -113,11 +98,30 @@ app.post("/upload", (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    res.json({
-      message: "File uploaded successfully",
-      filename: req.file.filename,
-      path: `/uploads/${req.file.filename}`,
-    });
+    try {
+      // Upload to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "thegrrrlsclub",
+        use_filename: true,
+        unique_filename: true,
+        resource_type: "auto"
+      });
+
+      // Delete temporary file
+      fs.unlinkSync(req.file.path);
+
+      res.json({
+        message: "File uploaded successfully",
+        filename: req.file.filename,
+        path: result.secure_url,
+        imageUrl: result.secure_url
+      });
+    } catch (cloudinaryError) {
+      console.error("Cloudinary upload error:", cloudinaryError);
+      // Delete temporary file
+      fs.unlinkSync(req.file.path);
+      res.status(500).json({ error: "Failed to upload to Cloudinary" });
+    }
   });
 });
 
