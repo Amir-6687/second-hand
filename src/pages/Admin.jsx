@@ -578,7 +578,7 @@ export default function Admin() {
               <div className="flex gap-2 flex-wrap">
                 {imageUrls.map((url, idx) => (
                   <div key={idx} className="relative">
-                    <img src={BASE_URL + url} alt="Preview" width={60} />
+                    <img src={getImageUrl(url)} alt="Preview" width={60} />
                     <button
                       type="button"
                       className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
@@ -1178,7 +1178,7 @@ export default function Admin() {
             {commissionForm.partnerLogo && (
               <div className="flex items-center gap-2">
                 <img
-                  src={BASE_URL + commissionForm.partnerLogo}
+                  src={getImageUrl(commissionForm.partnerLogo)}
                   alt="Partner Logo"
                   className="w-12 h-12 rounded-full object-cover border"
                 />
@@ -1278,7 +1278,7 @@ export default function Admin() {
               <div className="flex gap-2 flex-wrap">
                 {imageUrls.map((url, idx) => (
                   <div key={idx} className="relative">
-                    <img src={BASE_URL + url} alt="Preview" width={60} />
+                    <img src={getImageUrl(url)} alt="Preview" width={60} />
                     <button
                       type="button"
                       className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
@@ -1648,7 +1648,7 @@ export default function Admin() {
                         </div>
                         {p.partnerLogo && (
                           <img
-                            src={BASE_URL + p.partnerLogo}
+                            src={getImageUrl(p.partnerLogo)}
                             alt={p.partnerName}
                             width={60}
                           />
