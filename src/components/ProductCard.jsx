@@ -155,7 +155,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
                 {product.images.map((image, index) => (
                   <div key={index} className="px-2 outline-none">
                     <img
-                      src={BASE_URL + image}
+                      src={getImageUrl(image)}
                       alt={`${product.name} - ${index + 1}`}
                       className="w-full h-auto max-h-96 object-contain rounded mx-auto"
                     />
@@ -165,7 +165,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
             </div>
           ) : (
             <img
-              src={BASE_URL + product.image}
+              src={getImageUrl(product.image)}
               alt={product.name}
               className="w-full max-w-md object-contain rounded max-h-96"
             />

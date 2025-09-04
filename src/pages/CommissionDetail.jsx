@@ -259,7 +259,7 @@ export default function CommissionDetail() {
               {images.map((image, index) => (
                 <div key={index} className="relative">
                   <img
-                    src={BASE_URL + image}
+                    src={getImageUrl(image)}
                     alt={`${product.name} - ${index + 1}`}
                     className="w-full h-auto max-h-[500px] object-contain rounded-lg shadow"
                     style={{ background: "#f8f8f8" }}
@@ -293,7 +293,7 @@ export default function CommissionDetail() {
                 onClick={() => handleThumbnailClick(index)}
               >
                 <img
-                  src={BASE_URL + image}
+                  src={getImageUrl(image)}
                   alt={`Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover aspect-square"
                 />
