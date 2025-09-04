@@ -102,7 +102,7 @@ export default function Wishlist() {
                 {/* Image + delivery */}
                 <div className="flex flex-col items-center justify-center w-32 sm:w-24 flex-shrink-0">
                   <img
-                    src={getImageUrl(product.image)}
+                    src={getImageUrl(product.image || product.images?.[0])}
                     alt={product.name}
                     className="w-28 h-28 sm:w-20 sm:h-20 object-cover rounded border"
                   />
