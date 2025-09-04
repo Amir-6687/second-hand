@@ -22,6 +22,7 @@ import { PiXLogo } from "react-icons/pi";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { getImageUrl } from "../lib/api";
 
 const Tooltip = ({ show, children }) => (
   <div
@@ -388,7 +389,8 @@ const ProductCard = ({ product, linkPath = null }) => {
             <button
               onClick={handleAddToCart}
               className="text-gray-600 hover:text-pink-500 transition-colors cursor-pointer"
-              title="Add to Cart" aria-label="Add Test Product to cart"
+              title="Add to Cart"
+              aria-label="Add Test Product to cart"
             >
               <CiShoppingBasket size={24} />
             </button>

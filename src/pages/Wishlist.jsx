@@ -3,7 +3,7 @@ import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 import { AiFillHeart } from "react-icons/ai";
 import { RiDeleteBin3Line } from "react-icons/ri";
-import { apiFetch, BASE_URL } from "../lib/api";
+import { apiFetch, BASE_URL, getImageUrl } from "../lib/api";
 import { Link } from "react-router-dom";
 import StarRating from "../components/StarRating";
 
@@ -53,7 +53,7 @@ export default function Wishlist() {
                 {/* Image + delivery */}
                 <div className="flex flex-col items-center justify-center w-32 sm:w-24 flex-shrink-0">
                   <img
-                    src={BASE_URL + product.image}
+                    src={getImageUrl(product.image)}
                     alt={product.name}
                     className="w-28 h-28 sm:w-20 sm:h-20 object-cover rounded border"
                   />

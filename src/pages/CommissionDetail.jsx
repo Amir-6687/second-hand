@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import { getImageUrl } from "../lib/api";
 
 export default function CommissionDetail() {
   const { id } = useParams();
@@ -98,7 +99,7 @@ export default function CommissionDetail() {
 
   const handleImageClick = (image) => {
     if (isMobile()) return; // غیرفعال برای موبایل
-    setModalImage(BASE_URL + image);
+    setModalImage(getImageUrl(image));
     setShowZoomModal(true);
     setIsZoomed(false);
   };
@@ -141,7 +142,7 @@ export default function CommissionDetail() {
           <h1 className="text-3xl font-bold mb-4 text-center md:text-left">
             {product.name}
           </h1>
-          
+
           {/* Partner Info */}
           {product.partnerName && (
             <div className="flex items-center gap-2 mb-4">
@@ -171,7 +172,7 @@ export default function CommissionDetail() {
               )}
             </div>
           )}
-          
+
           <div className="text-2xl font-semibold text-gray-900 mb-8 text-center md:text-left">
             {product.isDiscounted && product.originalPrice ? (
               <div className="flex flex-col gap-2">
@@ -196,7 +197,9 @@ export default function CommissionDetail() {
           {product.commissionRate && (
             <div className="bg-pink-50 border border-pink-200 rounded-lg p-4 mb-6 w-full max-w-lg mx-auto md:mx-0">
               <div className="text-center">
-                <div className="text-sm text-pink-600 font-medium mb-1">Commission Rate</div>
+                <div className="text-sm text-pink-600 font-medium mb-1">
+                  Commission Rate
+                </div>
                 <div className="text-2xl font-bold text-pink-600">
                   {product.commissionRate}%
                 </div>

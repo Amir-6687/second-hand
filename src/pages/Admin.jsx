@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { apiFetch } from "../lib/api";
 import { BASE_URL } from "../lib/api";
+import { getImageUrl } from "../lib/api";
 
 export default function Admin() {
   const [products, setProducts] = useState([]);
@@ -978,7 +979,7 @@ export default function Admin() {
                         </div>
                         {p.image && (
                           <img
-                            src={BASE_URL + p.image}
+                            src={getImageUrl(p.image)}
                             alt={p.name}
                             width={60}
                           />

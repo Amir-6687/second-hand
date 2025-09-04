@@ -5,6 +5,7 @@ import { BASE_URL } from "../lib/api";
 import { useWishlist } from "../context/WishlistContext";
 import { FiChevronDown } from "react-icons/fi";
 import { RiArrowRightWideFill, RiArrowLeftWideFill } from "react-icons/ri";
+import { getImageUrl } from "../lib/api";
 
 const SHIPPING_COST = 4.99; // هزینه ثابت ارسال
 
@@ -98,7 +99,7 @@ export default function Cart() {
                 {item.images?.length > 0 ? (
                   <Link to={`/products/${item._id}`}>
                     <img
-                      src={BASE_URL + item.images[0]}
+                      src={getImageUrl(item.images[0])}
                       alt={item.name}
                       className="w-24 h-24 object-cover rounded mb-1 cursor-pointer hover:opacity-90 transition"
                     />
@@ -106,7 +107,7 @@ export default function Cart() {
                 ) : item.image ? (
                   <Link to={`/products/${item._id}`}>
                     <img
-                      src={BASE_URL + item.image}
+                      src={getImageUrl(item.image)}
                       alt={item.name}
                       className="w-24 h-24 object-cover rounded mb-1 cursor-pointer hover:opacity-90 transition"
                     />

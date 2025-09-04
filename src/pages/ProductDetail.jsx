@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import { getImageUrl } from "../lib/api";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -98,7 +99,7 @@ export default function ProductDetail() {
 
   const handleImageClick = (image) => {
     if (isMobile()) return; // غیرفعال برای موبایل
-    setModalImage(BASE_URL + image);
+    setModalImage(getImageUrl(image));
     setShowZoomModal(true);
   };
 
@@ -223,7 +224,7 @@ export default function ProductDetail() {
                 {images.map((image, index) => (
                   <div key={index} className="relative">
                     <img
-                      src={BASE_URL + image}
+                      src={getImageUrl(image)}
                       alt={`${product.name} - ${index + 1}`}
                       className="w-full h-auto max-h-[500px] object-contain rounded-lg shadow"
                       style={{ background: "#f8f8f8" }}
@@ -262,7 +263,7 @@ export default function ProductDetail() {
                 onClick={() => handleThumbnailClick(index)}
               >
                 <img
-                  src={BASE_URL + image}
+                  src={getImageUrl(image)}
                   alt={`Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover aspect-square"
                 />

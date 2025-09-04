@@ -3,7 +3,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { apiFetch } from "../lib/api";
 import { BASE_URL } from "../lib/api";
-import { FaCheckCircle, FaShoppingBag, FaHome, FaEnvelope } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaShoppingBag,
+  FaHome,
+  FaEnvelope,
+} from "react-icons/fa";
+import { getImageUrl } from "../lib/api";
 
 export default function PaymentSuccess() {
   const navigate = useNavigate();
@@ -11,9 +17,11 @@ export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
   const [orderDetails, setOrderDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   const paymentIntentId = searchParams.get("payment_intent");
-  const paymentIntentClientSecret = searchParams.get("payment_intent_client_secret");
+  const paymentIntentClientSecret = searchParams.get(
+    "payment_intent_client_secret"
+  );
 
   useEffect(() => {
     // اگر کاربر لاگین نیست، به صفحه لاگین هدایت کن
@@ -27,7 +35,7 @@ export default function PaymentSuccess() {
       try {
         const res = await apiFetch("/orders/user/my-orders", {
           headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
 
@@ -84,46 +92,85 @@ export default function PaymentSuccess() {
               <FaShoppingBag className="mr-3 text-blue-600" />
               Order Details
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
-                <h3 className="font-semibold text-gray-700 mb-2">Order Information</h3>
+                <h3 className="font-semibold text-gray-700 mb-2">
+                  Order Information
+                </h3>
                 <div className="space-y-2 text-sm">
-                  <p><span className="font-medium">Order ID:</span> {orderDetails._id}</p>
-                  <p><span className="font-medium">Date:</span> {new Date(orderDetails.createdAt).toLocaleDateString()}</p>
-                  <p><span className="font-medium">Status:</span> <span className="text-green-600 font-semibold">{orderDetails.status}</span></p>
-                  <p><span className="font-medium">Total:</span> <span className="text-lg font-bold text-green-600">€{orderDetails.totalPrice.toFixed(2)}</span></p>
+                  <p>
+                    <span className="font-medium">Order ID:</span>{" "}
+                    {orderDetails._id}
+                  </p>
+                  <p>
+                    <span className="font-medium">Date:</span>{" "}
+                    {new Date(orderDetails.createdAt).toLocaleDateString()}
+                  </p>
+                  <p>
+                    <span className="font-medium">Status:</span>{" "}
+                    <span className="text-green-600 font-semibold">
+                      {orderDetails.status}
+                    </span>
+                  </p>
+                  <p>
+                    <span className="font-medium">Total:</span>{" "}
+                    <span className="text-lg font-bold text-green-600">
+                      €{orderDetails.totalPrice.toFixed(2)}
+                    </span>
+                  </p>
                 </div>
               </div>
-              
+
               <div>
-                <h3 className="font-semibold text-gray-700 mb-2">Payment Information</h3>
+                <h3 className="font-semibold text-gray-700 mb-2">
+                  Payment Information
+                </h3>
                 <div className="space-y-2 text-sm">
-                  <p><span className="font-medium">Payment Method:</span> Stripe</p>
-                  <p><span className="font-medium">Payment ID:</span> {orderDetails.paymentIntentId}</p>
-                  <p><span className="font-medium">Status:</span> <span className="text-green-600 font-semibold">Completed</span></p>
+                  <p>
+                    <span className="font-medium">Payment Method:</span> Stripe
+                  </p>
+                  <p>
+                    <span className="font-medium">Payment ID:</span>{" "}
+                    {orderDetails.paymentIntentId}
+                  </p>
+                  <p>
+                    <span className="font-medium">Status:</span>{" "}
+                    <span className="text-green-600 font-semibold">
+                      Completed
+                    </span>
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Order Items */}
             <div className="border-t pt-6">
-              <h3 className="font-semibold text-gray-700 mb-4">Items Ordered</h3>
+              <h3 className="font-semibold text-gray-700 mb-4">
+                Items Ordered
+              </h3>
               <div className="space-y-4">
                 {orderDetails.items.map((item, index) => (
-                  <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                  <div
+                    key={index}
+                    className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
+                  >
                     {item.productId?.images?.[0] && (
-                      <img 
-                        src={BASE_URL + item.productId.images[0]} 
+                      <img
+                        src={getImageUrl(item.productId.images[0])}
                         alt={item.productId.name}
                         className="w-16 h-16 object-cover rounded"
                       />
                     )}
                     <div className="flex-1">
-                      <h4 className="font-medium">{item.productId?.name || item.name}</h4>
+                      <h4 className="font-medium">
+                        {item.productId?.name || item.name}
+                      </h4>
                       <p className="text-gray-600">Quantity: {item.quantity}</p>
                     </div>
-                    <p className="font-semibold">€{(item.price * item.quantity).toFixed(2)}</p>
+                    <p className="font-semibold">
+                      €{(item.price * item.quantity).toFixed(2)}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -143,8 +190,13 @@ export default function PaymentSuccess() {
                 <span className="text-blue-600 font-bold text-sm">1</span>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">Order Confirmation</h3>
-                <p className="text-gray-600">You will receive an email confirmation shortly with your order details.</p>
+                <h3 className="font-semibold text-gray-900">
+                  Order Confirmation
+                </h3>
+                <p className="text-gray-600">
+                  You will receive an email confirmation shortly with your order
+                  details.
+                </p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -153,7 +205,10 @@ export default function PaymentSuccess() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">Processing</h3>
-                <p className="text-gray-600">Your order is being prepared and will be shipped within 1-2 business days.</p>
+                <p className="text-gray-600">
+                  Your order is being prepared and will be shipped within 1-2
+                  business days.
+                </p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -162,7 +217,9 @@ export default function PaymentSuccess() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">Shipping</h3>
-                <p className="text-gray-600">You will receive tracking information once your order ships.</p>
+                <p className="text-gray-600">
+                  You will receive tracking information once your order ships.
+                </p>
               </div>
             </div>
           </div>

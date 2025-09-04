@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/Home.module.scss";
 import SEOHead from "../components/SEOHead";
-import { apiFetch, BASE_URL } from "../lib/api";
+import { apiFetch, BASE_URL, getImageUrl } from "../lib/api";
 
 export default function Home() {
   const [newestProducts, setNewestProducts] = useState([]);
@@ -31,12 +31,12 @@ export default function Home() {
 
   return (
     <>
-      <SEOHead 
-        title="The Grrrls Club - Fashion & Lifestyle" 
-        description="Discover unique fashion items, accessories, and lifestyle products at The Grrrls Club. Shop now for the latest trends and exclusive collections." 
-        keywords="fashion, lifestyle, clothing, accessories, shopping, women, style, boutique" 
+      <SEOHead
+        title="The Grrrls Club - Fashion & Lifestyle"
+        description="Discover unique fashion items, accessories, and lifestyle products at The Grrrls Club. Shop now for the latest trends and exclusive collections."
+        keywords="fashion, lifestyle, clothing, accessories, shopping, women, style, boutique"
       />
-      
+
       <main id="main-content" className="min-h-screen bg-white">
         {/* Banner Section */}
         <section className={styles.bannerSection}>
@@ -73,9 +73,9 @@ export default function Home() {
         <section className={styles.suggestedSection}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.suggestedSectionTitle}>Newest Favorites</h2>
-            <img 
-              src="/line-woman02.jpg" 
-              alt="Fashion illustration" 
+            <img
+              src="/line-woman02.jpg"
+              alt="Fashion illustration"
               className={styles.sectionIcon}
             />
           </div>
@@ -92,21 +92,23 @@ export default function Home() {
           ) : (
             <div className={styles.suggestedGrid}>
               {newestProducts.map((product) => (
-                <Link 
-                  key={product._id} 
+                <Link
+                  key={product._id}
                   to={`/products/${product._id}`}
                   className={styles.suggestedItem}
                 >
                   <div className={styles.suggestedImageWrapper}>
                     <img
-                      src={BASE_URL + (product.images?.[0] || product.image)}
+                      src={getImageUrl(product.images?.[0] || product.image)}
                       alt={product.name}
                       className={styles.suggestedImage}
                     />
                   </div>
                   <div className={styles.suggestedInfo}>
                     <h3 className={styles.suggestedTitle}>{product.name}</h3>
-                    <p className={styles.suggestedPrice}>€{product.price.toFixed(2)}</p>
+                    <p className={styles.suggestedPrice}>
+                      €{product.price.toFixed(2)}
+                    </p>
                   </div>
                 </Link>
               ))}
@@ -117,13 +119,15 @@ export default function Home() {
         {/* Features Section with Line Women */}
         <section className={styles.featuresSection}>
           <div className={styles.featuresContainer}>
-            <h2 className={styles.featuresTitle}>Why Choose The Grrrls Club?</h2>
+            <h2 className={styles.featuresTitle}>
+              Why Choose The Grrrls Club?
+            </h2>
             <div className={styles.featuresGrid}>
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
-                  <img 
-                    src="/line-woman03.jpg" 
-                    alt="Sustainable fashion" 
+                  <img
+                    src="/line-woman03.jpg"
+                    alt="Sustainable fashion"
                     className={styles.featureIcon}
                   />
                 </div>
@@ -134,9 +138,9 @@ export default function Home() {
               </div>
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
-                  <img 
-                    src="/line-woman04.jpg" 
-                    alt="Unique finds" 
+                  <img
+                    src="/line-woman04.jpg"
+                    alt="Unique finds"
                     className={styles.featureIcon}
                   />
                 </div>
@@ -147,9 +151,9 @@ export default function Home() {
               </div>
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
-                  <img 
-                    src="/line-woman06.jpg" 
-                    alt="Fast shipping" 
+                  <img
+                    src="/line-woman06.jpg"
+                    alt="Fast shipping"
                     className={styles.featureIcon}
                   />
                 </div>
@@ -168,7 +172,8 @@ export default function Home() {
             <div className={styles.ctaText}>
               <h2 className={styles.ctaTitle}>Ready to Start Shopping?</h2>
               <p className={styles.ctaDescription}>
-                Join thousands of fashion lovers who have discovered their style at The Grrrls Club
+                Join thousands of fashion lovers who have discovered their style
+                at The Grrrls Club
               </p>
               <Link to="/products">
                 <button className={styles.ctaButton}>
@@ -177,9 +182,9 @@ export default function Home() {
               </Link>
             </div>
             <div className={styles.ctaImage}>
-              <img 
-                src="/line-woman09.jpg" 
-                alt="Shopping illustration" 
+              <img
+                src="/line-woman09.jpg"
+                alt="Shopping illustration"
                 className={styles.ctaIllustration}
               />
             </div>
