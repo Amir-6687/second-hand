@@ -329,7 +329,7 @@ const ProductCard = ({ product, linkPath = null }) => {
       <Link to={getLinkPath()} className="block" onClick={handleCardClick}>
         <div className="relative w-full aspect-[4/5] overflow-hidden">
           <img
-            src={BASE_URL + (hovered ? secondImg : mainImg)}
+            src={getImageUrl(hovered ? secondImg : mainImg)}
             alt={product.name}
             className={`w-full h-full object-contain transition-transform duration-500 ${
               hovered ? "scale-105" : "scale-100"

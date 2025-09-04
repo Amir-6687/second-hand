@@ -148,7 +148,7 @@ export default function CommissionDetail() {
             <div className="flex items-center gap-2 mb-4">
               {product.partnerLogo && (
                 <img
-                  src={BASE_URL + product.partnerLogo}
+                  src={getImageUrl(product.partnerLogo)}
                   alt={product.partnerName}
                   className="w-8 h-8 rounded-full object-cover"
                 />
