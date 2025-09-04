@@ -30,53 +30,70 @@ app.use(
         return callback(null, true);
       }
       
-      // For development, allow localhost with any port
-      if (process.env.NODE_ENV === 'development' && origin.includes('localhost')) {
-        return callback(null, true);
-      }
-      
-      const msg = "The CORS policy for this site does not allow access from the specified Origin.";
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
       return callback(new Error(msg), false);
     },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: [
-      "Content-Type", 
-      "Authorization", 
-      "X-Requested-With",
-      "Accept",
-      "Origin"
-    ],
-    optionsSuccessStatus: 200,
-    preflightContinue: false
+    credentials: true
   })
 );
 
-// Middleware
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-// Static files
-app.use("/uploads", express.static("uploads"));
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.json({ status: "OK", timestamp: new Date().toISOString() });
+});
 
 // Routes
 app.use("/auth", require("./routes/auth"));
-app.use("/products", require("./routes/products"));
-app.use("/orders", require("./routes/orders"));
 app.use("/users", require("./routes/users"));
+app.use("/products", require("./routes/products"));
+app.use("/productDetails", require("./routes/productDetails"));
+app.use("/orders", require("./routes/orders"));
+app.use("/inventory", require("./routes/inventory"));
+app.use("/commission", require("./routes/commission"));
 app.use("/profile", require("./routes/profile"));
 app.use("/wishlist", require("./routes/wishlist"));
-app.use("/inventory", require("./routes/inventory"));
-app.use("/productDetails", require("./routes/productDetails"));
-app.use("/commission", require("./routes/commission"));
 
-// Health check endpoint
-app.get("/health", (req, res) => {
-  res.status(200).json({ 
-    status: "OK", 
-    message: "Server is running",
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+// File upload endpoint
+app.post("/upload", (req, res) => {
+  const multer = require("multer");
+  const path = require("path");
+  const fs = require("fs");
+
+  // Ensure uploads directory exists
+  const uploadsDir = path.join(__dirname, "uploads");
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, uploadsDir);
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+      cb(null, uniqueSuffix + path.extname(file.originalname));
+    },
+  });
+
+  const upload = multer({ storage: storage });
+
+  upload.single("image")(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    res.json({
+      message: "File uploaded successfully",
+      filename: req.file.filename,
+      path: `/uploads/${req.file.filename}`,
+    });
   });
 });
 
@@ -89,12 +106,21 @@ app.post("/create-payment-intent", async (req, res) => {
       return res.status(400).json({ error: "Invalid amount" });
     }
 
+    // Create simplified items metadata (only essential info)
+    const simplifiedItems = (items || []).map(item => ({
+      id: item._id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity || 1
+    }));
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount, // amount in cents
       currency: "eur",
       metadata: {
         userId: userId || "anonymous",
-        items: JSON.stringify(items || [])
+        itemsCount: (items || []).length.toString(),
+        items: JSON.stringify(simplifiedItems)
       },
     });
 
@@ -122,19 +148,11 @@ app.use((err, req, res, next) => {
   
   res.status(500).json({ 
     error: "Internal Server Error",
-    message: process.env.NODE_ENV === 'development' ? err.message : "Something went wrong"
+    message: err.message 
   });
 });
 
-// 404 handler
-app.use("*", (req, res) => {
-  res.status(404).json({ error: "Route not found" });
-});
-
 const PORT = process.env.PORT || 10000;
-
 app.listen(PORT, () => {
-  console.log(`✅ Server läuft auf Port ${PORT}`);
-  console.log(`🌐 CORS enabled for origins:`, allowedOrigins);
-  console.log(`🔧 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Server running on port ${PORT}`);
 });
