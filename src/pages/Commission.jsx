@@ -101,7 +101,7 @@ export default function Commission() {
             <div className="flex items-center gap-2">
               {selectedInfo.logo ? (
                 <img
-                  src={BASE_URL + selectedInfo.logo}
+                  src={getImageUrl(selectedInfo.logo)}
                   alt={selectedInfo.name}
                   className="w-6 h-6 rounded-full object-cover"
                 />
@@ -193,7 +193,7 @@ export default function Commission() {
                   >
                     {partnerLogo ? (
                       <img
-                        src={BASE_URL + partnerLogo}
+                        src={getImageUrl(partnerLogo)}
                         alt={partner}
                         className="w-6 h-6 rounded-full object-cover"
                       />
