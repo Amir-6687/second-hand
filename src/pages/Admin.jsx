@@ -905,7 +905,7 @@ export default function Admin() {
                           {editForm.images.map((url, idx) => (
                             <div key={idx} className="relative">
                               <img
-                                src={BASE_URL + url}
+                                src={getImageUrl(url)}
                                 alt="Preview"
                                 width={60}
                               />
@@ -1583,7 +1583,7 @@ export default function Admin() {
                           {editForm.images.map((url, idx) => (
                             <div key={idx} className="relative">
                               <img
-                                src={BASE_URL + url}
+                                src={getImageUrl(url)}
                                 alt="Preview"
                                 width={60}
                               />
