@@ -11,17 +11,57 @@ export default function Wishlist() {
   const { wishlist, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
+  const [commissionProducts, setCommissionProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProducts() {
-      const res = await apiFetch("/products");
-      const data = await res.json();
-      setProducts(data);
+      try {
+        setLoading(true);
+
+        // لود کردن محصولات معمولی
+        const productsRes = await apiFetch("/products");
+        const productsData = await productsRes.json();
+        setProducts(productsData);
+
+        // لود کردن محصولات Commission
+        const commissionRes = await apiFetch("/commission");
+        const commissionData = await commissionRes.json();
+        setCommissionProducts(commissionData);
+
+        console.log("Products loaded:", productsData.length);
+        console.log("Commission products loaded:", commissionData.length);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchProducts();
   }, []);
 
-  const wishlistProducts = products.filter((p) => wishlist.includes(p._id));
+  // ترکیب کردن همه محصولات
+  const allProducts = [...products, ...commissionProducts];
+  const wishlistProducts = allProducts.filter((p) => wishlist.includes(p._id));
+
+  // Debug info
+  console.log("Debug Wishlist:");
+  console.log("- Wishlist IDs:", wishlist);
+  console.log("- Regular products:", products.length);
+  console.log("- Commission products:", commissionProducts.length);
+  console.log("- All products:", allProducts.length);
+  console.log("- Wishlist products found:", wishlistProducts.length);
+
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 pt-6 pb-20">
+        <div className="text-center mt-20">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto"></div>
+          <p className="mt-4">Loading products...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 pt-6 pb-20">
@@ -40,6 +80,15 @@ export default function Wishlist() {
           <div className="text-center mt-20 col-span-full">
             <AiFillHeart size={40} className="mx-auto text-pink-400" />
             <h2 className="text-xl mt-4">Your wishlist is empty!</h2>
+            {/* Debug info */}
+            <div className="mt-4 p-4 bg-gray-100 rounded-lg text-left max-w-md mx-auto">
+              <h3 className="font-semibold mb-2">Debug Info:</h3>
+              <p>Wishlist IDs: {JSON.stringify(wishlist)}</p>
+              <p>Regular products: {products.length}</p>
+              <p>Commission products: {commissionProducts.length}</p>
+              <p>All products: {allProducts.length}</p>
+              <p>Wishlist products found: {wishlistProducts.length}</p>
+            </div>
           </div>
         ) : (
           wishlistProducts.map((product, idx) => (
