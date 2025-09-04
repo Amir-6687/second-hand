@@ -6,6 +6,7 @@ const app = express();
 const cors = require("cors");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const connectDB = require("./db");
+const path = require("path");
 connectDB();
 
 // CORS Configuration
@@ -39,6 +40,29 @@ app.use(
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+// Serve uploaded files statically with proper MIME types
+app.use("/uploads", (req, res, next) => {
+  const filePath = path.join(__dirname, "uploads", req.path);
+  const ext = path.extname(filePath).toLowerCase();
+  
+  // Set proper Content-Type for different image formats
+  const mimeTypes = {
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.png': 'image/png',
+    '.gif': 'image/gif',
+    '.webp': 'image/webp',
+    '.avif': 'image/avif',
+    '.svg': 'image/svg+xml'
+  };
+  
+  if (mimeTypes[ext]) {
+    res.setHeader('Content-Type', mimeTypes[ext]);
+  }
+  
+  next();
+}, express.static(path.join(__dirname, "uploads")));
 
 // Health check endpoint
 app.get("/health", (req, res) => {
