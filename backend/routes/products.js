@@ -8,14 +8,23 @@ const {
 const multer = require("multer");
 const path = require("path");
 const mongoose = require("mongoose");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-// تنظیمات ذخیره فایل
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/"); // پوشه uploads در ریشه پروژه
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
+// تنظیمات Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// تنظیمات ذخیره فایل روی Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "mir-femme/products",
+    allowed_formats: ["jpg", "jpeg", "png", "gif", "webp", "avif"],
+    transformation: [{ width: 800, height: 800, crop: "limit" }],
   },
 });
 const upload = multer({ storage });
@@ -25,7 +34,7 @@ router.post("/upload", authMiddleware, upload.single("image"), (req, res) => {
   if (req.user.role !== "admin")
     return res.status(403).json({ error: "Access denied" });
   if (!req.file) return res.status(400).json({ error: "No file uploaded" });
-  res.json({ imageUrl: `/uploads/${req.file.filename}` });
+  res.json({ imageUrl: req.file.path });
 });
 
 // گرفتن همه محصولات
