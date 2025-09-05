@@ -249,10 +249,18 @@ export default function Admin() {
   async function handleDelete(id) {
     if (!window.confirm("Are you sure?")) return;
     try {
-      await apiFetch(`/products/${id}`, {
+      // تشخیص نوع محصول بر اساس activeTab
+      const endpoint = activeTab === "commission" ? "/commission" : "/products";
+      await apiFetch(`${endpoint}/${id}`, {
         method: "DELETE",
       });
-      fetchProducts();
+
+      // refresh کردن لیست مناسب
+      if (activeTab === "commission") {
+        fetchCommissionProducts();
+      } else {
+        fetchProducts();
+      }
     } catch (err) {
       setError("Error deleting product");
     }
