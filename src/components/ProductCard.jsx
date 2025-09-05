@@ -340,13 +340,13 @@ const ProductCard = ({ product, linkPath = null }) => {
           {/* Left icons with animation */}
           <div
             className={`absolute top-2 left-2 flex flex-col gap-2 z-10
-        transition-all duration-300
-        ${
-          hovered || (isMobile() && showActions)
-            ? "opacity-100 translate-x-0"
-            : "opacity-0 -translate-x-4"
-        }
-      `}
+            transition-all duration-300
+            ${
+              hovered || (isMobile() && showActions)
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-4"
+            }
+          `}
           >
             <div className="relative">
               <button
@@ -400,8 +400,8 @@ const ProductCard = ({ product, linkPath = null }) => {
 
       {/* Product info */}
       <div className="flex flex-col items-center mt-3 mb-2">
-        <div className="flex items-center gap-1 mb-1">
-          {/* Partner Logo برای Commission products */}
+        <div className="flex items-center justify-between w-full px-2 mb-1">
+          {/* Partner Logo برای Commission products - سمت چپ */}
           {product.partnerLogo && (
             <img
               src={getImageUrl(product.partnerLogo)}
@@ -410,7 +410,8 @@ const ProductCard = ({ product, linkPath = null }) => {
               title={product.partnerName || "Partner"}
             />
           )}
-          {/* color or other features here */}
+          {/* فضای خالی برای تعادل */}
+          <div className="flex-1"></div>
         </div>
         <div className="text-base font-medium text-gray-900 text-center truncate w-full max-w-[90%]">
           {product.name}
