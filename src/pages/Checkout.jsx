@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from "../lib/stripe";
 import CheckoutForm from "../components/CheckoutForm";
-import { apiFetch } from "../lib/api";
+import { apiFetch, getImageUrl } from "../lib/api";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -123,10 +123,7 @@ export default function Checkout() {
                   className="flex items-center gap-4 p-3 bg-white rounded"
                 >
                   <img
-                    src={`${
-                      import.meta.env.VITE_BACKEND_URL ||
-                      "https://api.thegrrrlsclub.de"
-                    }${item.images?.[0] || item.image}`}
+                    src={getImageUrl(item.images?.[0] || item.image)}
                     alt={item.name}
                     className="w-16 h-16 object-cover rounded"
                   />
