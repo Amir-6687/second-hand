@@ -401,6 +401,15 @@ const ProductCard = ({ product, linkPath = null }) => {
       {/* Product info */}
       <div className="flex flex-col items-center mt-3 mb-2">
         <div className="flex items-center gap-1 mb-1">
+          {/* Partner Logo برای Commission products */}
+          {product.partnerLogo && (
+            <img
+              src={getImageUrl(product.partnerLogo)}
+              alt={product.partnerName || "Partner"}
+              className="w-6 h-6 rounded-full object-cover border border-gray-200"
+              title={product.partnerName || "Partner"}
+            />
+          )}
           {/* color or other features here */}
         </div>
         <div className="text-base font-medium text-gray-900 text-center truncate w-full max-w-[90%]">
