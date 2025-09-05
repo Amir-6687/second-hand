@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaEye, FaEdit, FaTrash, FaDownload } from "react-icons/fa";
+import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { apiFetch } from "../lib/api";
 import Pagination from "./Pagination";
 
@@ -17,7 +17,6 @@ const UsersView = () => {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
     }, 500);
-
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
@@ -38,7 +37,7 @@ const UsersView = () => {
         setTotalPages(data.totalPages || 1);
         setTotalUsers(data.totalUsers || 0);
       } else {
-        // Fallback for API that doesn't support pagination
+        // fallback
         const allUsers = await apiFetch("/users");
         const allData = await allUsers.json();
         const filteredUsers = debouncedSearchTerm
@@ -66,17 +65,9 @@ const UsersView = () => {
     }
   }
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
-  const handleSearchChange = (newSearchTerm) => {
-    setSearchTerm(newSearchTerm);
-    setCurrentPage(1); // Reset to first page when search changes
-  };
+  const handlePageChange = (newPage) => setCurrentPage(newPage);
 
   const exportUsers = () => {
-    // Export functionality
     const csvContent =
       "data:text/csv;charset=utf-8," +
       "Username,Email\n" +
@@ -99,7 +90,6 @@ const UsersView = () => {
       });
 
       if (response.ok) {
-        // Refresh users list
         fetchUsers();
         alert(`User role changed to ${newRole} successfully!`);
       } else {
@@ -111,7 +101,7 @@ const UsersView = () => {
     }
   };
 
-  if (usersLoading)
+  if (usersLoading) {
     return (
       <div className="flex items-center justify-center py-12">
         <div
@@ -120,6 +110,7 @@ const UsersView = () => {
         ></div>
       </div>
     );
+  }
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
@@ -142,7 +133,7 @@ const UsersView = () => {
         </div>
       </div>
 
-      {/* Table with responsive design */}
+      {/* Table */}
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -188,13 +179,33 @@ const UsersView = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div className="flex items-center space-x-2">
-                    <button className="text-blue-600 hover:text-blue-800 transition-colors">
+                    <button
+                      onClick={() => alert("View User: " + user.username)}
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                      title="View User"
+                    >
                       <FaEye size={16} />
                     </button>
-                    <button className="text-green-600 hover:text-green-800 transition-colors">
+                    <button
+                      onClick={() => alert("Edit User: " + user.username)}
+                      className="text-green-600 hover:text-green-800 transition-colors"
+                      title="Edit User"
+                    >
                       <FaEdit size={16} />
                     </button>
-                    <button className="text-red-600 hover:text-red-800 transition-colors">
+                    <button
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            "Are you sure you want to delete " + user.username + "?"
+                          )
+                        ) {
+                          alert("Delete User: " + user.username);
+                        }
+                      }}
+                      className="text-red-600 hover:text-red-800 transition-colors"
+                      title="Delete User"
+                    >
                       <FaTrash size={16} />
                     </button>
                   </div>
