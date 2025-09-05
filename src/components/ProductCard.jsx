@@ -399,14 +399,14 @@ const ProductCard = ({ product, linkPath = null }) => {
       </Link>
 
       {/* Product info */}
-      <div className="flex flex-col items-center mt-3 mb-2">
-        <div className="flex items-center justify-between w-full px-2 mb-1">
+      <div className="flex flex-col items-center mt-1 mb-2">
+        <div className="flex items-center justify-between w-full px-2 mb-2">
           {/* Partner Logo برای Commission products - سمت چپ */}
           {product.partnerLogo && (
             <img
               src={getImageUrl(product.partnerLogo)}
               alt={product.partnerName || "Partner"}
-              className="w-6 h-6 rounded-full object-cover border border-gray-200"
+              className="w-8 h-8 rounded-full object-cover border border-gray-200"
               title={product.partnerName || "Partner"}
             />
           )}
