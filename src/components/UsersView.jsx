@@ -11,6 +11,9 @@ const UsersView = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalUsers, setTotalUsers] = useState(0);
   const [pageSize] = useState(10);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showViewModal, setShowViewModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
   useEffect(() => {
@@ -95,6 +98,49 @@ const UsersView = () => {
     try {
       const response = await apiFetch(`/users/${userId}/role`, {
         method: "PUT",
+  const handleViewUser = (user) => {
+    setSelectedUser(user);
+    setShowViewModal(true);
+  };
+
+  const handleEditUser = (user) => {
+    setSelectedUser(user);
+    setShowEditModal(true);
+  };
+
+  const handleDeleteUser = async (userId) => {
+    if (!confirm("Are you sure you want to delete this user?")) return;
+    try {
+      const res = await apiFetch(`/users/${userId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to delete user");
+      fetchUsers(); // Refresh the list
+    } catch (err) {
+      console.error("Error deleting user:", err);
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await apiFetch(`/users/${selectedUser._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(selectedUser),
+      });
+      if (!res.ok) throw new Error("Failed to update user");
+      
+      setShowEditModal(false);
+      fetchUsers(); // Refresh the list
+      alert("User updated successfully!");
+    } catch (err) {
+      console.error("Error updating user:", err);
+      alert("Failed to update user");
+    }
+  };
+      alert("Failed to delete user");
+    }
+  };
         body: JSON.stringify({ role: newRole }),
       });
 
@@ -214,6 +260,157 @@ const UsersView = () => {
         showingText="Showing"
       />
     </div>
+      {/* View User Modal */}
+      {showViewModal && selectedUser && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">User Details</h3>
+              <button
+                onClick={() => setShowViewModal(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ×
+              </button>
+            </div>
+            <div className="space-y-3">
+              <div>
+                <label className="font-medium text-gray-700">Username:</label>
+                <p className="text-gray-900">{selectedUser.username}</p>
+              </div>
+              <div>
+                <label className="font-medium text-gray-700">Email:</label>
+                <p className="text-gray-900">{selectedUser.email}</p>
+              </div>
+              <div>
+                <label className="font-medium text-gray-700">Name:</label>
+                <p className="text-gray-900">{selectedUser.first_name} {selectedUser.last_name}</p>
+              </div>
+              <div>
+                <label className="font-medium text-gray-700">Phone:</label>
+                <p className="text-gray-900">{selectedUser.phone || "Not provided"}</p>
+              </div>
+              <div>
+                <label className="font-medium text-gray-700">Address:</label>
+                <p className="text-gray-900">{selectedUser.address || "Not provided"}</p>
+              </div>
+              <div>
+                <label className="font-medium text-gray-700">Role:</label>
+                <p className="text-gray-900 capitalize">{selectedUser.role || "user"}</p>
+              </div>
+            </div>
+            <div className="flex justify-end mt-6">
+              <button
+                onClick={() => setShowViewModal(false)}
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit User Modal */}
+      {showEditModal && selectedUser && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Edit User</h3>
+              <button
+                onClick={() => setShowEditModal(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ×
+              </button>
+            </div>
+            <form onSubmit={handleEditSubmit} className="space-y-4">
+              <div>
+                <label className="block font-medium text-gray-700 mb-1">Username:</label>
+                <input
+                  type="text"
+                  value={selectedUser.username}
+                  onChange={(e) => setSelectedUser({...selectedUser, username: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
+              <div>
+                <label className="block font-medium text-gray-700 mb-1">Email:</label>
+                <input
+                  type="email"
+                  value={selectedUser.email}
+                  onChange={(e) => setSelectedUser({...selectedUser, email: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block font-medium text-gray-700 mb-1">First Name:</label>
+                  <input
+                    type="text"
+                    value={selectedUser.first_name || ""}
+                    onChange={(e) => setSelectedUser({...selectedUser, first_name: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  />
+                </div>
+                <div>
+                  <label className="block font-medium text-gray-700 mb-1">Last Name:</label>
+                  <input
+                    type="text"
+                    value={selectedUser.last_name || ""}
+                    onChange={(e) => setSelectedUser({...selectedUser, last_name: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block font-medium text-gray-700 mb-1">Phone:</label>
+                <input
+                  type="tel"
+                  value={selectedUser.phone || ""}
+                  onChange={(e) => setSelectedUser({...selectedUser, phone: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
+              <div>
+                <label className="block font-medium text-gray-700 mb-1">Address:</label>
+                <textarea
+                  value={selectedUser.address || ""}
+                  onChange={(e) => setSelectedUser({...selectedUser, address: e.target.value})}
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
+              <div>
+                <label className="block font-medium text-gray-700 mb-1">Role:</label>
+                <select
+                  value={selectedUser.role || "user"}
+                  onChange={(e) => setSelectedUser({...selectedUser, role: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div className="flex justify-end space-x-3 mt-6">
+                <button
+                  type="button"
+                  onClick={() => setShowEditModal(false)}
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
   );
 };
 
