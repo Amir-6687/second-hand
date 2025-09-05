@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../lib/api";
+import { BASE_URL, getImageUrl } from "../lib/api";
 import ProductCard from "../components/ProductCard";
 
 export default function Commission() {
