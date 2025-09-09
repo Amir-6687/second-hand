@@ -620,6 +620,10 @@
   border: 3px solid #de5499;
   display: block;
   margin: 0 auto;
+  background: white;
+  padding: 6px;
+  clip-path: circle(50%);
+  -webkit-clip-path: circle(50%);
 }
 
 /* Features Section */
@@ -674,6 +678,10 @@
   border: 3px solid #de5499;
   display: block;
   margin: 0 auto;
+  background: white;
+  padding: 8px;
+  clip-path: circle(50%);
+  -webkit-clip-path: circle(50%);
 }
 
 .featureTitle {
