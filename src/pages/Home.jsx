@@ -80,6 +80,8 @@ export default function Home() {
               alt="Fashion illustration"
               className={styles.sectionIcon}
               priority={true}
+              width={60}
+              height={60}
             />
           </div>
           {loading ? (
@@ -134,6 +136,8 @@ export default function Home() {
                     alt="Sustainable fashion"
                     className={styles.featureIcon}
                     priority={false}
+                    width={80}
+                    height={80}
                   />
                 </div>
                 <h3 className={styles.featureTitle}>Sustainable Fashion</h3>
@@ -148,6 +152,8 @@ export default function Home() {
                     alt="Unique finds"
                     className={styles.featureIcon}
                     priority={false}
+                    width={80}
+                    height={80}
                   />
                 </div>
                 <h3 className={styles.featureTitle}>Unique Finds</h3>
@@ -162,6 +168,8 @@ export default function Home() {
                     alt="Fast shipping"
                     className={styles.featureIcon}
                     priority={false}
+                    width={80}
+                    height={80}
                   />
                 </div>
                 <h3 className={styles.featureTitle}>Fast Shipping</h3>
@@ -194,6 +202,8 @@ export default function Home() {
                 alt="Shopping illustration"
                 className={styles.ctaIllustration}
                 priority={false}
+                width={400}
+                height={300}
               />
             </div>
           </div>

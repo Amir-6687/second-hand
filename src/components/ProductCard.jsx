@@ -380,7 +380,9 @@ const ProductCard = ({ product, linkPath = null }) => {
                   toggleWishlist(product._id);
                 }}
                 tabIndex={-1}
-                aria-label={`${wishlist.includes(product._id) ? 'Remove from' : 'Add to'} wishlist ${product.name}`}
+                aria-label={`${
+                  wishlist.includes(product._id) ? "Remove from" : "Add to"
+                } wishlist ${product.name}`}
               >
                 {wishlist.includes(product._id) ? (
                   <AiFillHeart size={22} className="text-pink-500" />
