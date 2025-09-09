@@ -35,20 +35,20 @@ const CookieBanner = () => {
           {/* Content */}
           <div className="flex-1">
             <h3 className="text-lg font-semibold text-gray-900 mb-1">
-              Wir verwenden Cookies
+              We use Cookies
             </h3>
             <p className="text-sm text-gray-600 mb-2">
-              Um Ihnen die volle Funktionalität unserer Website zur Verfügung stellen zu können, 
-              verwenden wir Cookies. Diese helfen uns dabei, Ihre Präferenzen zu speichern und 
-              Ihnen ein besseres Einkaufserlebnis zu bieten.
+              To provide you with the full functionality of our website, 
+              we use cookies. These help us save your preferences and 
+              provide you with a better shopping experience.
             </p>
             <p className="text-xs text-gray-500">
-              Mehr Informationen finden Sie in unserer{' '}
+              More information can be found in our{' '}
               <a 
                 href="/privacy" 
                 className="text-pink-500 hover:text-pink-600 underline"
               >
-                Datenschutzerklärung
+                Privacy Policy
               </a>
             </p>
           </div>
@@ -60,13 +60,13 @@ const CookieBanner = () => {
               className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors flex items-center gap-2"
             >
               <FaTimes size={14} />
-              Ablehnen
+              Dismiss
             </button>
             <button
               onClick={handleAccept}
               className="px-6 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 rounded-lg transition-colors"
             >
-              Akzeptieren
+              Accept
             </button>
           </div>
         </div>
