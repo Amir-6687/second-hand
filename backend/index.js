@@ -64,6 +64,7 @@ app.use("/inventory", require("./routes/inventory"));
 app.use("/commission", require("./routes/commission"));
 app.use("/profile", require("./routes/profile"));
 app.use("/wishlist", require("./routes/wishlist"));
+app.use("/featured-products", require("./routes/featuredProducts"));
 
 // File upload endpoint - Cloudinary
 app.post("/upload", (req, res) => {

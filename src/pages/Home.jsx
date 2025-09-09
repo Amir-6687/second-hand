@@ -11,24 +11,44 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchNewestProducts = async () => {
+    const fetchFeaturedProducts = async () => {
       try {
-        const res = await apiFetch("/products");
+        const res = await apiFetch("/featured-products");
         if (res.ok) {
-          const products = await res.json();
-          // Get the 4 newest products
-          const newest = products.slice(0, 4);
-          console.log("Newest products:", newest);
-          setNewestProducts(newest);
+          const featuredProducts = await res.json();
+          // Extract product data from featured products
+          const products = featuredProducts.map(fp => fp.productId).filter(Boolean);
+          console.log("Featured products:", products);
+          setNewestProducts(products);
+        } else {
+          // Fallback to newest products if featured products fail
+          const res = await apiFetch("/products");
+          if (res.ok) {
+            const products = await res.json();
+            const newest = products.slice(0, 4);
+            console.log("Fallback to newest products:", newest);
+            setNewestProducts(newest);
+          }
         }
       } catch (error) {
-        console.error("Error fetching newest products:", error);
+        console.error("Error fetching featured products:", error);
+        // Fallback to newest products
+        try {
+          const res = await apiFetch("/products");
+          if (res.ok) {
+            const products = await res.json();
+            const newest = products.slice(0, 4);
+            setNewestProducts(newest);
+          }
+        } catch (fallbackError) {
+          console.error("Error fetching fallback products:", fallbackError);
+        }
       } finally {
         setLoading(false);
       }
     };
 
-    fetchNewestProducts();
+    fetchFeaturedProducts();
   }, []);
 
   return (
@@ -71,10 +91,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Newest Favorites Section - Dynamic */}
+        {/* Featured Products Section - Dynamic */}
         <LazyWrapper className={styles.suggestedSection}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.suggestedSectionTitle}>Newest Favorites</h2>
+            <h2 className={styles.suggestedSectionTitle}>Featured Products</h2>
             <OptimizedImage
               src="/line-woman02.jpg"
               alt="Fashion illustration"
