@@ -34,6 +34,8 @@ import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import Commission from "./pages/Commission";
 import CommissionDetail from "./pages/CommissionDetail";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import CookieBanner from "./components/CookieBanner";
 
 import AuthSuccess from "./pages/AuthSuccess";
@@ -699,6 +701,8 @@ export default function App() {
                     <Route path="/products/:id" element={<ProductDetail />} />
                     <Route path="/commission" element={<Commission />} />
                     <Route path="/commission/:id" element={<CommissionDetail />} />
+                    <Route path="/terms" element={<Terms />} />
+                    <Route path="/privacy" element={<Privacy />} />
 
                     <Route path="/auth-success" element={<AuthSuccess />} />
                     <Route

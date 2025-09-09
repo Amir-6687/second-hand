@@ -19,6 +19,9 @@ export default function Footer() {
           <a href="/contact" className="hover:text-white">
             Contact
           </a>
+          <a href="/terms" className="hover:text-white">
+            Terms & Conditions
+          </a>
           <a href="/privacy" className="hover:text-white">
             Privacy Policy
           </a>

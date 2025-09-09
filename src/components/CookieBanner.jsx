@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { FaCookieBite, FaTimes } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { FaCookieBite, FaTimes } from "react-icons/fa";
 
 const CookieBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     // Check if user has already accepted cookies
-    const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+    const cookiesAccepted = localStorage.getItem("cookiesAccepted");
     if (!cookiesAccepted) {
       setShowBanner(true);
     }
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem('cookiesAccepted', 'true');
+    localStorage.setItem("cookiesAccepted", "true");
     setShowBanner(false);
   };
 
@@ -31,28 +31,28 @@ const CookieBanner = () => {
           <div className="flex-shrink-0">
             <FaCookieBite className="text-pink-500 text-2xl" />
           </div>
-          
+
           {/* Content */}
           <div className="flex-1">
             <h3 className="text-lg font-semibold text-gray-900 mb-1">
               We use Cookies
             </h3>
             <p className="text-sm text-gray-600 mb-2">
-              To provide you with the full functionality of our website, 
-              we use cookies. These help us save your preferences and 
-              provide you with a better shopping experience.
+              To provide you with the full functionality of our website, we use
+              cookies. These help us save your preferences and provide you with
+              a better shopping experience.
             </p>
             <p className="text-xs text-gray-500">
-              More information can be found in our{' '}
-              <a 
-                href="/privacy" 
+              More information can be found in our{" "}
+              <a
+                href="/privacy"
                 className="text-pink-500 hover:text-pink-600 underline"
               >
                 Privacy Policy
               </a>
             </p>
           </div>
-          
+
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-2 flex-shrink-0">
             <button
