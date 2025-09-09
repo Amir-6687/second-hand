@@ -34,6 +34,7 @@ import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import Commission from "./pages/Commission";
 import CommissionDetail from "./pages/CommissionDetail";
+import CookieBanner from "./components/CookieBanner";
 
 import AuthSuccess from "./pages/AuthSuccess";
 import ForgetPassword from "./pages/ForgetPassword";
@@ -710,6 +711,7 @@ export default function App() {
 
                 <Footer />
                 <MobileBottomNav />
+                <CookieBanner />
 
                 {/* Floating WhatsApp Icon */}
                 <a

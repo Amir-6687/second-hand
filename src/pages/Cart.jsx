@@ -96,23 +96,39 @@ export default function Cart() {
 
               {/* Image + quantity */}
               <div className="flex flex-col items-start gap-2 flex-shrink-0">
-                {item.images?.length > 0 ? (
-                  <Link to={`/products/${item._id}`}>
-                    <img
-                      src={getImageUrl(item.images[0])}
-                      alt={item.name}
-                      className="w-24 h-24 object-cover rounded mb-1 cursor-pointer hover:opacity-90 transition"
-                    />
-                  </Link>
-                ) : item.image ? (
-                  <Link to={`/products/${item._id}`}>
-                    <img
-                      src={getImageUrl(item.image)}
-                      alt={item.name}
-                      className="w-24 h-24 object-cover rounded mb-1 cursor-pointer hover:opacity-90 transition"
-                    />
-                  </Link>
-                ) : null}
+                {(() => {
+                  console.log("Cart item:", item);
+                  console.log("item.images:", item.images);
+                  console.log("item.image:", item.image);
+
+                  if (item.images?.length > 0) {
+                    return (
+                      <Link to={`/products/${item._id}`}>
+                        <img
+                          src={getImageUrl(item.images[0])}
+                          alt={item.name}
+                          className="w-24 h-24 object-cover rounded mb-1 cursor-pointer hover:opacity-90 transition"
+                        />
+                      </Link>
+                    );
+                  } else if (item.image) {
+                    return (
+                      <Link to={`/products/${item._id}`}>
+                        <img
+                          src={getImageUrl(item.image)}
+                          alt={item.name}
+                          className="w-24 h-24 object-cover rounded mb-1 cursor-pointer hover:opacity-90 transition"
+                        />
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <div className="w-24 h-24 bg-gray-200 rounded mb-1 flex items-center justify-center text-gray-500 text-xs">
+                        No Image
+                      </div>
+                    );
+                  }
+                })()}
 
                 {/* Quantity Selector */}
                 <div className="flex flex-col items-start w-full">

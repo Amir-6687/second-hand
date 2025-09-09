@@ -298,6 +298,9 @@ const ProductCard = ({ product, linkPath = null }) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
+    console.log("Adding to cart:", product);
+    console.log("Product images:", product.images);
+    console.log("Product image:", product.image);
     addToCart(product);
     setAddedEffect(true);
     setTimeout(() => setAddedEffect(false), 1500);
