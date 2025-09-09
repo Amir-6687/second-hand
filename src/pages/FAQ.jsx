@@ -14,60 +14,60 @@ const FAQ = () => {
 
   const faqData = [
     {
-      question: "Wie funktioniert der Versand?",
-      answer: "Wir versenden mit DHL oder Hermes umweltfreundlich und plastikfrei. Die Standard-Lieferzeit beträgt 2-5 Werktage. Versandkosten: 4,90 € pauschal, ab 60 € Warenwert versandkostenfrei. Abholung in Bielefeld ist auf Anfrage möglich."
+      question: "How does shipping work?",
+      answer: "We ship with DHL or Hermes in an environmentally friendly and plastic-free way. Standard delivery time is 2-5 business days. Shipping costs: €4.90 flat rate, free shipping from €60 order value. Pickup in Bielefeld is possible upon request."
     },
     {
-      question: "Welche Zahlungsmethoden akzeptiert ihr?",
-      answer: "Du kannst bequem und sicher bezahlen mit PayPal (schnell, sicher, mit Käuferschutz), WERO (direktes europäisches Bezahlen, gebührenarm) oder Vorkasse (Banküberweisung)."
+      question: "What payment methods do you accept?",
+      answer: "You can pay conveniently and securely with PayPal (fast, secure, with buyer protection), WERO (direct European payment, low fees) or prepayment (bank transfer)."
     },
     {
-      question: "Kann ich meine Bestellung zurückgeben?",
-      answer: "Ja, du hast 14 Tage Zeit zur Rückgabe (außer bei Kommissionsware, diese ist entsprechend gekennzeichnet). Bitte sende ungetragene Artikel in Originalzustand zurück. Bei Rückgabe trägst du die Rücksendekosten selbst."
+      question: "Can I return my order?",
+      answer: "Yes, you have 14 days to return items (except for commission items, which are marked accordingly). Please send unworn items back in original condition. You bear the return shipping costs yourself."
     },
     {
-      question: "Was sind Kommissionsartikel?",
-      answer: "Kommissionsartikel sind Einzelstücke oder Produkte, die auf Kommissionsbasis eingestellt sind. Diese sind als solche gekennzeichnet. Bei Kommissionsware sind Rückgaben ausgeschlossen."
+      question: "What are commission items?",
+      answer: "Commission items are unique pieces or products listed on a commission basis. These are marked as such. Returns are excluded for commission items."
     },
     {
-      question: "Wie kann ich euch kontaktieren?",
-      answer: "Du erreichst uns per E-Mail unter info@thegrrrlsclub.de oder über unsere Website www.thegrrrlsclub.de. Wir antworten gerne auf deine Fragen!"
+      question: "How can I contact you?",
+      answer: "You can reach us by email at info@thegrrrlsclub.de or through our website www.thegrrrlsclub.de. We're happy to answer your questions!"
     },
     {
-      question: "Gibt es eine Mindestbestellmenge?",
-      answer: "Nein, es gibt keine Mindestbestellmenge. Du kannst auch einzelne Artikel bestellen."
+      question: "Is there a minimum order quantity?",
+      answer: "No, there is no minimum order quantity. You can also order individual items."
     },
     {
-      question: "Wie lange dauert die Bearbeitung meiner Bestellung?",
-      answer: "Nach Zahlungseingang bearbeiten wir deine Bestellung so schnell wie möglich. Die Lieferzeit beträgt dann 2-5 Werktage."
+      question: "How long does order processing take?",
+      answer: "After payment is received, we process your order as quickly as possible. Delivery time is then 2-5 business days."
     },
     {
-      question: "Kann ich meine Bestellung stornieren?",
-      answer: "Ja, du kannst deine Bestellung stornieren, solange sie noch nicht versandt wurde. Kontaktiere uns einfach per E-Mail."
+      question: "Can I cancel my order?",
+      answer: "Yes, you can cancel your order as long as it hasn't been shipped yet. Just contact us by email."
     },
     {
-      question: "Was passiert bei beschädigten Artikeln?",
-      answer: "Falls ein Artikel beschädigt ankommt, kontaktiere uns bitte sofort mit Fotos. Wir ersetzen den Artikel kostenlos oder erstatten den vollen Kaufpreis."
+      question: "What happens with damaged items?",
+      answer: "If an item arrives damaged, please contact us immediately with photos. We'll replace the item free of charge or refund the full purchase price."
     },
     {
-      question: "Gibt es Rabatte oder Gutscheine?",
-      answer: "Ja, wir bieten regelmäßig Rabatte und Gutscheine an. Folge uns auf Instagram @the_grrrls_club, um über aktuelle Angebote informiert zu bleiben."
+      question: "Are there discounts or vouchers?",
+      answer: "Yes, we regularly offer discounts and vouchers. Follow us on Instagram @the_grrrls_club to stay informed about current offers."
     }
   ];
 
   return (
     <>
       <SEOHead
-        title="FAQ - Häufig gestellte Fragen - The Grrrls Club"
-        description="Antworten auf häufig gestellte Fragen zu Versand, Zahlung, Rückgabe und mehr bei The Grrrls Club"
-        keywords="FAQ, Fragen, Versand, Zahlung, Rückgabe, Support, Hilfe"
+        title="FAQ - Frequently Asked Questions - The Grrrls Club"
+        description="Answers to frequently asked questions about shipping, payment, returns and more at The Grrrls Club"
+        keywords="FAQ, questions, shipping, payment, returns, support, help"
       />
       
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Häufig gestellte Fragen (FAQ)
+              Frequently Asked Questions (FAQ)
             </h1>
             
             <div className="space-y-4">
@@ -99,17 +99,17 @@ const FAQ = () => {
 
             <div className="mt-12 bg-pink-50 p-6 rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4 text-center">
-                Weitere Fragen?
+                More Questions?
               </h2>
               <p className="text-gray-600 text-center mb-4">
-                Du findest keine Antwort auf deine Frage? Kontaktiere uns gerne!
+                Can't find an answer to your question? Feel free to contact us!
               </p>
               <div className="text-center">
                 <a
                   href="mailto:info@thegrrrlsclub.de"
                   className="inline-block bg-pink-500 text-white px-6 py-3 rounded-lg hover:bg-pink-600 transition-colors"
                 >
-                  E-Mail senden
+                  Send Email
                 </a>
               </div>
             </div>

@@ -7,179 +7,174 @@ const Terms = () => {
       <SEOHead
         title="Terms and Conditions - The Grrrls Club"
         description="Terms and Conditions for The Grrrls Club online store"
-        keywords="terms, conditions, AGB, legal, shop, online store"
+        keywords="terms, conditions, legal, shop, online store"
       />
 
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Terms and Conditions (AGB)
+              Terms and Conditions
             </h1>
 
             <div className="prose prose-lg max-w-none">
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  1. Geltungsbereich
+                  1. Scope of Application
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle
-                  Bestellungen über unseren Online-Shop „The Grrrls Club",
-                  vertreten durch Elena Rieke. Unser Angebot richtet sich an
-                  Verbraucher*innen im Sinne des § 13 BGB.
+                  These Terms and Conditions apply to all orders through our
+                  online shop "The Grrrls Club", represented by Elena Rieke. Our
+                  offer is directed at consumers within the meaning of § 13 BGB.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  2. Vertragspartner, Vertragsschluss
+                  2. Contracting Parties, Contract Conclusion
                 </h2>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-600">
-                    <strong>Der Kaufvertrag kommt zustande mit:</strong>
+                    <strong>The purchase contract is concluded with:</strong>
                     <br />
                     Elena Rieke – The Grrrls Club
                     <br />
-                    [Adresse ergänzen]
+                    [Address to be added]
                     <br />
-                    [Steuernummer ergänzen]
+                    [Tax number to be added]
                   </p>
                 </div>
                 <p className="text-gray-600 leading-relaxed mt-4">
-                  Mit Einstellung der Produkte in den Online-Shop geben wir ein
-                  verbindliches Angebot zum Vertragsschluss über diese Artikel
-                  ab. Der Vertrag kommt zustande, sobald du im Checkout auf
-                  „Jetzt kaufen" klickst.
+                  By listing products in the online shop, we make a binding offer
+                  to conclude a contract for these items. The contract is
+                  concluded when you click "Buy now" in the checkout.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  3. Kommissionsartikel & Unikate
+                  3. Commission Items & Unique Pieces
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Einige Produkte sind Einzelstücke oder auf Kommissionsbasis
-                  eingestellt. Diese sind als solche gekennzeichnet. Rückgaben
-                  sind bei Kommissionsware ausgeschlossen, bei anderen Artikeln
-                  gilt das gesetzliche Widerrufsrecht.
+                  Some products are unique pieces or listed on a commission
+                  basis. These are marked as such. Returns are excluded for
+                  commission items, while other items are subject to the legal
+                  right of withdrawal.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  4. Versand & Lieferung
+                  4. Shipping & Delivery
                 </h2>
                 <ul className="list-disc pl-6 text-gray-600 space-y-2">
                   <li>
-                    Die Lieferung erfolgt innerhalb Deutschlands mit DHL oder
-                    Hermes
+                    Delivery within Germany is carried out by DHL or Hermes
                   </li>
-                  <li>Versandkosten betragen pauschal 4,90 € pro Bestellung</li>
-                  <li>Ab einem Warenwert von 60 € ist der Versand kostenlos</li>
+                  <li>Shipping costs are €4.90 flat rate per order</li>
+                  <li>Free shipping from €60 order value</li>
                   <li>
-                    Die Lieferzeit beträgt 2–5 Werktage ab Zahlungseingang
+                    Delivery time is 2–5 business days after payment is received
                   </li>
                 </ul>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  5. Bezahlung
+                  5. Payment
                 </h2>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  Folgende Zahlungsmethoden stehen zur Verfügung:
+                  The following payment methods are available:
                 </p>
                 <ul className="list-disc pl-6 text-gray-600 space-y-1">
                   <li>PayPal</li>
-                  <li>Vorkasse (Banküberweisung)</li>
+                  <li>Prepayment (Bank transfer)</li>
                   <li>WERO</li>
                 </ul>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  6. Widerruf & Rückgabe
+                  6. Withdrawal & Returns
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Du hast das Recht, binnen 14 Tagen ohne Angabe von Gründen den
-                  Kauf zu widerrufen. Ausgenommen hiervon sind: Kommissionsware,
-                  individualisierte Produkte oder getragene Kleidungsstücke mit
-                  Nutzungsspuren.
+                  You have the right to withdraw from the purchase within 14
+                  days without giving reasons. Excluded from this are:
+                  commission items, personalized products or worn clothing with
+                  signs of use.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  7. Eigentumsvorbehalt
+                  7. Retention of Title
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Bis zur vollständigen Bezahlung bleibt die Ware unser
-                  Eigentum.
+                  The goods remain our property until full payment is made.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  8. Datenschutz
+                  8. Data Protection
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Es gelten unsere Datenschutzbestimmungen (siehe
-                  „Datenschutzerklärung").
+                  Our data protection regulations apply (see "Privacy Policy").
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  9. Versand & Rückgabe Details
+                  9. Shipping & Returns Details
                 </h2>
                 <div className="bg-pink-50 p-4 rounded-lg">
                   <h3 className="text-lg font-medium text-gray-700 mb-2">
-                    Versand:
+                    Shipping:
                   </h3>
                   <ul className="list-disc pl-6 text-gray-600 space-y-1 mb-4">
                     <li>
-                      Wir versenden mit DHL oder Hermes – umweltfreundlich und
-                      plastikfrei
+                      We ship with DHL or Hermes – environmentally friendly and
+                      plastic-free
                     </li>
-                    <li>Standard-Lieferzeit: 2–5 Werktage</li>
+                    <li>Standard delivery time: 2–5 business days</li>
                     <li>
-                      Versandkosten: 4,90 € pauschal | ab 60 € versandkostenfrei
+                      Shipping costs: €4.90 flat rate | free from €60
                     </li>
-                    <li>Abholung in Bielefeld auf Anfrage möglich</li>
+                    <li>Pickup in Bielefeld possible upon request</li>
                   </ul>
 
                   <h3 className="text-lg font-medium text-gray-700 mb-2">
-                    Rückgabe & Umtausch:
+                    Returns & Exchanges:
                   </h3>
                   <ul className="list-disc pl-6 text-gray-600 space-y-1">
                     <li>
-                      Du hast 14 Tage Zeit zur Rückgabe (außer Kommissionsware,
-                      siehe Kennzeichnung)
+                      You have 14 days to return items (except commission items,
+                      see marking)
                     </li>
                     <li>
-                      Bitte sende ungetragene Artikel in Originalzustand zurück
+                      Please send unworn items back in original condition
                     </li>
-                    <li>Bei Rückgabe trägst du die Rücksendekosten selbst</li>
+                    <li>You bear the return shipping costs yourself</li>
                   </ul>
                 </div>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  10. Zahlungsmethoden
+                  10. Payment Methods
                 </h2>
                 <div className="bg-green-50 p-4 rounded-lg">
                   <p className="text-gray-600 mb-2">
-                    Du kannst bequem und sicher bezahlen mit:
+                    You can pay conveniently and securely with:
                   </p>
                   <ul className="list-none text-gray-600 space-y-1">
-                    <li>✔️ PayPal – schnell, sicher, mit Käuferschutz</li>
+                    <li>✔️ PayPal – fast, secure, with buyer protection</li>
                     <li>
-                      ✔️ WERO – direktes europäisches Bezahlen (gebührenarm)
+                      ✔️ WERO – direct European payment (low fees)
                     </li>
                     <li>
-                      ✔️ Vorkasse – du überweist den Betrag, wir versenden nach
-                      Geldeingang
+                      ✔️ Prepayment – you transfer the amount, we ship after
+                      payment is received
                     </li>
                   </ul>
                 </div>
@@ -187,11 +182,11 @@ const Terms = () => {
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  11. Kontakt
+                  11. Contact
                 </h2>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-600">
-                    Bei Fragen zu diesen AGB wende dich gerne an uns:
+                    If you have any questions about these Terms, please contact us:
                   </p>
                   <p className="text-gray-600 mt-2">
                     Email: info@thegrrrlsclub.de

@@ -5,37 +5,37 @@ const Impressum = () => {
   return (
     <>
       <SEOHead
-        title="Impressum - The Grrrls Club"
-        description="Impressum for The Grrrls Club online store"
-        keywords="impressum, legal notice, company information, contact"
+        title="Legal Notice - The Grrrls Club"
+        description="Legal notice for The Grrrls Club online store"
+        keywords="legal notice, company information, contact, impressum"
       />
       
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Impressum
+              Legal Notice
             </h1>
             
             <div className="prose prose-lg max-w-none">
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Angaben gemäß § 5 TMG</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Information according to § 5 TMG</h2>
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <p className="text-gray-600 leading-relaxed">
                     <strong>Elena Rieke</strong><br />
                     The Grrrls Club<br />
-                    [Straße und Hausnummer]<br />
-                    [PLZ und Ort]<br />
-                    Deutschland
+                    [Street and house number]<br />
+                    [Postal code and city]<br />
+                    Germany
                   </p>
                 </div>
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Kontakt</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Contact</h2>
                 <div className="bg-pink-50 p-6 rounded-lg">
                   <p className="text-gray-600 leading-relaxed">
-                    <strong>Telefon:</strong> [Telefonnummer]<br />
+                    <strong>Phone:</strong> [Phone number]<br />
                     <strong>E-Mail:</strong> info@thegrrrlsclub.de<br />
                     <strong>Website:</strong> www.thegrrrlsclub.de
                   </p>
@@ -43,75 +43,64 @@ const Impressum = () => {
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Umsatzsteuer-ID</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">VAT ID</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
-                  [USt-IdNr. wird ergänzt]
+                  VAT identification number according to § 27 a VAT Act:<br />
+                  [VAT ID to be added]
                 </p>
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Responsible for content according to § 55 Abs. 2 RStV</h2>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-600">
                     Elena Rieke<br />
-                    [Straße und Hausnummer]<br />
-                    [PLZ und Ort]
+                    [Street and house number]<br />
+                    [Postal code and city]
                   </p>
                 </div>
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Streitschlichtung</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Dispute Resolution</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+                  The European Commission provides a platform for online dispute resolution (ODR): 
                   <a href="https://ec.europa.eu/consumers/odr/" className="text-pink-500 hover:text-pink-600 underline ml-1" target="_blank" rel="noopener noreferrer">
                     https://ec.europa.eu/consumers/odr/
                   </a>
                 </p>
                 <p className="text-gray-600 leading-relaxed mt-2">
-                  Unsere E-Mail-Adresse finden Sie oben im Impressum.
+                  You can find our email address above in the legal notice.
                 </p>
                 <p className="text-gray-600 leading-relaxed mt-2">
-                  Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer 
-                  Verbraucherschlichtungsstelle teilzunehmen.
+                  We are not willing or obligated to participate in dispute resolution proceedings before a consumer arbitration board.
                 </p>
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Haftung für Inhalte</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Liability for Content</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten 
-                  nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als 
-                  Diensteanbieter jedoch nicht unter der Verpflichtung, übermittelte oder gespeicherte 
-                  fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine 
-                  rechtswidrige Tätigkeit hinweisen.
+                  As a service provider, we are responsible for our own content on these pages according to general laws pursuant to § 7 para. 1 TMG. According to §§ 8 to 10 TMG, however, we as a service provider are not under obligation to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.
                 </p>
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Haftung für Links</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Liability for Links</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen 
-                  Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. 
-                  Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber 
-                  der Seiten verantwortlich.
+                  Our offer contains links to external websites of third parties, on whose contents we have no influence. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the pages is always responsible for the contents of the linked pages.
                 </p>
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Urheberrecht</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Copyright</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen 
-                  dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art 
-                  der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen 
-                  Zustimmung des jeweiligen Autors bzw. Erstellers.
+                  The contents and works created by the site operators on these pages are subject to German copyright law. The reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator.
                 </p>
               </section>
 
               <div className="border-t pt-6 mt-8">
                 <p className="text-sm text-gray-500 text-center">
-                  Stand: {new Date().toLocaleDateString('de-DE', { 
+                  Last updated: {new Date().toLocaleDateString('en-US', { 
                     year: 'numeric', 
                     month: 'long', 
                     day: 'numeric' 

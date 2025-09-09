@@ -7,7 +7,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { RiArrowRightWideFill, RiArrowLeftWideFill } from "react-icons/ri";
 import { getImageUrl } from "../lib/api";
 
-const SHIPPING_COST = 4.99; // هزینه ثابت ارسال
+const SHIPPING_COST = 4.99; // Fixed shipping cost
 
 export default function Cart() {
   const {
@@ -30,13 +30,13 @@ export default function Cart() {
     return (
       <div className="text-center mt-20">
         <h2 className="text-2xl font-semibold text-gray-700">
-          Dein Warenkorb ist leer 🛒
+          Your cart is empty 🛒
         </h2>
         <Link
           to="/products"
           className="inline-block mt-4 text-blue-600 hover:underline"
         >
-          Zurück zu den Produkten
+          Back to Products
         </Link>
       </div>
     );
@@ -69,7 +69,7 @@ export default function Cart() {
         </a>
       </div>
 
-      {/* خط جداکننده از چپ تا راست کامل */}
+      {/* Full width separator line */}
       <div className="-mx-6">
         <hr className="border-t-4 border-gray-300 mb-6" />
       </div>
@@ -77,7 +77,7 @@ export default function Cart() {
       <ul className="space-y-0">
         {items.map((item, index) => (
           <li key={item._id} className="relative pt-4 pb-6">
-            {/* خط جداکننده بین محصولات */}
+            {/* Separator line between products */}
             {index > 0 && (
               <div className="-mx-6">
                 <hr className="border-t border-gray-300 mb-4" />

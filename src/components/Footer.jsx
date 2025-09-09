@@ -20,13 +20,13 @@ export default function Footer() {
             FAQ
           </a>
           <a href="/terms" className="hover:text-white">
-            AGB
+            Terms
           </a>
           <a href="/privacy" className="hover:text-white">
-            Datenschutz
+            Privacy
           </a>
           <a href="/impressum" className="hover:text-white">
-            Impressum
+            Legal Notice
           </a>
         </div>
         <div className="flex space-x-6">

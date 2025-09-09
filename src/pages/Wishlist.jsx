@@ -19,12 +19,12 @@ export default function Wishlist() {
       try {
         setLoading(true);
 
-        // لود کردن محصولات معمولی
+        // Loading regular products
         const productsRes = await apiFetch("/products");
         const productsData = await productsRes.json();
         setProducts(productsData);
 
-        // لود کردن محصولات Commission
+        // Loading Commission products
         const commissionRes = await apiFetch("/commission");
         const commissionData = await commissionRes.json();
         setCommissionProducts(commissionData);
@@ -40,7 +40,7 @@ export default function Wishlist() {
     fetchProducts();
   }, []);
 
-  // ترکیب کردن همه محصولات
+  // Combining all products
   const allProducts = [...products, ...commissionProducts];
   const wishlistProducts = allProducts.filter((p) => wishlist.includes(p._id));
 
