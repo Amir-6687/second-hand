@@ -622,8 +622,7 @@
   margin: 0 auto;
   background: white;
   padding: 6px;
-  clip-path: circle(50%);
-  -webkit-clip-path: circle(50%);
+  overflow: hidden;
 }
 
 /* Features Section */
@@ -680,8 +679,7 @@
   margin: 0 auto;
   background: white;
   padding: 8px;
-  clip-path: circle(50%);
-  -webkit-clip-path: circle(50%);
+  overflow: hidden;
 }
 
 .featureTitle {
