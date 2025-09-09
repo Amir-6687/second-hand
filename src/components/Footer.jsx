@@ -9,21 +9,24 @@ export default function Footer() {
           <h2 className="text-xl font-bold mb-2">ShopEase</h2>
           <p className="text-sm">© 2025 ShopEase. All rights reserved.</p>
         </div>
-        <div className="flex gap-6 text-sm">
+        <div className="flex flex-wrap gap-4 text-sm justify-center">
           <a href="/about" className="hover:text-white">
             About Us
           </a>
           <a href="/services" className="hover:text-white">
             Services
           </a>
-          <a href="/contact" className="hover:text-white">
-            Contact
+          <a href="/faq" className="hover:text-white">
+            FAQ
           </a>
           <a href="/terms" className="hover:text-white">
-            Terms & Conditions
+            AGB
           </a>
           <a href="/privacy" className="hover:text-white">
-            Privacy Policy
+            Datenschutz
+          </a>
+          <a href="/impressum" className="hover:text-white">
+            Impressum
           </a>
         </div>
         <div className="flex space-x-6">

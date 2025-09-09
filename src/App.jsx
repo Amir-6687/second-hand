@@ -36,6 +36,8 @@ import Commission from "./pages/Commission";
 import CommissionDetail from "./pages/CommissionDetail";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Impressum from "./pages/Impressum";
+import FAQ from "./pages/FAQ";
 import CookieBanner from "./components/CookieBanner";
 
 import AuthSuccess from "./pages/AuthSuccess";
@@ -703,6 +705,8 @@ export default function App() {
                     <Route path="/commission/:id" element={<CommissionDetail />} />
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/impressum" element={<Impressum />} />
+                    <Route path="/faq" element={<FAQ />} />
 
                     <Route path="/auth-success" element={<AuthSuccess />} />
                     <Route
