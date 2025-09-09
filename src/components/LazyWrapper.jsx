@@ -1,17 +1,42 @@
-import React, { Suspense } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const LazyWrapper = ({ children, fallback = null }) => {
+const LazyWrapper = ({ 
+  children, 
+  fallback = null, 
+  threshold = 0.1, 
+  rootMargin = '50px',
+  className = '' 
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasLoaded) {
+          setIsVisible(true);
+          setHasLoaded(true);
+          observer.disconnect();
+        }
+      },
+      { 
+        threshold, 
+        rootMargin 
+      }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [threshold, rootMargin, hasLoaded]);
+
   return (
-    <Suspense fallback={fallback || (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
-        </div>
-      </div>
-    )}>
-      {children}
-    </Suspense>
+    <div ref={elementRef} className={className}>
+      {isVisible ? children : (fallback || <div className="animate-pulse bg-gray-200 h-32 rounded"></div>)}
+    </div>
   );
 };
 

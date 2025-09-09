@@ -45,8 +45,8 @@ const Terms = () => {
                   </p>
                 </div>
                 <p className="text-gray-600 leading-relaxed mt-4">
-                  By listing products in the online shop, we make a binding offer
-                  to conclude a contract for these items. The contract is
+                  By listing products in the online shop, we make a binding
+                  offer to conclude a contract for these items. The contract is
                   concluded when you click "Buy now" in the checkout.
                 </p>
               </section>
@@ -137,9 +137,7 @@ const Terms = () => {
                       plastic-free
                     </li>
                     <li>Standard delivery time: 2–5 business days</li>
-                    <li>
-                      Shipping costs: €4.90 flat rate | free from €60
-                    </li>
+                    <li>Shipping costs: €4.90 flat rate | free from €60</li>
                     <li>Pickup in Bielefeld possible upon request</li>
                   </ul>
 
@@ -151,9 +149,7 @@ const Terms = () => {
                       You have 14 days to return items (except commission items,
                       see marking)
                     </li>
-                    <li>
-                      Please send unworn items back in original condition
-                    </li>
+                    <li>Please send unworn items back in original condition</li>
                     <li>You bear the return shipping costs yourself</li>
                   </ul>
                 </div>
@@ -169,9 +165,7 @@ const Terms = () => {
                   </p>
                   <ul className="list-none text-gray-600 space-y-1">
                     <li>✔️ PayPal – fast, secure, with buyer protection</li>
-                    <li>
-                      ✔️ WERO – direct European payment (low fees)
-                    </li>
+                    <li>✔️ WERO – direct European payment (low fees)</li>
                     <li>
                       ✔️ Prepayment – you transfer the amount, we ship after
                       payment is received
@@ -186,7 +180,8 @@ const Terms = () => {
                 </h2>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-600">
-                    If you have any questions about these Terms, please contact us:
+                    If you have any questions about these Terms, please contact
+                    us:
                   </p>
                   <p className="text-gray-600 mt-2">
                     Email: info@thegrrrlsclub.de

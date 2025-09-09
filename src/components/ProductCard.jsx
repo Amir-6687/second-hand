@@ -23,6 +23,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { getImageUrl } from "../lib/api";
+import OptimizedImage from "./OptimizedImage";
 
 const Tooltip = ({ show, children }) => (
   <div
@@ -154,20 +155,22 @@ const QuickViewModal = ({ product, open, onClose }) => {
               <Slider {...sliderSettings}>
                 {product.images.map((image, index) => (
                   <div key={index} className="px-2 outline-none">
-                    <img
+                    <OptimizedImage
                       src={getImageUrl(image)}
                       alt={`${product.name} - ${index + 1}`}
                       className="w-full h-auto max-h-96 object-contain rounded mx-auto"
+                      priority={index === 0}
                     />
                   </div>
                 ))}
               </Slider>
             </div>
           ) : (
-            <img
+            <OptimizedImage
               src={getImageUrl(product.image)}
               alt={product.name}
               className="w-full max-w-md object-contain rounded max-h-96"
+              priority={true}
             />
           )}
         </div>
@@ -331,13 +334,13 @@ const ProductCard = ({ product, linkPath = null }) => {
       {/* Image with hover effect */}
       <Link to={getLinkPath()} className="block" onClick={handleCardClick}>
         <div className="relative w-full aspect-[4/5] overflow-hidden">
-          <img
+          <OptimizedImage
             src={getImageUrl(hovered ? secondImg : mainImg)}
             alt={product.name}
             className={`w-full h-full object-contain transition-transform duration-500 ${
               hovered ? "scale-105" : "scale-100"
             }`}
-            draggable={false}
+            priority={true}
           />
 
           {/* Left icons with animation */}
@@ -361,6 +364,7 @@ const ProductCard = ({ product, linkPath = null }) => {
                   setShowModal(true);
                 }}
                 tabIndex={-1}
+                aria-label={`Quick view ${product.name}`}
               >
                 <AiOutlineSearch size={22} className="text-gray-700" />
               </button>
@@ -376,6 +380,7 @@ const ProductCard = ({ product, linkPath = null }) => {
                   toggleWishlist(product._id);
                 }}
                 tabIndex={-1}
+                aria-label={`${wishlist.includes(product._id) ? 'Remove from' : 'Add to'} wishlist ${product.name}`}
               >
                 {wishlist.includes(product._id) ? (
                   <AiFillHeart size={22} className="text-pink-500" />
@@ -393,7 +398,7 @@ const ProductCard = ({ product, linkPath = null }) => {
               onClick={handleAddToCart}
               className="text-gray-600 hover:text-pink-500 transition-colors cursor-pointer"
               title="Add to Cart"
-              aria-label="Add Test Product to cart"
+              aria-label={`Add ${product.name} to cart`}
             >
               <CiShoppingBasket size={24} />
             </button>
@@ -406,11 +411,13 @@ const ProductCard = ({ product, linkPath = null }) => {
         <div className="flex items-center justify-between w-full px-2 mb-2">
           {/* Partner Logo برای Commission products - سمت چپ */}
           {product.partnerLogo && (
-            <img
+            <OptimizedImage
               src={getImageUrl(product.partnerLogo)}
               alt={product.partnerName || "Partner"}
               className="w-8 h-8 rounded-full object-cover border border-gray-200"
               title={product.partnerName || "Partner"}
+              width={32}
+              height={32}
             />
           )}
           {/* فضای خالی برای تعادل */}

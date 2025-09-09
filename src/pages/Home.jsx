@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styles from "../styles/Home.module.scss";
 import SEOHead from "../components/SEOHead";
 import { apiFetch, BASE_URL, getImageUrl } from "../lib/api";
+import OptimizedImage from "../components/OptimizedImage";
+import LazyWrapper from "../components/LazyWrapper";
 
 export default function Home() {
   const [newestProducts, setNewestProducts] = useState([]);
@@ -70,13 +72,14 @@ export default function Home() {
         </section>
 
         {/* Newest Favorites Section - Dynamic */}
-        <section className={styles.suggestedSection}>
+        <LazyWrapper className={styles.suggestedSection}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.suggestedSectionTitle}>Newest Favorites</h2>
-            <img
+            <OptimizedImage
               src="/line-woman02.jpg"
               alt="Fashion illustration"
               className={styles.sectionIcon}
+              priority={true}
             />
           </div>
           {loading ? (
@@ -98,10 +101,11 @@ export default function Home() {
                   className={styles.suggestedItem}
                 >
                   <div className={styles.suggestedImageWrapper}>
-                    <img
+                    <OptimizedImage
                       src={getImageUrl(product.images?.[0] || product.image)}
                       alt={product.name}
                       className={styles.suggestedImage}
+                      priority={false}
                     />
                   </div>
                   <div className={styles.suggestedInfo}>
@@ -114,10 +118,10 @@ export default function Home() {
               ))}
             </div>
           )}
-        </section>
+        </LazyWrapper>
 
         {/* Features Section with Line Women */}
-        <section className={styles.featuresSection}>
+        <LazyWrapper className={styles.featuresSection}>
           <div className={styles.featuresContainer}>
             <h2 className={styles.featuresTitle}>
               Why Choose The Grrrls Club?
@@ -125,10 +129,11 @@ export default function Home() {
             <div className={styles.featuresGrid}>
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
-                  <img
+                  <OptimizedImage
                     src="/line-woman03.jpg"
                     alt="Sustainable fashion"
                     className={styles.featureIcon}
+                    priority={false}
                   />
                 </div>
                 <h3 className={styles.featureTitle}>Sustainable Fashion</h3>
@@ -138,10 +143,11 @@ export default function Home() {
               </div>
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
-                  <img
+                  <OptimizedImage
                     src="/line-woman04.jpg"
                     alt="Unique finds"
                     className={styles.featureIcon}
+                    priority={false}
                   />
                 </div>
                 <h3 className={styles.featureTitle}>Unique Finds</h3>
@@ -151,10 +157,11 @@ export default function Home() {
               </div>
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
-                  <img
+                  <OptimizedImage
                     src="/line-woman06.jpg"
                     alt="Fast shipping"
                     className={styles.featureIcon}
+                    priority={false}
                   />
                 </div>
                 <h3 className={styles.featureTitle}>Fast Shipping</h3>
@@ -164,10 +171,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </LazyWrapper>
 
         {/* CTA Section with Line Woman */}
-        <section className={styles.ctaSection}>
+        <LazyWrapper className={styles.ctaSection}>
           <div className={styles.ctaContent}>
             <div className={styles.ctaText}>
               <h2 className={styles.ctaTitle}>Ready to Start Shopping?</h2>
@@ -182,14 +189,15 @@ export default function Home() {
               </Link>
             </div>
             <div className={styles.ctaImage}>
-              <img
+              <OptimizedImage
                 src="/line-woman09.jpg"
                 alt="Shopping illustration"
                 className={styles.ctaIllustration}
+                priority={false}
               />
             </div>
           </div>
-        </section>
+        </LazyWrapper>
       </main>
     </>
   );
