@@ -8,9 +8,9 @@ const { authMiddleware } = require("../middleware/auth");
 router.get("/", async (req, res) => {
   try {
     const featuredProducts = await FeaturedProduct.find({ isActive: true })
-      .populate('productId')
+      .populate("productId")
       .sort({ displayOrder: 1 });
-    
+
     res.json(featuredProducts);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -25,9 +25,9 @@ router.get("/admin", authMiddleware, async (req, res) => {
     }
 
     const featuredProducts = await FeaturedProduct.find()
-      .populate('productId')
+      .populate("productId")
       .sort({ displayOrder: 1 });
-    
+
     res.json(featuredProducts);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -41,7 +41,8 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(403).json({ error: "Access denied" });
     }
 
-    const { productId, displayOrder, customTitle, customDescription } = req.body;
+    const { productId, displayOrder, customTitle, customDescription } =
+      req.body;
 
     // Check if product exists
     const product = await Product.findById(productId);
@@ -52,19 +53,19 @@ router.post("/", authMiddleware, async (req, res) => {
     // Check if display order is already taken
     const existingFeatured = await FeaturedProduct.findOne({ displayOrder });
     if (existingFeatured) {
-      return res.status(400).json({ 
-        error: `Display order ${displayOrder} is already taken` 
+      return res.status(400).json({
+        error: `Display order ${displayOrder} is already taken`,
       });
     }
 
     // Check if product is already featured
-    const alreadyFeatured = await FeaturedProduct.findOne({ 
-      productId, 
-      isActive: true 
+    const alreadyFeatured = await FeaturedProduct.findOne({
+      productId,
+      isActive: true,
     });
     if (alreadyFeatured) {
-      return res.status(400).json({ 
-        error: "Product is already featured" 
+      return res.status(400).json({
+        error: "Product is already featured",
       });
     }
 
@@ -72,12 +73,12 @@ router.post("/", authMiddleware, async (req, res) => {
       productId,
       displayOrder,
       customTitle,
-      customDescription
+      customDescription,
     });
 
     await featuredProduct.save();
-    await featuredProduct.populate('productId');
-    
+    await featuredProduct.populate("productId");
+
     res.status(201).json(featuredProduct);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -95,13 +96,13 @@ router.put("/:id", authMiddleware, async (req, res) => {
 
     // Check if new display order is already taken by another featured product
     if (displayOrder) {
-      const existingFeatured = await FeaturedProduct.findOne({ 
-        displayOrder, 
-        _id: { $ne: req.params.id } 
+      const existingFeatured = await FeaturedProduct.findOne({
+        displayOrder,
+        _id: { $ne: req.params.id },
       });
       if (existingFeatured) {
-        return res.status(400).json({ 
-          error: `Display order ${displayOrder} is already taken` 
+        return res.status(400).json({
+          error: `Display order ${displayOrder} is already taken`,
         });
       }
     }
@@ -110,7 +111,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
       req.params.id,
       { displayOrder, customTitle, customDescription, isActive },
       { new: true, runValidators: true }
-    ).populate('productId');
+    ).populate("productId");
 
     if (!featuredProduct) {
       return res.status(404).json({ error: "Featured product not found" });
@@ -129,7 +130,9 @@ router.delete("/:id", authMiddleware, async (req, res) => {
       return res.status(403).json({ error: "Access denied" });
     }
 
-    const featuredProduct = await FeaturedProduct.findByIdAndDelete(req.params.id);
+    const featuredProduct = await FeaturedProduct.findByIdAndDelete(
+      req.params.id
+    );
     if (!featuredProduct) {
       return res.status(404).json({ error: "Featured product not found" });
     }
@@ -149,14 +152,15 @@ router.get("/available-products", authMiddleware, async (req, res) => {
 
     // Get all products
     const allProducts = await Product.find({ active: true });
-    
+
     // Get already featured product IDs
-    const featuredProductIds = await FeaturedProduct.find({ isActive: true })
-      .distinct('productId');
-    
+    const featuredProductIds = await FeaturedProduct.find({
+      isActive: true,
+    }).distinct("productId");
+
     // Filter out already featured products
     const availableProducts = allProducts.filter(
-      product => !featuredProductIds.includes(product._id.toString())
+      (product) => !featuredProductIds.includes(product._id.toString())
     );
 
     res.json(availableProducts);

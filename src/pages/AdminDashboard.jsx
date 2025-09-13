@@ -18,6 +18,7 @@ import TopProductsChart from "../components/TopProductsChart";
 import OrdersView from "../components/OrdersView";
 import UsersView from "../components/UsersView";
 import FeaturedProductsView from "../components/FeaturedProductsView";
+import PartnersView from "../components/PartnersView";
 
 // Custom color palette based on client's requirements
 const colors = {
@@ -407,6 +408,7 @@ export default function AdminDashboard() {
             { id: "users", label: "Users", icon: <FaUsers /> },
             { id: "products", label: "Products", icon: <FaBox /> },
             { id: "featured", label: "Featured Products", icon: <FaBox /> },
+            { id: "partners", label: "Partners", icon: <FaFileAlt /> },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -434,6 +436,7 @@ export default function AdminDashboard() {
       {activeTab === "orders" && <OrdersView />}
       {activeTab === "users" && <UsersView />}
       {activeTab === "featured" && <FeaturedProductsView />}
+      {activeTab === "partners" && <PartnersView />}
       {activeTab === "products" && (
         <div className="space-y-6">
           {/* Product Management Cards */}

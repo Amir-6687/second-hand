@@ -8,30 +8,38 @@ import LazyWrapper from "../components/LazyWrapper";
 
 export default function Home() {
   const [newestProducts, setNewestProducts] = useState([]);
+  const [partners, setPartners] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFeaturedProducts = async () => {
+    const fetchData = async () => {
       try {
-        const res = await apiFetch("/featured-products");
-        if (res.ok) {
-          const featuredProducts = await res.json();
-          // Extract product data from featured products
-          const products = featuredProducts.map(fp => fp.productId).filter(Boolean);
-          console.log("Featured products:", products);
+        // Fetch featured products
+        const featuredRes = await apiFetch("/featured-products");
+        if (featuredRes.ok) {
+          const featuredProducts = await featuredRes.json();
+          const products = featuredProducts
+            .map((fp) => fp.productId)
+            .filter(Boolean);
           setNewestProducts(products);
         } else {
-          // Fallback to newest products if featured products fail
+          // Fallback to newest products
           const res = await apiFetch("/products");
           if (res.ok) {
             const products = await res.json();
             const newest = products.slice(0, 4);
-            console.log("Fallback to newest products:", newest);
             setNewestProducts(newest);
           }
         }
+
+        // Fetch partners
+        const partnersRes = await apiFetch("/partners");
+        if (partnersRes.ok) {
+          const partnersData = await partnersRes.json();
+          setPartners(partnersData.slice(0, 3)); // Show only first 3 partners
+        }
       } catch (error) {
-        console.error("Error fetching featured products:", error);
+        console.error("Error fetching data:", error);
         // Fallback to newest products
         try {
           const res = await apiFetch("/products");
@@ -48,7 +56,7 @@ export default function Home() {
       }
     };
 
-    fetchFeaturedProducts();
+    fetchData();
   }, []);
 
   return (
@@ -197,6 +205,80 @@ export default function Home() {
                   Quick and reliable delivery to your doorstep
                 </p>
               </div>
+            </div>
+          </div>
+        </LazyWrapper>
+
+        {/* Partners Section */}
+        <LazyWrapper className={styles.partnersSection}>
+          <div className={styles.partnersContainer}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.partnersTitle}>
+                Unsere Geschäftspartner & Synergin
+              </h2>
+              <OptimizedImage
+                src="/line-woman11.jpg"
+                alt="Partners illustration"
+                className={styles.sectionIcon}
+                priority={false}
+                width={60}
+                height={60}
+              />
+            </div>
+            <p className={styles.partnersDescription}>
+              Entdecken Sie unsere wertvollen Partner, die nachhaltige und
+              natürliche Lösungen anbieten
+            </p>
+            <div className={styles.partnersGrid}>
+              {loading ? (
+                <div className={styles.partnersLoading}>
+                  {[...Array(3)].map((_, index) => (
+                    <div key={index} className={styles.partnerCard}>
+                      <div className="animate-pulse bg-gray-200 h-32 rounded"></div>
+                      <div className="animate-pulse bg-gray-200 h-4 rounded mt-2"></div>
+                      <div className="animate-pulse bg-gray-200 h-4 rounded mt-1 w-2/3"></div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                partners.map((partner) => (
+                  <div key={partner._id} className={styles.partnerCard}>
+                    <div className={styles.partnerImage}>
+                      <OptimizedImage
+                        src={partner.featuredImage || "/line-woman12.jpg"}
+                        alt={partner.name}
+                        className={styles.partnerImageContent}
+                        priority={false}
+                      />
+                    </div>
+                    <div className={styles.partnerInfo}>
+                      <h3 className={styles.partnerName}>{partner.name}</h3>
+                      <p className={styles.partnerDescription}>
+                        {partner.description?.substring(0, 100)}...
+                      </p>
+                      <div className={styles.partnerCategory}>
+                        {partner.category === "education" && "🎓 Ausbildung"}
+                        {partner.category === "natural_products" &&
+                          "🌿 Naturprodukte"}
+                        {partner.category === "fashion" && "👗 Mode"}
+                        {partner.category === "health_wellness" &&
+                          "💊 Gesundheit"}
+                        {partner.category === "beauty" && "💄 Schönheit"}
+                        {partner.category === "sustainability" &&
+                          "♻️ Nachhaltigkeit"}
+                        {partner.category === "other" && "🔗 Andere"}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+            <div className={styles.partnersCTA}>
+              <Link to="/partners">
+                <button className={styles.partnersButton}>
+                  Alle Partner entdecken
+                </button>
+              </Link>
             </div>
           </div>
         </LazyWrapper>

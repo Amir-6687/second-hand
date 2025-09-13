@@ -7,14 +7,14 @@ const cors = require("cors");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const connectDB = require("./db");
 const path = require("path");
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require("cloudinary").v2;
 connectDB();
 
 // Cloudinary config
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // CORS Configuration
@@ -25,7 +25,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
   "http://127.0.0.1:5173",
-  "http://127.0.0.1:3000"
+  "http://127.0.0.1:3000",
 ];
 
 app.use(
@@ -33,16 +33,17 @@ app.use(
     origin: function (origin, callback) {
       // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
-      
+
       // Check if origin is in allowed list
       if (allowedOrigins.indexOf(origin) !== -1) {
         return callback(null, true);
       }
-      
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+
+      const msg =
+        "The CORS policy for this site does not allow access from the specified Origin.";
       return callback(new Error(msg), false);
     },
-    credentials: true
+    credentials: true,
   })
 );
 
@@ -65,6 +66,7 @@ app.use("/commission", require("./routes/commission"));
 app.use("/profile", require("./routes/profile"));
 app.use("/wishlist", require("./routes/wishlist"));
 app.use("/featured-products", require("./routes/featuredProducts"));
+app.use("/partners", require("./routes/partners"));
 
 // File upload endpoint - Cloudinary
 app.post("/upload", (req, res) => {
@@ -105,7 +107,7 @@ app.post("/upload", (req, res) => {
         folder: "thegrrrlsclub",
         use_filename: true,
         unique_filename: true,
-        resource_type: "auto"
+        resource_type: "auto",
       });
 
       // Delete temporary file
@@ -115,7 +117,7 @@ app.post("/upload", (req, res) => {
         message: "File uploaded successfully",
         filename: req.file.filename,
         path: result.secure_url,
-        imageUrl: result.secure_url
+        imageUrl: result.secure_url,
       });
     } catch (cloudinaryError) {
       console.error("Cloudinary upload error:", cloudinaryError);
@@ -130,17 +132,17 @@ app.post("/upload", (req, res) => {
 app.post("/create-payment-intent", async (req, res) => {
   try {
     const { amount, items, userId } = req.body;
-    
+
     if (!amount || amount <= 0) {
       return res.status(400).json({ error: "Invalid amount" });
     }
 
     // Create simplified items metadata (only essential info)
-    const simplifiedItems = (items || []).map(item => ({
+    const simplifiedItems = (items || []).map((item) => ({
       id: item._id,
       name: item.name,
       price: item.price,
-      quantity: item.quantity || 1
+      quantity: item.quantity || 1,
     }));
 
     const paymentIntent = await stripe.paymentIntents.create({
@@ -149,13 +151,13 @@ app.post("/create-payment-intent", async (req, res) => {
       metadata: {
         userId: userId || "anonymous",
         itemsCount: (items || []).length.toString(),
-        items: JSON.stringify(simplifiedItems)
+        items: JSON.stringify(simplifiedItems),
       },
     });
 
     res.json({
       clientSecret: paymentIntent.client_secret,
-      paymentIntentId: paymentIntent.id
+      paymentIntentId: paymentIntent.id,
     });
   } catch (error) {
     console.error("Error creating payment intent:", error);
@@ -166,18 +168,18 @@ app.post("/create-payment-intent", async (req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error("Error:", err);
-  
+
   if (err.message.includes("CORS")) {
-    return res.status(403).json({ 
-      error: "CORS Error", 
+    return res.status(403).json({
+      error: "CORS Error",
       message: err.message,
-      allowedOrigins: allowedOrigins
+      allowedOrigins: allowedOrigins,
     });
   }
-  
-  res.status(500).json({ 
+
+  res.status(500).json({
     error: "Internal Server Error",
-    message: err.message 
+    message: err.message,
   });
 });
 

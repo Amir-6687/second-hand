@@ -38,6 +38,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Impressum from "./pages/Impressum";
 import FAQ from "./pages/FAQ";
+import Partners from "./pages/Partners";
 import CookieBanner from "./components/CookieBanner";
 
 import AuthSuccess from "./pages/AuthSuccess";
@@ -350,40 +351,46 @@ function Navigation() {
 
         {/* Center - Menu (Desktop Only) */}
         <div className="hidden md:flex items-center gap-6">
-          {["/", "/services", "/about", "/products", "/commission"].map(
-            (path, idx) => {
-              const names = [
-                "HOME",
-                "SERVICES",
-                "ABOUT US",
-                "PRODUCTS",
-                "COMMISSION",
-              ];
-              return (
-                <div key={path} className="relative">
-                  <NavLink
-                    to={path}
-                    className={({ isActive }) =>
-                      `${
-                        isActive ? "font-semibold" : ""
-                      } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
-                    }
-                  >
-                    {names[idx]}
-                  </NavLink>
-                  {/* Active indicator line above menu item */}
-                  <NavLink
-                    to={path}
-                    className={({ isActive }) =>
-                      `${
-                        isActive ? "block" : "hidden"
-                      } absolute -top-2 left-1/2 transform -translate-x-1/2 w-full h-0.5 bg-pink-500`
-                    }
-                  />
-                </div>
-              );
-            }
-          )}
+          {[
+            "/",
+            "/services",
+            "/about",
+            "/products",
+            "/partners",
+            "/commission",
+          ].map((path, idx) => {
+            const names = [
+              "HOME",
+              "SERVICES",
+              "ABOUT US",
+              "PRODUCTS",
+              "PARTNER",
+              "COMMISSION",
+            ];
+            return (
+              <div key={path} className="relative">
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "font-semibold" : ""
+                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
+                  }
+                >
+                  {names[idx]}
+                </NavLink>
+                {/* Active indicator line above menu item */}
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "block" : "hidden"
+                    } absolute -top-2 left-1/2 transform -translate-x-1/2 w-full h-0.5 bg-pink-500`
+                  }
+                />
+              </div>
+            );
+          })}
         </div>
 
         {/* Right side - Wishlist, Cart, Search, Login, etc. */}
@@ -500,31 +507,37 @@ function Navigation() {
       pt-24 md:hidden
     `}
         >
-          {["/", "/services", "/about", "/products", "/commission"].map(
-            (path, idx) => {
-              const names = [
-                "HOME",
-                "SERVICES",
-                "ABOUT US",
-                "PRODUCTS",
-                "COMMISSION",
-              ];
-              return (
-                <NavLink
-                  key={path}
-                  to={path}
-                  onClick={closeMenu}
-                  className={({ isActive }) =>
-                    `${
-                      isActive ? "font-semibold" : ""
-                    } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
-                  }
-                >
-                  {names[idx]}
-                </NavLink>
-              );
-            }
-          )}
+          {[
+            "/",
+            "/services",
+            "/about",
+            "/products",
+            "/partners",
+            "/commission",
+          ].map((path, idx) => {
+            const names = [
+              "HOME",
+              "SERVICES",
+              "ABOUT US",
+              "PRODUCTS",
+              "PARTNER",
+              "COMMISSION",
+            ];
+            return (
+              <NavLink
+                key={path}
+                to={path}
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "font-semibold" : ""
+                  } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
+                }
+              >
+                {names[idx]}
+              </NavLink>
+            );
+          })}
 
           <div className="mt-4 flex flex-col items-center gap-2 text-sm justify-center">
             {user ? (
@@ -643,97 +656,107 @@ export default function App() {
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
-          <ErrorBoundary><SkipLinks /><BrowserRouter>
-            {/* محفظه اصلی */}
-            <div className="relative min-h-screen bg-white">
-              {/* محتوای اصلی */}
-              <div className="px-0">
-                <Navigation />
-                <Breadcrumb />
-                <main>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/products" element={<Products />} />
-                    <Route
-                      path="/checkout"
-                      element={
-                        <ProtectedRoute>
-                          <Checkout />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/payment-success"
-                      element={<PaymentSuccess />}
-                    />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route
-                      path="/admin"
-                      element={
-                        <ProtectedRoute requireAdmin={true}>
-                          <Admin />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/admin-dashboard"
-                      element={
-                        <ProtectedRoute requireAdmin={true}>
-                          <AdminDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/profile"
-                      element={
-                        <ProtectedRoute>
-                          <Profile />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/update-password"
-                      element={<UpdatePassword />}
-                    />
-                    <Route path="/favorites" element={<Wishlist />} />
-                    <Route path="/products/:id" element={<ProductDetail />} />
-                    <Route path="/commission" element={<Commission />} />
-                    <Route path="/commission/:id" element={<CommissionDetail />} />
-                    <Route path="/terms" element={<Terms />} />
-                    <Route path="/privacy" element={<Privacy />} />
-                    <Route path="/impressum" element={<Impressum />} />
-                    <Route path="/faq" element={<FAQ />} />
+          <ErrorBoundary>
+            <SkipLinks />
+            <BrowserRouter>
+              {/* محفظه اصلی */}
+              <div className="relative min-h-screen bg-white">
+                {/* محتوای اصلی */}
+                <div className="px-0">
+                  <Navigation />
+                  <Breadcrumb />
+                  <main>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/services" element={<Services />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/products" element={<Products />} />
+                      <Route path="/partners" element={<Partners />} />
+                      <Route
+                        path="/checkout"
+                        element={
+                          <ProtectedRoute>
+                            <Checkout />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/payment-success"
+                        element={<PaymentSuccess />}
+                      />
+                      <Route path="/cart" element={<Cart />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
+                      <Route
+                        path="/admin"
+                        element={
+                          <ProtectedRoute requireAdmin={true}>
+                            <Admin />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin-dashboard"
+                        element={
+                          <ProtectedRoute requireAdmin={true}>
+                            <AdminDashboard />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/profile"
+                        element={
+                          <ProtectedRoute>
+                            <Profile />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/update-password"
+                        element={<UpdatePassword />}
+                      />
+                      <Route path="/favorites" element={<Wishlist />} />
+                      <Route path="/products/:id" element={<ProductDetail />} />
+                      <Route path="/commission" element={<Commission />} />
+                      <Route
+                        path="/commission/:id"
+                        element={<CommissionDetail />}
+                      />
+                      <Route path="/terms" element={<Terms />} />
+                      <Route path="/privacy" element={<Privacy />} />
+                      <Route path="/impressum" element={<Impressum />} />
+                      <Route path="/faq" element={<FAQ />} />
 
-                    <Route path="/auth-success" element={<AuthSuccess />} />
-                    <Route
-                      path="/forget-password"
-                      element={<ForgetPassword />}
-                    />
-                    <Route path="/reset-password" element={<ResetPassword />} />
-                  </Routes>
-                </main>
+                      <Route path="/auth-success" element={<AuthSuccess />} />
+                      <Route
+                        path="/forget-password"
+                        element={<ForgetPassword />}
+                      />
+                      <Route
+                        path="/reset-password"
+                        element={<ResetPassword />}
+                      />
+                    </Routes>
+                  </main>
 
-                <Footer />
-                <MobileBottomNav />
-                <CookieBanner />
+                  <Footer />
+                  <MobileBottomNav />
+                  <CookieBanner />
 
-                {/* Floating WhatsApp Icon */}
-                <a
-                  href="https://wa.me/4952194932874"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="fixed bottom-20 right-6 md:bottom-6 md:right-6 z-50 bg-green-500/90 hover:bg-green-600/95 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110"
-                  aria-label="Contact us on WhatsApp"
-                >
-                  <FaWhatsapp size={28} />
-                </a>
+                  {/* Floating WhatsApp Icon */}
+                  <a
+                    href="https://wa.me/4952194932874"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fixed bottom-20 right-6 md:bottom-6 md:right-6 z-50 bg-green-500/90 hover:bg-green-600/95 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110"
+                    aria-label="Contact us on WhatsApp"
+                  >
+                    <FaWhatsapp size={28} />
+                  </a>
+                </div>
               </div>
-            </div>
-          </BrowserRouter></ErrorBoundary>
+            </BrowserRouter>
+          </ErrorBoundary>
         </WishlistProvider>
       </CartProvider>
     </AuthProvider>
