@@ -35,8 +35,10 @@ router.get("/", async (req, res) => {
       createdAt: -1,
     });
 
+    console.log("Found partners:", partners.length);
     res.json(partners);
   } catch (err) {
+    console.error("Error fetching partners:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -189,6 +191,25 @@ router.get("/types/list", async (req, res) => {
 
     res.json(types);
   } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Test endpoint to check database connection and data
+router.get("/test", async (req, res) => {
+  try {
+    const totalPartners = await Partner.countDocuments();
+    const activePartners = await Partner.countDocuments({ isActive: true });
+    const allPartners = await Partner.find({}).limit(5);
+    
+    res.json({
+      totalPartners,
+      activePartners,
+      samplePartners: allPartners,
+      message: "Database connection working"
+    });
+  } catch (err) {
+    console.error("Test endpoint error:", err);
     res.status(500).json({ error: err.message });
   }
 });
