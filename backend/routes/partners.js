@@ -196,7 +196,7 @@ router.get("/types/list", async (req, res) => {
 });
 
 // Test endpoint to check database connection and data
-router.get("/test", async (req, res) => {
+router.get("/debug/test", async (req, res) => {
   try {
     const totalPartners = await Partner.countDocuments();
     const activePartners = await Partner.countDocuments({ isActive: true });
