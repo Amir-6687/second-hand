@@ -34,19 +34,7 @@ const ImageSlider = () => {
     setIsAutoPlaying(true);
   };
 
-  // Manual navigation
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-    setIsAutoPlaying(false);
-    // Resume auto-play after 8 seconds of manual interaction
-    setTimeout(() => setIsAutoPlaying(true), 8000);
-  };
 
-  const goToNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 8000);
-  };
 
   return (
     <section 
@@ -76,16 +64,6 @@ const ImageSlider = () => {
             ))}
           </div>
 
-          {/* Navigation arrow */}
-          <button
-            onClick={goToNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200 p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
-            aria-label="Next image"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
 
 
           {/* Slide counter */}
