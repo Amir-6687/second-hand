@@ -1,6 +1,7 @@
 import SkipLinks from "./components/SkipLinks";
 import ErrorBoundary from "./components/ErrorBoundary";
 import React, { useState, useEffect, useRef } from "react";
+import { useDarkMode } from "./hooks/useDarkMode";
 import {
   BrowserRouter,
   Routes,
@@ -290,6 +291,7 @@ function Navigation() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const searchRef = useRef(null);
+  const isDarkMode = useDarkMode();
   const navigate = window.location
     ? (path) => (window.location.href = path)
     : () => {};
@@ -334,17 +336,14 @@ function Navigation() {
 
   return (
     <>
-      <nav
-        className="text-gray-900 py-8 px-4 shadow-md flex items-center justify-between relative"
-        style={{ backgroundColor: "#EDDCD9" }}
-      >
+      <nav className="text-gray-900 dark:text-gray-100 py-8 px-4 shadow-md flex items-center justify-between relative bg-[#EDDCD9] dark:bg-gray-800">
         {/* Left side - Logo */}
         <div className="text-xl font-bold flex items-center justify-start">
           <NavLink to="/" aria-label="Home">
             <img
               src={logo}
               alt="Shop Logo"
-              className="h-32 w-auto cursor-pointer"
+              className="h-32 w-auto cursor-pointer logo"
             />
           </NavLink>
         </div>
@@ -450,7 +449,7 @@ function Navigation() {
           <button
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            className="focus:outline-none z-50 text-black"
+            className="focus:outline-none z-50 text-black dark:text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -502,7 +501,7 @@ function Navigation() {
 
         {/* منوی موبایل */}
         <div
-          className={`fixed top-0 right-0 h-full w-64 bg-pink-100 shadow-lg transform transition-transform duration-500 ease-in-out z-40
+          className={`fixed top-0 right-0 h-full w-64 bg-pink-100 dark:bg-gray-800 shadow-lg transform transition-transform duration-500 ease-in-out z-40
       ${menuOpen ? "translate-x-0" : "translate-x-full"}
       pt-24 md:hidden
     `}
@@ -531,7 +530,7 @@ function Navigation() {
                 className={({ isActive }) =>
                   `${
                     isActive ? "font-semibold" : ""
-                  } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
+                  } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide text-gray-900 dark:text-gray-100`
                 }
               >
                 {names[idx]}
@@ -545,7 +544,7 @@ function Navigation() {
                 <NavLink
                   to="/profile"
                   onClick={closeMenu}
-                  className="hover:text-pink-600 flex items-center gap-1"
+                  className="hover:text-pink-600 flex items-center gap-1 text-gray-900 dark:text-gray-100"
                 >
                   <CiUser className="w-5 h-5" />
                   {user?.username || "Profile"}
@@ -564,7 +563,7 @@ function Navigation() {
                     logout();
                     closeMenu();
                   }}
-                  className="text-red-500 hover:underline flex items-center justify-center mt-6"
+                  className="text-red-500 hover:underline flex items-center justify-center mt-6 dark:text-red-400"
                   style={{ background: "none", border: "none", padding: 0 }}
                 >
                   <CiLogout size={28} />
@@ -575,7 +574,7 @@ function Navigation() {
                 <NavLink
                   to="/login"
                   onClick={closeMenu}
-                  className="flex items-center justify-center"
+                  className="flex items-center justify-center text-gray-900 dark:text-gray-100"
                 >
                   <CiLogin size={28} />
                 </NavLink>
@@ -588,14 +587,14 @@ function Navigation() {
             <a
               href="https://www.instagram.com/the_grrrls_club?igsh=YWFybzVzNWtrZTB0"
               aria-label="Instagram"
-              className="hover:text-pink-600 transition-colors"
+              className="hover:text-pink-600 transition-colors text-gray-900 dark:text-gray-100"
             >
               <FaInstagram size={20} />
             </a>
             <a
               href="https://facebook.com"
               aria-label="Facebook"
-              className="hover:text-blue-600 transition-colors"
+              className="hover:text-blue-600 transition-colors text-gray-900 dark:text-gray-100"
             >
               <FaFacebook size={20} />
             </a>

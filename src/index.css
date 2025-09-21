@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* Ensure proper contrast in dark mode */
+.dark {
+  color-scheme: dark;
+}
+
+/* Fix for images in dark mode */
+.dark img {
+  filter: brightness(0.9);
+}
+
+/* Logo styling for dark mode */
+.dark .logo {
+  filter: brightness(0.7) contrast(0.8) grayscale(0.3);
+}
+
+/* Specific logo styling for header */
+.dark nav img {
+  filter: brightness(0.6) contrast(0.7) grayscale(0.4);
+  opacity: 0.8;
+}
+
+/* Ensure text readability in dark mode */
+.dark .text-gray-900 {
+  color: rgb(243 244 246);
+}
+
+.dark .text-gray-800 {
+  color: rgb(229 231 235);
+}
+
+.dark .text-gray-700 {
+  color: rgb(209 213 219);
+}
+
+.dark .text-gray-600 {
+  color: rgb(156 163 175);
+}
+
+.dark .text-gray-500 {
+  color: rgb(107 114 128);
+}
