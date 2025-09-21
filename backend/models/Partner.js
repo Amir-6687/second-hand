@@ -35,13 +35,13 @@ const partnerSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
-        "education", // آموزش و تعلیم
-        "natural_products", // محصولات طبیعی
-        "fashion", // مد و لباس
-        "health_wellness", // سلامت و تندرستی
-        "beauty", // زیبایی
-        "sustainability", // پایداری
-        "other", // سایر
+        "education", // Education & Training
+        "natural_products", // Natural Products
+        "fashion", // Fashion & Clothing
+        "health_wellness", // Health & Wellness
+        "beauty", // Beauty
+        "sustainability", // Sustainability
+        "other", // Other
       ],
     },
     services: [

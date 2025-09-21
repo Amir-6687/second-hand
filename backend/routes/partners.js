@@ -290,13 +290,13 @@ router.delete("/:id", authMiddleware, async (req, res) => {
 router.get("/categories/list", async (req, res) => {
   try {
     const categories = [
-      { value: "education", label: "آموزش و تعلیم", icon: "🎓" },
-      { value: "natural_products", label: "محصولات طبیعی", icon: "🌿" },
-      { value: "fashion", label: "مد و لباس", icon: "👗" },
-      { value: "health_wellness", label: "سلامت و تندرستی", icon: "💊" },
-      { value: "beauty", label: "زیبایی", icon: "💄" },
-      { value: "sustainability", label: "پایداری", icon: "♻️" },
-      { value: "other", label: "سایر", icon: "🔗" },
+      { value: "education", label: "Education & Training", icon: "🎓" },
+      { value: "natural_products", label: "Natural Products", icon: "🌿" },
+      { value: "fashion", label: "Fashion & Clothing", icon: "👗" },
+      { value: "health_wellness", label: "Health & Wellness", icon: "💊" },
+      { value: "beauty", label: "Beauty", icon: "💄" },
+      { value: "sustainability", label: "Sustainability", icon: "♻️" },
+      { value: "other", label: "Other", icon: "🔗" },
     ];
 
     res.json(categories);
