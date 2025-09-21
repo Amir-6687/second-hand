@@ -49,7 +49,7 @@ export default function Cart() {
         <span className="text-xl font-bold">Cart</span>
         <Link
           to="/checkout"
-          className="bg-[#DC2525] hover:bg-[#be123c] text-white font-semibold rounded-lg px-3 py-3 text-base shadow transition"
+          className="bg-[#DC2525] hover:bg-[#be123c] text-gray-800 font-semibold rounded-lg px-3 py-3 text-base shadow transition"
           style={{ minWidth: 120, textAlign: "center" }}
         >
           Checkout <RiArrowRightWideFill className="inline ml-1" size={20} />
@@ -61,7 +61,7 @@ export default function Cart() {
         <span className="text-xl font-bold md:text-2xl">Cart</span>
         <a
           href="/checkout"
-          className="px-5 py-2 rounded bg-teal-700 text-white font-semibold hover:bg-teal-800 transition text-base md:text-lg shadow md:bg-red-600 md:hover:bg-red-700"
+          className="px-5 py-2 rounded bg-teal-700 text-gray-800 font-semibold hover:bg-teal-800 transition text-base md:text-lg shadow md:bg-red-600 md:hover:bg-red-700"
           style={{ minWidth: 120, textAlign: "center" }}
         >
           Checkout{" "}
@@ -220,7 +220,7 @@ export default function Cart() {
       <div className="md:hidden mt-6 flex flex-col gap-4">
         <Link
           to="/checkout"
-          className="w-full flex items-center justify-between bg-[#DC2525] hover:bg-[#be123c] text-white font-bold text-lg rounded-2xl py-4 px-6 shadow transition"
+          className="w-full flex items-center justify-between bg-[#DC2525] hover:bg-[#be123c] text-gray-800 font-bold text-lg rounded-2xl py-4 px-6 shadow transition"
           style={{ minHeight: 56 }}
         >
           <span className="mx-auto">Checkout</span>
