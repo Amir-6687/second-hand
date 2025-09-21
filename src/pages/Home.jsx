@@ -5,6 +5,7 @@ import SEOHead from "../components/SEOHead";
 import { apiFetch, BASE_URL, getImageUrl } from "../lib/api";
 import OptimizedImage from "../components/OptimizedImage";
 import LazyWrapper from "../components/LazyWrapper";
+import ImageSlider from "../components/ImageSlider";
 
 export default function Home() {
   const [newestProducts, setNewestProducts] = useState([]);
@@ -177,6 +178,9 @@ export default function Home() {
             </span>
           </div>
         </section>
+
+        {/* Image Slider Section */}
+        <ImageSlider />
 
         {/* Welcome Message Section */}
         <section style={{ textAlign: "center", margin: "2.5rem 0 1.5rem 0" }}>
