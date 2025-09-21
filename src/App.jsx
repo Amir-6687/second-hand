@@ -179,7 +179,7 @@ function LoginIconWithTooltip() {
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
     >
-      <CiLogin size={28} />
+      <CiLogin size={28} className="text-gray-800" />
       {show && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
           Login
@@ -205,8 +205,8 @@ function SearchIconWithTooltip({ onClick, isOpen }) {
     >
       <CiSearch
         size={28}
-        className={`transition-colors ${
-          isOpen ? "text-pink-500" : "text-gray-700 hover:text-pink-500"
+        className={`transition-colors text-gray-800 ${
+          isOpen ? "text-pink-500" : "hover:text-pink-500"
         }`}
       />
       {show && (
@@ -238,7 +238,7 @@ function ShopIconWithTooltip({ onClick }) {
       tabIndex={0}
       type="button"
     >
-      <CiShoppingCart size={28} />
+      <CiShoppingCart size={28} className="text-gray-800" />
       {cartItemCount > 0 && (
         <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
           {cartItemCount}
@@ -270,7 +270,7 @@ function FavoritesIconWithTooltip({ onClick }) {
       tabIndex={0}
       type="button"
     >
-      <PiHeartStraightThin size={28} />
+      <PiHeartStraightThin size={28} className="text-gray-800" />
       {wishlistItemCount > 0 && (
         <div className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
           {wishlistItemCount}
@@ -376,7 +376,7 @@ function Navigation() {
                   className={({ isActive }) =>
                     `${
                       isActive ? "font-semibold" : ""
-                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide`
+                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide text-gray-800`
                   }
                 >
                   {names[idx]}
@@ -396,7 +396,7 @@ function Navigation() {
         </div>
 
         {/* Right side - Wishlist, Cart, Search, Login, etc. */}
-        <div className="hidden md:flex items-center gap-4 text-sm">
+        <div className="hidden md:flex items-center gap-4 text-sm text-gray-800">
           <FavoritesIconWithTooltip onClick={() => navigate("/favorites")} />
           <ShopIconWithTooltip onClick={() => navigate("/cart")} />
           <SearchIconWithTooltip
@@ -579,7 +579,7 @@ function Navigation() {
                   onClick={closeMenu}
                   className="flex items-center justify-center text-gray-900 dark:text-gray-100"
                 >
-                  <CiLogin size={28} />
+                  <CiLogin size={28} className="text-gray-800" />
                 </NavLink>
               </>
             )}
