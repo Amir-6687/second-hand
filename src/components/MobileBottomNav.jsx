@@ -100,7 +100,7 @@ export default function MobileBottomNav() {
           <PiShoppingBagThin size={24} />
           <span className="text-xs mt-1">Cart</span>
           {user && cartItemCount > 0 && (
-            <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
+            <div className="absolute -top-1 -right-1 bg-red-500 text-gray-800 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
               {cartItemCount > 99 ? "99+" : cartItemCount}
             </div>
           )}
@@ -119,7 +119,7 @@ export default function MobileBottomNav() {
           <PiHeartStraightThin size={24} />
           <span className="text-xs mt-1">Wishlist</span>
           {user && wishlistItemCount > 0 && (
-            <div className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
+            <div className="absolute -top-1 -right-1 bg-pink-500 text-gray-800 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
               {wishlistItemCount > 99 ? "99+" : wishlistItemCount}
             </div>
           )}
@@ -194,7 +194,7 @@ export default function MobileBottomNav() {
                 type="submit"
                 className="ml-2 p-2 bg-pink-500 hover:bg-pink-600 rounded-full transition-colors"
               >
-                <CiSearch size={20} className="text-white" />
+                <CiSearch size={20} className="text-gray-800" />
               </button>
             </div>
           </form>

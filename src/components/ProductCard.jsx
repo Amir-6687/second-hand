@@ -27,7 +27,7 @@ import OptimizedImage from "./OptimizedImage";
 
 const Tooltip = ({ show, children }) => (
   <div
-    className={`pointer-events-none absolute left-10 top-2 z-20 px-2 py-1 rounded text-xs text-white bg-black transition-opacity duration-200 ${
+    className={`pointer-events-none absolute left-10 top-2 z-20 px-2 py-1 rounded text-xs text-gray-800 bg-gray-100 dark:text-gray-800 dark:bg-gray-200 transition-opacity duration-200 ${
       show ? "opacity-100" : "opacity-0"
     }`}
     style={{ whiteSpace: "nowrap" }}
@@ -185,7 +185,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
                 <span className="text-pink-500">
                   €{product.price.toLocaleString()}
                 </span>
-                <span className="bg-red-500 text-white px-3 py-1 rounded text-sm font-medium">
+                <span className="bg-red-500 text-gray-800 px-3 py-1 rounded text-sm font-medium">
                   {product.discountLabel || "Last Chance"}
                 </span>
               </div>
@@ -223,7 +223,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
           </div>
 
           <button
-            className="mt-2 mb-8 bg-pink-500 text-white px-6 py-2 rounded flex items-center gap-2 justify-center hover:bg-pink-600 transition text-lg font-semibold"
+            className="mt-2 mb-8 bg-pink-500 text-gray-800 px-6 py-2 rounded flex items-center gap-2 justify-center hover:bg-pink-600 transition text-lg font-semibold"
             onClick={() => {
               addToCart({ ...product, selectedSize });
               onClose();
@@ -437,7 +437,7 @@ const ProductCard = ({ product, linkPath = null }) => {
               <span className="text-pink-400">
                 €{product.price.toLocaleString()}
               </span>
-              <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+              <span className="bg-red-500 text-gray-800 px-2 py-1 rounded text-xs font-medium">
                 {product.discountLabel || "Last Chance"}
               </span>
             </div>

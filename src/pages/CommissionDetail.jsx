@@ -182,7 +182,7 @@ export default function CommissionDetail() {
                 <span className="text-2xl font-semibold text-pink-600">
                   €{product.price.toLocaleString()}
                 </span>
-                <span className="bg-red-500 text-white px-3 py-1 rounded text-sm font-medium w-fit">
+                <span className="bg-red-500 text-gray-800 px-3 py-1 rounded text-sm font-medium w-fit">
                   {product.discountLabel || "Last Chance"}
                 </span>
               </div>
@@ -214,7 +214,7 @@ export default function CommissionDetail() {
           <div className="flex flex-col sm:flex-row gap-4 mb-8 w-full max-w-lg mx-auto md:mx-0">
             <button
               onClick={() => addToCart({ ...product, quantity: 1 })}
-              className="flex-1 bg-[#DC2525] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#b71c1c] hover:scale-105 active:scale-95 transition-all duration-200"
+              className="flex-1 bg-[#DC2525] text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-[#b71c1c] hover:scale-105 active:scale-95 transition-all duration-200"
             >
               Add to Cart
             </button>
@@ -222,7 +222,7 @@ export default function CommissionDetail() {
               onClick={() => toggleWishlist(product._id)}
               className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
                 wishlist.includes(product._id)
-                  ? "bg-pink-500 text-white hover:bg-pink-600"
+                  ? "bg-pink-500 text-gray-800 hover:bg-pink-600"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
@@ -271,7 +271,7 @@ export default function CommissionDetail() {
                       onClick={() => handleImageClick(image)}
                     >
                       <div className="bg-black bg-opacity-50 rounded-full p-3">
-                        <FiZoomIn className="text-white text-2xl" />
+                        <FiZoomIn className="text-gray-800 text-2xl" />
                       </div>
                     </div>
                   )}
