@@ -336,7 +336,10 @@ function Navigation() {
 
   return (
     <>
-      <nav className="text-gray-900 dark:text-gray-100 py-8 px-4 shadow-md flex items-center justify-between relative bg-[#EDDCD9] dark:bg-gray-800">
+      <nav
+        className="text-gray-900 dark:text-gray-100 py-8 px-4 shadow-md flex items-center justify-between relative"
+        style={{ backgroundColor: "#EDDCD9" }}
+      >
         {/* Left side - Logo */}
         <div className="text-xl font-bold flex items-center justify-start">
           <NavLink to="/" aria-label="Home">
