@@ -103,21 +103,6 @@ const ImageSlider = () => {
             </svg>
           </button>
 
-          {/* Slide indicators */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-            {sliderImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentSlide
-                    ? 'bg-white dark:bg-gray-200 scale-125'
-                    : 'bg-white/60 dark:bg-gray-400/60 hover:bg-white/80 dark:hover:bg-gray-300/80'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
 
           {/* Slide counter */}
           <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-medium">
