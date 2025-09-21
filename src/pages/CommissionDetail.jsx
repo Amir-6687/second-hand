@@ -30,10 +30,10 @@ export default function CommissionDetail() {
   const mainSliderRef = useRef(null);
   const zoomImageRef = useRef(null);
 
-  // تابع تشخیص دستگاه موبایل
+  // Function to detect mobile device
   const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
-  // تنظیمات اسلایدر اصلی
+  // Main slider settings
   const mainSliderSettings = {
     dots: false,
     infinite: true,
@@ -98,7 +98,7 @@ export default function CommissionDetail() {
   };
 
   const handleImageClick = (image) => {
-    if (isMobile()) return; // غیرفعال برای موبایل
+    if (isMobile()) return; // Disabled for mobile
     setModalImage(getImageUrl(image));
     setShowZoomModal(true);
     setIsZoomed(false);
@@ -137,7 +137,7 @@ export default function CommissionDetail() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
       <div className="max-w-6xl w-full flex flex-col md:flex-row items-center md:items-start gap-10 py-12">
-        {/* مشخصات سمت چپ */}
+        {/* Left side specifications */}
         <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start order-2 md:order-1">
           <h1 className="text-3xl font-bold mb-4 text-center md:text-left">
             {product.name}
@@ -232,7 +232,7 @@ export default function CommissionDetail() {
             </button>
           </div>
 
-          {/* جزئیات محصول */}
+          {/* Product details */}
           <div className="bg-gray-50 rounded-lg p-4 mb-8 w-full max-w-lg mx-auto md:mx-0">
             <div className="mb-2">
               <span className="font-bold">Category:</span>{" "}
@@ -247,9 +247,9 @@ export default function CommissionDetail() {
           </div>
         </div>
 
-        {/* بخش تصاویر سمت راست */}
+        {/* Right side images section */}
         <div className="w-full md:w-1/2 flex flex-row-reverse gap-6 order-1 md:order-2">
-          {/* اسلایدر اصلی */}
+          {/* Main slider */}
           <div className="w-4/5 relative">
             <Slider
               {...mainSliderSettings}
@@ -280,7 +280,7 @@ export default function CommissionDetail() {
             </Slider>
           </div>
 
-          {/* گالری تصاویر عمودی */}
+          {/* Vertical image gallery */}
           <div className="w-1/5 flex flex-col gap-4 overflow-y-auto max-h-[500px] pr-2">
             {images.map((image, index) => (
               <div
@@ -303,7 +303,7 @@ export default function CommissionDetail() {
         </div>
       </div>
 
-      {/* بخش رتبه‌بندی */}
+      {/* Rating section */}
       <div className="flex flex-col items-center mt-2 mb-8">
         <div className="mb-2 flex flex-col items-center">
           <span className="font-semibold mb-1">Average rating:</span>
@@ -336,7 +336,7 @@ export default function CommissionDetail() {
         )}
       </div>
 
-      {/* مودال بزرگنمایی تصویر (فقط برای دسکتاپ) */}
+      {/* Image zoom modal (desktop only) */}
       {showZoomModal && !isMobile() && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"

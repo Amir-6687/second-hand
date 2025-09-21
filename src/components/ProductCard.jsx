@@ -92,7 +92,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
   const productLink = window.location.origin + "/products/" + product._id;
   const sizes = ["S", "M", "L", "XL"];
 
-  // تنظیمات اسلایدر
+  // Slider settings
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -107,7 +107,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
-  // کامپوننت‌های سفارشی برای فلش‌ها
+  // Custom components for arrows
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -286,7 +286,7 @@ const ProductCard = ({ product, linkPath = null }) => {
         e.preventDefault();
         setShowActions(true);
       } else {
-        // دومین ضربه: رفتن به جزئیات محصول
+        // Second tap: go to product details
         setShowActions(false);
       }
     }
@@ -411,7 +411,7 @@ const ProductCard = ({ product, linkPath = null }) => {
       {/* Product info */}
       <div className="flex flex-col items-center mt-1 mb-2">
         <div className="flex items-center justify-between w-full px-2 mb-2">
-          {/* Partner Logo برای Commission products - سمت چپ */}
+          {/* Partner Logo for Commission products - left side */}
           {product.partnerLogo && (
             <OptimizedImage
               src={getImageUrl(product.partnerLogo)}
@@ -422,7 +422,7 @@ const ProductCard = ({ product, linkPath = null }) => {
               height={32}
             />
           )}
-          {/* فضای خالی برای تعادل */}
+          {/* Empty space for balance */}
           <div className="flex-1"></div>
         </div>
         <div className="text-base font-medium text-gray-900 text-center truncate w-full max-w-[90%]">
