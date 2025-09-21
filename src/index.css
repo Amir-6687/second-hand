@@ -14,19 +14,9 @@
   color-scheme: dark;
 }
 
-/* Fix for images in dark mode */
-.dark img {
-  filter: brightness(0.9);
-}
-
-/* Logo styling for dark mode */
+/* Logo styling for dark mode - only apply to logo class */
 .dark .logo {
   filter: brightness(0.7) contrast(0.8) grayscale(0.3);
-}
-
-/* Specific logo styling for header */
-.dark nav img {
-  filter: brightness(0.6) contrast(0.7) grayscale(0.4);
   opacity: 0.8;
 }
 
