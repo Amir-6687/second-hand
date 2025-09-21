@@ -20,6 +20,8 @@
   opacity: 0.8;
 }
 
+/* Force rebuild - text visibility fixes */
+
 /* Ensure text readability in dark mode */
 .dark .text-gray-900 {
   color: rgb(17 24 39);
