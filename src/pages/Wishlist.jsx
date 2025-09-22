@@ -79,15 +79,15 @@ export default function Wishlist() {
         {wishlistProducts.length === 0 ? (
           <div className="text-center mt-20 col-span-full">
             <AiFillHeart size={40} className="mx-auto text-pink-400" />
-            <h2 className="text-xl mt-4">Your wishlist is empty!</h2>
+            <h2 className="text-xl mt-4 text-[#171717]">Your wishlist is empty!</h2>
             {/* Debug info */}
             <div className="mt-4 p-4 bg-gray-100 rounded-lg text-left max-w-md mx-auto">
-              <h3 className="font-semibold mb-2">Debug Info:</h3>
-              <p>Wishlist IDs: {JSON.stringify(wishlist)}</p>
-              <p>Regular products: {products.length}</p>
-              <p>Commission products: {commissionProducts.length}</p>
-              <p>All products: {allProducts.length}</p>
-              <p>Wishlist products found: {wishlistProducts.length}</p>
+              <h3 className="font-semibold mb-2 text-[#171717]">Debug Info:</h3>
+              <p className="text-[#171717]">Wishlist IDs: {JSON.stringify(wishlist)}</p>
+              <p className="text-[#171717]">Regular products: {products.length}</p>
+              <p className="text-[#171717]">Commission products: {commissionProducts.length}</p>
+              <p className="text-[#171717]">All products: {allProducts.length}</p>
+              <p className="text-[#171717]">Wishlist products found: {wishlistProducts.length}</p>
             </div>
           </div>
         ) : (
