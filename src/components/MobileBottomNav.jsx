@@ -64,7 +64,7 @@ export default function MobileBottomNav() {
           to="/"
           className={({ isActive }) =>
             `flex flex-col items-center justify-center py-2 transition-colors ${
-              isActive
+              isActive && !searchOpen
                 ? "text-pink-600 dark:text-pink-400"
                 : "text-[#171717] dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
             }`
@@ -91,7 +91,7 @@ export default function MobileBottomNav() {
           to="/cart"
           className={({ isActive }) =>
             `flex flex-col items-center justify-center py-2 transition-colors relative ${
-              isActive
+              isActive && !searchOpen
                 ? "text-pink-600 dark:text-pink-400"
                 : "text-[#171717] dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
             }`
@@ -110,7 +110,7 @@ export default function MobileBottomNav() {
           to="/wishlist"
           className={({ isActive }) =>
             `flex flex-col items-center justify-center py-2 transition-colors relative ${
-              isActive
+              isActive && !searchOpen
                 ? "text-pink-600 dark:text-pink-400"
                 : "text-[#171717] dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
             }`
