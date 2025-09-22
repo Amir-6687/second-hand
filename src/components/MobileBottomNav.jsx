@@ -79,7 +79,7 @@ export default function MobileBottomNav() {
           className={`flex flex-col items-center justify-center py-2 transition-colors ${
             searchOpen
               ? "text-pink-600 dark:text-pink-400"
-              : "text-pink-500 dark:text-pink-400 hover:text-pink-600 dark:hover:text-pink-400"
+              : "text-gray-500 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
           }`}
           data-mobile-search-icon
         >
@@ -148,7 +148,7 @@ export default function MobileBottomNav() {
       {/* Mobile SearchBox */}
       <div
         ref={searchRef}
-        className="fixed bottom-16 left-0 right-0 bg-white dark:bg-gray-800 shadow-xl border-t border-gray-200 dark:border-gray-700 z-50 transform transition-all duration-300 ease-in-out md:hidden"
+        className="fixed bottom-16 left-0 right-0 bg-pink-100 shadow-xl border-t border-gray-200 z-50 transform transition-all duration-300 ease-in-out md:hidden"
         style={{
           transform: searchOpen ? "translateY(0)" : "translateY(100%)",
           opacity: searchOpen ? 1 : 0,
