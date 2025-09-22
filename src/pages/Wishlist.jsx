@@ -69,7 +69,7 @@ export default function Wishlist() {
       <div className="mb-6 flex justify-center md:justify-start">
         <Link
           to="/products"
-          className="inline-block px-4 py-2 bg-[#DC2525] text-gray-800 rounded-lg font-medium hover:bg-[#b71c1c] transition"
+          className="inline-block px-4 py-2 bg-[#DC2525] text-white rounded-lg font-medium hover:bg-[#b71c1c] transition"
         >
           ← Back to Products
         </Link>
@@ -142,7 +142,7 @@ export default function Wishlist() {
                       </span>
                       <button
                         onClick={() => addToCart(product)}
-                        className="w-full sm:w-auto px-3 py-1 bg-[#DC2525] text-gray-800 rounded hover:bg-[#b71c1c] hover:scale-105 hover:shadow-lg active:scale-95 active:bg-[#8e0000] transform transition-all duration-200 ease-in-out text-sm font-semibold"
+                        className="w-full sm:w-auto px-3 py-1 bg-[#DC2525] text-white rounded hover:bg-[#b71c1c] hover:scale-105 hover:shadow-lg active:scale-95 active:bg-[#8e0000] transform transition-all duration-200 ease-in-out text-sm font-semibold"
                       >
                         Add to Cart
                       </button>

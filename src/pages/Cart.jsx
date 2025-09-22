@@ -49,7 +49,7 @@ export default function Cart() {
         <span className="text-xl font-bold">Cart</span>
         <Link
           to="/checkout"
-          className="bg-[#DC2525] hover:bg-[#be123c] text-gray-800 font-semibold rounded-lg px-3 py-3 text-base shadow transition"
+          className="bg-[#DC2525] hover:bg-[#be123c] text-white font-semibold rounded-lg px-3 py-3 text-base shadow transition"
           style={{ minWidth: 120, textAlign: "center" }}
         >
           Checkout <RiArrowRightWideFill className="inline ml-1" size={20} />
@@ -220,7 +220,7 @@ export default function Cart() {
       <div className="md:hidden mt-6 flex flex-col gap-4">
         <Link
           to="/checkout"
-          className="w-full flex items-center justify-between bg-[#DC2525] hover:bg-[#be123c] text-gray-800 font-bold text-lg rounded-2xl py-4 px-6 shadow transition"
+          className="w-full flex items-center justify-between bg-[#DC2525] hover:bg-[#be123c] text-white font-bold text-lg rounded-2xl py-4 px-6 shadow transition"
           style={{ minHeight: 56 }}
         >
           <span className="mx-auto">Checkout</span>

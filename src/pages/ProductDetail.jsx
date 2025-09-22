@@ -157,7 +157,7 @@ export default function ProductDetail() {
           <div className="flex flex-col sm:flex-row gap-4 mb-8 w-full max-w-lg mx-auto md:mx-0">
             <button
               onClick={() => addToCart({ ...product, quantity: 1 })}
-              className="flex-1 bg-[#DC2525] text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-[#b71c1c] hover:scale-105 active:scale-95 transition-all duration-200"
+              className="flex-1 bg-[#DC2525] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#b71c1c] hover:scale-105 active:scale-95 transition-all duration-200"
             >
               Add to Cart
             </button>
