@@ -173,7 +173,7 @@ export default function Home() {
           <div className={styles.bannerBox}>
             <h2>Welcome to Your Second Hand Online Shop</h2>
             <p>Save the world by giving used clothes a second life</p>
-            <span style={{ color: "#00bfae", fontWeight: 700 }}>
+            <span style={{ color: "#b45309", fontWeight: 700 }}>
               #savetheworldbuysecondhand
             </span>
           </div>
@@ -189,14 +189,14 @@ export default function Home() {
               fontSize: "2.1rem",
               fontWeight: 700,
               marginBottom: "0.5rem",
-              color: "#00897b",
+              color: "#b45309",
             }}
           >
             Welcome to Your Second Hand Online Shop
           </h1>
           <div style={{ fontSize: "1.1rem", color: "#444", fontWeight: 500 }}>
             Save the world by giving used clothes a second life{" "}
-            <span style={{ color: "#00bfae", fontWeight: 700 }}>
+            <span style={{ color: "#b45309", fontWeight: 700 }}>
               #savetheworldbuysecondhand
             </span>
           </div>
