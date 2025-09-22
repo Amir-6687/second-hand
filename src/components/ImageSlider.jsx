@@ -45,7 +45,7 @@ const ImageSlider = () => {
 
   // Handle click to toggle auto-play (mobile friendly)
   const handleSliderClick = () => {
-    setIsAutoPlaying(prev => !prev);
+    setIsAutoPlaying((prev) => !prev);
   };
 
   return (
@@ -80,7 +80,7 @@ const ImageSlider = () => {
           </div>
 
           {/* Slide counter */}
-          <div className="absolute top-4 right-4 bg-gray-800/90 dark:bg-gray-200/90 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm font-medium">
+          <div className="absolute top-4 right-4 bg-gray-800/90 dark:bg-gray-200/90 text-[#171717] dark:text-gray-200 px-3 py-1 rounded-full text-sm font-medium">
             {currentSlide + 1} / {sliderImages.length}
           </div>
 
