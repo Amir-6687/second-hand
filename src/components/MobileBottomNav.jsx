@@ -79,7 +79,7 @@ export default function MobileBottomNav() {
           className={`flex flex-col items-center justify-center py-2 transition-colors ${
             searchOpen
               ? "text-pink-600 dark:text-pink-400"
-              : "text-gray-500 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
+              : "text-pink-500 dark:text-pink-400 hover:text-pink-600 dark:hover:text-pink-400"
           }`}
           data-mobile-search-icon
         >
