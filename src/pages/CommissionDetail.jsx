@@ -182,7 +182,7 @@ export default function CommissionDetail() {
                 <span className="text-2xl font-semibold text-pink-600">
                   €{product.price.toLocaleString()}
                 </span>
-                <span className="bg-red-500 text-gray-800 px-3 py-1 rounded text-sm font-medium w-fit">
+                <span className="bg-red-500 text-white px-3 py-1 rounded text-sm font-medium w-fit">
                   {product.discountLabel || "Last Chance"}
                 </span>
               </div>

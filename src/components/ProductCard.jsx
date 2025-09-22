@@ -185,7 +185,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
                 <span className="text-pink-500">
                   €{product.price.toLocaleString()}
                 </span>
-                <span className="bg-red-500 text-gray-800 px-3 py-1 rounded text-sm font-medium">
+                <span className="bg-red-500 text-white px-3 py-1 rounded text-sm font-medium">
                   {product.discountLabel || "Last Chance"}
                 </span>
               </div>
@@ -437,7 +437,7 @@ const ProductCard = ({ product, linkPath = null }) => {
               <span className="text-pink-400">
                 €{product.price.toLocaleString()}
               </span>
-              <span className="bg-red-500 text-gray-800 px-2 py-1 rounded text-xs font-medium">
+              <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
                 {product.discountLabel || "Last Chance"}
               </span>
             </div>
