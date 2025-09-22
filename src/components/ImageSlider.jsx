@@ -28,13 +28,24 @@ const ImageSlider = () => {
     };
   }, [isAutoPlaying, sliderImages.length]);
 
-  // Pause auto-play on hover
+  // Pause auto-play on hover (desktop only)
   const handleMouseEnter = () => {
-    setIsAutoPlaying(false);
+    // Only pause on desktop, not on mobile
+    if (window.innerWidth >= 768) {
+      setIsAutoPlaying(false);
+    }
   };
 
   const handleMouseLeave = () => {
-    setIsAutoPlaying(true);
+    // Only resume on desktop, not on mobile
+    if (window.innerWidth >= 768) {
+      setIsAutoPlaying(true);
+    }
+  };
+
+  // Handle click to toggle auto-play (mobile friendly)
+  const handleSliderClick = () => {
+    setIsAutoPlaying(prev => !prev);
   };
 
   return (
@@ -44,6 +55,7 @@ const ImageSlider = () => {
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleSliderClick}
     >
       <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white dark:bg-gray-800">
         {/* Main slider container */}
