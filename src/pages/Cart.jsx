@@ -61,7 +61,7 @@ export default function Cart() {
         <span className="text-xl font-bold md:text-2xl">Cart</span>
         <a
           href="/checkout"
-          className="px-5 py-2 rounded bg-teal-700 text-gray-800 font-semibold hover:bg-teal-800 transition text-base md:text-lg shadow md:bg-red-600 md:hover:bg-red-700"
+          className="px-5 py-2 rounded bg-teal-700 text-white font-semibold hover:bg-teal-800 transition text-base md:text-lg shadow md:bg-red-600 md:hover:bg-red-700"
           style={{ minWidth: 120, textAlign: "center" }}
         >
           Checkout{" "}
