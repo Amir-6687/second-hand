@@ -351,7 +351,7 @@ export default function ReportsModal({ isOpen, onClose, data }) {
                     <div className="text-3xl font-bold text-blue-600 mb-2">
                       €{(reportData.totalRevenue || 0).toFixed(2)}
                     </div>
-                    <div className="text-gray-600">Total Revenue</div>
+                    <div className="text-[#171717]">Total Revenue</div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     {reportData.monthlyRevenue?.map((item, index) => (
@@ -377,7 +377,7 @@ export default function ReportsModal({ isOpen, onClose, data }) {
                     <div className="text-3xl font-bold text-green-600 mb-2">
                       {reportData.totalOrders || 0}
                     </div>
-                    <div className="text-gray-600">Total Orders</div>
+                    <div className="text-[#171717]">Total Orders</div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     {Object.entries(reportData.orderStatuses || {}).map(
@@ -403,7 +403,7 @@ export default function ReportsModal({ isOpen, onClose, data }) {
                     <div className="text-3xl font-bold text-purple-600 mb-2">
                       {reportData.totalProducts || 0}
                     </div>
-                    <div className="text-gray-600">Total Products</div>
+                    <div className="text-[#171717]">Total Products</div>
                   </div>
                   <div className="space-y-3">
                     {reportData.topProducts
@@ -417,7 +417,7 @@ export default function ReportsModal({ isOpen, onClose, data }) {
                             <div className="font-semibold text-gray-800">
                               {product.name || "Unknown Product"}
                             </div>
-                            <div className="text-sm text-gray-600">
+                            <div className="text-sm text-[#171717]">
                               {product.sales || 0} sales
                             </div>
                           </div>
@@ -453,7 +453,7 @@ export default function ReportsModal({ isOpen, onClose, data }) {
             </div>
             <button
               onClick={onClose}
-              className="px-1.5 py-1.5 rounded border border-gray-300 text-gray-600 font-medium hover:bg-gray-50 transition-colors text-xs"
+              className="px-1.5 py-1.5 rounded border border-gray-300 text-[#171717] font-medium hover:bg-gray-50 transition-colors text-xs"
             >
               Cancel
             </button>

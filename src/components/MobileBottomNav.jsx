@@ -66,7 +66,7 @@ export default function MobileBottomNav() {
             `flex flex-col items-center justify-center py-2 transition-colors ${
               isActive
                 ? "text-pink-600 dark:text-pink-400"
-                : "text-gray-500 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
+                : "text-[#171717] dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
             }`
           }
         >
@@ -79,7 +79,7 @@ export default function MobileBottomNav() {
           className={`flex flex-col items-center justify-center py-2 transition-colors ${
             searchOpen
               ? "text-pink-600 dark:text-pink-400"
-              : "text-gray-500 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
+              : "text-[#171717] dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
           }`}
           data-mobile-search-icon
         >
@@ -93,14 +93,14 @@ export default function MobileBottomNav() {
             `flex flex-col items-center justify-center py-2 transition-colors relative ${
               isActive
                 ? "text-pink-600 dark:text-pink-400"
-                : "text-gray-500 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
+                : "text-[#171717] dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
             }`
           }
         >
           <PiShoppingBagThin size={24} />
           <span className="text-xs mt-1">Cart</span>
           {user && cartItemCount > 0 && (
-            <div className="absolute -top-1 -right-1 bg-red-500 text-gray-800 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
+            <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
               {cartItemCount > 99 ? "99+" : cartItemCount}
             </div>
           )}
@@ -112,14 +112,14 @@ export default function MobileBottomNav() {
             `flex flex-col items-center justify-center py-2 transition-colors relative ${
               isActive
                 ? "text-pink-600 dark:text-pink-400"
-                : "text-gray-500 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
+                : "text-[#171717] dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
             }`
           }
         >
           <PiHeartStraightThin size={24} />
           <span className="text-xs mt-1">Wishlist</span>
           {user && wishlistItemCount > 0 && (
-            <div className="absolute -top-1 -right-1 bg-pink-500 text-gray-800 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
+            <div className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
               {wishlistItemCount > 99 ? "99+" : wishlistItemCount}
             </div>
           )}
@@ -131,7 +131,7 @@ export default function MobileBottomNav() {
             `flex flex-col items-center justify-center py-2 transition-colors ${
               isActive
                 ? "text-pink-600 dark:text-pink-400"
-                : "text-gray-500 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
+                : "text-[#171717] dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400"
             }`
           }
         >
@@ -164,7 +164,10 @@ export default function MobileBottomNav() {
               onClick={() => setSearchOpen(false)}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
             >
-              <IoClose size={20} className="text-gray-500 dark:text-gray-400" />
+              <IoClose
+                size={20}
+                className="text-[#171717] dark:text-gray-400"
+              />
             </button>
           </div>
 
@@ -186,7 +189,7 @@ export default function MobileBottomNav() {
                 >
                   <IoClose
                     size={18}
-                    className="text-gray-500 dark:text-gray-400"
+                    className="text-[#171717] dark:text-gray-400"
                   />
                 </button>
               )}
@@ -201,7 +204,7 @@ export default function MobileBottomNav() {
 
           {/* Quick Search Suggestions */}
           <div className="mt-4">
-            <p className="text-sm text-gray-500 mb-2">Popular searches:</p>
+            <p className="text-sm text-[#171717] mb-2">Popular searches:</p>
             <div className="flex flex-wrap gap-2">
               {["Dress", "Shoes", "Bag", "Accessories"].map((term) => (
                 <button

@@ -89,14 +89,14 @@ const SearchBox = React.forwardRef(
                 onClick={() => setSearchTerm("")}
                 className="ml-2 p-1 hover:bg-gray-200 rounded-full transition-colors"
               >
-                <IoClose size={16} className="text-gray-500" />
+                <IoClose size={16} className="text-[#171717]" />
               </button>
             )}
             <button
               type="submit"
               className="ml-2 p-1 hover:bg-gray-200 rounded-full transition-colors"
             >
-              <CiSearch size={18} className="text-gray-600" />
+              <CiSearch size={18} className="text-[#171717]" />
             </button>
           </div>
         </form>
@@ -240,7 +240,7 @@ function ShopIconWithTooltip({ onClick }) {
     >
       <CiShoppingCart size={28} className="text-gray-800" />
       {cartItemCount > 0 && (
-        <div className="absolute -top-2 -right-2 bg-red-500 text-gray-800 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+        <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
           {cartItemCount}
         </div>
       )}
@@ -272,7 +272,7 @@ function FavoritesIconWithTooltip({ onClick }) {
     >
       <PiHeartStraightThin size={28} className="text-gray-800" />
       {wishlistItemCount > 0 && (
-        <div className="absolute -top-2 -right-2 bg-pink-500 text-gray-800 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+        <div className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
           {wishlistItemCount}
         </div>
       )}
@@ -452,7 +452,7 @@ function Navigation() {
           <button
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            className="focus:outline-none z-50 text-black dark:text-white"
+            className="focus:outline-none z-50 text-[#171717] dark:text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -617,7 +617,7 @@ function Breadcrumb() {
   const pathnames = location.pathname.split("/").filter((x) => x);
   return (
     <nav
-      className="text-xs sm:text-sm px-4 py-2 bg-gray-50 text-gray-500"
+      className="text-xs sm:text-sm px-4 py-2 bg-gray-50 text-[#171717]"
       aria-label="breadcrumb"
     >
       <ol className="list-none flex flex-wrap gap-1">

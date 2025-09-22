@@ -32,7 +32,7 @@ const OrderStatusChart = ({ orderStatuses, colors }) => {
       return (
         <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
           <p className="font-medium text-gray-900">{data.name}</p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-[#171717]">
             {data.value} orders ({percentage}%)
           </p>
         </div>
@@ -49,7 +49,7 @@ const OrderStatusChart = ({ orderStatuses, colors }) => {
             className="w-3 h-3 rounded-full"
             style={{ backgroundColor: entry.color }}
           />
-          <span className="text-sm text-gray-600">{entry.value}</span>
+          <span className="text-sm text-[#171717]">{entry.value}</span>
         </div>
       ))}
     </div>

@@ -43,7 +43,7 @@ export default function OrderHistory() {
     return (
       <div className="text-center py-8">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500 mx-auto mb-4"></div>
-        <p className="text-gray-600">Loading orders...</p>
+        <p className="text-[#171717]">Loading orders...</p>
       </div>
     );
   }
@@ -60,7 +60,7 @@ export default function OrderHistory() {
     return (
       <div className="text-center py-12">
         <FaShoppingBag className="text-6xl text-gray-300 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-gray-600 mb-2">
+        <h3 className="text-xl font-semibold text-[#171717] mb-2">
           No Orders Yet
         </h3>
         <p className="text-gray-500">You haven't made any purchases yet.</p>
@@ -84,7 +84,7 @@ export default function OrderHistory() {
                 <h3 className="font-semibold text-gray-900">
                   Order #{order._id.slice(-8)}
                 </h3>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
+                <div className="flex items-center gap-2 text-sm text-[#171717]">
                   <FaCalendarAlt className="text-xs" />
                   <span>{new Date(order.createdAt).toLocaleDateString()}</span>
                 </div>
@@ -146,7 +146,7 @@ export default function OrderHistory() {
 
           {/* Payment Info */}
           <div className="border-t pt-4 mt-4">
-            <div className="flex items-center justify-between text-sm text-gray-600">
+            <div className="flex items-center justify-between text-sm text-[#171717]">
               <span>Payment ID: {order.paymentIntentId?.slice(-12)}</span>
               <button className="text-blue-600 hover:text-blue-800 font-medium">
                 View Details

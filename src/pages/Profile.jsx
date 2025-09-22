@@ -69,7 +69,7 @@ export default function Profile() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
-    
+
     // Clear username error when user starts typing
     if (name === "username") {
       setUsernameError("");
@@ -82,48 +82,49 @@ export default function Profile() {
     setError("");
     setSuccess("");
     setUsernameError("");
-    
+
     try {
       console.log("Submitting profile data:", profile); // Debug log
-      
+
       const res = await apiFetch("/profile", {
         method: "PUT",
         body: JSON.stringify(profile),
       });
-      
+
       if (!res.ok) {
         if (res.status === 401) {
           logout();
           navigate("/login");
           return;
         }
-        
+
         const errorData = await res.json();
         if (res.status === 400 && errorData.error.includes("Username")) {
           setUsernameError(errorData.error);
           return;
         }
-        
-        throw new Error(`HTTP ${res.status}: ${errorData.error || "Failed to update profile"}`);
+
+        throw new Error(
+          `HTTP ${res.status}: ${errorData.error || "Failed to update profile"}`
+        );
       }
-      
+
       const data = await res.json();
       console.log("Updated profile response:", data); // Debug log
-      
+
       // Update profile state with the response data
       setProfile(data);
-      
+
       // Update AuthContext with new username
       updateUser({
         username: data.username,
-        email: data.email
+        email: data.email,
       });
-      
+
       setSuccess("✅ Profile updated successfully!");
-      
+
       // Clear success message after 3 seconds
       setTimeout(() => setSuccess(""), 3000);
-      
     } catch (err) {
       console.error("Profile update error:", err);
       setError("Failed to update profile: " + err.message);
@@ -137,7 +138,11 @@ export default function Profile() {
   };
 
   const handleDeleteAccount = async () => {
-    if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+    if (
+      !confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      )
+    ) {
       return;
     }
     try {
@@ -179,7 +184,7 @@ export default function Profile() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading profile...</p>
+          <p className="text-[#171717]">Loading profile...</p>
         </div>
       </div>
     );
@@ -189,7 +194,9 @@ export default function Profile() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Please log in</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            Please log in
+          </h2>
           <button
             onClick={() => navigate("/login")}
             className="bg-pink-500 text-white px-6 py-2 rounded-lg hover:bg-pink-600"
@@ -208,7 +215,9 @@ export default function Profile() {
           {/* Header */}
           <div className="bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-8">
             <h1 className="text-3xl font-bold text-white mb-2">My Profile</h1>
-            <p className="text-white/90">Manage your account settings and preferences</p>
+            <p className="text-white/90">
+              Manage your account settings and preferences
+            </p>
           </div>
 
           {/* Success Message */}
@@ -272,7 +281,9 @@ export default function Profile() {
                       required
                     />
                     {usernameError && (
-                      <p className="text-red-500 text-sm mt-1">{usernameError}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {usernameError}
+                      </p>
                     )}
                     <p className="text-xs text-gray-500 mt-1">
                       Choose a unique username that others can use to find you
@@ -288,7 +299,9 @@ export default function Profile() {
                       disabled
                       className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500"
                     />
-                    <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Email cannot be changed
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -358,7 +371,9 @@ export default function Profile() {
                 </div>
 
                 <div className="pt-6 border-t border-gray-200">
-                  <h3 className="text-lg font-semibold text-red-600 mb-4">Danger Zone</h3>
+                  <h3 className="text-lg font-semibold text-red-600 mb-4">
+                    Danger Zone
+                  </h3>
                   <button
                     type="button"
                     onClick={handleDeleteAccount}
@@ -367,7 +382,8 @@ export default function Profile() {
                     Delete Account
                   </button>
                   <p className="text-sm text-gray-500 mt-2">
-                    This action cannot be undone. All your data will be permanently deleted.
+                    This action cannot be undone. All your data will be
+                    permanently deleted.
                   </p>
                 </div>
               </form>
@@ -375,7 +391,9 @@ export default function Profile() {
 
             {activeTab === "orders" && (
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">Order History</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                  Order History
+                </h3>
                 <OrderHistory />
               </div>
             )}

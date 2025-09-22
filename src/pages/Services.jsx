@@ -9,35 +9,35 @@ const services = [
     title: "Aufräumhilfe",
     description:
       "Professionelle Unterstützung beim Aufräumen und Organisieren.",
-    image: lineWoman11
+    image: lineWoman11,
   },
   {
     title: "Alltagsbegleitung",
     description:
       "Begleitung und Unterstützung im Alltag für mehr Lebensqualität.",
-    image: lineWoman12
+    image: lineWoman12,
   },
   {
     title: "Umzugsvorpacken",
     description: "Hilfe beim Vorbereiten und Packen für den Umzug.",
-    image: lineWoman13
+    image: lineWoman13,
   },
   {
     title: "Gesellschaftlerin",
     description: "Gesellschaft leisten und soziale Kontakte fördern.",
-    image: lineWoman11
+    image: lineWoman11,
   },
 ];
 
 export default function Services() {
   return (
     <>
-      <SEOHead 
-        title="Services - The Grrrls Club" 
-        description="Professional services including organization help, daily assistance, moving preparation, and companionship at The Grrrls Club." 
-        keywords="services, organization, assistance, moving, companionship, support" 
+      <SEOHead
+        title="Services - The Grrrls Club"
+        description="Professional services including organization help, daily assistance, moving preparation, and companionship at The Grrrls Club."
+        keywords="services, organization, assistance, moving, companionship, support"
       />
-      
+
       <main className="min-h-screen bg-white">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-pink-50 to-purple-50 py-16">
@@ -47,13 +47,14 @@ export default function Services() {
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
                   Our Services
                 </h1>
-                <p className="text-xl text-gray-600 mb-8">
-                  Professional support services to make your life easier and more organized.
+                <p className="text-xl text-[#171717] mb-8">
+                  Professional support services to make your life easier and
+                  more organized.
                 </p>
                 <div className="flex items-center gap-4">
-                  <img 
-                    src={lineWoman11} 
-                    alt="Service illustration" 
+                  <img
+                    src={lineWoman11}
+                    alt="Service illustration"
                     className="w-16 h-16 rounded-full object-cover border-4 border-pink-300"
                   />
                   <span className="text-lg font-semibold text-gray-700">
@@ -62,9 +63,9 @@ export default function Services() {
                 </div>
               </div>
               <div className="flex justify-center">
-                <img 
-                  src={lineWoman12} 
-                  alt="Services illustration" 
+                <img
+                  src={lineWoman12}
+                  alt="Services illustration"
                   className="max-w-full h-auto max-h-96 object-contain"
                 />
               </div>
@@ -79,20 +80,20 @@ export default function Services() {
               <h2 className="text-3xl font-bold text-gray-800 mb-4">
                 What We Offer
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-[#171717]">
                 Comprehensive services tailored to your needs
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {services.map((service, index) => (
-                <div 
+                <div
                   key={index}
                   className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-6 text-center"
                 >
                   <div className="mb-4">
-                    <img 
-                      src={service.image} 
+                    <img
+                      src={service.image}
                       alt={service.title}
                       className="w-20 h-20 mx-auto rounded-full object-cover border-4 border-pink-200"
                     />
@@ -100,7 +101,7 @@ export default function Services() {
                   <h3 className="text-xl font-semibold text-gray-800 mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-[#171717] leading-relaxed">
                     {service.description}
                   </p>
                 </div>
@@ -113,7 +114,7 @@ export default function Services() {
         <section className="relative py-16 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
           {/* Background blur effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600"></div>
-          
+
           <div className="relative max-w-6xl mx-auto px-4">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
               {/* Text content */}
@@ -128,17 +129,17 @@ export default function Services() {
                   Contact Us
                 </button>
               </div>
-              
+
               {/* Image with blur background effect */}
               <div className="relative lg:flex-shrink-0">
                 <div className="relative">
                   {/* Blur background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full blur-sm scale-110"></div>
-                  
+
                   {/* Main image */}
-                  <img 
-                    src={lineWoman13} 
-                    alt="Contact illustration" 
+                  <img
+                    src={lineWoman13}
+                    alt="Contact illustration"
                     className="relative w-32 h-32 lg:w-40 lg:h-40 rounded-full object-cover border-4 border-white/30 backdrop-blur-sm"
                   />
                 </div>

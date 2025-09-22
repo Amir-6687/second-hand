@@ -132,7 +132,7 @@ export default function ProductDetail() {
           </h1>
           {product.description && (
             <div className="mb-6 w-full max-w-lg mx-auto md:mx-0">
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-[#171717] leading-relaxed">
                 {showFullDesc
                   ? product.description
                   : product.description.length > 150
@@ -245,7 +245,7 @@ export default function ProductDetail() {
               </Slider>
             ) : (
               <div className="w-full h-[500px] bg-gray-100 rounded-lg flex items-center justify-center">
-                <p className="text-gray-500">No images available</p>
+                <p className="text-[#171717]">No images available</p>
               </div>
             )}
           </div>
@@ -283,7 +283,7 @@ export default function ProductDetail() {
             onChange={() => {}}
             size={20}
           />
-          <span className="text-xs text-gray-500 mt-1">
+          <span className="text-xs text-[#171717] mt-1">
             {avgRating ? `${avgRating} / 5` : "No ratings yet"}
           </span>
         </div>
@@ -296,7 +296,7 @@ export default function ProductDetail() {
             size={20}
           />
           {!hasBought && (
-            <span className="ml-2 text-xs text-gray-400">
+            <span className="ml-2 text-xs text-[#171717]">
               (You can only rate products you have purchased)
             </span>
           )}

@@ -106,7 +106,7 @@ export default function Wishlist() {
                     alt={product.name}
                     className="w-28 h-28 sm:w-20 sm:h-20 object-cover rounded border"
                   />
-                  <div className="text-xs text-gray-600 mt-2 flex items-center gap-1">
+                  <div className="text-xs text-[#171717] mt-2 flex items-center gap-1">
                     📦 <span>Available - 2-3 working days</span>
                   </div>
                   <button
@@ -124,12 +124,12 @@ export default function Wishlist() {
                     <h3 className="text-base font-semibold text-gray-900">
                       {product.name}
                     </h3>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-[#171717] text-sm">
                       {product.description}
                     </p>
                     <div className="flex items-center gap-2 mt-1">
                       <StarRating value={product.avgRating || 0} disabled />
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-[#171717]">
                         ({product.ratings?.length || 0})
                       </span>
                     </div>

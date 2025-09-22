@@ -37,7 +37,7 @@ const CookieBanner = () => {
             <h3 className="text-lg font-semibold text-gray-900 mb-1">
               We use Cookies
             </h3>
-            <p className="text-sm text-gray-600 mb-2">
+            <p className="text-sm text-[#171717] mb-2">
               To provide you with the full functionality of our website, we use
               cookies. These help us save your preferences and provide you with
               a better shopping experience.
@@ -57,7 +57,7 @@ const CookieBanner = () => {
           <div className="flex flex-col sm:flex-row gap-2 flex-shrink-0">
             <button
               onClick={handleDismiss}
-              className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors flex items-center gap-2"
+              className="px-4 py-2 text-sm font-medium text-[#171717] bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors flex items-center gap-2"
             >
               <FaTimes size={14} />
               Dismiss

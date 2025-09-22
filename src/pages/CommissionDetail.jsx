@@ -203,7 +203,7 @@ export default function CommissionDetail() {
                 <div className="text-2xl font-bold text-pink-600">
                   {product.commissionRate}%
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-xs text-[#171717] mt-1">
                   Earn commission on this product
                 </div>
               </div>
@@ -313,7 +313,7 @@ export default function CommissionDetail() {
             onChange={() => {}}
             size={20}
           />
-          <span className="text-xs text-gray-500 mt-1">
+          <span className="text-xs text-[#171717] mt-1">
             {avgRating ? `${avgRating} / 5` : "No ratings yet"}
           </span>
         </div>
@@ -326,7 +326,7 @@ export default function CommissionDetail() {
             size={20}
           />
           {!hasBought && (
-            <span className="ml-2 text-xs text-gray-400">
+            <span className="ml-2 text-xs text-[#171717]">
               (You can only rate products you have purchased)
             </span>
           )}

@@ -315,7 +315,7 @@ export default function AdminDashboard() {
                   <p className="text-sm font-medium text-gray-900">
                     New order #{order._id.slice(-6)}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-[#171717]">
                     €{order.totalPrice} •{" "}
                     {new Date(order.createdAt).toLocaleDateString()}
                   </p>
@@ -359,7 +359,7 @@ export default function AdminDashboard() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Authentication Required
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-[#171717] mb-6">
             Please log in to access the admin dashboard.
           </p>
           <a
@@ -385,7 +385,7 @@ export default function AdminDashboard() {
           <h1 className="text-4xl font-bold" style={{ color: colors.darkTeal }}>
             Admin Dashboard
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-[#171717] mt-2">
             Complete store management and analytics
           </p>
         </div>
@@ -416,7 +416,7 @@ export default function AdminDashboard() {
               className={`flex items-center space-x-1 md:space-x-2 py-3 px-2 md:px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${
                 activeTab === tab.id
                   ? `border-b-2 font-semibold`
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                  : "border-transparent text-[#171717] hover:text-gray-700 hover:border-gray-300"
               }`}
               style={
                 activeTab === tab.id
@@ -453,7 +453,7 @@ export default function AdminDashboard() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Add New Product
                 </h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-[#171717] text-sm mb-4">
                   Create and add new products to your store
                 </p>
                 <a
@@ -479,7 +479,7 @@ export default function AdminDashboard() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Manage Products
                 </h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-[#171717] text-sm mb-4">
                   Edit, delete and manage existing products
                 </p>
                 <a
@@ -505,7 +505,7 @@ export default function AdminDashboard() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Product Analytics
                 </h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-[#171717] text-sm mb-4">
                   View detailed analytics and insights
                 </p>
                 <button

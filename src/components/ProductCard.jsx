@@ -242,7 +242,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
                   href={s.url(productLink, product.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-pink-500 transition"
+                  className="text-[#171717] hover:text-pink-500 transition"
                   title={"Share on " + s.name}
                 >
                   {s.icon}
@@ -398,7 +398,7 @@ const ProductCard = ({ product, linkPath = null }) => {
           <div className="absolute bottom-[-09px] left-1/2 transform -translate-x-1/2">
             <button
               onClick={handleAddToCart}
-              className="text-gray-600 hover:text-pink-500 transition-colors cursor-pointer"
+              className="text-[#171717] hover:text-pink-500 transition-colors cursor-pointer"
               title="Add to Cart"
               aria-label={`Add ${product.name} to cart`}
             >

@@ -8,7 +8,10 @@ const ImageSlider = () => {
   const isDarkMode = useDarkMode();
 
   // Array of slider images
-  const sliderImages = Array.from({ length: 14 }, (_, i) => `slider-${String(i + 1).padStart(2, '0')}.jpg`);
+  const sliderImages = Array.from(
+    { length: 14 },
+    (_, i) => `slider-${String(i + 1).padStart(2, "0")}.jpg`
+  );
 
   // Auto-slide functionality
   useEffect(() => {
@@ -34,11 +37,11 @@ const ImageSlider = () => {
     setIsAutoPlaying(true);
   };
 
-
-
   return (
-    <section 
-      className={`relative w-full max-w-6xl mx-auto my-12 px-4 ${isDarkMode ? 'dark' : ''}`}
+    <section
+      className={`relative w-full max-w-6xl mx-auto my-12 px-4 ${
+        isDarkMode ? "dark" : ""
+      }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -46,7 +49,7 @@ const ImageSlider = () => {
         {/* Main slider container */}
         <div className="relative h-64 md:h-80 lg:h-96">
           {/* Slides */}
-          <div 
+          <div
             className="flex transition-transform duration-700 ease-in-out h-full"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
@@ -56,15 +59,13 @@ const ImageSlider = () => {
                   src={`/${image}`}
                   alt={`Fashion showcase ${index + 1}`}
                   className="w-full h-full object-cover"
-                  loading={index === currentSlide ? 'eager' : 'lazy'}
+                  loading={index === currentSlide ? "eager" : "lazy"}
                 />
                 {/* Overlay gradient for better text readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
               </div>
             ))}
           </div>
-
-
 
           {/* Slide counter */}
           <div className="absolute top-4 right-4 bg-gray-800/90 dark:bg-gray-200/90 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm font-medium">
@@ -73,9 +74,13 @@ const ImageSlider = () => {
 
           {/* Auto-play indicator */}
           <div className="absolute top-4 left-4 flex items-center space-x-2">
-            <div className={`w-2 h-2 rounded-full ${isAutoPlaying ? 'bg-green-400' : 'bg-gray-400'}`}></div>
+            <div
+              className={`w-2 h-2 rounded-full ${
+                isAutoPlaying ? "bg-green-400" : "bg-gray-400"
+              }`}
+            ></div>
             <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">
-              {isAutoPlaying ? 'Auto' : 'Paused'}
+              {isAutoPlaying ? "Auto" : "Paused"}
             </span>
           </div>
         </div>
@@ -85,9 +90,10 @@ const ImageSlider = () => {
           <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">
             Discover Our Fashion Collection
           </h3>
-          <p className="text-gray-600 dark:text-gray-300">
-            Explore our curated selection of stylish second-hand clothing and accessories. 
-            Each piece tells a story and contributes to sustainable fashion.
+          <p className="text-[#171717] dark:text-gray-300">
+            Explore our curated selection of stylish second-hand clothing and
+            accessories. Each piece tells a story and contributes to sustainable
+            fashion.
           </p>
         </div>
       </div>

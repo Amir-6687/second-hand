@@ -190,10 +190,10 @@ export default function Partners() {
               </div>
             ) : partners.length === 0 ? (
               <div className="text-center py-16">
-                <h3 className="text-2xl font-semibold text-gray-600 mb-4">
+                <h3 className="text-2xl font-semibold text-[#171717] mb-4">
                   Keine Partner gefunden
                 </h3>
-                <p className="text-gray-500">
+                <p className="text-[#171717]">
                   Versuchen Sie andere Suchkriterien oder Filter.
                 </p>
               </div>
@@ -234,7 +234,7 @@ export default function Partners() {
                           {partner.name}
                         </h3>
 
-                        <p className="text-gray-600 mb-4 line-clamp-3">
+                        <p className="text-[#171717] mb-4 line-clamp-3">
                           {partner.description}
                         </p>
 
@@ -274,7 +274,7 @@ export default function Partners() {
                         )}
 
                         {/* Contact Info */}
-                        <div className="space-y-2 text-sm text-gray-600">
+                        <div className="space-y-2 text-sm text-[#171717]">
                           {partner.contactInfo?.phone && (
                             <p>📞 {partner.contactInfo.phone}</p>
                           )}

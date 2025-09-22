@@ -11,7 +11,7 @@ const AccessDenied = () => {
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             Access Denied
           </h1>
-          <p className="text-gray-600">
+          <p className="text-[#171717]">
             You don't have permission to access this page. Only administrators
             can view this content.
           </p>

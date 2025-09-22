@@ -60,7 +60,7 @@ export default function PaymentSuccess() {
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading order details...</p>
+          <p className="text-[#171717]">Loading order details...</p>
         </div>
       </div>
     );
@@ -77,7 +77,7 @@ export default function PaymentSuccess() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Payment Successful! 🎉
           </h1>
-          <p className="text-xl text-gray-600 mb-2">
+          <p className="text-xl text-[#171717] mb-2">
             Thank you for your purchase, {user?.name || "Valued Customer"}!
           </p>
           <p className="text-gray-500">
@@ -166,7 +166,9 @@ export default function PaymentSuccess() {
                       <h4 className="font-medium">
                         {item.productId?.name || item.name}
                       </h4>
-                      <p className="text-gray-600">Quantity: {item.quantity}</p>
+                      <p className="text-[#171717]">
+                        Quantity: {item.quantity}
+                      </p>
                     </div>
                     <p className="font-semibold">
                       €{(item.price * item.quantity).toFixed(2)}
@@ -193,7 +195,7 @@ export default function PaymentSuccess() {
                 <h3 className="font-semibold text-gray-900">
                   Order Confirmation
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-[#171717]">
                   You will receive an email confirmation shortly with your order
                   details.
                 </p>
@@ -205,7 +207,7 @@ export default function PaymentSuccess() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">Processing</h3>
-                <p className="text-gray-600">
+                <p className="text-[#171717]">
                   Your order is being prepared and will be shipped within 1-2
                   business days.
                 </p>
@@ -217,7 +219,7 @@ export default function PaymentSuccess() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">Shipping</h3>
-                <p className="text-gray-600">
+                <p className="text-[#171717]">
                   You will receive tracking information once your order ships.
                 </p>
               </div>

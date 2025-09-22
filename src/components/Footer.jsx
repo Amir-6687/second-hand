@@ -32,14 +32,14 @@ export default function Footer() {
         <div className="flex space-x-6">
           <a
             href="https://www.instagram.com/the_grrrls_club?igsh=YWFybzVzNWtrZTB0"
-            className="text-gray-400 hover:text-pink-600 transition-colors"
+            className="text-[#171717] hover:text-pink-600 transition-colors"
             aria-label="Instagram"
           >
             <FaInstagram size={20} />
           </a>
           <a
             href="https://facebook.com"
-            className="text-gray-400 hover:text-blue-600 transition-colors"
+            className="text-[#171717] hover:text-blue-600 transition-colors"
             aria-label="Facebook"
           >
             <FaFacebook size={20} />

@@ -84,7 +84,7 @@ export default function Commission() {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Kommissions-Neuware
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-[#171717]">
           Entdecken Sie neue Produkte unserer Partner mit attraktiven
           Kommissionspreisen
         </p>
@@ -116,7 +116,7 @@ export default function Commission() {
             </div>
 
             {/* Count Badge */}
-            <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-sm font-medium">
+            <span className="bg-gray-100 text-[#171717] px-2 py-1 rounded-full text-sm font-medium">
               {selectedInfo.count}
             </span>
 
@@ -229,7 +229,7 @@ export default function Commission() {
 
       {/* Tab Content Indicator */}
       <div className="mb-6 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-[#171717]">
           {selectedPartner === "all"
             ? `Zeige alle ${products.length} Produkte von ${uniquePartners.length} Partnern`
             : `Zeige ${filteredProducts.length} Produkte von ${selectedPartner}`}

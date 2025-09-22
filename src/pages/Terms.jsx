@@ -22,7 +22,7 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   1. Scope of Application
                 </h2>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-[#171717] leading-relaxed">
                   These Terms and Conditions apply to all orders through our
                   online shop "The Grrrls Club", represented by Elena Rieke. Our
                   offer is directed at consumers within the meaning of § 13 BGB.
@@ -34,7 +34,7 @@ const Terms = () => {
                   2. Contracting Parties, Contract Conclusion
                 </h2>
                 <div className="bg-gray-50 p-4 rounded-lg">
-                  <p className="text-gray-600">
+                  <p className="text-[#171717]">
                     <strong>The purchase contract is concluded with:</strong>
                     <br />
                     Elena Rieke – The Grrrls Club
@@ -44,7 +44,7 @@ const Terms = () => {
                     [Tax number to be added]
                   </p>
                 </div>
-                <p className="text-gray-600 leading-relaxed mt-4">
+                <p className="text-[#171717] leading-relaxed mt-4">
                   By listing products in the online shop, we make a binding
                   offer to conclude a contract for these items. The contract is
                   concluded when you click "Buy now" in the checkout.
@@ -55,7 +55,7 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   3. Commission Items & Unique Pieces
                 </h2>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-[#171717] leading-relaxed">
                   Some products are unique pieces or listed on a commission
                   basis. These are marked as such. Returns are excluded for
                   commission items, while other items are subject to the legal
@@ -67,7 +67,7 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   4. Shipping & Delivery
                 </h2>
-                <ul className="list-disc pl-6 text-gray-600 space-y-2">
+                <ul className="list-disc pl-6 text-[#171717] space-y-2">
                   <li>
                     Delivery within Germany is carried out by DHL or Hermes
                   </li>
@@ -83,10 +83,10 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   5. Payment
                 </h2>
-                <p className="text-gray-600 leading-relaxed mb-4">
+                <p className="text-[#171717] leading-relaxed mb-4">
                   The following payment methods are available:
                 </p>
-                <ul className="list-disc pl-6 text-gray-600 space-y-1">
+                <ul className="list-disc pl-6 text-[#171717] space-y-1">
                   <li>PayPal</li>
                   <li>Prepayment (Bank transfer)</li>
                   <li>WERO</li>
@@ -97,7 +97,7 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   6. Withdrawal & Returns
                 </h2>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-[#171717] leading-relaxed">
                   You have the right to withdraw from the purchase within 14
                   days without giving reasons. Excluded from this are:
                   commission items, personalized products or worn clothing with
@@ -109,7 +109,7 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   7. Retention of Title
                 </h2>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-[#171717] leading-relaxed">
                   The goods remain our property until full payment is made.
                 </p>
               </section>
@@ -118,7 +118,7 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   8. Data Protection
                 </h2>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-[#171717] leading-relaxed">
                   Our data protection regulations apply (see "Privacy Policy").
                 </p>
               </section>
@@ -131,7 +131,7 @@ const Terms = () => {
                   <h3 className="text-lg font-medium text-gray-700 mb-2">
                     Shipping:
                   </h3>
-                  <ul className="list-disc pl-6 text-gray-600 space-y-1 mb-4">
+                  <ul className="list-disc pl-6 text-[#171717] space-y-1 mb-4">
                     <li>
                       We ship with DHL or Hermes – environmentally friendly and
                       plastic-free
@@ -144,7 +144,7 @@ const Terms = () => {
                   <h3 className="text-lg font-medium text-gray-700 mb-2">
                     Returns & Exchanges:
                   </h3>
-                  <ul className="list-disc pl-6 text-gray-600 space-y-1">
+                  <ul className="list-disc pl-6 text-[#171717] space-y-1">
                     <li>
                       You have 14 days to return items (except commission items,
                       see marking)
@@ -160,10 +160,10 @@ const Terms = () => {
                   10. Payment Methods
                 </h2>
                 <div className="bg-green-50 p-4 rounded-lg">
-                  <p className="text-gray-600 mb-2">
+                  <p className="text-[#171717] mb-2">
                     You can pay conveniently and securely with:
                   </p>
-                  <ul className="list-none text-gray-600 space-y-1">
+                  <ul className="list-none text-[#171717] space-y-1">
                     <li>✔️ PayPal – fast, secure, with buyer protection</li>
                     <li>✔️ WERO – direct European payment (low fees)</li>
                     <li>
@@ -179,11 +179,11 @@ const Terms = () => {
                   11. Contact
                 </h2>
                 <div className="bg-gray-50 p-4 rounded-lg">
-                  <p className="text-gray-600">
+                  <p className="text-[#171717]">
                     If you have any questions about these Terms, please contact
                     us:
                   </p>
-                  <p className="text-gray-600 mt-2">
+                  <p className="text-[#171717] mt-2">
                     Email: info@thegrrrlsclub.de
                     <br />
                     Website: www.thegrrrlsclub.de

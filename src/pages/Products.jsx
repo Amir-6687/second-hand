@@ -86,7 +86,7 @@ export default function Products() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Search Results
             </h2>
-            <p className="text-gray-600">
+            <p className="text-[#171717]">
               Found {filteredProducts.length} product
               {filteredProducts.length !== 1 ? "s" : ""} for "{searchTerm}"
             </p>

@@ -123,7 +123,7 @@ export default function Cart() {
                     );
                   } else {
                     return (
-                      <div className="w-24 h-24 bg-gray-200 rounded mb-1 flex items-center justify-center text-gray-500 text-xs">
+                      <div className="w-24 h-24 bg-gray-200 rounded mb-1 flex items-center justify-center text-[#171717] text-xs">
                         No Image
                       </div>
                     );
@@ -133,7 +133,7 @@ export default function Cart() {
                 {/* Quantity Selector */}
                 <div className="flex flex-col items-start w-full">
                   <label
-                    className="text-xs text-gray-500 mb-1"
+                    className="text-xs text-[#171717] mb-1"
                     htmlFor={`qty-${item._id}`}
                   >
                     Quantity
@@ -162,7 +162,7 @@ export default function Cart() {
                       ))}
                     </select>
                     <FiChevronDown
-                      className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-[#171717]"
                       size={20}
                     />
                   </div>
@@ -173,7 +173,7 @@ export default function Cart() {
               <div className="flex-1 flex flex-col gap-1 min-w-[120px] pr-6">
                 <p className="font-semibold text-base mb-1">{item.name}</p>
                 <button
-                  className="text-gray-500 text-sm hover:text-pink-500 transition w-fit"
+                  className="text-[#171717] text-sm hover:text-pink-500 transition w-fit"
                   onClick={() => {
                     toggleWishlist(item._id);
                     removeFromCart(item._id);
@@ -200,17 +200,17 @@ export default function Cart() {
 
       <div className="mt-6 space-y-2 pt-4">
         <div className="flex justify-between">
-          <p className="text-gray-600">Subtotal:</p>
+          <p className="text-[#171717]">Subtotal:</p>
           <p className="font-medium">€{subtotal.toFixed(2)}</p>
         </div>
         <div className="flex justify-between">
-          <p className="text-gray-600">Shipping costs:</p>
+          <p className="text-[#171717]">Shipping costs:</p>
           <p className="font-medium">€{shippingCost.toFixed(2)}</p>
         </div>
         <div className="flex justify-between border-t border-gray-300 pt-2 mt-2">
           <p className="text-lg font-bold">Total:</p>
           <p className="text-lg font-bold">€{total.toFixed(2)}</p>
-          <p className="text-xs font-light text-gray-500 text-center mt-1">
+          <p className="text-xs font-light text-[#171717] text-center mt-1">
             All prices are in euros and include VAT
           </p>
         </div>
