@@ -452,7 +452,8 @@ function Navigation() {
           <button
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            className="focus:outline-none z-50 text-[#171717] dark:text-white"
+            className="focus:outline-none z-50"
+            style={{ color: '#171717' }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
