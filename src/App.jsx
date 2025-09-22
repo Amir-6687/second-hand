@@ -584,7 +584,7 @@ function Navigation() {
                   onClick={closeMenu}
                   className="flex items-center justify-center text-gray-900 dark:text-gray-100"
                 >
-                  <CiLogin size={28} className="text-[#171717]" />
+                  <CiLogin size={28} className="text-green-500" />
                 </NavLink>
               </>
             )}
