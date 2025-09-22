@@ -347,6 +347,7 @@ function Navigation() {
               src={logo}
               alt="Shop Logo"
               className="h-32 w-auto cursor-pointer logo"
+              style={{ filter: 'brightness(0) saturate(100%) invert(9%) sepia(9%) saturate(0%) hue-rotate(315deg) brightness(95%) contrast(86%)' }}
             />
           </NavLink>
         </div>
