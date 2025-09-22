@@ -59,7 +59,7 @@ export default function MobileBottomNav() {
   return (
     <>
       {/* Mobile Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-pink-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg z-50 grid grid-cols-5 items-center h-16 md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 bg-pink-100 border-t border-gray-200 shadow-lg z-50 grid grid-cols-5 items-center h-16 md:hidden">
         <NavLink
           to="/"
           className={({ isActive }) =>
