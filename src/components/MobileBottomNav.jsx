@@ -157,7 +157,7 @@ export default function MobileBottomNav() {
       >
         <div className="p-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            <h3 className="text-lg font-semibold text-[#171717] dark:text-gray-100">
               Search Products
             </h3>
             <button
