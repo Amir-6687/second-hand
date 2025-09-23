@@ -143,7 +143,7 @@ export default function Cart() {
                   <div className="relative w-20">
                     <select
                       id={`qty-${item._id}`}
-                      className="block w-full border border-gray-300 rounded-xl px-3 py-2 pr-8 appearance-none focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"
+                      className="block w-full border border-gray-300 rounded-xl px-3 py-2 pr-8 appearance-none focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white text-[#171717]"
                       value={item.quantity || 1}
                       onChange={(e) => {
                         const val = parseInt(e.target.value);
@@ -173,7 +173,9 @@ export default function Cart() {
 
               {/* Name + wishlist + price */}
               <div className="flex-1 flex flex-col gap-1 min-w-[120px] pr-6">
-                <p className="font-semibold text-base mb-1 text-[#171717]">{item.name}</p>
+                <p className="font-semibold text-base mb-1 text-[#171717]">
+                  {item.name}
+                </p>
                 <button
                   className="text-[#171717] text-sm hover:text-pink-500 transition w-fit"
                   onClick={() => {
@@ -207,11 +209,15 @@ export default function Cart() {
         </div>
         <div className="flex justify-between">
           <p className="text-[#171717]">Shipping costs:</p>
-          <p className="font-medium text-[#171717]">€{shippingCost.toFixed(2)}</p>
+          <p className="font-medium text-[#171717]">
+            €{shippingCost.toFixed(2)}
+          </p>
         </div>
         <div className="flex justify-between border-t border-gray-300 pt-2 mt-2">
           <p className="text-lg font-bold text-[#171717]">Total:</p>
-          <p className="text-lg font-bold text-[#171717]">€{total.toFixed(2)}</p>
+          <p className="text-lg font-bold text-[#171717]">
+            €{total.toFixed(2)}
+          </p>
           <p className="text-xs font-light text-[#171717] text-center mt-1">
             All prices are in euros and include VAT
           </p>
