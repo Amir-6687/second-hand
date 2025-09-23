@@ -406,7 +406,7 @@ export default function Home() {
             </div>
             <div className={styles.ctaImage}>
               <OptimizedImage
-                src="/line-woman09.jpg"
+                src="/line-woman09.png"
                 alt="Shopping illustration"
                 className={styles.ctaIllustration}
                 priority={false}
