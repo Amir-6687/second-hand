@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import StarRating from "../components/StarRating";
 
 export default function Wishlist() {
-  const { wishlist, toggleWishlist } = useWishlist();
+  const { wishlist, toggleWishlist, refreshWishlist } = useWishlist();
   const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
   const [commissionProducts, setCommissionProducts] = useState([]);
@@ -51,6 +51,7 @@ export default function Wishlist() {
   console.log("- Commission products:", commissionProducts.length);
   console.log("- All products:", allProducts.length);
   console.log("- Wishlist products found:", wishlistProducts.length);
+  console.log("- localStorage wishlist:", JSON.parse(localStorage.getItem("wishlistItems") || "[]"));
 
   if (loading) {
     return (
@@ -88,6 +89,12 @@ export default function Wishlist() {
               <p className="text-[#171717]">Commission products: {commissionProducts.length}</p>
               <p className="text-[#171717]">All products: {allProducts.length}</p>
               <p className="text-[#171717]">Wishlist products found: {wishlistProducts.length}</p>
+              <button 
+                onClick={refreshWishlist}
+                className="mt-2 px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
+              >
+                Refresh Wishlist
+              </button>
             </div>
           </div>
         ) : (
