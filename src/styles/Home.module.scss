@@ -866,7 +866,7 @@
 /* ====== Partners Section ====== */
 .partnersSection {
   padding: 4rem 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: white;
 }
 
 .partnersContainer {
@@ -919,7 +919,7 @@
 .partnerImage {
   height: 200px;
   overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -953,7 +953,7 @@
 
 .partnerCategory {
   display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #849c22 0%, #6b7e1c 100%);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 2rem;
@@ -966,7 +966,7 @@
 }
 
 .partnersButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #849c22 0%, #6b7e1c 100%);
   color: white;
   padding: 1rem 2rem;
   border: none;
@@ -980,7 +980,7 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 20px rgba(132, 156, 34, 0.4);
   }
 }
 
