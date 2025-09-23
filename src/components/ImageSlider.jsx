@@ -101,17 +101,11 @@ const ImageSlider = () => {
         </div>
 
         {/* Slider info */}
-        <div
-          className="p-6"
-          style={{
-            backgroundColor: "#849c22 !important",
-            background: "#849c22 !important",
-          }}
-        >
-          <h3 className="text-xl font-bold text-white mb-2">
+        <div className="p-6 slider-info-bg" style={{ color: "white" }}>
+          <h3 className="text-xl font-bold text-white mb-2" style={{ color: "white" }}>
             Discover Our Fashion Collection
           </h3>
-          <p className="text-white">
+          <p className="text-white" style={{ color: "white" }}>
             Explore our curated selection of stylish second-hand clothing and
             accessories. Each piece tells a story and contributes to sustainable
             fashion.

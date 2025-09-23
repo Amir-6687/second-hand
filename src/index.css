@@ -42,3 +42,9 @@
 .dark .text-gray-500 {
   color: rgb(107 114 128);
 }
+
+/* Custom background for Discover Our Fashion Collection section */
+.slider-info-bg {
+  background-color: #849c22 !important;
+  background: #849c22 !important;
+}
