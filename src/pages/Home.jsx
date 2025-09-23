@@ -44,7 +44,8 @@ export default function Home() {
             {
               _id: "sample1",
               name: "Paracelsus Gesundheitsakademien",
-              description: "Paracelsus ist die größte Heilpraktikerschule Deutschlands mit 54 Standorten in Deutschland und der Schweiz. Wir bieten umfassende Ausbildungen in Naturheilkunde, Psychotherapie, Osteopathie und Tierheilkunde an.",
+              description:
+                "Paracelsus ist die größte Heilpraktikerschule Deutschlands mit 54 Standorten in Deutschland und der Schweiz. Wir bieten umfassende Ausbildungen in Naturheilkunde, Psychotherapie, Osteopathie und Tierheilkunde an.",
               website: "https://www.paracelsus.de/heilpraktikerschulen",
               category: "education",
               services: [
@@ -76,7 +77,8 @@ export default function Home() {
             {
               _id: "sample2",
               name: "Ulbrich Natur",
-              description: "Ulbrich Natur ist spezialisiert auf Naturkosmetik und Naturtextilien. Wir bieten nachhaltige und natürliche Produkte für eine bewusste Lebensweise und umweltfreundliche Alternativen zu konventionellen Kosmetik- und Textilprodukten.",
+              description:
+                "Ulbrich Natur ist spezialisiert auf Naturkosmetik und Naturtextilien. Wir bieten nachhaltige und natürliche Produkte für eine bewusste Lebensweise und umweltfreundliche Alternativen zu konventionellen Kosmetik- und Textilprodukten.",
               website: "https://www.instagram.com/ulbrichnatur_bielefeld",
               instagram: "https://www.instagram.com/ulbrichnatur_bielefeld",
               category: "natural_products",
@@ -106,7 +108,8 @@ export default function Home() {
             {
               _id: "sample3",
               name: "Fairticken",
-              description: "Fairticken ist Ihr Online-Shop für nachhaltige Mode. Wir bieten VEGAN, ECO und FAIR Mode für Damen und Herren, inklusive FAIRTICKEN SHOES. Unser Fokus liegt auf ethischer Mode und nachhaltigen Alternativen.",
+              description:
+                "Fairticken ist Ihr Online-Shop für nachhaltige Mode. Wir bieten VEGAN, ECO und FAIR Mode für Damen und Herren, inklusive FAIRTICKEN SHOES. Unser Fokus liegt auf ethischer Mode und nachhaltigen Alternativen.",
               website: "https://www.fairticken-shop.de",
               category: "fashion",
               services: [
@@ -173,7 +176,7 @@ export default function Home() {
           <div className={styles.bannerBox}>
             <h2>Welcome to Your Second Hand Online Shop</h2>
             <p>Save the world by giving used clothes a second life</p>
-            <span style={{ color: "#b45309", fontWeight: 700 }}>
+            <span style={{ color: "#849c22", fontWeight: 700 }}>
               #savetheworldbuysecondhand
             </span>
           </div>
@@ -189,14 +192,14 @@ export default function Home() {
               fontSize: "2.1rem",
               fontWeight: 700,
               marginBottom: "0.5rem",
-              color: "#b45309",
+              color: "#849c22",
             }}
           >
             Welcome to Your Second Hand Online Shop
           </h1>
           <div style={{ fontSize: "1.1rem", color: "#444", fontWeight: 500 }}>
             Save the world by giving used clothes a second life{" "}
-            <span style={{ color: "#b45309", fontWeight: 700 }}>
+            <span style={{ color: "#849c22", fontWeight: 700 }}>
               #savetheworldbuysecondhand
             </span>
           </div>
