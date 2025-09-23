@@ -6,6 +6,8 @@ import { apiFetch, BASE_URL, getImageUrl } from "../lib/api";
 import OptimizedImage from "../components/OptimizedImage";
 import LazyWrapper from "../components/LazyWrapper";
 import ImageSlider from "../components/ImageSlider";
+import lineWoman06 from "../assets/line-woman06.png";
+import lineWoman09 from "../assets/line-woman09.png";
 
 export default function Home() {
   const [newestProducts, setNewestProducts] = useState([]);
@@ -298,7 +300,7 @@ export default function Home() {
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
                   <OptimizedImage
-                    src="/line-woman06.png"
+                    src={lineWoman06}
                     alt="Fast shipping"
                     className={styles.featureIcon}
                     priority={false}
@@ -406,7 +408,7 @@ export default function Home() {
             </div>
             <div className={styles.ctaImage}>
               <OptimizedImage
-                src="/line-woman09.png"
+                src={lineWoman09}
                 alt="Shopping illustration"
                 className={styles.ctaIllustration}
                 priority={false}
