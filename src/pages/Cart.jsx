@@ -46,7 +46,7 @@ export default function Cart() {
     <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow mt-10">
       {/* Mobile top bar */}
       <div className="md:hidden sticky top-0 z-30 bg-white border-b border-gray-200 flex items-center justify-between px-4 py-3">
-        <span className="text-xl font-bold">Cart</span>
+        <span className="text-xl font-bold text-[#171717]">Cart</span>
         <Link
           to="/checkout"
           className="bg-[#DC2525] hover:bg-[#be123c] text-white font-semibold rounded-lg px-3 py-3 text-base shadow transition"
@@ -58,7 +58,7 @@ export default function Cart() {
 
       {/* Desktop top bar */}
       <div className="w-full items-center justify-between mb-6 px-2 md:px-0 hidden md:flex">
-        <span className="text-xl font-bold md:text-2xl">Cart</span>
+        <span className="text-xl font-bold md:text-2xl text-[#171717]">Cart</span>
         <a
           href="/checkout"
           className="px-5 py-2 rounded bg-teal-700 text-white font-semibold hover:bg-teal-800 transition text-base md:text-lg shadow md:bg-red-600 md:hover:bg-red-700"
