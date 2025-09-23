@@ -326,7 +326,7 @@ export default function Home() {
                 Unsere Geschäftspartner & Synergin
               </h2>
               <OptimizedImage
-                src="/line-woman11.jpg"
+                src="/line-woman11.png"
                 alt="Partners illustration"
                 className={styles.sectionIcon}
                 priority={false}
@@ -354,7 +354,7 @@ export default function Home() {
                   <div key={partner._id} className={styles.partnerCard}>
                     <div className={styles.partnerImage}>
                       <OptimizedImage
-                        src={partner.featuredImage || "/line-woman12.jpg"}
+                        src={partner.featuredImage || "/line-woman12.png"}
                         alt={partner.name}
                         className={styles.partnerImageContent}
                         priority={false}

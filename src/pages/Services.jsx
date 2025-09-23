@@ -1,7 +1,7 @@
 import React from "react";
-import lineWoman11 from "../assets/line-woman11.jpg";
-import lineWoman12 from "../assets/line-woman12.jpg";
-import lineWoman13 from "../assets/line-woman13.jpg";
+import lineWoman11 from "../assets/line-woman11.png";
+import lineWoman12 from "../assets/line-woman12.png";
+import lineWoman13 from "../assets/line-woman13.png";
 import SEOHead from "../components/SEOHead";
 
 const services = [
