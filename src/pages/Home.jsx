@@ -298,7 +298,7 @@ export default function Home() {
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
                   <OptimizedImage
-                    src="/line-woman06.jpg"
+                    src="/line-woman06.png"
                     alt="Fast shipping"
                     className={styles.featureIcon}
                     priority={false}
