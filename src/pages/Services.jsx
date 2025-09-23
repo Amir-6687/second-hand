@@ -111,21 +111,21 @@ export default function Services() {
         </section>
 
         {/* CTA Section with improved positioning and blur effect */}
-        <section className="relative py-16 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
+        <section className="relative py-16 bg-white overflow-hidden">
           {/* Background blur effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600"></div>
+          <div className="absolute inset-0 bg-white"></div>
 
           <div className="relative max-w-6xl mx-auto px-4">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
               {/* Text content */}
               <div className="text-center lg:text-left lg:flex-1">
-                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                <h2 className="text-3xl lg:text-4xl font-bold text-[#171717] mb-4">
                   Ready to Get Started?
                 </h2>
-                <p className="text-xl text-white/90 mb-8">
+                <p className="text-xl text-[#171717] mb-8">
                   Contact us today to learn more about our services
                 </p>
-                <button className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                <button className="bg-gradient-to-r from-[#849c22] to-[#6b7e1c] text-white px-8 py-3 rounded-lg font-semibold hover:from-[#6b7e1c] hover:to-[#849c22] transition-all duration-300">
                   Contact Us
                 </button>
               </div>
@@ -133,14 +133,11 @@ export default function Services() {
               {/* Image with blur background effect */}
               <div className="relative lg:flex-shrink-0">
                 <div className="relative">
-                  {/* Blur background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full blur-sm scale-110"></div>
-
                   {/* Main image */}
                   <img
                     src={lineWoman13}
                     alt="Contact illustration"
-                    className="relative w-32 h-32 lg:w-40 lg:h-40 rounded-full object-cover border-4 border-white/30 backdrop-blur-sm"
+                    className="relative w-32 h-32 lg:w-40 lg:h-40 rounded-full object-cover border-4 border-gray-200"
                   />
                 </div>
               </div>
