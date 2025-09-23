@@ -52,6 +52,8 @@ export default function Wishlist() {
   console.log("- All products:", allProducts.length);
   console.log("- Wishlist products found:", wishlistProducts.length);
   console.log("- localStorage wishlist:", JSON.parse(localStorage.getItem("wishlistItems") || "[]"));
+  console.log("- Sample product data:", allProducts[0]);
+  console.log("- Wishlist products data:", wishlistProducts);
 
   if (loading) {
     return (
@@ -109,9 +111,12 @@ export default function Wishlist() {
                 {/* Image + delivery */}
                 <div className="flex flex-col items-center justify-center w-32 sm:w-24 flex-shrink-0">
                   <img
-                    src={getImageUrl(product.image || product.images?.[0])}
+                    src={getImageUrl(product.image || product.images?.[0] || '')}
                     alt={product.name}
                     className="w-28 h-28 sm:w-20 sm:h-20 object-cover rounded border"
+                    onError={(e) => {
+                      e.target.src = '/placeholder-image.jpg';
+                    }}
                   />
                   <div className="text-xs text-[#171717] mt-2 flex items-center gap-1">
                     📦 <span>Available - 2-3 working days</span>
