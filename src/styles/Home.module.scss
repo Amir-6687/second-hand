@@ -756,9 +756,9 @@
 .ctaIllustration {
   max-width: 400px;
   width: 100%;
-  height: 100%;
-  max-height: 300px;
-  object-fit: cover;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
   border-radius: 12px;
   filter: brightness(1.1);
 }
@@ -829,15 +829,16 @@
   .ctaImage {
     justify-content: center;
     padding-right: 0;
-    height: 200px;
-    overflow: hidden;
+    height: auto;
+    min-height: 200px;
+    overflow: visible;
   }
 
   .ctaIllustration {
     max-width: 250px;
-    max-height: 200px;
-    height: 100%;
-    object-fit: cover;
+    max-height: none;
+    height: auto;
+    object-fit: contain;
   }
 
   .ctaTitle {
