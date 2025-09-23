@@ -108,12 +108,12 @@ export default function Checkout() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8">Checkout</h1>
+        <h1 className="text-3xl font-bold text-center mb-8 text-[#171717]">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Order Summary */}
           <div className="bg-gray-50 p-6 rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+            <h2 className="text-xl font-semibold mb-4 text-[#171717]">Order Summary</h2>
 
             {/* Cart Items */}
             <div className="space-y-4 mb-6">
@@ -128,12 +128,12 @@ export default function Checkout() {
                     className="w-16 h-16 object-cover rounded"
                   />
                   <div className="flex-1">
-                    <h3 className="font-medium">{item.name}</h3>
+                    <h3 className="font-medium text-[#171717]">{item.name}</h3>
                     <p className="text-[#171717]">
                       Quantity: {item.quantity || 1}
                     </p>
                   </div>
-                  <p className="font-semibold">
+                  <p className="font-semibold text-[#171717]">
                     €{(item.price * (item.quantity || 1)).toFixed(2)}
                   </p>
                 </div>
@@ -143,23 +143,23 @@ export default function Checkout() {
             {/* Price Breakdown */}
             <div className="border-t pt-4 space-y-2">
               <div className="flex justify-between">
-                <span>Subtotal:</span>
-                <span>€{subtotal.toFixed(2)}</span>
+                <span className="text-[#171717]">Subtotal:</span>
+                <span className="text-[#171717]">€{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Shipping:</span>
-                <span>€{shippingCost.toFixed(2)}</span>
+                <span className="text-[#171717]">Shipping:</span>
+                <span className="text-[#171717]">€{shippingCost.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-lg font-bold border-t pt-2">
-                <span>Total:</span>
-                <span>€{total.toFixed(2)}</span>
+                <span className="text-[#171717]">Total:</span>
+                <span className="text-[#171717]">€{total.toFixed(2)}</span>
               </div>
             </div>
           </div>
 
           {/* Payment Form */}
           <div className="bg-white p-6 rounded-lg border">
-            <h2 className="text-xl font-semibold mb-4">Payment Information</h2>
+            <h2 className="text-xl font-semibold mb-4 text-[#171717]">Payment Information</h2>
             {clientSecret && (
               <Elements stripe={stripePromise} options={options}>
                 <CheckoutForm
