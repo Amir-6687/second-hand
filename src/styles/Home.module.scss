@@ -727,8 +727,8 @@
 }
 
 .ctaButton {
-  background: white;
-  color: #de5499;
+  background: linear-gradient(135deg, #849c22 0%, #6b7e1c 100%);
+  color: white;
   padding: 1rem 2rem;
   border: none;
   border-radius: 8px;
@@ -739,7 +739,7 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 24px rgba(132, 156, 34, 0.4);
   }
 }
 
