@@ -240,8 +240,12 @@ export default function CommissionDetail() {
             </div>
             {product.partnerDescription && (
               <div className="mb-2">
-                <span className="font-bold text-[#171717]">Partner Description:</span>{" "}
-                <span className="text-[#171717]">{product.partnerDescription}</span>
+                <span className="font-bold text-[#171717]">
+                  Partner Description:
+                </span>{" "}
+                <span className="text-[#171717]">
+                  {product.partnerDescription}
+                </span>
               </div>
             )}
           </div>

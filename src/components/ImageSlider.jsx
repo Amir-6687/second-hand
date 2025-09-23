@@ -80,7 +80,10 @@ const ImageSlider = () => {
           </div>
 
           {/* Slide counter */}
-          <div className="absolute top-4 right-4 bg-gray-800/90 dark:bg-gray-200/90 text-[#171717] dark:text-[#171717] px-3 py-1 rounded-full text-sm font-medium">
+          <div
+            className="absolute top-4 right-4 bg-gray-800/90 dark:bg-gray-200/90 px-3 py-1 rounded-full text-sm font-medium"
+            style={{ color: "#171717" }}
+          >
             {currentSlide + 1} / {sliderImages.length}
           </div>
 
@@ -91,18 +94,24 @@ const ImageSlider = () => {
                 isAutoPlaying ? "bg-green-400" : "bg-gray-400"
               }`}
             ></div>
-            <span className="text-[#171717] dark:text-[#171717] text-sm font-medium">
+            <span className="text-sm font-medium" style={{ color: "#171717" }}>
               {isAutoPlaying ? "Auto" : "Paused"}
             </span>
           </div>
         </div>
 
         {/* Slider info */}
-        <div className="p-6 bg-gradient-to-r from-pink-50 to-purple-50 dark:from-gray-700 dark:to-gray-800">
-          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">
+        <div
+          className="p-6"
+          style={{
+            backgroundColor: "#849c22 !important",
+            background: "#849c22 !important",
+          }}
+        >
+          <h3 className="text-xl font-bold text-white mb-2">
             Discover Our Fashion Collection
           </h3>
-          <p className="text-[#171717] dark:text-gray-300">
+          <p className="text-white">
             Explore our curated selection of stylish second-hand clothing and
             accessories. Each piece tells a story and contributes to sustainable
             fashion.
