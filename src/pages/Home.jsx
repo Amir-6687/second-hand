@@ -298,11 +298,15 @@ export default function Home() {
               <div className={styles.featureItem}>
                 <div className={styles.featureImage}>
                   <img
-                    src="/line-woman06.png"
+                    src="./line-woman06.png"
                     alt="Fast shipping"
                     className={styles.featureIcon}
                     width={80}
                     height={80}
+                    onError={(e) => {
+                      console.log('Image failed to load:', e.target.src);
+                      e.target.src = '/line-woman06.png';
+                    }}
                   />
                 </div>
                 <h3 className={styles.featureTitle}>Fast Shipping</h3>
@@ -405,11 +409,15 @@ export default function Home() {
             </div>
             <div className={styles.ctaImage}>
               <img
-                src="/line-woman09.png"
+                src="./line-woman09.png"
                 alt="Shopping illustration"
                 className={styles.ctaIllustration}
                 width={400}
                 height={300}
+                onError={(e) => {
+                  console.log('Image failed to load:', e.target.src);
+                  e.target.src = '/line-woman09.png';
+                }}
               />
             </div>
           </div>
