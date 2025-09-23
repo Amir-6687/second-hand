@@ -80,7 +80,7 @@ const ImageSlider = () => {
           </div>
 
           {/* Slide counter */}
-          <div className="absolute top-4 right-4 bg-gray-800/90 dark:bg-gray-200/90 text-[#171717] dark:text-gray-200 px-3 py-1 rounded-full text-sm font-medium">
+          <div className="absolute top-4 right-4 bg-gray-800/90 dark:bg-gray-200/90 text-[#171717] dark:text-[#171717] px-3 py-1 rounded-full text-sm font-medium">
             {currentSlide + 1} / {sliderImages.length}
           </div>
 
@@ -91,7 +91,7 @@ const ImageSlider = () => {
                 isAutoPlaying ? "bg-green-400" : "bg-gray-400"
               }`}
             ></div>
-            <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">
+            <span className="text-[#171717] dark:text-[#171717] text-sm font-medium">
               {isAutoPlaying ? "Auto" : "Paused"}
             </span>
           </div>
