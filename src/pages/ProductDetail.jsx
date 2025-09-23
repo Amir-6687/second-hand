@@ -178,35 +178,35 @@ export default function ProductDetail() {
           {/* جزئیات محصول */}
           <div className="bg-gray-50 rounded-lg p-4 mb-8 w-full max-w-lg mx-auto md:mx-0">
             <div className="mb-2">
-              <span className="font-bold">Zustand:</span>{" "}
-              <span>{product.zustand || "-"}</span>
+              <span className="font-bold text-[#171717]">Zustand:</span>{" "}
+              <span className="text-[#171717]">{product.zustand || "-"}</span>
             </div>
             <div className="mb-2">
-              <span className="font-bold">Size (cm):</span>{" "}
-              <span>
+              <span className="font-bold text-[#171717]">Size (cm):</span>{" "}
+              <span className="text-[#171717]">
                 {product.width || "-"} x {product.depth || "-"} x{" "}
                 {product.height || "-"}
               </span>
             </div>
             <div className="mb-2">
-              <span className="font-bold">Brand:</span>{" "}
-              <span>{product.brand || "-"}</span>
+              <span className="font-bold text-[#171717]">Brand:</span>{" "}
+              <span className="text-[#171717]">{product.brand || "-"}</span>
             </div>
             <div className="mb-2">
-              <span className="font-bold">Model:</span>{" "}
-              <span>{product.model || "-"}</span>
+              <span className="font-bold text-[#171717]">Model:</span>{" "}
+              <span className="text-[#171717]">{product.model || "-"}</span>
             </div>
             <div className="mb-2">
-              <span className="font-bold">Color:</span>{" "}
-              <span>{product.color || "-"}</span>
+              <span className="font-bold text-[#171717]">Color:</span>{" "}
+              <span className="text-[#171717]">{product.color || "-"}</span>
             </div>
             <div className="mb-2">
-              <span className="font-bold">Material:</span>{" "}
-              <span>{product.material || "-"}</span>
+              <span className="font-bold text-[#171717]">Material:</span>{" "}
+              <span className="text-[#171717]">{product.material || "-"}</span>
             </div>
             <div className="mb-2">
-              <span className="font-bold">Pattern:</span>{" "}
-              <span>{product.pattern || "-"}</span>
+              <span className="font-bold text-[#171717]">Pattern:</span>{" "}
+              <span className="text-[#171717]">{product.pattern || "-"}</span>
             </div>
           </div>
         </div>
