@@ -58,7 +58,9 @@ export default function Cart() {
 
       {/* Desktop top bar */}
       <div className="w-full items-center justify-between mb-6 px-2 md:px-0 hidden md:flex">
-        <span className="text-xl font-bold md:text-2xl text-[#171717]">Cart</span>
+        <span className="text-xl font-bold md:text-2xl text-[#171717]">
+          Cart
+        </span>
         <a
           href="/checkout"
           className="px-5 py-2 rounded bg-teal-700 text-white font-semibold hover:bg-teal-800 transition text-base md:text-lg shadow md:bg-red-600 md:hover:bg-red-700"
@@ -156,7 +158,7 @@ export default function Cart() {
                       }}
                     >
                       {[1, 2, 3, 4, 5].map((n) => (
-                        <option key={n} value={n}>
+                        <option key={n} value={n} className="text-[#171717]">
                           {n}
                         </option>
                       ))}
@@ -171,7 +173,7 @@ export default function Cart() {
 
               {/* Name + wishlist + price */}
               <div className="flex-1 flex flex-col gap-1 min-w-[120px] pr-6">
-                <p className="font-semibold text-base mb-1">{item.name}</p>
+                <p className="font-semibold text-base mb-1 text-[#171717]">{item.name}</p>
                 <button
                   className="text-[#171717] text-sm hover:text-pink-500 transition w-fit"
                   onClick={() => {
@@ -185,7 +187,7 @@ export default function Cart() {
                 <div className="border-b border-gray-200 w-full mt-1 mb-2" />
 
                 {/* Price fixed at bottom-right */}
-                <span className="absolute bottom-4 right-4 text-sm font-bold text-gray-800">
+                <span className="absolute bottom-4 right-4 text-sm font-bold text-[#171717]">
                   €{item.price.toFixed(2)}
                 </span>
               </div>
@@ -201,15 +203,15 @@ export default function Cart() {
       <div className="mt-6 space-y-2 pt-4">
         <div className="flex justify-between">
           <p className="text-[#171717]">Subtotal:</p>
-          <p className="font-medium">€{subtotal.toFixed(2)}</p>
+          <p className="font-medium text-[#171717]">€{subtotal.toFixed(2)}</p>
         </div>
         <div className="flex justify-between">
           <p className="text-[#171717]">Shipping costs:</p>
-          <p className="font-medium">€{shippingCost.toFixed(2)}</p>
+          <p className="font-medium text-[#171717]">€{shippingCost.toFixed(2)}</p>
         </div>
         <div className="flex justify-between border-t border-gray-300 pt-2 mt-2">
-          <p className="text-lg font-bold">Total:</p>
-          <p className="text-lg font-bold">€{total.toFixed(2)}</p>
+          <p className="text-lg font-bold text-[#171717]">Total:</p>
+          <p className="text-lg font-bold text-[#171717]">€{total.toFixed(2)}</p>
           <p className="text-xs font-light text-[#171717] text-center mt-1">
             All prices are in euros and include VAT
           </p>
