@@ -10,10 +10,10 @@ import {
   useLocation,
   Link,
 } from "react-router-dom";
-const Home = React.lazy(() => import("./pages/Home"));
+import Home from "./pages/Home";
 const Services = React.lazy(() => import("./pages/Services"));
-const About = React.lazy(() => import("./pages/About"));
-const Products = React.lazy(() => import("./pages/Products"));
+import About from "./pages/About";
+import Products from "./pages/Products";
 const Checkout = React.lazy(() => import("./pages/Checkout"));
 const PaymentSuccess = React.lazy(() => import("./pages/PaymentSuccess"));
 const PaymentError = React.lazy(() => import("./pages/PaymentError"));
@@ -32,7 +32,7 @@ const UpdatePassword = React.lazy(() => import("./pages/UpdatePassword"));
 import MobileBottomNav from "./components/MobileBottomNav";
 import { WishlistProvider, useWishlist } from "./context/WishlistContext";
 const Wishlist = React.lazy(() => import("./pages/Wishlist"));
-const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
+import ProductDetail from "./pages/ProductDetail";
 const Commission = React.lazy(() => import("./pages/Commission"));
 const CommissionDetail = React.lazy(() => import("./pages/CommissionDetail"));
 const Terms = React.lazy(() => import("./pages/Terms"));
@@ -675,78 +675,81 @@ export default function App() {
                   <Breadcrumb />
                   <main>
                     <React.Suspense fallback={null}>
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/services" element={<Services />} />
-                      <Route path="/about" element={<About />} />
-                      <Route path="/products" element={<Products />} />
-                      <Route path="/partners" element={<Partners />} />
-                      <Route
-                        path="/checkout"
-                        element={
-                          <ProtectedRoute>
-                            <Checkout />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/payment-success"
-                        element={<PaymentSuccess />}
-                      />
-                      <Route path="/cart" element={<Cart />} />
-                      <Route path="/wishlist" element={<Wishlist />} />
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/register" element={<Register />} />
-                      <Route
-                        path="/admin"
-                        element={
-                          <ProtectedRoute requireAdmin={true}>
-                            <Admin />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/admin-dashboard"
-                        element={
-                          <ProtectedRoute requireAdmin={true}>
-                            <AdminDashboard />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/profile"
-                        element={
-                          <ProtectedRoute>
-                            <Profile />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/update-password"
-                        element={<UpdatePassword />}
-                      />
-                      <Route path="/favorites" element={<Wishlist />} />
-                      <Route path="/products/:id" element={<ProductDetail />} />
-                      <Route path="/commission" element={<Commission />} />
-                      <Route
-                        path="/commission/:id"
-                        element={<CommissionDetail />}
-                      />
-                      <Route path="/terms" element={<Terms />} />
-                      <Route path="/privacy" element={<Privacy />} />
-                      <Route path="/impressum" element={<Impressum />} />
-                      <Route path="/faq" element={<FAQ />} />
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/services" element={<Services />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/products" element={<Products />} />
+                        <Route path="/partners" element={<Partners />} />
+                        <Route
+                          path="/checkout"
+                          element={
+                            <ProtectedRoute>
+                              <Checkout />
+                            </ProtectedRoute>
+                          }
+                        />
+                        <Route
+                          path="/payment-success"
+                          element={<PaymentSuccess />}
+                        />
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/wishlist" element={<Wishlist />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route
+                          path="/admin"
+                          element={
+                            <ProtectedRoute requireAdmin={true}>
+                              <Admin />
+                            </ProtectedRoute>
+                          }
+                        />
+                        <Route
+                          path="/admin-dashboard"
+                          element={
+                            <ProtectedRoute requireAdmin={true}>
+                              <AdminDashboard />
+                            </ProtectedRoute>
+                          }
+                        />
+                        <Route
+                          path="/profile"
+                          element={
+                            <ProtectedRoute>
+                              <Profile />
+                            </ProtectedRoute>
+                          }
+                        />
+                        <Route
+                          path="/update-password"
+                          element={<UpdatePassword />}
+                        />
+                        <Route path="/favorites" element={<Wishlist />} />
+                        <Route
+                          path="/products/:id"
+                          element={<ProductDetail />}
+                        />
+                        <Route path="/commission" element={<Commission />} />
+                        <Route
+                          path="/commission/:id"
+                          element={<CommissionDetail />}
+                        />
+                        <Route path="/terms" element={<Terms />} />
+                        <Route path="/privacy" element={<Privacy />} />
+                        <Route path="/impressum" element={<Impressum />} />
+                        <Route path="/faq" element={<FAQ />} />
 
-                      <Route path="/auth-success" element={<AuthSuccess />} />
-                      <Route
-                        path="/forget-password"
-                        element={<ForgetPassword />}
-                      />
-                      <Route
-                        path="/reset-password"
-                        element={<ResetPassword />}
-                      />
-                    </Routes>
+                        <Route path="/auth-success" element={<AuthSuccess />} />
+                        <Route
+                          path="/forget-password"
+                          element={<ForgetPassword />}
+                        />
+                        <Route
+                          path="/reset-password"
+                          element={<ResetPassword />}
+                        />
+                      </Routes>
                     </React.Suspense>
                   </main>
 
