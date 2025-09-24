@@ -173,7 +173,15 @@ export default function Home() {
       <main id="main-content" className="min-h-screen bg-white">
         {/* Banner Section */}
         <section className={styles.bannerSection}>
-          <div className={styles.bannerBox}>
+          {/* Background image as content image to allow fetchpriority */}
+          <img
+            src={new URL("../assets/Background.jpg", import.meta.url).href}
+            alt="Background"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+            fetchpriority="high"
+            decoding="async"
+          />
+          <div className={styles.bannerBox} style={{ position: "relative", zIndex: 1 }}>
             <h2>Welcome to Your Second Hand Online Shop</h2>
             <p>Save the world by giving used clothes a second life</p>
             <span style={{ color: "#849c22", fontWeight: 700 }}>

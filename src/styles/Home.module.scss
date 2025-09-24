@@ -476,13 +476,13 @@
 .bannerSection {
   position: relative;
   height: 80vh;
-  background-image: url("/src/assets/Background.jpg");
-  background-size: cover;
-  background-position: center;
+  /* background moved to an <img> for better LCP prioritization */
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding-right: 2rem;
+  overflow: hidden;
 
   .bannerBox {
     background: rgba(255, 255, 255, 0.3);
