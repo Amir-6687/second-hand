@@ -586,7 +586,13 @@ export default function Admin() {
               <div className="flex gap-2 flex-wrap">
                 {imageUrls.map((url, idx) => (
                   <div key={idx} className="relative">
-                    <img src={getImageUrl(url)} alt="Preview" width={60} />
+                    <img
+                      src={getImageUrl(url)}
+                      alt="Preview"
+                      width={60}
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <button
                       type="button"
                       className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
@@ -1286,7 +1292,13 @@ export default function Admin() {
               <div className="flex gap-2 flex-wrap">
                 {imageUrls.map((url, idx) => (
                   <div key={idx} className="relative">
-                    <img src={getImageUrl(url)} alt="Preview" width={60} />
+                    <img
+                      src={getImageUrl(url)}
+                      alt="Preview"
+                      width={60}
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <button
                       type="button"
                       className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"

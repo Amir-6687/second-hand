@@ -72,6 +72,8 @@ const ImageSlider = () => {
                   alt={`Fashion showcase ${index + 1}`}
                   className="w-full h-full object-cover"
                   loading={index === currentSlide ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchpriority={index === 0 ? "high" : undefined}
                 />
                 {/* Overlay gradient for better text readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
@@ -102,7 +104,10 @@ const ImageSlider = () => {
 
         {/* Slider info */}
         <div className="p-6 slider-info-bg" style={{ color: "white" }}>
-          <h3 className="text-xl font-bold text-white mb-2" style={{ color: "white" }}>
+          <h3
+            className="text-xl font-bold text-white mb-2"
+            style={{ color: "white" }}
+          >
             Discover Our Fashion Collection
           </h3>
           <p className="text-white" style={{ color: "white" }}>

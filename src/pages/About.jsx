@@ -19,6 +19,8 @@ export default function About() {
           src={aboutUsImg}
           alt="About Us"
           className="w-full h-full object-cover object-[75%_center] md:object-center"
+          fetchpriority="high"
+          decoding="async"
         />
         <div
           className="absolute left-0 top-0 h-full flex flex-col justify-center pl-3 md:pl-8 bg-gradient-to-r from-white/80 to-transparent"
@@ -48,6 +50,8 @@ export default function About() {
               src={about01}
               alt="List for free"
               className="rounded-lg w-full max-w-xs mb-4 shadow"
+              loading="lazy"
+              decoding="async"
             />
             <h3 className="font-bold text-lg mb-2">1. List for free</h3>
             <p className="mb-4 text-gray-700 text-sm">
@@ -68,6 +72,8 @@ export default function About() {
               src={about02}
               alt="Sell it, ship it"
               className="rounded-lg w-full max-w-xs mb-4 shadow"
+              loading="lazy"
+              decoding="async"
             />
             <h3 className="font-bold text-lg mb-2">2. Sell it, ship it</h3>
             <p className="mb-4 text-gray-700 text-sm">
@@ -87,6 +93,8 @@ export default function About() {
               src={about03}
               alt="It’s payday!"
               className="rounded-lg w-full max-w-xs mb-4 shadow"
+              loading="lazy"
+              decoding="async"
             />
             <h3 className="font-bold text-lg mb-2">3. It’s payday!</h3>
             <p className="mb-4 text-gray-700 text-sm">
@@ -128,6 +136,8 @@ export default function About() {
               src={about04}
               alt="Find it"
               className="rounded-lg w-full max-w-xs mb-4 shadow"
+              loading="lazy"
+              decoding="async"
             />
             <h3 className="font-bold text-lg mb-2">1. Find it</h3>
             <p className="mb-4 text-gray-700 text-sm">
@@ -147,6 +157,8 @@ export default function About() {
               src={about05}
               alt="Buy it"
               className="rounded-lg w-full max-w-xs mb-4 shadow"
+              loading="lazy"
+              decoding="async"
             />
             <h3 className="font-bold text-lg mb-2">2. Buy it</h3>
             <p className="mb-4 text-gray-700 text-sm">
@@ -167,6 +179,8 @@ export default function About() {
               src={about06}
               alt="Get it"
               className="rounded-lg w-full max-w-xs mb-4 shadow"
+              loading="lazy"
+              decoding="async"
             />
             <h3 className="font-bold text-lg mb-2">3. Get it</h3>
             <p className="mb-4 text-gray-700 text-sm">
@@ -292,6 +306,8 @@ export default function About() {
           alt="Footer Banner"
           className="w-full h-[320px] object-cover object-left md:object-center"
           style={{ minHeight: 220 }}
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center md:items-end md:pr-12 md:text-right">
           <h2 className="text-2xl md:text-4xl font-bold text-[#171717] mb-4 md:mb-6 drop-shadow-lg">
