@@ -65,20 +65,29 @@ const ImageSlider = () => {
             className="flex transition-transform duration-700 ease-in-out h-full"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
-            {sliderImages.map((image, index) => (
-              <div key={index} className="w-full h-full flex-shrink-0 relative">
-                <img
-                  src={`/${image}`}
-                  alt={`Fashion showcase ${index + 1}`}
-                  className="w-full h-full object-cover"
-                  loading={index === currentSlide ? "eager" : "lazy"}
-                  decoding="async"
-                  fetchpriority={index === 0 ? "high" : undefined}
-                />
-                {/* Overlay gradient for better text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-              </div>
-            ))}
+            {sliderImages.map((image, index) => {
+              const isVisible =
+                index === currentSlide || index === (currentSlide + 1) % sliderImages.length;
+              return (
+                <div key={index} className="w-full h-full flex-shrink-0 relative">
+                  {isVisible ? (
+                    <img
+                      src={`/${image}`}
+                      alt={`Fashion showcase ${index + 1}`}
+                      className="w-full h-full object-cover"
+                      loading={index === currentSlide ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchpriority={index === 0 ? "high" : undefined}
+                      width={1920}
+                      height={768}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-100" aria-hidden="true" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Slide counter */}
