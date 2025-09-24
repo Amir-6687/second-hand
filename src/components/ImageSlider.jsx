@@ -67,22 +67,33 @@ const ImageSlider = () => {
           >
             {sliderImages.map((image, index) => {
               const isVisible =
-                index === currentSlide || index === (currentSlide + 1) % sliderImages.length;
+                index === currentSlide ||
+                index === (currentSlide + 1) % sliderImages.length;
               return (
-                <div key={index} className="w-full h-full flex-shrink-0 relative">
+                <div
+                  key={index}
+                  className="w-full h-full flex-shrink-0 relative"
+                >
                   {isVisible ? (
-                    <img
-                      src={`/${image}`}
-                      alt={`Fashion showcase ${index + 1}`}
-                      className="w-full h-full object-cover"
-                      loading={index === currentSlide ? "eager" : "lazy"}
-                      decoding="async"
-                      fetchpriority={index === 0 ? "high" : undefined}
-                      width={1920}
-                      height={768}
-                    />
+                    <picture>
+                      <source srcSet={`/${image.replace('.jpg', '.webp')}`} type="image/webp" />
+                      <img
+                        src={`/${image}`}
+                        alt={`Fashion showcase ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        loading={index === currentSlide ? "eager" : "lazy"}
+                        decoding="async"
+                        fetchpriority={index === 0 ? "high" : undefined}
+                        width={1920}
+                        height={768}
+                        sizes="(max-width: 768px) 100vw, 100vw"
+                      />
+                    </picture>
                   ) : (
-                    <div className="w-full h-full bg-gray-100" aria-hidden="true" />
+                    <div
+                      className="w-full h-full bg-gray-100"
+                      aria-hidden="true"
+                    />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                 </div>
