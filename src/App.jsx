@@ -10,41 +10,41 @@ import {
   useLocation,
   Link,
 } from "react-router-dom";
-import Home from "./pages/Home";
-import Services from "./pages/Services";
-import About from "./pages/About";
-import Products from "./pages/Products";
-import Checkout from "./pages/Checkout";
-import PaymentSuccess from "./pages/PaymentSuccess";
-import PaymentError from "./pages/PaymentError";
+const Home = React.lazy(() => import("./pages/Home"));
+const Services = React.lazy(() => import("./pages/Services"));
+const About = React.lazy(() => import("./pages/About"));
+const Products = React.lazy(() => import("./pages/Products"));
+const Checkout = React.lazy(() => import("./pages/Checkout"));
+const PaymentSuccess = React.lazy(() => import("./pages/PaymentSuccess"));
+const PaymentError = React.lazy(() => import("./pages/PaymentError"));
 import { CartProvider, useCart } from "./context/CartContext";
-import Cart from "./pages/Cart";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+const Cart = React.lazy(() => import("./pages/Cart"));
+const Login = React.lazy(() => import("./pages/Login"));
+const Register = React.lazy(() => import("./pages/Register"));
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Admin from "./pages/Admin";
-import AdminDashboard from "./pages/AdminDashboard";
+const Admin = React.lazy(() => import("./pages/Admin"));
+const AdminDashboard = React.lazy(() => import("./pages/AdminDashboard"));
 import Footer from "./components/Footer";
 import logo from "./assets/logo.png";
-import Profile from "./pages/Profile";
-import UpdatePassword from "./pages/UpdatePassword";
+const Profile = React.lazy(() => import("./pages/Profile"));
+const UpdatePassword = React.lazy(() => import("./pages/UpdatePassword"));
 import MobileBottomNav from "./components/MobileBottomNav";
 import { WishlistProvider, useWishlist } from "./context/WishlistContext";
-import Wishlist from "./pages/Wishlist";
-import ProductDetail from "./pages/ProductDetail";
-import Commission from "./pages/Commission";
-import CommissionDetail from "./pages/CommissionDetail";
-import Terms from "./pages/Terms";
-import Privacy from "./pages/Privacy";
-import Impressum from "./pages/Impressum";
-import FAQ from "./pages/FAQ";
+const Wishlist = React.lazy(() => import("./pages/Wishlist"));
+const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
+const Commission = React.lazy(() => import("./pages/Commission"));
+const CommissionDetail = React.lazy(() => import("./pages/CommissionDetail"));
+const Terms = React.lazy(() => import("./pages/Terms"));
+const Privacy = React.lazy(() => import("./pages/Privacy"));
+const Impressum = React.lazy(() => import("./pages/Impressum"));
+const FAQ = React.lazy(() => import("./pages/FAQ"));
 import Partners from "./pages/Partners";
 import CookieBanner from "./components/CookieBanner";
 
-import AuthSuccess from "./pages/AuthSuccess";
-import ForgetPassword from "./pages/ForgetPassword";
-import ResetPassword from "./pages/ResetPassword";
+const AuthSuccess = React.lazy(() => import("./pages/AuthSuccess"));
+const ForgetPassword = React.lazy(() => import("./pages/ForgetPassword"));
+const ResetPassword = React.lazy(() => import("./pages/ResetPassword"));
 import {
   CiUser,
   CiLogin,
@@ -674,6 +674,7 @@ export default function App() {
                   <Navigation />
                   <Breadcrumb />
                   <main>
+                    <React.Suspense fallback={null}>
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/services" element={<Services />} />
@@ -746,6 +747,7 @@ export default function App() {
                         element={<ResetPassword />}
                       />
                     </Routes>
+                    </React.Suspense>
                   </main>
 
                   <Footer />
