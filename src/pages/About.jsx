@@ -57,7 +57,7 @@ export default function About() {
             </p>
             <a
               href="/how-to-list"
-              className="text-teal-700 font-medium border-b-2 border-teal-700 hover:text-teal-900 transition"
+              className="text-[#849c22] font-medium border-b-2 border-[#849c22] hover:text-[#849c22] transition"
             >
               Learn more
             </a>
@@ -76,7 +76,7 @@ export default function About() {
             </p>
             <a
               href="/how-to-ship"
-              className="text-teal-700 font-medium border-b-2 border-teal-700 hover:text-teal-900 transition"
+              className="text-[#849c22] font-medium border-b-2 border-[#849c22] hover:text-[#849c22] transition"
             >
               Learn more
             </a>
@@ -95,7 +95,7 @@ export default function About() {
             </p>
             <a
               href="/how-to-get-paid"
-              className="text-teal-700 font-medium border-b-2 border-teal-700 hover:text-teal-900 transition"
+              className="text-[#849c22] font-medium border-b-2 border-[#849c22] hover:text-[#849c22] transition"
             >
               Learn more
             </a>
@@ -105,7 +105,7 @@ export default function About() {
         <div className="flex justify-center mt-10">
           <a
             href="/products"
-            className="px-8 py-3 rounded border border-teal-700 text-teal-700 font-semibold hover:bg-teal-700 hover:text-white transition text-lg shadow-sm"
+            className="px-8 py-3 rounded border border-teal-700 text-teal-700 font-semibold hover:bg-[#849c22] hover:text-white transition text-lg shadow-sm"
           >
             Start selling
           </a>
@@ -136,7 +136,7 @@ export default function About() {
             </p>
             <a
               href="/how-to-find"
-              className="text-teal-700 font-medium border-b-2 border-teal-700 hover:text-teal-900 transition"
+              className="text-[#849c22] font-medium border-b-2 border-[#849c22] hover:text-[#849c22] transition"
             >
               Learn more
             </a>
@@ -156,7 +156,7 @@ export default function About() {
             </p>
             <a
               href="/how-to-buy"
-              className="text-teal-700 font-medium border-b-2 border-teal-700 hover:text-teal-900 transition"
+              className="text-[#849c22] font-medium border-b-2 border-[#849c22] hover:text-[#849c22] transition"
             >
               Learn more
             </a>
@@ -176,7 +176,7 @@ export default function About() {
             </p>
             <a
               href="/how-to-get"
-              className="text-teal-700 font-medium border-b-2 border-teal-700 hover:text-teal-900 transition"
+              className="text-[#849c22] font-medium border-b-2 border-[#849c22] hover:text-[#849c22] transition"
             >
               Learn more
             </a>
@@ -186,7 +186,7 @@ export default function About() {
         <div className="flex justify-center mt-10">
           <a
             href="/products"
-            className="px-8 py-3 rounded border border-teal-700 text-teal-700 font-semibold hover:bg-teal-700 hover:text-white transition text-lg shadow-sm"
+            className="px-8 py-3 rounded border border-teal-700 text-[#849c22] font-semibold hover:bg-teal-700 hover:text-white transition text-lg shadow-sm"
           >
             Start shopping
           </a>
@@ -240,7 +240,7 @@ export default function About() {
               </p>
               <a
                 href="/buyer-protection"
-                className="text-teal-700 font-medium border-b-2 border-teal-700 hover:text-teal-900 transition"
+                className="text-[#849c22] font-medium border-b-2 border-[#849c22] hover:text-[#849c22] transition"
               >
                 Learn more
               </a>
@@ -276,7 +276,7 @@ export default function About() {
               </p>
               <a
                 href="/refund-policy"
-                className="text-teal-700 font-medium border-b-2 border-teal-700 hover:text-teal-900 transition"
+                className="text-[#849c22] font-medium border-b-2 border-[#849c22] hover:text-[#849c22] transition"
               >
                 Learn more
               </a>
@@ -294,19 +294,19 @@ export default function About() {
           style={{ minHeight: 220 }}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center md:items-end md:pr-12 md:text-right">
-          <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6 drop-shadow-lg">
+          <h2 className="text-2xl md:text-4xl font-bold text-[#171717] mb-4 md:mb-6 drop-shadow-lg">
             Ready to go?
           </h2>
           <div className="flex gap-2 md:gap-4 flex-wrap justify-center">
             <a
               href="/products"
-              className="px-4 py-2 md:px-8 md:py-3 rounded border border-white text-white font-semibold bg-transparent hover:bg-white hover:text-teal-700 transition text-base md:text-lg shadow whitespace-nowrap"
+              className="px-4 py-2 md:px-8 md:py-3 rounded border border-white text-[#849c22] font-semibold bg-transparent hover:bg-white hover:text-teal-700 transition text-base md:text-lg shadow whitespace-nowrap"
             >
               Start shopping
             </a>
             <a
               href="/sell"
-              className="px-4 py-2 md:px-8 md:py-3 rounded bg-white text-teal-700 font-semibold hover:bg-teal-700 hover:text-white transition text-base md:text-lg shadow whitespace-nowrap"
+              className="px-4 py-2 md:px-8 md:py-3 rounded bg-white text-teal-700 font-semibold hover:bg-[#849c22] hover:text-white transition text-base md:text-lg shadow whitespace-nowrap"
             >
               Start selling
             </a>
