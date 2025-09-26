@@ -176,7 +176,9 @@ export default function Home() {
           {/* Background image as content image to allow fetchpriority */}
           <picture>
             <source
-              srcSet={new URL("../../public/Background.webp", import.meta.url).href}
+              srcSet={
+                new URL("../../public/Background.webp", import.meta.url).href
+              }
               type="image/webp"
             />
             <img

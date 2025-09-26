@@ -19,6 +19,7 @@ export default function About() {
           src={aboutUsImg}
           alt="About Us"
           className="w-full h-full object-cover object-[75%_center] md:object-center"
+          در
           fetchpriority="high"
           decoding="async"
         />

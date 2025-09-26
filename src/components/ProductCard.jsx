@@ -176,13 +176,13 @@ const QuickViewModal = ({ product, open, onClose }) => {
         </div>
         <div className="flex-1 flex flex-col justify-start">
           <h2 className="text-3xl font-bold mb-2">{product.name}</h2>
-          <div className="text-pink-500 text-2xl font-semibold mb-4">
+          <div className="text-pink-600 dark:text-pink-400 text-2xl font-semibold mb-4">
             {product.isDiscounted && product.originalPrice ? (
               <div className="flex items-center gap-3">
                 <span className="line-through text-red-500 text-xl">
                   €{product.originalPrice.toLocaleString()}
                 </span>
-                <span className="text-pink-500">
+                <span className="text-pink-600 dark:text-pink-400">
                   €{product.price.toLocaleString()}
                 </span>
                 <span className="bg-red-500 text-white px-3 py-1 rounded text-sm font-medium">
@@ -242,7 +242,7 @@ const QuickViewModal = ({ product, open, onClose }) => {
                   href={s.url(productLink, product.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#171717] hover:text-pink-500 transition"
+                  className="text-[#171717] hover:text-pink-600 dark:hover:text-pink-400 transition"
                   title={"Share on " + s.name}
                 >
                   {s.icon}
@@ -385,7 +385,10 @@ const ProductCard = ({ product, linkPath = null }) => {
                 } wishlist ${product.name}`}
               >
                 {wishlist.includes(product._id) ? (
-                  <AiFillHeart size={22} className="text-pink-500" />
+                  <AiFillHeart
+                    size={22}
+                    className="text-pink-600 dark:text-pink-400"
+                  />
                 ) : (
                   <AiOutlineHeart size={22} className="text-gray-700" />
                 )}
@@ -398,7 +401,7 @@ const ProductCard = ({ product, linkPath = null }) => {
           <div className="absolute bottom-[-09px] left-1/2 transform -translate-x-1/2">
             <button
               onClick={handleAddToCart}
-              className="text-[#171717] hover:text-pink-500 transition-colors cursor-pointer"
+              className="text-[#171717] hover:text-pink-600 dark:hover:text-pink-400 transition-colors cursor-pointer"
               title="Add to Cart"
               aria-label={`Add ${product.name} to cart`}
             >

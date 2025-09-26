@@ -177,7 +177,7 @@ export default function Cart() {
                   {item.name}
                 </p>
                 <button
-                  className="text-[#171717] text-sm hover:text-pink-500 transition w-fit"
+                  className="text-[#171717] text-sm hover:text-pink-600 dark:hover:text-pink-400 transition w-fit"
                   onClick={() => {
                     toggleWishlist(item._id);
                     removeFromCart(item._id);

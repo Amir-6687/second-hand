@@ -164,7 +164,7 @@ export default function CommissionDetail() {
               {showFullDesc ? product.description : truncatedDesc}
               {product.description?.length > 70 && (
                 <button
-                  className="text-pink-500 ml-2 hover:underline font-medium"
+                  className="text-pink-600 dark:text-pink-400 ml-2 hover:underline font-medium"
                   onClick={() => setShowFullDesc(!showFullDesc)}
                 >
                   {showFullDesc ? "less" : "more"}

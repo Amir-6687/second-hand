@@ -76,7 +76,10 @@ const ImageSlider = () => {
                 >
                   {isVisible ? (
                     <picture>
-                      <source srcSet={`/${image.replace('.jpg', '.webp')}`} type="image/webp" />
+                      <source
+                        srcSet={`/${image.replace(".jpg", ".webp")}`}
+                        type="image/webp"
+                      />
                       <img
                         src={`/${image}`}
                         alt={`Fashion showcase ${index + 1}`}

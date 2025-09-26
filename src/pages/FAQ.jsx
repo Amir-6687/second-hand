@@ -91,9 +91,9 @@ const FAQ = () => {
                       {item.question}
                     </span>
                     {openItems[index] ? (
-                      <FaChevronUp className="text-pink-500" />
+                      <FaChevronUp className="text-pink-600 dark:text-pink-400" />
                     ) : (
-                      <FaChevronDown className="text-pink-500" />
+                      <FaChevronDown className="text-pink-600 dark:text-pink-400" />
                     )}
                   </button>
                   {openItems[index] && (

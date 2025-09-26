@@ -87,7 +87,7 @@ const Impressum = () => {
                   resolution (ODR):
                   <a
                     href="https://ec.europa.eu/consumers/odr/"
-                    className="text-pink-500 hover:text-pink-600 underline ml-1"
+                    className="text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 underline ml-1"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

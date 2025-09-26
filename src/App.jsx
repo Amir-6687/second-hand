@@ -87,14 +87,16 @@ const SearchBox = React.forwardRef(
               <button
                 type="button"
                 onClick={() => setSearchTerm("")}
-                className="ml-2 p-1 hover:bg-gray-200 rounded-full transition-colors"
+                className="ml-2 p-2 hover:bg-gray-200 rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                aria-label="Clear search"
               >
                 <IoClose size={16} className="text-[#171717]" />
               </button>
             )}
             <button
               type="submit"
-              className="ml-2 p-1 hover:bg-gray-200 rounded-full transition-colors"
+              className="ml-2 p-2 hover:bg-gray-200 rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              aria-label="Search"
             >
               <CiSearch size={18} className="text-[#171717]" />
             </button>
@@ -114,6 +116,8 @@ function AdminIconWithTooltip() {
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
+      role="button"
+      aria-label="Admin panel"
     >
       <RiAdminLine size={18} className="cursor-pointer" />
       {show && (
@@ -134,6 +138,8 @@ function UserIconWithTooltip() {
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
+      role="button"
+      aria-label="User profile"
     >
       <RiUserLine className="w-5 h-5 cursor-pointer" />
       {show && (
@@ -152,11 +158,18 @@ function LogoutIconWithTooltip({ onClick }) {
     <button
       onClick={onClick}
       className="relative flex items-center text-red-500 hover:underline md:flex hidden"
-      style={{ background: "none", border: "none", padding: 0 }}
+      style={{
+        background: "none",
+        border: "none",
+        padding: "8px",
+        minWidth: "44px",
+        minHeight: "44px",
+      }}
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
       type="button"
+      aria-label="Logout"
     >
       <CiLogout size={28} />
       {show && (
@@ -178,8 +191,9 @@ function LoginIconWithTooltip() {
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
+      aria-label="Login to your account"
     >
-      <CiLogin size={28} className="text-gray-800" />
+      <CiLogin size={28} className="text-gray-900 dark:text-gray-100" />
       {show && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
           Login
@@ -196,16 +210,24 @@ function SearchIconWithTooltip({ onClick, isOpen }) {
     <button
       onClick={onClick}
       className="relative flex items-center md:flex hidden"
-      style={{ background: "none", border: "none", padding: 0, marginRight: 4 }}
+      style={{
+        background: "none",
+        border: "none",
+        padding: "8px",
+        marginRight: 4,
+        minWidth: "44px",
+        minHeight: "44px",
+      }}
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
       type="button"
       data-search-icon
+      aria-label={isOpen ? "Close search" : "Open search"}
     >
       <CiSearch
         size={28}
-        className={`transition-colors text-gray-800 ${
+        className={`transition-colors text-gray-900 dark:text-gray-100 ${
           isOpen ? "text-pink-500" : "hover:text-pink-500"
         }`}
       />
@@ -232,13 +254,21 @@ function ShopIconWithTooltip({ onClick }) {
     <button
       onClick={onClick}
       className="relative flex items-center md:flex hidden"
-      style={{ background: "none", border: "none", padding: 0, marginLeft: 4 }}
+      style={{
+        background: "none",
+        border: "none",
+        padding: "8px",
+        marginLeft: 4,
+        minWidth: "44px",
+        minHeight: "44px",
+      }}
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
       type="button"
+      aria-label={`Shopping cart with ${cartItemCount} items`}
     >
-      <CiShoppingCart size={28} className="text-gray-800" />
+      <CiShoppingCart size={28} className="text-gray-900 dark:text-gray-100" />
       {cartItemCount > 0 && (
         <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
           {cartItemCount}
@@ -264,13 +294,24 @@ function FavoritesIconWithTooltip({ onClick }) {
     <button
       onClick={onClick}
       className="relative flex items-center md:flex hidden"
-      style={{ background: "none", border: "none", padding: 0, marginLeft: 4 }}
+      style={{
+        background: "none",
+        border: "none",
+        padding: "8px",
+        marginLeft: 4,
+        minWidth: "44px",
+        minHeight: "44px",
+      }}
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       tabIndex={0}
       type="button"
+      aria-label={`Wishlist with ${wishlistItemCount} items`}
     >
-      <PiHeartStraightThin size={28} className="text-gray-800" />
+      <PiHeartStraightThin
+        size={28}
+        className="text-gray-900 dark:text-gray-100"
+      />
       {wishlistItemCount > 0 && (
         <div className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
           {wishlistItemCount}
@@ -380,7 +421,7 @@ function Navigation() {
                   className={({ isActive }) =>
                     `${
                       isActive ? "font-semibold" : ""
-                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide text-gray-800`
+                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide text-gray-900 dark:text-gray-100`
                   }
                 >
                   {names[idx]}
@@ -393,6 +434,7 @@ function Navigation() {
                       isActive ? "block" : "hidden"
                     } absolute -top-2 left-1/2 transform -translate-x-1/2 w-full h-0.5 bg-pink-500`
                   }
+                  aria-label={`Active indicator for ${names[idx]}`}
                 />
               </div>
             );
@@ -400,7 +442,7 @@ function Navigation() {
         </div>
 
         {/* Right side - Wishlist, Cart, Search, Login, etc. */}
-        <div className="hidden md:flex items-center gap-4 text-sm text-gray-800">
+        <div className="hidden md:flex items-center gap-4 text-sm text-gray-900 dark:text-gray-100">
           <FavoritesIconWithTooltip onClick={() => navigate("/favorites")} />
           <ShopIconWithTooltip onClick={() => navigate("/cart")} />
           <SearchIconWithTooltip
@@ -456,7 +498,7 @@ function Navigation() {
           <button
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            className="focus:outline-none z-50"
+            className="focus:outline-none z-50 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
             style={{ color: "#171717" }}
           >
             <svg
@@ -539,7 +581,7 @@ function Navigation() {
                 className={({ isActive }) =>
                   `${
                     isActive ? "font-semibold" : ""
-                  } block py-2 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide text-gray-900 dark:text-gray-100`
+                  } block py-3 px-4 text-center hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide text-gray-900 dark:text-gray-100 min-h-[44px] flex items-center justify-center`
                 }
               >
                 {names[idx]}
@@ -573,7 +615,14 @@ function Navigation() {
                     closeMenu();
                   }}
                   className="text-red-500 hover:underline flex items-center justify-center mt-6 dark:text-red-400"
-                  style={{ background: "none", border: "none", padding: 0 }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    padding: "8px",
+                    minWidth: "44px",
+                    minHeight: "44px",
+                  }}
+                  aria-label="Logout"
                 >
                   <CiLogout size={28} />
                 </button>
@@ -583,7 +632,8 @@ function Navigation() {
                 <NavLink
                   to="/login"
                   onClick={closeMenu}
-                  className="flex items-center justify-center text-gray-900 dark:text-gray-100"
+                  className="flex items-center justify-center text-gray-900 dark:text-gray-100 min-h-[44px] min-w-[44px] p-2"
+                  aria-label="Login to your account"
                 >
                   <CiLogin size={28} className="text-green-500" />
                 </NavLink>
@@ -595,15 +645,19 @@ function Navigation() {
           <div className="mt-auto pt-8 flex items-center justify-center gap-4">
             <a
               href="https://www.instagram.com/the_grrrls_club?igsh=YWFybzVzNWtrZTB0"
-              aria-label="Instagram"
-              className="hover:text-pink-600 transition-colors text-gray-900 dark:text-gray-100"
+              aria-label="Follow us on Instagram"
+              className="hover:text-pink-600 transition-colors text-gray-900 dark:text-gray-100 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <FaInstagram size={20} />
             </a>
             <a
               href="https://facebook.com"
-              aria-label="Facebook"
-              className="hover:text-blue-600 transition-colors text-gray-900 dark:text-gray-100"
+              aria-label="Follow us on Facebook"
+              className="hover:text-blue-600 transition-colors text-gray-900 dark:text-gray-100 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <FaFacebook size={20} />
             </a>
@@ -628,7 +682,10 @@ function Breadcrumb() {
     >
       <ol className="list-none flex flex-wrap gap-1">
         <li>
-          <NavLink to="/" className="hover:underline text-pink-500">
+          <NavLink
+            to="/"
+            className="hover:underline text-pink-600 dark:text-pink-400"
+          >
             Home
           </NavLink>
           {pathnames.length > 0 && <span className="mx-1">/</span>}
@@ -641,7 +698,7 @@ function Breadcrumb() {
               {!isLast ? (
                 <NavLink
                   to={routeTo}
-                  className="hover:underline text-pink-500 capitalize"
+                  className="hover:underline text-pink-600 dark:text-pink-400 capitalize"
                 >
                   {decodeURIComponent(name)}
                 </NavLink>

@@ -29,7 +29,7 @@ const CookieBanner = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
           {/* Cookie Icon */}
           <div className="flex-shrink-0">
-            <FaCookieBite className="text-pink-500 text-2xl" />
+            <FaCookieBite className="text-pink-600 dark:text-pink-400 text-2xl" />
           </div>
 
           {/* Content */}
@@ -46,7 +46,7 @@ const CookieBanner = () => {
               More information can be found in our{" "}
               <a
                 href="/privacy"
-                className="text-pink-500 hover:text-pink-600 underline"
+                className="text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 underline"
               >
                 Privacy Policy
               </a>
