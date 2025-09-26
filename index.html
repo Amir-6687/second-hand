@@ -1,69 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Under Maintenance</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .maintenance-container {
-            text-align: center;
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: 2rem;
-        }
-        .icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: #e91e63;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-        p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-        .contact {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 10px;
-            border-left: 4px solid #e91e63;
-        }
-        .contact a {
-            color: #e91e63;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .contact a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="maintenance-container">
-        <div class="icon">🔧</div>
-        <h1>Website Under Maintenance</h1>
-        <p>We're currently working on improving our website to serve you better. We'll be back online shortly.</p>
-        <div class="contact">
-            <p>For urgent inquiries, please contact us at:</p>
-            <a href="mailto:support@example.com">support@example.com</a>
-        </div>
-    </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://api.thegrrrlsclub.de" crossorigin />
+    <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+    <link rel="preconnect" href="https://m.stripe.network" crossorigin />
+
+    <title>The Girl's Club</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
