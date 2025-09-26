@@ -141,7 +141,7 @@ function UserIconWithTooltip() {
       role="button"
       aria-label="User profile"
     >
-      <RiUserLine className="w-5 h-5 cursor-pointer" />
+      <RiUserLine className="w-5 h-5 cursor-pointer text-gray-700 dark:text-gray-300" />
       {show && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/70 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
           User
@@ -193,7 +193,7 @@ function LoginIconWithTooltip() {
       tabIndex={0}
       aria-label="Login to your account"
     >
-      <CiLogin size={28} className="text-gray-900 dark:text-gray-100" />
+      <CiLogin size={28} className="text-gray-700 dark:text-gray-300" />
       {show && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-white/80 text-black text-xs rounded shadow z-50 whitespace-nowrap backdrop-blur-md border border-gray-200">
           Login
@@ -227,8 +227,8 @@ function SearchIconWithTooltip({ onClick, isOpen }) {
     >
       <CiSearch
         size={28}
-        className={`transition-colors text-gray-900 dark:text-gray-100 ${
-          isOpen ? "text-pink-500" : "hover:text-pink-500"
+        className={`transition-colors text-gray-700 dark:text-gray-300 ${
+          isOpen ? "text-gray-600" : "hover:text-gray-600"
         }`}
       />
       {show && (
@@ -268,7 +268,7 @@ function ShopIconWithTooltip({ onClick }) {
       type="button"
       aria-label={`Shopping cart with ${cartItemCount} items`}
     >
-      <CiShoppingCart size={28} className="text-gray-900 dark:text-gray-100" />
+      <CiShoppingCart size={28} className="text-gray-700 dark:text-gray-300" />
       {cartItemCount > 0 && (
         <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
           {cartItemCount}
@@ -310,7 +310,7 @@ function FavoritesIconWithTooltip({ onClick }) {
     >
       <PiHeartStraightThin
         size={28}
-        className="text-gray-900 dark:text-gray-100"
+        className="text-gray-700 dark:text-gray-300"
       />
       {wishlistItemCount > 0 && (
         <div className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
@@ -382,7 +382,7 @@ function Navigation() {
         style={{ backgroundColor: "#EDDCD9" }}
       >
         {/* Left side - Logo */}
-        <div className="text-xl font-bold flex items-center justify-start">
+        <div className="text-xl font-bold flex items-center justify-start ml-8">
           <NavLink to="/" aria-label="Home">
             <img
               src={logo}
@@ -421,7 +421,7 @@ function Navigation() {
                   className={({ isActive }) =>
                     `${
                       isActive ? "font-semibold" : ""
-                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-pink-600 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide text-gray-900 dark:text-gray-100`
+                    } py-2 px-4 hover:-translate-y-1 hover:scale-105 hover:text-gray-700 transition-transform duration-200 ease-in-out uppercase text-sm tracking-wide text-gray-800 dark:text-gray-200`
                   }
                 >
                   {names[idx]}
@@ -442,7 +442,7 @@ function Navigation() {
         </div>
 
         {/* Right side - Wishlist, Cart, Search, Login, etc. */}
-        <div className="hidden md:flex items-center gap-4 text-sm text-gray-900 dark:text-gray-100">
+        <div className="hidden md:flex items-center gap-4 text-sm text-gray-700 dark:text-gray-300">
           <FavoritesIconWithTooltip onClick={() => navigate("/favorites")} />
           <ShopIconWithTooltip onClick={() => navigate("/cart")} />
           <SearchIconWithTooltip
