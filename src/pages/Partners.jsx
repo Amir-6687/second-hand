@@ -149,7 +149,9 @@ export default function Partners() {
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-[#849c22]"
                   >
-                    <option className="bg-white text-gray-900" value="all">Alle Kategorien</option>
+                    <option className="bg-white text-gray-900" value="all">
+                      Alle Kategorien
+                    </option>
                     {categories.map((category) => (
                       <option
                         className="bg-white text-gray-900"
@@ -172,7 +174,9 @@ export default function Partners() {
                     onChange={(e) => setSelectedType(e.target.value)}
                     className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-[#849c22]"
                   >
-                    <option className="bg-white text-gray-900" value="all">Alle Typen</option>
+                    <option className="bg-white text-gray-900" value="all">
+                      Alle Typen
+                    </option>
                     {types.map((type) => (
                       <option
                         className="bg-white text-gray-900"
@@ -212,11 +216,11 @@ export default function Partners() {
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                       {/* Partner Image */}
                       <div className="h-48 bg-[#eef5db] flex items-center justify-center">
-                        {partner.featuredImage ? (
+                        {partner.logo || partner.featuredImage ? (
                           <OptimizedImage
-                            src={partner.featuredImage}
+                            src={partner.logo || partner.featuredImage}
                             alt={partner.name}
-                            className="w-full h-full object-cover"
+                            className="max-h-40 w-auto object-contain"
                           />
                         ) : (
                           <div className="text-6xl">

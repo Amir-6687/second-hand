@@ -77,6 +77,8 @@ export default function Admin() {
     services: "",
     partnershipType: "geschaeftspartner",
     isActive: true,
+    logo: "",
+    featuredImage: "",
   });
   const [partnerEditId, setPartnerEditId] = useState(null);
   const [partnerEditForm, setPartnerEditForm] = useState({
@@ -88,6 +90,8 @@ export default function Admin() {
     services: "",
     partnershipType: "geschaeftspartner",
     isActive: true,
+    logo: "",
+    featuredImage: "",
   });
 
   // گرفتن لیست محصولات
@@ -134,6 +138,8 @@ export default function Admin() {
       const token = localStorage.getItem("token");
       const payload = {
         ...partnerForm,
+        logo: partnerForm.logo,
+        featuredImage: partnerForm.featuredImage,
         services: partnerForm.services
           ? partnerForm.services.split(",").map((s) => s.trim())
           : [],
@@ -154,6 +160,8 @@ export default function Admin() {
         services: "",
         partnershipType: "geschaeftspartner",
         isActive: true,
+        logo: "",
+        featuredImage: "",
       });
       fetchPartnersAdmin();
     } catch (err) {
@@ -166,6 +174,8 @@ export default function Admin() {
       const token = localStorage.getItem("token");
       const payload = {
         ...partnerEditForm,
+        logo: partnerEditForm.logo,
+        featuredImage: partnerEditForm.featuredImage,
         services: partnerEditForm.services
           ? partnerEditForm.services.split(",").map((s) => s.trim())
           : [],
@@ -468,14 +478,16 @@ export default function Admin() {
         >
           Commission Products
         </button>
-    <button
-      onClick={() => setActiveTab("partners")}
-      className={`px-4 py-2 rounded ${
-        activeTab === "partners" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-      }`}
-    >
-      Partners
-    </button>
+        <button
+          onClick={() => setActiveTab("partners")}
+          className={`px-4 py-2 rounded ${
+            activeTab === "partners"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 text-gray-700"
+          }`}
+        >
+          Partners
+        </button>
       </div>
 
       {activeTab === "products" && (
@@ -1252,126 +1264,64 @@ export default function Admin() {
               </>
             )}
 
-  {activeTab === "partners" && (
-    <>
-      <form onSubmit={handleAddPartner} className="mb-6 space-y-2">
-        <div className="font-bold">Name</div>
-        <input
-          className="w-full border p-2 rounded"
-          placeholder="Name"
-          value={partnerForm.name}
-          onChange={(e) => setPartnerForm((f) => ({ ...f, name: e.target.value }))}
-          required
-        />
-        <div className="font-bold">Website (https://...)</div>
-        <input
-          className="w-full border p-2 rounded"
-          placeholder="https://example.com"
-          value={partnerForm.website}
-          onChange={(e) => setPartnerForm((f) => ({ ...f, website: e.target.value }))}
-          required
-        />
-        <div className="font-bold">Instagram (optional)</div>
-        <input
-          className="w-full border p-2 rounded"
-          placeholder="https://instagram.com/..."
-          value={partnerForm.instagram}
-          onChange={(e) => setPartnerForm((f) => ({ ...f, instagram: e.target.value }))}
-        />
-        <div className="font-bold">Description</div>
-        <textarea
-          className="w-full border p-2 rounded"
-          placeholder="Short description"
-          value={partnerForm.description}
-          onChange={(e) => setPartnerForm((f) => ({ ...f, description: e.target.value }))}
-          required
-        />
-        <div className="font-bold">Category</div>
-        <select
-          className="w-full border p-2 rounded"
-          value={partnerForm.category}
-          onChange={(e) => setPartnerForm((f) => ({ ...f, category: e.target.value }))}
-        >
-          <option value="education">Education & Training</option>
-          <option value="natural_products">Natural Products</option>
-          <option value="fashion">Fashion</option>
-          <option value="health_wellness">Health & Wellness</option>
-          <option value="beauty">Beauty</option>
-          <option value="sustainability">Sustainability</option>
-          <option value="other">Other</option>
-        </select>
-        <div className="font-bold">Services (comma separated)</div>
-        <input
-          className="w-full border p-2 rounded"
-          placeholder="Service A, Service B"
-          value={partnerForm.services}
-          onChange={(e) => setPartnerForm((f) => ({ ...f, services: e.target.value }))}
-        />
-        <div className="font-bold">Partnership Type</div>
-        <select
-          className="w-full border p-2 rounded"
-          value={partnerForm.partnershipType}
-          onChange={(e) => setPartnerForm((f) => ({ ...f, partnershipType: e.target.value }))}
-        >
-          <option value="geschaeftspartner">Geschäftspartner</option>
-          <option value="synergin">Synergin</option>
-        </select>
-        <div className="flex items-center gap-2">
-          <input
-            id="partner-active"
-            type="checkbox"
-            checked={partnerForm.isActive}
-            onChange={(e) => setPartnerForm((f) => ({ ...f, isActive: e.target.checked }))}
-          />
-          <label htmlFor="partner-active" className="font-medium">Active</label>
-        </div>
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-          Add Partner
-        </button>
-      </form>
-
-      {partnersLoading ? (
-        <p>Loading partners...</p>
-      ) : (
-        <ul className="space-y-2">
-          {partnersAdmin.map((p) => (
-            <li key={p._id} className="flex justify-between items-start border p-2 rounded">
-              {partnerEditId === p._id ? (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleUpdatePartner(p._id);
-                  }}
-                  className="flex flex-col gap-2 w-full"
-                >
+            {activeTab === "partners" && (
+              <>
+                <form onSubmit={handleAddPartner} className="mb-6 space-y-2">
+                  <div className="font-bold">Name</div>
                   <input
-                    className="border p-2 rounded"
-                    value={partnerEditForm.name}
-                    onChange={(e) => setPartnerEditForm((f) => ({ ...f, name: e.target.value }))}
+                    className="w-full border p-2 rounded"
+                    placeholder="Name"
+                    value={partnerForm.name}
+                    onChange={(e) =>
+                      setPartnerForm((f) => ({ ...f, name: e.target.value }))
+                    }
                     required
                   />
+                  <div className="font-bold">Website (https://...)</div>
                   <input
-                    className="border p-2 rounded"
+                    className="w-full border p-2 rounded"
                     placeholder="https://example.com"
-                    value={partnerEditForm.website}
-                    onChange={(e) => setPartnerEditForm((f) => ({ ...f, website: e.target.value }))}
+                    value={partnerForm.website}
+                    onChange={(e) =>
+                      setPartnerForm((f) => ({ ...f, website: e.target.value }))
+                    }
                     required
                   />
+                  <div className="font-bold">Instagram (optional)</div>
                   <input
-                    className="border p-2 rounded"
+                    className="w-full border p-2 rounded"
                     placeholder="https://instagram.com/..."
-                    value={partnerEditForm.instagram || ""}
-                    onChange={(e) => setPartnerEditForm((f) => ({ ...f, instagram: e.target.value }))}
+                    value={partnerForm.instagram}
+                    onChange={(e) =>
+                      setPartnerForm((f) => ({
+                        ...f,
+                        instagram: e.target.value,
+                      }))
+                    }
                   />
+                  <div className="font-bold">Description</div>
                   <textarea
-                    className="border p-2 rounded"
-                    value={partnerEditForm.description}
-                    onChange={(e) => setPartnerEditForm((f) => ({ ...f, description: e.target.value }))}
+                    className="w-full border p-2 rounded"
+                    placeholder="Short description"
+                    value={partnerForm.description}
+                    onChange={(e) =>
+                      setPartnerForm((f) => ({
+                        ...f,
+                        description: e.target.value,
+                      }))
+                    }
+                    required
                   />
+                  <div className="font-bold">Category</div>
                   <select
-                    className="border p-2 rounded"
-                    value={partnerEditForm.category}
-                    onChange={(e) => setPartnerEditForm((f) => ({ ...f, category: e.target.value }))}
+                    className="w-full border p-2 rounded"
+                    value={partnerForm.category}
+                    onChange={(e) =>
+                      setPartnerForm((f) => ({
+                        ...f,
+                        category: e.target.value,
+                      }))
+                    }
                   >
                     <option value="education">Education & Training</option>
                     <option value="natural_products">Natural Products</option>
@@ -1381,70 +1331,320 @@ export default function Admin() {
                     <option value="sustainability">Sustainability</option>
                     <option value="other">Other</option>
                   </select>
+                  <div className="font-bold">Services (comma separated)</div>
                   <input
-                    className="border p-2 rounded"
+                    className="w-full border p-2 rounded"
                     placeholder="Service A, Service B"
-                    value={partnerEditForm.services}
-                    onChange={(e) => setPartnerEditForm((f) => ({ ...f, services: e.target.value }))}
+                    value={partnerForm.services}
+                    onChange={(e) =>
+                      setPartnerForm((f) => ({
+                        ...f,
+                        services: e.target.value,
+                      }))
+                    }
                   />
+                  <div className="font-bold">Partnership Type</div>
                   <select
-                    className="border p-2 rounded"
-                    value={partnerEditForm.partnershipType}
-                    onChange={(e) => setPartnerEditForm((f) => ({ ...f, partnershipType: e.target.value }))}
+                    className="w-full border p-2 rounded"
+                    value={partnerForm.partnershipType}
+                    onChange={(e) =>
+                      setPartnerForm((f) => ({
+                        ...f,
+                        partnershipType: e.target.value,
+                      }))
+                    }
                   >
                     <option value="geschaeftspartner">Geschäftspartner</option>
                     <option value="synergin">Synergin</option>
                   </select>
+                  {/* Logo upload */}
+                  <div className="font-bold">Logo</div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const file = e.target.files && e.target.files[0];
+                      if (!file) return;
+                      const formData = new FormData();
+                      formData.append("image", file);
+                      const res = await fetch(BASE_URL + "/products/upload", {
+                        method: "POST",
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                        body: formData,
+                      });
+                      const data = await res.json();
+                      setPartnerForm((f) => ({ ...f, logo: data.imageUrl }));
+                    }}
+                    className="w-full border p-2 rounded"
+                  />
+                  {partnerForm.logo && (
+                    <img
+                      src={getImageUrl(partnerForm.logo)}
+                      alt="Logo preview"
+                      className="w-16 h-16 object-cover rounded border mt-2"
+                    />
+                  )}
+                  {/* Featured image upload */}
+                  <div className="font-bold">Featured Image (optional)</div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const file = e.target.files && e.target.files[0];
+                      if (!file) return;
+                      const formData = new FormData();
+                      formData.append("image", file);
+                      const res = await fetch(BASE_URL + "/products/upload", {
+                        method: "POST",
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                        body: formData,
+                      });
+                      const data = await res.json();
+                      setPartnerForm((f) => ({ ...f, featuredImage: data.imageUrl }));
+                    }}
+                    className="w-full border p-2 rounded"
+                  />
+                  {partnerForm.featuredImage && (
+                    <img
+                      src={getImageUrl(partnerForm.featuredImage)}
+                      alt="Featured preview"
+                      className="w-24 h-16 object-cover rounded border mt-2"
+                    />
+                  )}
                   <div className="flex items-center gap-2">
                     <input
-                      id={`edit-active-${p._id}`}
+                      id="partner-active"
                       type="checkbox"
-                      checked={!!partnerEditForm.isActive}
-                      onChange={(e) => setPartnerEditForm((f) => ({ ...f, isActive: e.target.checked }))}
+                      checked={partnerForm.isActive}
+                      onChange={(e) =>
+                        setPartnerForm((f) => ({
+                          ...f,
+                          isActive: e.target.checked,
+                        }))
+                      }
                     />
-                    <label htmlFor={`edit-active-${p._id}`} className="font-medium">Active</label>
+                    <label htmlFor="partner-active" className="font-medium">
+                      Active
+                    </label>
                   </div>
-                  <div className="flex gap-2">
-                    <button type="submit" className="bg-green-600 text-white px-3 py-1 rounded">Save</button>
-                    <button type="button" className="bg-gray-300 px-3 py-1 rounded" onClick={() => setPartnerEditId(null)}>Cancel</button>
-                  </div>
+                  <button
+                    type="submit"
+                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  >
+                    Add Partner
+                  </button>
                 </form>
-              ) : (
-                <div className="flex-1">
-                  <div className="font-bold">{p.name}</div>
-                  <div className="text-sm text-gray-600 break-words">{p.website}</div>
-                  <div className="text-sm text-gray-600">{p.category} • {p.partnershipType} • {p.isActive ? "Active" : "Inactive"}</div>
-                  <div className="text-sm text-gray-700 mt-1">{p.description}</div>
-                </div>
-              )}
-              <div className="flex flex-col gap-2 ml-4">
-                <button
-                  onClick={() => {
-                    setPartnerEditId(p._id);
-                    setPartnerEditForm({
-                      name: p.name || "",
-                      description: p.description || "",
-                      website: p.website || "",
-                      instagram: p.instagram || "",
-                      category: p.category || "education",
-                      services: (p.services || []).join(", "),
-                      partnershipType: p.partnershipType || "geschaeftspartner",
-                      isActive: p.isActive !== false,
-                    });
-                  }}
-                  className="text-blue-600 hover:underline"
-                >
-                  Edit
-                </button>
-                <button onClick={() => handleDeletePartner(p._id)} className="text-red-600 hover:underline">Delete</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-      {error && <div className="text-red-500 mt-2">{error}</div>}
-    </>
-  )}
+
+                {partnersLoading ? (
+                  <p>Loading partners...</p>
+                ) : (
+                  <ul className="space-y-2">
+                    {partnersAdmin.map((p) => (
+                      <li
+                        key={p._id}
+                        className="flex justify-between items-start border p-2 rounded"
+                      >
+                        {partnerEditId === p._id ? (
+                          <form
+                            onSubmit={(e) => {
+                              e.preventDefault();
+                              handleUpdatePartner(p._id);
+                            }}
+                            className="flex flex-col gap-2 w-full"
+                          >
+                            <input
+                              className="border p-2 rounded"
+                              value={partnerEditForm.name}
+                              onChange={(e) =>
+                                setPartnerEditForm((f) => ({
+                                  ...f,
+                                  name: e.target.value,
+                                }))
+                              }
+                              required
+                            />
+                            <input
+                              className="border p-2 rounded"
+                              placeholder="https://example.com"
+                              value={partnerEditForm.website}
+                              onChange={(e) =>
+                                setPartnerEditForm((f) => ({
+                                  ...f,
+                                  website: e.target.value,
+                                }))
+                              }
+                              required
+                            />
+                            <input
+                              className="border p-2 rounded"
+                              placeholder="https://instagram.com/..."
+                              value={partnerEditForm.instagram || ""}
+                              onChange={(e) =>
+                                setPartnerEditForm((f) => ({
+                                  ...f,
+                                  instagram: e.target.value,
+                                }))
+                              }
+                            />
+                            <textarea
+                              className="border p-2 rounded"
+                              value={partnerEditForm.description}
+                              onChange={(e) =>
+                                setPartnerEditForm((f) => ({
+                                  ...f,
+                                  description: e.target.value,
+                                }))
+                              }
+                            />
+                            <select
+                              className="border p-2 rounded"
+                              value={partnerEditForm.category}
+                              onChange={(e) =>
+                                setPartnerEditForm((f) => ({
+                                  ...f,
+                                  category: e.target.value,
+                                }))
+                              }
+                            >
+                              <option value="education">
+                                Education & Training
+                              </option>
+                              <option value="natural_products">
+                                Natural Products
+                              </option>
+                              <option value="fashion">Fashion</option>
+                              <option value="health_wellness">
+                                Health & Wellness
+                              </option>
+                              <option value="beauty">Beauty</option>
+                              <option value="sustainability">
+                                Sustainability
+                              </option>
+                              <option value="other">Other</option>
+                            </select>
+                            <input
+                              className="border p-2 rounded"
+                              placeholder="Service A, Service B"
+                              value={partnerEditForm.services}
+                              onChange={(e) =>
+                                setPartnerEditForm((f) => ({
+                                  ...f,
+                                  services: e.target.value,
+                                }))
+                              }
+                            />
+                            <select
+                              className="border p-2 rounded"
+                              value={partnerEditForm.partnershipType}
+                              onChange={(e) =>
+                                setPartnerEditForm((f) => ({
+                                  ...f,
+                                  partnershipType: e.target.value,
+                                }))
+                              }
+                            >
+                              <option value="geschaeftspartner">
+                                Geschäftspartner
+                              </option>
+                              <option value="synergin">Synergin</option>
+                            </select>
+                            <div className="flex items-center gap-2">
+                              <input
+                                id={`edit-active-${p._id}`}
+                                type="checkbox"
+                                checked={!!partnerEditForm.isActive}
+                                onChange={(e) =>
+                                  setPartnerEditForm((f) => ({
+                                    ...f,
+                                    isActive: e.target.checked,
+                                  }))
+                                }
+                              />
+                              <label
+                                htmlFor={`edit-active-${p._id}`}
+                                className="font-medium"
+                              >
+                                Active
+                              </label>
+                            </div>
+                            <div className="flex gap-2">
+                              <button
+                                type="submit"
+                                className="bg-green-600 text-white px-3 py-1 rounded"
+                              >
+                                Save
+                              </button>
+                              <button
+                                type="button"
+                                className="bg-gray-300 px-3 py-1 rounded"
+                                onClick={() => setPartnerEditId(null)}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </form>
+                        ) : (
+                          <div className="flex-1">
+                            <div className="font-bold">{p.name}</div>
+                            {p.logo && (
+                              <img
+                                src={getImageUrl(p.logo)}
+                                alt="Logo"
+                                className="w-10 h-10 object-cover rounded-full border my-1"
+                              />
+                            )}
+                            <div className="text-sm text-gray-600 break-words">
+                              {p.website}
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              {p.category} • {p.partnershipType} •{" "}
+                              {p.isActive ? "Active" : "Inactive"}
+                            </div>
+                            <div className="text-sm text-gray-700 mt-1">
+                              {p.description}
+                            </div>
+                          </div>
+                        )}
+                        <div className="flex flex-col gap-2 ml-4">
+                          <button
+                            onClick={() => {
+                              setPartnerEditId(p._id);
+                              setPartnerEditForm({
+                                name: p.name || "",
+                                description: p.description || "",
+                                website: p.website || "",
+                                instagram: p.instagram || "",
+                                category: p.category || "education",
+                                services: (p.services || []).join(", "),
+                                partnershipType:
+                                  p.partnershipType || "geschaeftspartner",
+                                isActive: p.isActive !== false,
+                                logo: p.logo || "",
+                                featuredImage: p.featuredImage || "",
+                              });
+                            }}
+                            className="text-blue-600 hover:underline"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDeletePartner(p._id)}
+                            className="text-red-600 hover:underline"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {error && <div className="text-red-500 mt-2">{error}</div>}
+              </>
+            )}
 
             <div className="font-bold">Commission Rate (e.g., 30 for 30%)</div>
             <input
