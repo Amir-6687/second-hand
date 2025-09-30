@@ -147,11 +147,15 @@ export default function Partners() {
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#849c22]"
+                    className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-[#849c22]"
                   >
-                    <option value="all">Alle Kategorien</option>
+                    <option className="bg-white text-gray-900" value="all">Alle Kategorien</option>
                     {categories.map((category) => (
-                      <option key={category.value} value={category.value}>
+                      <option
+                        className="bg-white text-gray-900"
+                        key={category.value}
+                        value={category.value}
+                      >
                         {category.icon} {category.label}
                       </option>
                     ))}
@@ -166,11 +170,15 @@ export default function Partners() {
                   <select
                     value={selectedType}
                     onChange={(e) => setSelectedType(e.target.value)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#849c22]"
+                    className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-[#849c22]"
                   >
-                    <option value="all">Alle Typen</option>
+                    <option className="bg-white text-gray-900" value="all">Alle Typen</option>
                     {types.map((type) => (
-                      <option key={type.value} value={type.value}>
+                      <option
+                        className="bg-white text-gray-900"
+                        key={type.value}
+                        value={type.value}
+                      >
                         {type.icon} {type.label}
                       </option>
                     ))}
