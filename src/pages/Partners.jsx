@@ -115,7 +115,7 @@ export default function Partners() {
         </section>
 
         {/* Filters Section */}
-        <section className="bg-white py-8">
+        <section className="py-8" style={{ backgroundColor: "#ffffff" }}>
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <form onSubmit={handleSearch} className="mb-6">
