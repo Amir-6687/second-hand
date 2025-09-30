@@ -102,7 +102,7 @@ export default function Partners() {
 
       <main id="main-content" className="min-h-screen bg-white">
         {/* Header Section */}
-        <section className="bg-gradient-to-r from-teal-600 to-teal-800 text-white py-16">
+        <section className="bg-[#849c22] text-white py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Geschäftspartner & Synergin
@@ -126,12 +126,12 @@ export default function Partners() {
                       placeholder="Partner suchen..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#849c22] focus:border-transparent"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+                    className="px-6 py-3 bg-[#849c22] text-white rounded-lg hover:bg-[#6b7e1c] transition-colors"
                   >
                     Suchen
                   </button>
@@ -147,7 +147,7 @@ export default function Partners() {
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
+                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#849c22]"
                   >
                     <option value="all">Alle Kategorien</option>
                     {categories.map((category) => (
@@ -166,7 +166,7 @@ export default function Partners() {
                   <select
                     value={selectedType}
                     onChange={(e) => setSelectedType(e.target.value)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
+                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#849c22]"
                   >
                     <option value="all">Alle Typen</option>
                     {types.map((type) => (
@@ -203,7 +203,7 @@ export default function Partners() {
                   <LazyWrapper key={partner._id}>
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                       {/* Partner Image */}
-                      <div className="h-48 bg-gradient-to-br from-teal-100 to-teal-200 flex items-center justify-center">
+                      <div className="h-48 bg-[#eef5db] flex items-center justify-center">
                         {partner.featuredImage ? (
                           <OptimizedImage
                             src={partner.featuredImage}
@@ -220,7 +220,7 @@ export default function Partners() {
                       {/* Partner Content */}
                       <div className="p-6">
                         <div className="flex items-center justify-between mb-3">
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#eef5db] text-[#849c22]">
                             {getCategoryIcon(partner.category)}{" "}
                             {getCategoryLabel(partner.category)}
                           </span>
@@ -289,7 +289,7 @@ export default function Partners() {
                             href={partner.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 bg-teal-600 text-white text-center py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors"
+                            className="flex-1 bg-[#849c22] text-white text-center py-2 px-4 rounded-lg hover:bg-[#6b7e1c] transition-colors"
                           >
                             Website besuchen
                           </a>
@@ -314,7 +314,7 @@ export default function Partners() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-teal-600 text-white py-16">
+        <section className="bg-[#849c22] text-white py-16">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-4">
               Möchten Sie unser Partner werden?
@@ -324,7 +324,7 @@ export default function Partners() {
             </p>
             <Link
               to="/contact"
-              className="inline-block bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="inline-block bg-white text-[#849c22] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               Kontakt aufnehmen
             </Link>
