@@ -36,130 +36,84 @@ router.get("/", async (req, res) => {
     });
 
     console.log("Found partners:", partners.length);
-    
+
     // If no partners found in database, return sample data
     if (partners.length === 0) {
       const samplePartners = [
         {
           _id: "sample1",
-          name: "Paracelsus Gesundheitsakademien",
-          description: "Paracelsus ist die größte Heilpraktikerschule Deutschlands mit 54 Standorten in Deutschland und der Schweiz. Wir bieten umfassende Ausbildungen in Naturheilkunde, Psychotherapie, Osteopathie und Tierheilkunde an.",
-          website: "https://www.paracelsus.de/heilpraktikerschulen",
-          category: "education",
-          services: [
-            "Heilpraktiker/in Ausbildung",
-            "Heilpraktiker/in für Psychotherapie",
-            "Osteopath/in Ausbildung",
-            "Tierheilpraktiker/in Ausbildung",
-            "Ernährungsberater/-in Ausbildung",
-            "Massagetherapie",
-            "Fortbildungen für verschiedene Berufsgruppen",
-          ],
+          name: "Sample Partner A",
+          description: "Nachhaltige Produkte und faire Zusammenarbeit.",
+          website: "https://example.com",
+          category: "natural_products",
+          services: ["Naturprodukte", "Nachhaltige Alternativen"],
           partnershipType: "geschaeftspartner",
-          contactInfo: {
-            phone: "0261 95 25 20",
-            address: "54 Standorte in Deutschland und der Schweiz",
-          },
-          tags: [
-            "Heilpraktiker",
-            "Naturheilkunde",
-            "Ausbildung",
-            "Gesundheit",
-            "Schweiz",
-            "Deutschland",
-          ],
-          specialOffers: "Kostenlose Beratung und Infoveranstaltungen",
+          contactInfo: { address: "Deutschland" },
+          tags: ["Nachhaltigkeit", "Natur"],
+          specialOffers: "—",
           displayOrder: 1,
           isActive: true,
         },
         {
           _id: "sample2",
-          name: "Ulbrich Natur",
-          description: "Ulbrich Natur ist spezialisiert auf Naturkosmetik und Naturtextilien. Wir bieten nachhaltige und natürliche Produkte für eine bewusste Lebensweise und umweltfreundliche Alternativen zu konventionellen Kosmetik- und Textilprodukten.",
-          website: "https://www.instagram.com/ulbrichnatur_bielefeld",
-          instagram: "https://www.instagram.com/ulbrichnatur_bielefeld",
-          category: "natural_products",
-          services: [
-            "Naturkosmetik",
-            "Naturtextilien",
-            "Nachhaltige Produkte",
-            "Umweltfreundliche Alternativen",
-            "Bewusste Lebensweise",
-          ],
+          name: "Sample Partner B",
+          description: "Synergien im Bereich Marketing und Community.",
+          website: "https://example.com",
+          instagram: "https://instagram.com/example",
+          category: "other",
+          services: ["Marketing", "Community"],
           partnershipType: "synergin",
-          contactInfo: {
-            address: "Bielefeld, Deutschland",
-          },
-          tags: [
-            "Naturkosmetik",
-            "Naturtextilien",
-            "Nachhaltigkeit",
-            "Bio",
-            "Umwelt",
-            "Bielefeld",
-          ],
-          specialOffers: "Exklusive Rabatte auf nachhaltige Produkte",
+          contactInfo: { address: "Deutschland" },
+          tags: ["Synergie", "Marketing"],
+          specialOffers: "—",
           displayOrder: 2,
           isActive: true,
         },
         {
           _id: "sample3",
-          name: "Fairticken",
-          description: "Fairticken ist Ihr Online-Shop für nachhaltige Mode. Wir bieten VEGAN, ECO und FAIR Mode für Damen und Herren, inklusive FAIRTICKEN SHOES. Unser Fokus liegt auf ethischer Mode und nachhaltigen Alternativen.",
-          website: "https://www.fairticken-shop.de",
+          name: "Sample Partner C",
+          description: "Faire Mode und nachhaltige Kleidung.",
+          website: "https://example.com",
           category: "fashion",
-          services: [
-            "VEGAN Mode",
-            "ECO Mode",
-            "FAIR Mode",
-            "FAIRTICKEN SHOES",
-            "Nachhaltige Sneaker",
-            "Ethische Mode",
-            "Damen- und Herrenmode",
-          ],
+          services: ["Eco", "Fair"],
           partnershipType: "geschaeftspartner",
-          contactInfo: {
-            address: "Deutschland",
-          },
-          tags: [
-            "Vegan",
-            "Eco",
-            "Fair",
-            "Nachhaltige Mode",
-            "Sneaker",
-            "Ethische Mode",
-            "Online Shop",
-          ],
-          specialOffers: "Spezielle Editionen und SALE Events",
+          contactInfo: { address: "Deutschland" },
+          tags: ["Fair", "Eco", "Mode"],
+          specialOffers: "—",
           displayOrder: 3,
           isActive: true,
         },
       ];
-      
+
       // Apply filters to sample data
       let filteredPartners = samplePartners;
-      
+
       if (category && category !== "all") {
-        filteredPartners = filteredPartners.filter(p => p.category === category);
-      }
-      
-      if (partnershipType && partnershipType !== "all") {
-        filteredPartners = filteredPartners.filter(p => p.partnershipType === partnershipType);
-      }
-      
-      if (search) {
-        const searchLower = search.toLowerCase();
-        filteredPartners = filteredPartners.filter(p => 
-          p.name.toLowerCase().includes(searchLower) ||
-          p.description.toLowerCase().includes(searchLower) ||
-          p.services.some(s => s.toLowerCase().includes(searchLower)) ||
-          p.tags.some(t => t.toLowerCase().includes(searchLower))
+        filteredPartners = filteredPartners.filter(
+          (p) => p.category === category
         );
       }
-      
+
+      if (partnershipType && partnershipType !== "all") {
+        filteredPartners = filteredPartners.filter(
+          (p) => p.partnershipType === partnershipType
+        );
+      }
+
+      if (search) {
+        const searchLower = search.toLowerCase();
+        filteredPartners = filteredPartners.filter(
+          (p) =>
+            p.name.toLowerCase().includes(searchLower) ||
+            p.description.toLowerCase().includes(searchLower) ||
+            p.services.some((s) => s.toLowerCase().includes(searchLower)) ||
+            p.tags.some((t) => t.toLowerCase().includes(searchLower))
+        );
+      }
+
       return res.json(filteredPartners);
     }
-    
+
     res.json(partners);
   } catch (err) {
     console.error("Error fetching partners:", err);
@@ -325,12 +279,12 @@ router.get("/debug/test", async (req, res) => {
     const totalPartners = await Partner.countDocuments();
     const activePartners = await Partner.countDocuments({ isActive: true });
     const allPartners = await Partner.find({}).limit(5);
-    
+
     res.json({
       totalPartners,
       activePartners,
       samplePartners: allPartners,
-      message: "Database connection working"
+      message: "Database connection working",
     });
   } catch (err) {
     console.error("Test endpoint error:", err);
