@@ -464,11 +464,16 @@ export default function PartnersView() {
                       const fd = new FormData();
                       fd.append("image", file);
                       const token = localStorage.getItem("token");
+                      const baseUrl =
+                        import.meta.env.VITE_BACKEND_URL ||
+                        "https://api.thegrrrlsclub.de";
                       const res = await fetch(
-                        import.meta.env.VITE_BACKEND_URL || "https://api.thegrrrlsclub.de" + "/products/upload",
+                        baseUrl + "/products/upload",
                         {
                           method: "POST",
-                          headers: token ? { Authorization: `Bearer ${token}` } : {},
+                          headers: token
+                            ? { Authorization: `Bearer ${token}` }
+                            : {},
                           body: fd,
                         }
                       );
@@ -499,16 +504,24 @@ export default function PartnersView() {
                       const fd = new FormData();
                       fd.append("image", file);
                       const token = localStorage.getItem("token");
+                      const baseUrl =
+                        import.meta.env.VITE_BACKEND_URL ||
+                        "https://api.thegrrrlsclub.de";
                       const res = await fetch(
-                        import.meta.env.VITE_BACKEND_URL || "https://api.thegrrrlsclub.de" + "/products/upload",
+                        baseUrl + "/products/upload",
                         {
                           method: "POST",
-                          headers: token ? { Authorization: `Bearer ${token}` } : {},
+                          headers: token
+                            ? { Authorization: `Bearer ${token}` }
+                            : {},
                           body: fd,
                         }
                       );
                       const data = await res.json();
-                      setFormData((prev) => ({ ...prev, featuredImage: data.imageUrl }));
+                      setFormData((prev) => ({
+                        ...prev,
+                        featuredImage: data.imageUrl,
+                      }));
                     }}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                   />
