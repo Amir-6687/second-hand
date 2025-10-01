@@ -211,17 +211,27 @@ export default function Partners() {
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                style={{ alignItems: "stretch" }}
+              >
                 {partners.map((partner) => (
                   <LazyWrapper key={partner._id}>
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div
+                      className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        height: "100%",
+                      }}
+                    >
                       {/* Partner Image */}
-                      <div className="h-48 bg-[#eef5db] flex items-center justify-center">
+                      <div className="h-48 bg-[#eef5db] flex items-center justify-center overflow-hidden p-4">
                         {partner.logo || partner.featuredImage ? (
                           <OptimizedImage
                             src={partner.logo || partner.featuredImage}
                             alt={partner.name}
-                            className="max-h-40 w-auto object-contain"
+                            className="max-h-full max-w-full object-contain"
                           />
                         ) : (
                           <div className="text-6xl">
@@ -231,7 +241,14 @@ export default function Partners() {
                       </div>
 
                       {/* Partner Content */}
-                      <div className="p-6">
+                      <div
+                        className="p-6 flex flex-col flex-1"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          flex: "1",
+                        }}
+                      >
                         <div className="flex items-center justify-between mb-3">
                           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#eef5db] text-[#849c22]">
                             {getCategoryIcon(partner.category)}{" "}
@@ -247,47 +264,64 @@ export default function Partners() {
                           {partner.name}
                         </h3>
 
-                        <p className="text-[#171717] mb-4 line-clamp-3">
+                        <p
+                          className="text-[#171717] mb-4 line-clamp-3"
+                          style={{ height: "4.5rem", overflow: "hidden" }}
+                        >
                           {partner.description}
                         </p>
 
                         {/* Services */}
-                        {partner.services && partner.services.length > 0 && (
-                          <div className="mb-4">
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2">
-                              Services:
-                            </h4>
-                            <div className="flex flex-wrap gap-1">
-                              {partner.services
-                                .slice(0, 3)
-                                .map((service, index) => (
-                                  <span
-                                    key={index}
-                                    className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
-                                  >
-                                    {service}
+                        <div
+                          className="mb-4"
+                          style={{ height: "3rem", overflow: "hidden" }}
+                        >
+                          {partner.services && partner.services.length > 0 && (
+                            <div>
+                              <h4 className="text-sm font-semibold text-gray-700 mb-2">
+                                Services:
+                              </h4>
+                              <div className="flex flex-wrap gap-1">
+                                {partner.services
+                                  .slice(0, 3)
+                                  .map((service, index) => (
+                                    <span
+                                      key={index}
+                                      className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                                    >
+                                      {service}
+                                    </span>
+                                  ))}
+                                {partner.services.length > 3 && (
+                                  <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                                    +{partner.services.length - 3} mehr
                                   </span>
-                                ))}
-                              {partner.services.length > 3 && (
-                                <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
-                                  +{partner.services.length - 3} mehr
-                                </span>
-                              )}
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
+                        </div>
 
                         {/* Special Offers */}
-                        {partner.specialOffers && (
-                          <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                            <p className="text-sm text-yellow-800">
-                              <strong>Angebot:</strong> {partner.specialOffers}
-                            </p>
-                          </div>
-                        )}
+                        <div
+                          className="mb-4"
+                          style={{ height: "2rem", overflow: "hidden" }}
+                        >
+                          {partner.specialOffers && (
+                            <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                              <p className="text-sm text-yellow-800">
+                                <strong>Angebot:</strong>{" "}
+                                {partner.specialOffers}
+                              </p>
+                            </div>
+                          )}
+                        </div>
 
                         {/* Contact Info */}
-                        <div className="space-y-2 text-sm text-[#171717]">
+                        <div
+                          className="space-y-2 text-sm text-[#171717]"
+                          style={{ height: "3rem", overflow: "hidden" }}
+                        >
                           {partner.contactInfo?.phone && (
                             <p>📞 {partner.contactInfo.phone}</p>
                           )}
@@ -297,7 +331,15 @@ export default function Partners() {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="mt-6 flex gap-3">
+                        <div
+                          className="mt-auto pt-4 flex gap-3"
+                          style={{
+                            marginTop: "auto",
+                            paddingTop: "1rem",
+                            display: "flex",
+                            gap: "0.75rem",
+                          }}
+                        >
                           <a
                             href={partner.website}
                             target="_blank"

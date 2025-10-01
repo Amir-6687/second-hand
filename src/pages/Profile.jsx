@@ -279,6 +279,7 @@ export default function Profile() {
                       }`}
                       placeholder="Enter your username"
                       required
+                      style={{ backgroundColor: "#ffffff", color: "#111827" }}
                     />
                     {usernameError && (
                       <p className="text-red-500 text-sm mt-1">
@@ -313,6 +314,7 @@ export default function Profile() {
                       value={profile.first_name || ""}
                       onChange={handleChange}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      style={{ backgroundColor: "#ffffff", color: "#111827" }}
                     />
                   </div>
                   <div>
@@ -325,6 +327,7 @@ export default function Profile() {
                       value={profile.last_name || ""}
                       onChange={handleChange}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      style={{ backgroundColor: "#ffffff", color: "#111827" }}
                     />
                   </div>
                   <div>
@@ -337,6 +340,7 @@ export default function Profile() {
                       value={profile.phone || ""}
                       onChange={handleChange}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      style={{ backgroundColor: "#ffffff", color: "#111827" }}
                     />
                   </div>
                   <div>
@@ -349,6 +353,7 @@ export default function Profile() {
                       onChange={handleChange}
                       rows={3}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      style={{ backgroundColor: "#ffffff", color: "#111827" }}
                     />
                   </div>
                 </div>

@@ -21,8 +21,6 @@ export default function PartnersView() {
     category: "other",
     services: [],
     partnershipType: "geschaeftspartner",
-    logo: "",
-    featuredImage: "",
     contactInfo: {
       email: "",
       phone: "",
@@ -140,8 +138,6 @@ export default function PartnersView() {
       category: partner.category || "other",
       services: partner.services || [],
       partnershipType: partner.partnershipType || "geschaeftspartner",
-      logo: partner.logo || "",
-      featuredImage: partner.featuredImage || "",
       contactInfo: {
         email: partner.contactInfo?.email || "",
         phone: partner.contactInfo?.phone || "",
@@ -187,8 +183,6 @@ export default function PartnersView() {
       category: "other",
       services: [],
       partnershipType: "geschaeftspartner",
-      logo: "",
-      featuredImage: "",
       contactInfo: {
         email: "",
         phone: "",
@@ -446,92 +440,6 @@ export default function PartnersView() {
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   />
-                </div>
-              </div>
-
-              {/* Logo upload */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Logo
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={async (e) => {
-                      const file = e.target.files && e.target.files[0];
-                      if (!file) return;
-                      const fd = new FormData();
-                      fd.append("image", file);
-                      const token = localStorage.getItem("token");
-                      const baseUrl =
-                        import.meta.env.VITE_BACKEND_URL ||
-                        "https://api.thegrrrlsclub.de";
-                      const res = await fetch(
-                        baseUrl + "/products/upload",
-                        {
-                          method: "POST",
-                          headers: token
-                            ? { Authorization: `Bearer ${token}` }
-                            : {},
-                          body: fd,
-                        }
-                      );
-                      const data = await res.json();
-                      setFormData((prev) => ({ ...prev, logo: data.imageUrl }));
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  />
-                  {formData.logo && (
-                    <img
-                      src={formData.logo}
-                      alt="Logo preview"
-                      className="mt-2 w-16 h-16 object-cover rounded border"
-                    />
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Featured Image (optional)
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={async (e) => {
-                      const file = e.target.files && e.target.files[0];
-                      if (!file) return;
-                      const fd = new FormData();
-                      fd.append("image", file);
-                      const token = localStorage.getItem("token");
-                      const baseUrl =
-                        import.meta.env.VITE_BACKEND_URL ||
-                        "https://api.thegrrrlsclub.de";
-                      const res = await fetch(
-                        baseUrl + "/products/upload",
-                        {
-                          method: "POST",
-                          headers: token
-                            ? { Authorization: `Bearer ${token}` }
-                            : {},
-                          body: fd,
-                        }
-                      );
-                      const data = await res.json();
-                      setFormData((prev) => ({
-                        ...prev,
-                        featuredImage: data.imageUrl,
-                      }));
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  />
-                  {formData.featuredImage && (
-                    <img
-                      src={formData.featuredImage}
-                      alt="Featured preview"
-                      className="mt-2 w-24 h-16 object-cover rounded border"
-                    />
-                  )}
                 </div>
               </div>
 

@@ -121,7 +121,7 @@ const UsersView = () => {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete user");
-      
+
       fetchUsers(); // Refresh the list
       alert("User deleted successfully!");
     } catch (err) {
@@ -141,7 +141,7 @@ const UsersView = () => {
         body: JSON.stringify(selectedUser),
       });
       if (!res.ok) throw new Error("Failed to update user");
-      
+
       setShowEditModal(false);
       fetchUsers(); // Refresh the list
       alert("User updated successfully!");
@@ -170,9 +170,15 @@ const UsersView = () => {
           <input
             type="text"
             placeholder="Search users..."
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 w-full sm:w-64"
+            className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 w-full sm:w-64 bg-white text-gray-900 placeholder-gray-500 shadow-sm"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              backgroundColor: "#ffffff",
+              color: "#111827",
+              WebkitTextFillColor: "#111827",
+              caretColor: "#111827",
+            }}
           />
           <button
             onClick={exportUsers}
@@ -221,7 +227,13 @@ const UsersView = () => {
                   <select
                     value={user.role || "user"}
                     onChange={(e) => changeUserRole(user._id, e.target.value)}
-                    className="border border-gray-300 rounded px-2 py-1 text-sm"
+                    className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-900 shadow-sm"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: "#111827",
+                      WebkitTextFillColor: "#111827",
+                      caretColor: "#111827",
+                    }}
                   >
                     <option value="user">User</option>
                     <option value="admin">Admin</option>
@@ -291,19 +303,27 @@ const UsersView = () => {
               </div>
               <div>
                 <label className="font-medium text-gray-700">Name:</label>
-                <p className="text-gray-900">{selectedUser.first_name} {selectedUser.last_name}</p>
+                <p className="text-gray-900">
+                  {selectedUser.first_name} {selectedUser.last_name}
+                </p>
               </div>
               <div>
                 <label className="font-medium text-gray-700">Phone:</label>
-                <p className="text-gray-900">{selectedUser.phone || "Not provided"}</p>
+                <p className="text-gray-900">
+                  {selectedUser.phone || "Not provided"}
+                </p>
               </div>
               <div>
                 <label className="font-medium text-gray-700">Address:</label>
-                <p className="text-gray-900">{selectedUser.address || "Not provided"}</p>
+                <p className="text-gray-900">
+                  {selectedUser.address || "Not provided"}
+                </p>
               </div>
               <div>
                 <label className="font-medium text-gray-700">Role:</label>
-                <p className="text-gray-900 capitalize">{selectedUser.role || "user"}</p>
+                <p className="text-gray-900 capitalize">
+                  {selectedUser.role || "user"}
+                </p>
               </div>
             </div>
             <div className="flex justify-end mt-6">
@@ -333,67 +353,149 @@ const UsersView = () => {
             </div>
             <form onSubmit={handleEditSubmit} className="space-y-4">
               <div>
-                <label className="block font-medium text-gray-700 mb-1">Username:</label>
+                <label className="block font-medium text-gray-700 mb-1">
+                  Username:
+                </label>
                 <input
                   type="text"
                   value={selectedUser.username}
-                  onChange={(e) => setSelectedUser({...selectedUser, username: e.target.value})}
+                  onChange={(e) =>
+                    setSelectedUser({
+                      ...selectedUser,
+                      username: e.target.value,
+                    })
+                  }
                   className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    color: "#111827",
+                    WebkitTextFillColor: "#111827",
+                    caretColor: "#111827",
+                  }}
                 />
               </div>
               <div>
-                <label className="block font-medium text-gray-700 mb-1">Email:</label>
+                <label className="block font-medium text-gray-700 mb-1">
+                  Email:
+                </label>
                 <input
                   type="email"
                   value={selectedUser.email}
-                  onChange={(e) => setSelectedUser({...selectedUser, email: e.target.value})}
+                  onChange={(e) =>
+                    setSelectedUser({ ...selectedUser, email: e.target.value })
+                  }
                   className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    color: "#111827",
+                    WebkitTextFillColor: "#111827",
+                    caretColor: "#111827",
+                  }}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-medium text-gray-700 mb-1">First Name:</label>
+                  <label className="block font-medium text-gray-700 mb-1">
+                    First Name:
+                  </label>
                   <input
                     type="text"
                     value={selectedUser.first_name || ""}
-                    onChange={(e) => setSelectedUser({...selectedUser, first_name: e.target.value})}
+                    onChange={(e) =>
+                      setSelectedUser({
+                        ...selectedUser,
+                        first_name: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: "#111827",
+                      WebkitTextFillColor: "#111827",
+                      caretColor: "#111827",
+                    }}
                   />
                 </div>
                 <div>
-                  <label className="block font-medium text-gray-700 mb-1">Last Name:</label>
+                  <label className="block font-medium text-gray-700 mb-1">
+                    Last Name:
+                  </label>
                   <input
                     type="text"
                     value={selectedUser.last_name || ""}
-                    onChange={(e) => setSelectedUser({...selectedUser, last_name: e.target.value})}
+                    onChange={(e) =>
+                      setSelectedUser({
+                        ...selectedUser,
+                        last_name: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: "#111827",
+                      WebkitTextFillColor: "#111827",
+                      caretColor: "#111827",
+                    }}
                   />
                 </div>
               </div>
               <div>
-                <label className="block font-medium text-gray-700 mb-1">Phone:</label>
+                <label className="block font-medium text-gray-700 mb-1">
+                  Phone:
+                </label>
                 <input
                   type="tel"
                   value={selectedUser.phone || ""}
-                  onChange={(e) => setSelectedUser({...selectedUser, phone: e.target.value})}
+                  onChange={(e) =>
+                    setSelectedUser({ ...selectedUser, phone: e.target.value })
+                  }
                   className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    color: "#111827",
+                    WebkitTextFillColor: "#111827",
+                    caretColor: "#111827",
+                  }}
                 />
               </div>
               <div>
-                <label className="block font-medium text-gray-700 mb-1">Address:</label>
+                <label className="block font-medium text-gray-700 mb-1">
+                  Address:
+                </label>
                 <textarea
                   value={selectedUser.address || ""}
-                  onChange={(e) => setSelectedUser({...selectedUser, address: e.target.value})}
+                  onChange={(e) =>
+                    setSelectedUser({
+                      ...selectedUser,
+                      address: e.target.value,
+                    })
+                  }
                   rows={3}
                   className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    color: "#111827",
+                    WebkitTextFillColor: "#111827",
+                    caretColor: "#111827",
+                  }}
                 />
               </div>
               <div>
-                <label className="block font-medium text-gray-700 mb-1">Role:</label>
+                <label className="block font-medium text-gray-700 mb-1">
+                  Role:
+                </label>
                 <select
                   value={selectedUser.role || "user"}
-                  onChange={(e) => setSelectedUser({...selectedUser, role: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  onChange={(e) =>
+                    setSelectedUser({ ...selectedUser, role: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white text-gray-900 shadow-sm"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    color: "#111827",
+                    WebkitTextFillColor: "#111827",
+                    caretColor: "#111827",
+                  }}
                 >
                   <option value="user">User</option>
                   <option value="admin">Admin</option>

@@ -453,7 +453,7 @@ export default function Admin() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow mt-10">
+    <div className="admin-page max-w-2xl mx-auto p-6 bg-white rounded shadow mt-10">
       <h2 className="text-2xl font-bold mb-4">Product Management</h2>
 
       {/* Tabs */}
@@ -1370,7 +1370,9 @@ export default function Admin() {
                       const res = await fetch(BASE_URL + "/products/upload", {
                         method: "POST",
                         headers: {
-                          Authorization: `Bearer ${localStorage.getItem("token")}`,
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                          )}`,
                         },
                         body: formData,
                       });
@@ -1399,12 +1401,17 @@ export default function Admin() {
                       const res = await fetch(BASE_URL + "/products/upload", {
                         method: "POST",
                         headers: {
-                          Authorization: `Bearer ${localStorage.getItem("token")}`,
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                          )}`,
                         },
                         body: formData,
                       });
                       const data = await res.json();
-                      setPartnerForm((f) => ({ ...f, featuredImage: data.imageUrl }));
+                      setPartnerForm((f) => ({
+                        ...f,
+                        featuredImage: data.imageUrl,
+                      }));
                     }}
                     className="w-full border p-2 rounded"
                   />
