@@ -138,7 +138,7 @@ export default function Login() {
               </label>
               <div className="relative">
                 <input
-                  className="w-full border border-white/60 bg-white backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all md:bg-white md:backdrop-blur-0 md:border-white/80"
+                  className="w-full border border-white/60 bg-white backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg pr-16 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all md:bg-white md:backdrop-blur-0 md:border-white/80"
                   type="password"
                   placeholder="Your Password"
                   value={password}
@@ -159,12 +159,14 @@ export default function Login() {
                   className="absolute top-1/2 right-4 -translate-y-1/2 text-gray-600 hover:text-gray-800 transition-colors z-10 bg-white px-2 py-1 rounded"
                   style={{
                     position: "absolute",
-                    right: "16px",
+                    right: "8px",
                     top: "50%",
                     transform: "translateY(-50%)",
                     backgroundColor: "#ffffff",
                     padding: "4px 8px",
                     borderRadius: "4px",
+                    border: "1px solid #e5e7eb",
+                    boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
                   }}
                   aria-label={showPassword ? "Hide Password" : "Show Password"}
                 >
