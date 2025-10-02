@@ -139,7 +139,7 @@ export default function Login() {
               <div className="relative">
                 <input
                   className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all md:bg-white md:backdrop-blur-0 md:border-white/80"
-                  type={showPassword ? "text" : "password"}
+                  type="text"
                   placeholder="Your Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
