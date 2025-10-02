@@ -192,7 +192,7 @@ export default function Home() {
                 objectFit: "cover",
                 zIndex: 0,
               }}
-              fetchpriority="high"
+              fetchPriority="high"
               decoding="async"
             />
           </picture>

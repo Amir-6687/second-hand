@@ -117,12 +117,18 @@ export default function Login() {
                 Email
               </label>
               <input
-                className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
+                className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all md:bg-white md:backdrop-blur-0 md:border-white/80"
                 type="email"
                 placeholder="Your Email Address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#111827",
+                  WebkitTextFillColor: "#111827",
+                  caretColor: "#111827",
+                }}
               />
             </div>
 
@@ -132,22 +138,31 @@ export default function Login() {
               </label>
               <div className="relative">
                 <input
-                  className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
+                  className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 p-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all md:bg-white md:backdrop-blur-0 md:border-white/80"
                   type={showPassword ? "text" : "password"}
                   placeholder="Your Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  style={{
+                    backgroundColor: "#ffffff",
+                    color: "#111827",
+                    WebkitTextFillColor: "#111827",
+                    caretColor: "#111827",
+                  }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800 transition-colors z-10 md:right-0 left-64 md:left-80"
+                  className="absolute top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800 transition-colors z-10"
                   style={{
                     position: "absolute",
-                    right: "12px",
+                    right: "16px",
                     top: "50%",
                     transform: "translateY(-50%)",
+                    background:
+                      "linear-gradient(90deg, rgba(255,255,255,0) 0%, #ffffff 40%)",
+                    paddingLeft: "8px",
                   }}
                   aria-label={showPassword ? "Hide Password" : "Show Password"}
                 >
@@ -194,7 +209,8 @@ export default function Login() {
               <label className="flex items-center">
                 <input
                   type="checkbox"
-                  className="mr-2 accent-gray-800"
+                  className="mr-2 accent-gray-800 bg-white border border-white/80 rounded"
+                  style={{ backgroundColor: "#ffffff" }}
                   checked={stayLoggedIn}
                   onChange={(e) => setStayLoggedIn(e.target.checked)}
                 />

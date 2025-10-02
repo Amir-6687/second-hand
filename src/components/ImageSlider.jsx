@@ -113,15 +113,17 @@ const ImageSlider = () => {
           </div>
 
           {/* Auto-play indicator */}
-          <div className="absolute top-4 left-4 flex items-center space-x-2">
-            <div
-              className={`w-2 h-2 rounded-full ${
-                isAutoPlaying ? "bg-green-400" : "bg-gray-400"
-              }`}
-            ></div>
-            <span className="text-sm font-medium" style={{ color: "#171717" }}>
-              {isAutoPlaying ? "Auto" : "Paused"}
-            </span>
+          <div className="absolute top-4 left-4">
+            <div className="bg-gray-600/80 px-3 py-1 rounded-full flex items-center space-x-2">
+              <div
+                className={`w-2 h-2 rounded-full ${
+                  isAutoPlaying ? "bg-green-400" : "bg-gray-400"
+                }`}
+              ></div>
+              <span className="text-sm font-medium text-white">
+                {isAutoPlaying ? "Auto" : "Paused"}
+              </span>
+            </div>
           </div>
         </div>
 

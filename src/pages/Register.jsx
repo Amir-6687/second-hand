@@ -135,6 +135,12 @@ export default function Register() {
                 value={form.email}
                 onChange={handleChange}
                 className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#111827",
+                  WebkitTextFillColor: "#111827",
+                  caretColor: "#111827",
+                }}
               />
             </div>
             <div>
@@ -148,6 +154,12 @@ export default function Register() {
                 className={`w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all ${
                   errors.password ? "border-red-400" : ""
                 }`}
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#111827",
+                  WebkitTextFillColor: "#111827",
+                  caretColor: "#111827",
+                }}
               />
               {errors.password && (
                 <p className="text-red-200 text-xs mt-1 drop-shadow-sm">
@@ -166,6 +178,12 @@ export default function Register() {
                 className={`w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all ${
                   errors.confirmPassword ? "border-red-400" : ""
                 }`}
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#111827",
+                  WebkitTextFillColor: "#111827",
+                  caretColor: "#111827",
+                }}
               />
               {errors.confirmPassword && (
                 <p className="text-red-200 text-xs mt-1 drop-shadow-sm">
@@ -183,6 +201,12 @@ export default function Register() {
                 className={`w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all ${
                   errors.first_name ? "border-red-400" : ""
                 }`}
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#111827",
+                  WebkitTextFillColor: "#111827",
+                  caretColor: "#111827",
+                }}
               />
               {errors.first_name && (
                 <p className="text-red-200 text-xs mt-1 drop-shadow-sm">
@@ -200,6 +224,12 @@ export default function Register() {
                 className={`w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all ${
                   errors.last_name ? "border-red-400" : ""
                 }`}
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#111827",
+                  WebkitTextFillColor: "#111827",
+                  caretColor: "#111827",
+                }}
               />
               {errors.last_name && (
                 <p className="text-red-200 text-xs mt-1 drop-shadow-sm">
@@ -214,6 +244,12 @@ export default function Register() {
                 value={form.phone}
                 onChange={handleChange}
                 className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#111827",
+                  WebkitTextFillColor: "#111827",
+                  caretColor: "#111827",
+                }}
               />
             </div>
             <div>
@@ -223,6 +259,12 @@ export default function Register() {
                 value={form.address}
                 onChange={handleChange}
                 className="w-full border border-white/60 bg-white/85 backdrop-blur-sm text-gray-900 placeholder-gray-700 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#111827",
+                  WebkitTextFillColor: "#111827",
+                  caretColor: "#111827",
+                }}
               />
             </div>
             <button

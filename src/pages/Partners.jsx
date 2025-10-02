@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { PiInstagramLogoLight } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import { apiFetch } from "../lib/api";
@@ -102,7 +103,7 @@ export default function Partners() {
 
       <main id="main-content" className="min-h-screen bg-white">
         {/* Header Section */}
-        <section className="bg-gradient-to-r from-teal-600 to-teal-800 text-white py-16">
+        <section className="bg-[#849c22] text-white py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Geschäftspartner & Synergin
@@ -115,7 +116,7 @@ export default function Partners() {
         </section>
 
         {/* Filters Section */}
-        <section className="bg-gray-50 py-8">
+        <section className="py-8" style={{ backgroundColor: "#ffffff" }}>
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <form onSubmit={handleSearch} className="mb-6">
@@ -126,12 +127,12 @@ export default function Partners() {
                       placeholder="Partner suchen..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 shadow-sm focus:ring-2 focus:ring-[#849c22] focus:border-transparent"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+                    className="px-6 py-3 bg-[#849c22] text-white rounded-lg hover:bg-[#6b7e1c] transition-colors"
                   >
                     Suchen
                   </button>
@@ -147,11 +148,17 @@ export default function Partners() {
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
+                    className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-[#849c22]"
                   >
-                    <option value="all">Alle Kategorien</option>
+                    <option className="bg-white text-gray-900" value="all">
+                      Alle Kategorien
+                    </option>
                     {categories.map((category) => (
-                      <option key={category.value} value={category.value}>
+                      <option
+                        className="bg-white text-gray-900"
+                        key={category.value}
+                        value={category.value}
+                      >
                         {category.icon} {category.label}
                       </option>
                     ))}
@@ -166,11 +173,17 @@ export default function Partners() {
                   <select
                     value={selectedType}
                     onChange={(e) => setSelectedType(e.target.value)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
+                    className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-[#849c22]"
                   >
-                    <option value="all">Alle Typen</option>
+                    <option className="bg-white text-gray-900" value="all">
+                      Alle Typen
+                    </option>
                     {types.map((type) => (
-                      <option key={type.value} value={type.value}>
+                      <option
+                        className="bg-white text-gray-900"
+                        key={type.value}
+                        value={type.value}
+                      >
                         {type.icon} {type.label}
                       </option>
                     ))}
@@ -198,17 +211,27 @@ export default function Partners() {
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                style={{ alignItems: "stretch" }}
+              >
                 {partners.map((partner) => (
                   <LazyWrapper key={partner._id}>
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div
+                      className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        height: "100%",
+                      }}
+                    >
                       {/* Partner Image */}
-                      <div className="h-48 bg-gradient-to-br from-teal-100 to-teal-200 flex items-center justify-center">
-                        {partner.featuredImage ? (
+                      <div className="h-48 bg-[#eef5db] flex items-center justify-center overflow-hidden p-4">
+                        {partner.logo || partner.featuredImage ? (
                           <OptimizedImage
-                            src={partner.featuredImage}
+                            src={partner.logo || partner.featuredImage}
                             alt={partner.name}
-                            className="w-full h-full object-cover"
+                            className="max-h-full max-w-full object-contain"
                           />
                         ) : (
                           <div className="text-6xl">
@@ -218,9 +241,16 @@ export default function Partners() {
                       </div>
 
                       {/* Partner Content */}
-                      <div className="p-6">
+                      <div
+                        className="p-6 flex flex-col flex-1"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          flex: "1",
+                        }}
+                      >
                         <div className="flex items-center justify-between mb-3">
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#eef5db] text-[#849c22]">
                             {getCategoryIcon(partner.category)}{" "}
                             {getCategoryLabel(partner.category)}
                           </span>
@@ -234,47 +264,64 @@ export default function Partners() {
                           {partner.name}
                         </h3>
 
-                        <p className="text-[#171717] mb-4 line-clamp-3">
+                        <p
+                          className="text-[#171717] mb-4 line-clamp-3"
+                          style={{ height: "4.5rem", overflow: "hidden" }}
+                        >
                           {partner.description}
                         </p>
 
                         {/* Services */}
-                        {partner.services && partner.services.length > 0 && (
-                          <div className="mb-4">
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2">
-                              Services:
-                            </h4>
-                            <div className="flex flex-wrap gap-1">
-                              {partner.services
-                                .slice(0, 3)
-                                .map((service, index) => (
-                                  <span
-                                    key={index}
-                                    className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
-                                  >
-                                    {service}
+                        <div
+                          className="mb-4"
+                          style={{ height: "3rem", overflow: "hidden" }}
+                        >
+                          {partner.services && partner.services.length > 0 && (
+                            <div>
+                              <h4 className="text-sm font-semibold text-gray-700 mb-2">
+                                Services:
+                              </h4>
+                              <div className="flex flex-wrap gap-1">
+                                {partner.services
+                                  .slice(0, 3)
+                                  .map((service, index) => (
+                                    <span
+                                      key={index}
+                                      className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                                    >
+                                      {service}
+                                    </span>
+                                  ))}
+                                {partner.services.length > 3 && (
+                                  <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                                    +{partner.services.length - 3} mehr
                                   </span>
-                                ))}
-                              {partner.services.length > 3 && (
-                                <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
-                                  +{partner.services.length - 3} mehr
-                                </span>
-                              )}
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
+                        </div>
 
                         {/* Special Offers */}
-                        {partner.specialOffers && (
-                          <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                            <p className="text-sm text-yellow-800">
-                              <strong>Angebot:</strong> {partner.specialOffers}
-                            </p>
-                          </div>
-                        )}
+                        <div
+                          className="mb-4"
+                          style={{ height: "2rem", overflow: "hidden" }}
+                        >
+                          {partner.specialOffers && (
+                            <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                              <p className="text-sm text-yellow-800">
+                                <strong>Angebot:</strong>{" "}
+                                {partner.specialOffers}
+                              </p>
+                            </div>
+                          )}
+                        </div>
 
                         {/* Contact Info */}
-                        <div className="space-y-2 text-sm text-[#171717]">
+                        <div
+                          className="space-y-2 text-sm text-[#171717]"
+                          style={{ height: "3rem", overflow: "hidden" }}
+                        >
                           {partner.contactInfo?.phone && (
                             <p>📞 {partner.contactInfo.phone}</p>
                           )}
@@ -284,12 +331,20 @@ export default function Partners() {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="mt-6 flex gap-3">
+                        <div
+                          className="mt-auto pt-4 flex gap-3"
+                          style={{
+                            marginTop: "auto",
+                            paddingTop: "1rem",
+                            display: "flex",
+                            gap: "0.75rem",
+                          }}
+                        >
                           <a
                             href={partner.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 bg-teal-600 text-white text-center py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors"
+                            className="flex-1 bg-[#849c22] text-white text-center py-2 px-4 rounded-lg hover:bg-[#6b7e1c] transition-colors"
                           >
                             Website besuchen
                           </a>
@@ -298,9 +353,10 @@ export default function Partners() {
                               href={partner.instagram}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center"
+                              aria-label="Instagram"
                             >
-                              📷
+                              <PiInstagramLogoLight size={22} />
                             </a>
                           )}
                         </div>
@@ -314,7 +370,7 @@ export default function Partners() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-teal-600 text-white py-16">
+        <section className="bg-[#849c22] text-white py-16">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-4">
               Möchten Sie unser Partner werden?
@@ -324,7 +380,7 @@ export default function Partners() {
             </p>
             <Link
               to="/contact"
-              className="inline-block bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="inline-block bg-white text-[#849c22] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               Kontakt aufnehmen
             </Link>
