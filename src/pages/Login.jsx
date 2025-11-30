@@ -148,20 +148,18 @@ export default function Login() {
                     color: "#111827",
                     WebkitTextFillColor: "#111827",
                     caretColor: "#111827",
+                    paddingRight: "48px",
                   }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800 transition-colors z-10"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-800 transition-colors z-10 bg-transparent border-none p-0 cursor-pointer"
                   style={{
-                    position: "absolute",
-                    right: "16px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    background:
-                      "linear-gradient(90deg, rgba(255,255,255,0) 0%, #ffffff 40%)",
-                    paddingLeft: "8px",
+                    background: "transparent",
+                    border: "none",
+                    padding: "0",
+                    cursor: "pointer",
                   }}
                   aria-label={showPassword ? "Hide Password" : "Show Password"}
                 >
