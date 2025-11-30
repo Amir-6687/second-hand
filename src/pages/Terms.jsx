@@ -184,7 +184,7 @@ const Terms = () => {
                     us:
                   </p>
                   <p className="text-[#171717] mt-2">
-                    Email: info@thegrrrlsclub.de
+                    Email: jelena.rieke@gmail.com
                     <br />
                     Website: www.thegrrrlsclub.de
                   </p>

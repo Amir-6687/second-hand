@@ -208,7 +208,7 @@ const Privacy = () => {
                     data practices, please contact us:
                   </p>
                   <p className="text-[#171717]">
-                    Email: info@thegrrrlsclub.de
+                    Email: jelena.rieke@gmail.com
                     <br />
                     Website: www.thegrrrlsclub.de
                   </p>

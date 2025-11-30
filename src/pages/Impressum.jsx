@@ -45,7 +45,7 @@ const Impressum = () => {
                   <p className="text-[#171717] leading-relaxed">
                     <strong>Phone:</strong> [Phone number]
                     <br />
-                    <strong>E-Mail:</strong> info@thegrrrlsclub.de
+                    <strong>E-Mail:</strong> jelena.rieke@gmail.com
                     <br />
                     <strong>Website:</strong> www.thegrrrlsclub.de
                   </p>
