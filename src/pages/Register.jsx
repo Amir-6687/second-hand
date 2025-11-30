@@ -160,7 +160,7 @@ export default function Register() {
                     color: "#111827",
                     WebkitTextFillColor: "#111827",
                     caretColor: "#111827",
-                    paddingRight: "48px",
+                    paddingRight: "28px",
                   }}
                 />
                 <button
@@ -173,7 +173,7 @@ export default function Register() {
                     padding: "0",
                     cursor: "pointer",
                     zIndex: 1,
-                    right: "4px",
+                    right: "0px",
                   }}
                   aria-label={showPassword ? "Hide Password" : "Show Password"}
                 >
@@ -237,7 +237,7 @@ export default function Register() {
                     color: "#111827",
                     WebkitTextFillColor: "#111827",
                     caretColor: "#111827",
-                    paddingRight: "48px",
+                    paddingRight: "28px",
                   }}
                 />
                 <button
@@ -250,7 +250,7 @@ export default function Register() {
                     padding: "0",
                     cursor: "pointer",
                     zIndex: 1,
-                    right: "4px",
+                    right: "0px",
                   }}
                   aria-label={
                     showConfirmPassword ? "Hide Password" : "Show Password"
