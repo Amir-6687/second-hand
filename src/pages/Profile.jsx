@@ -42,7 +42,6 @@ export default function Profile() {
         throw new Error(`HTTP ${res.status}: Failed to load profile`);
       }
       const data = await res.json();
-      console.log("Loaded profile data:", data); // Debug log
       setProfile(data);
     } catch (err) {
       console.error("Profile loading error:", err);
@@ -84,8 +83,6 @@ export default function Profile() {
     setUsernameError("");
 
     try {
-      console.log("Submitting profile data:", profile); // Debug log
-
       const res = await apiFetch("/profile", {
         method: "PUT",
         body: JSON.stringify(profile),
@@ -110,7 +107,6 @@ export default function Profile() {
       }
 
       const data = await res.json();
-      console.log("Updated profile response:", data); // Debug log
 
       // Update profile state with the response data
       setProfile(data);

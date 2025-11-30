@@ -48,13 +48,6 @@ export default function AdminDashboard() {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    // TODO: Remove this in production - only for testing
-    // if (!localStorage.getItem("token")) {
-    //   localStorage.setItem(
-    //     "token",
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3N2VjYTZmNzEzY2U5NGRlZGI3NmEiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MzcxMDI5OSwiZXhwIjoxNzUzNzk2Njk5fQ.rl94go2VdicRDaxdLWhrWIetQf5-y-bcsm4mCS00dEw"
-    //   );
-    // }
     checkUserRole();
   }, [dateRange]);
 
@@ -64,7 +57,6 @@ export default function AdminDashboard() {
       // Check if user is logged in
       const token = localStorage.getItem("token");
       if (!token) {
-        console.log("No token found, redirecting to login");
         window.location.href = "/login";
         return;
       }
@@ -75,7 +67,6 @@ export default function AdminDashboard() {
         const role = payload.role;
 
         if (role !== "admin") {
-          console.log("User is not admin, redirecting to home");
           window.location.href = "/";
           return;
         }
@@ -103,7 +94,6 @@ export default function AdminDashboard() {
       // Check if user is logged in
       const token = localStorage.getItem("token");
       if (!token) {
-        console.log("No token found, redirecting to login");
         window.location.href = "/login";
         return;
       }
@@ -122,17 +112,10 @@ export default function AdminDashboard() {
           ordersRes.status === 401 ||
           productsRes.status === 401
         ) {
-          console.log("Unauthorized, redirecting to login");
           localStorage.removeItem("token");
           window.location.href = "/login";
           return;
         }
-        console.log(
-          "Response status:",
-          usersRes.status,
-          ordersRes.status,
-          productsRes.status
-        );
         throw new Error("Failed to fetch data");
       }
 
@@ -170,7 +153,6 @@ export default function AdminDashboard() {
       console.error("Error fetching dashboard data:", err);
       // If it's a JSON parse error, it might be an HTML response (login page)
       if (err.message.includes("Unexpected token '<'")) {
-        console.log("Received HTML response, redirecting to login");
         localStorage.removeItem("token");
         window.location.href = "/login";
         return;

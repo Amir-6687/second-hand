@@ -45,23 +45,23 @@ export default function CheckoutForm({ items, total, userId, onSuccess }) {
           // ایجاد سفارش در دیتابیس
           const orderData = {
             userId: userId,
-            items: items.map(item => ({
+            items: items.map((item) => ({
               productId: item._id,
               quantity: item.quantity || 1,
               price: item.price,
-              name: item.name
+              name: item.name,
             })),
             totalPrice: total,
             status: "پرداخت شده",
             paymentIntentId: paymentIntent.id,
-            shippingAddress: "Default Address", // TODO: Add address form
+            shippingAddress: "Default Address",
           };
 
           const orderRes = await apiFetch("/orders", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify(orderData),
           });
@@ -77,30 +77,30 @@ export default function CheckoutForm({ items, total, userId, onSuccess }) {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
-                  "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
-                body: JSON.stringify({ 
-                  quantity: item.quantity || 1 
+                body: JSON.stringify({
+                  quantity: item.quantity || 1,
                 }),
               });
             } catch (inventoryError) {
-              console.warn(`Failed to update inventory for product ${item._id}:`, inventoryError);
               // ادامه می‌دهیم حتی اگر موجودی به‌روزرسانی نشود
             }
           }
 
           setError(false);
           setMessage("Payment successful! Redirecting...");
-          
+
           // فراخوانی callback موفقیت
           setTimeout(() => {
             onSuccess();
           }, 1500);
-
         } catch (orderError) {
           console.error("Order creation error:", orderError);
           setError(true);
-          setMessage("Payment successful but order creation failed. Please contact support.");
+          setMessage(
+            "Payment successful but order creation failed. Please contact support."
+          );
         }
       }
     } catch (err) {

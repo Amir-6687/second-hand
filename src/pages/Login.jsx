@@ -50,7 +50,6 @@ export default function Login() {
     if (provider === "Google") {
       await handleGoogleLogin();
     } else {
-      console.log(`${provider} login will be implemented soon!`);
       alert(`${provider} login will be implemented soon!`);
     }
   };

@@ -268,8 +268,6 @@ export default function Admin() {
         images: imageUrls, // all images
       };
 
-      console.log("Sending product data:", productData);
-
       const res = await apiFetch("/products", {
         method: "POST",
         body: JSON.stringify(productData),
@@ -341,8 +339,6 @@ export default function Admin() {
         images: imageUrls,
       };
 
-      console.log("Sending commission data:", commissionData);
-
       const res = await apiFetch("/commission", {
         method: "POST",
         body: JSON.stringify(commissionData),
@@ -399,9 +395,6 @@ export default function Admin() {
     setSelectedFilesCount(files.length);
 
     // اگر در تب commission هستیم، فایل‌ها رو برای commission products ذخیره کن
-    if (activeTab === "commission") {
-      console.log("Commission product images selected:", files);
-    }
   };
 
   const handleImageUpload = async () => {
@@ -420,7 +413,6 @@ export default function Admin() {
       }
 
       const files = Array.from(fileInput.files);
-      console.log("Uploading files:", files);
 
       for (const file of files) {
         const formData = new FormData();
@@ -443,10 +435,6 @@ export default function Admin() {
       setImageUrl(""); // پاک کردن
       setImage(null);
       setSelectedFilesCount(0);
-      console.log(
-        "Upload completed. Total images:",
-        imageUrls.length + files.length
-      );
     } catch (err) {
       setError(`Error uploading images: ${err.message}`);
     }
@@ -1112,18 +1100,6 @@ export default function Admin() {
                         ) : (
                           <span>€{p.price}</span>
                         )}
-                        <div className="text-sm text-gray-500">
-                          Debug: price={p.price}, originalPrice=
-                          {p.originalPrice}, isDiscounted={p.isDiscounted},
-                          discountLabel=
-                          {p.discountLabel}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          Condition:{" "}
-                          {p.isDiscounted && p.originalPrice
-                            ? "TRUE - Showing discounted"
-                            : "FALSE - Showing normal price"}
-                        </div>
                         <div className="text-sm text-gray-500">
                           {p.description}
                         </div>

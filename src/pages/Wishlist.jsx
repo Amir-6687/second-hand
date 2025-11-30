@@ -28,9 +28,6 @@ export default function Wishlist() {
         const commissionRes = await apiFetch("/commission");
         const commissionData = await commissionRes.json();
         setCommissionProducts(commissionData);
-
-        console.log("Products loaded:", productsData.length);
-        console.log("Commission products loaded:", commissionData.length);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -43,17 +40,6 @@ export default function Wishlist() {
   // Combining all products
   const allProducts = [...products, ...commissionProducts];
   const wishlistProducts = allProducts.filter((p) => wishlist.includes(p._id));
-
-  // Debug info
-  console.log("Debug Wishlist:");
-  console.log("- Wishlist IDs:", wishlist);
-  console.log("- Regular products:", products.length);
-  console.log("- Commission products:", commissionProducts.length);
-  console.log("- All products:", allProducts.length);
-  console.log("- Wishlist products found:", wishlistProducts.length);
-  console.log("- localStorage wishlist:", JSON.parse(localStorage.getItem("wishlistItems") || "[]"));
-  console.log("- Sample product data:", allProducts[0]);
-  console.log("- Wishlist products data:", wishlistProducts);
 
   if (loading) {
     return (
@@ -82,22 +68,9 @@ export default function Wishlist() {
         {wishlistProducts.length === 0 ? (
           <div className="text-center mt-20 col-span-full">
             <AiFillHeart size={40} className="mx-auto text-pink-400" />
-            <h2 className="text-xl mt-4 text-[#171717]">Your wishlist is empty!</h2>
-            {/* Debug info */}
-            <div className="mt-4 p-4 bg-gray-100 rounded-lg text-left max-w-md mx-auto">
-              <h3 className="font-semibold mb-2 text-[#171717]">Debug Info:</h3>
-              <p className="text-[#171717]">Wishlist IDs: {JSON.stringify(wishlist)}</p>
-              <p className="text-[#171717]">Regular products: {products.length}</p>
-              <p className="text-[#171717]">Commission products: {commissionProducts.length}</p>
-              <p className="text-[#171717]">All products: {allProducts.length}</p>
-              <p className="text-[#171717]">Wishlist products found: {wishlistProducts.length}</p>
-              <button 
-                onClick={refreshWishlist}
-                className="mt-2 px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
-              >
-                Refresh Wishlist
-              </button>
-            </div>
+            <h2 className="text-xl mt-4 text-[#171717]">
+              Your wishlist is empty!
+            </h2>
           </div>
         ) : (
           wishlistProducts.map((product, idx) => (
@@ -111,11 +84,13 @@ export default function Wishlist() {
                 {/* Image + delivery */}
                 <div className="flex flex-col items-center justify-center w-32 sm:w-24 flex-shrink-0">
                   <img
-                    src={getImageUrl(product.image || product.images?.[0] || '')}
+                    src={getImageUrl(
+                      product.image || product.images?.[0] || ""
+                    )}
                     alt={product.name}
                     className="w-28 h-28 sm:w-20 sm:h-20 object-cover rounded border"
                     onError={(e) => {
-                      e.target.src = '/placeholder-image.jpg';
+                      e.target.src = "/placeholder-image.jpg";
                     }}
                   />
                   <div className="text-xs text-[#171717] mt-2 flex items-center gap-1">

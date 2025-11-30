@@ -23,7 +23,6 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
         const role = payload.role;
 
         if (requireAdmin && role !== "admin") {
-          console.log("User is not admin, showing access denied");
           setShowAccessDenied(true);
           return;
         }

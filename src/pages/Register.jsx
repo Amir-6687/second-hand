@@ -98,8 +98,6 @@ export default function Register() {
   };
 
   const handleSocialRegister = (provider) => {
-    // TODO: Implement social registration logic
-    console.log(`Registering with ${provider}`);
     alert(`${provider} registration will be implemented soon!`);
   };
 

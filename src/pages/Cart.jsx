@@ -99,10 +99,6 @@ export default function Cart() {
               {/* Image + quantity */}
               <div className="flex flex-col items-start gap-2 flex-shrink-0">
                 {(() => {
-                  console.log("Cart item:", item);
-                  console.log("item.images:", item.images);
-                  console.log("item.image:", item.image);
-
                   if (item.images?.length > 0) {
                     return (
                       <Link to={`/products/${item._id}`}>

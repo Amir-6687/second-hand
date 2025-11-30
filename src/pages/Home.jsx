@@ -330,7 +330,6 @@ export default function Home() {
                     width={80}
                     height={80}
                     onError={(e) => {
-                      console.log("Image failed to load:", e.target.src);
                       e.target.src = "/line-woman06.png";
                     }}
                   />
@@ -441,7 +440,6 @@ export default function Home() {
                 width={400}
                 height={300}
                 onError={(e) => {
-                  console.log("Image failed to load:", e.target.src);
                   e.target.src = "/line-woman09.png";
                 }}
               />
