@@ -148,7 +148,6 @@ export default function Login() {
                     color: "#111827",
                     WebkitTextFillColor: "#111827",
                     caretColor: "#111827",
-                    paddingRight: "40px",
                   }}
                 />
                 <button
