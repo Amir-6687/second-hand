@@ -173,7 +173,7 @@ export default function Register() {
                     padding: "0",
                     cursor: "pointer",
                     zIndex: 1,
-                    right: "8px",
+                    right: "4px",
                   }}
                   aria-label={showPassword ? "Hide Password" : "Show Password"}
                 >
@@ -250,7 +250,7 @@ export default function Register() {
                     padding: "0",
                     cursor: "pointer",
                     zIndex: 1,
-                    right: "8px",
+                    right: "4px",
                   }}
                   aria-label={
                     showConfirmPassword ? "Hide Password" : "Show Password"

@@ -161,7 +161,7 @@ export default function Login() {
                     padding: "0",
                     cursor: "pointer",
                     zIndex: 1,
-                    right: "8px",
+                    right: "4px",
                   }}
                   aria-label={showPassword ? "Hide Password" : "Show Password"}
                 >
