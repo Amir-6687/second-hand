@@ -148,7 +148,7 @@ export default function Login() {
                     color: "#111827",
                     WebkitTextFillColor: "#111827",
                     caretColor: "#111827",
-                    paddingRight: "28px",
+                    paddingRight: "40px",
                   }}
                 />
                 <button
@@ -161,7 +161,7 @@ export default function Login() {
                     padding: "0",
                     cursor: "pointer",
                     zIndex: 1,
-                    right: "0px",
+                    right: "12px",
                   }}
                   aria-label={showPassword ? "Hide Password" : "Show Password"}
                 >
