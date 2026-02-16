@@ -1,6 +1,5 @@
 // src/lib/api.js
-const BASE_URL =
-  import.meta.env.VITE_BACKEND_URL || "https://api.thegrrrlsclub.de";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export { BASE_URL };
 

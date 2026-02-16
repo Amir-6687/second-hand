@@ -104,7 +104,7 @@ const SearchBox = React.forwardRef(
         </form>
       </div>
     );
-  }
+  },
 );
 
 // Tooltip for Admin icon (desktop only)
@@ -247,7 +247,7 @@ function ShopIconWithTooltip({ onClick }) {
 
   const cartItemCount = items.reduce(
     (total, item) => total + (item.quantity || 1),
-    0
+    0,
   );
 
   return (
@@ -714,6 +714,8 @@ function Breadcrumb() {
 }
 
 export default function App() {
+  console.log("BACKEND_URL =", import.meta.env.VITE_BACKEND_URL);
+
   return (
     <AuthProvider>
       <CartProvider>

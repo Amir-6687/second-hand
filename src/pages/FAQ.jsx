@@ -35,8 +35,7 @@ const FAQ = () => {
     },
     {
       question: "How can I contact you?",
-      answer:
-        "You can reach us by email at jelena.rieke@gmail.com or through our website www.thegrrrlsclub.de. We're happy to answer your questions!",
+      answer: "You can reach us by email or through our website.",
     },
     {
       question: "Is there a minimum order quantity?",

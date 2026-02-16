@@ -20,31 +20,37 @@ cloudinary.config({
 // CORS Configuration
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  "https://thegrrrlsclub.de",
-  "https://www.thegrrrlsclub.de",
   "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
   "http://localhost:3000",
   "http://127.0.0.1:5173",
   "http://127.0.0.1:3000",
 ];
 
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // Allow requests with no origin (like mobile apps or curl requests)
+//       if (!origin) return callback(null, true);
+
+//       // Check if origin is in allowed list
+//       if (allowedOrigins.indexOf(origin) !== -1) {
+//         return callback(null, true);
+//       }
+
+//       const msg =
+//         "The CORS policy for this site does not allow access from the specified Origin.";
+//       return callback(new Error(msg), false);
+//     },
+//     credentials: true,
+//   }),
+// );
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-
-      // Check if origin is in allowed list
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        return callback(null, true);
-      }
-
-      const msg =
-        "The CORS policy for this site does not allow access from the specified Origin.";
-      return callback(new Error(msg), false);
-    },
+    origin: "*",
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.json({ limit: "10mb" }));
@@ -104,7 +110,7 @@ app.post("/upload", (req, res) => {
     try {
       // Upload to Cloudinary
       const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "thegrrrlsclub",
+        folder: "amir-project",
         use_filename: true,
         unique_filename: true,
         resource_type: "auto",

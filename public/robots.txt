@@ -19,4 +19,5 @@ Allow: /impressum
 Allow: /faq
 
 # Sitemap
-Sitemap: https://thegrrrlsclub.de/sitemap.xml
+# Sitemap: http://localhost:10000/sitemap.xml
+

@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 
 // Email verification function
 const sendVerificationEmail = async (email, verificationToken) => {
-  const backendBase = process.env.BACKEND_URL || "https://api.thegrrrlsclub.de";
+  const backendBase = process.env.BACKEND_URL;
   const verificationUrl = `${backendBase}/auth/verify/${verificationToken}`;
 
   const mailOptions = {
@@ -36,7 +36,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
 
 // Password reset email
 const sendPasswordResetEmail = async (email, resetToken) => {
-  const frontendBase = process.env.FRONTEND_URL || "http://localhost:5173";
+  const frontendBase = process.env.FRONTEND_URL;
   const resetUrl = `${frontendBase}/reset-password?token=${resetToken}`;
 
   const mailOptions = {
