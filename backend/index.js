@@ -8,7 +8,10 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const connectDB = require("./db");
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
-connectDB();
+connectDB().catch((err) => {
+  console.error("Failed to connect to MongoDB:", err);
+  process.exit(1);
+});
 
 // Cloudinary config
 cloudinary.config({
@@ -55,6 +58,9 @@ app.use(
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+// Serve static files from uploads directory
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Health check endpoint
 app.get("/health", (req, res) => {

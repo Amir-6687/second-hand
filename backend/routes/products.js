@@ -8,33 +8,66 @@ const {
 const multer = require("multer");
 const path = require("path");
 const mongoose = require("mongoose");
-const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const fs = require("fs");
 
-// تنظیمات Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// Local storage configuration
+const uploadsDir = path.join(__dirname, "../uploads");
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
-// تنظیمات ذخیره فایل روی Cloudinary
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "mir-femme/products",
-    allowed_formats: ["jpg", "jpeg", "png", "gif", "webp", "avif"],
-    transformation: [{ width: 800, height: 800, crop: "limit" }],
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadsDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
   },
 });
-const upload = multer({ storage });
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  fileFilter: (req, file, cb) => {
+    const allowedMimes = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+      "image/avif",
+    ];
+    if (allowedMimes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          "Invalid file type. Only JPEG, PNG, GIF, WebP, and AVIF allowed.",
+        ),
+      );
+    }
+  },
+});
 
 // روت آپلود عکس (فقط ادمین) ← باید قبل از روت‌های پارامتری باشد!
-router.post("/upload", authMiddleware, upload.single("image"), (req, res) => {
-  if (req.user.role !== "admin")
-    return res.status(403).json({ error: "Access denied" });
-  if (!req.file) return res.status(400).json({ error: "No file uploaded" });
-  res.json({ imageUrl: req.file.path });
+router.post("/upload", authMiddleware, (req, res, next) => {
+  upload.single("image")(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+
+    try {
+      if (req.user.role !== "admin")
+        return res.status(403).json({ error: "Access denied" });
+      if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+
+      // Return relative path that can be served by the backend
+      const imageUrl = `/uploads/${req.file.filename}`;
+      res.json({ imageUrl });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
 });
 
 // گرفتن همه محصولات
@@ -116,7 +149,7 @@ router.get("/:id", authMiddlewareOptional, async (req, res) => {
     if (req.user) {
       const userId = req.user.userId;
       const ratingObj = product.ratings?.find(
-        (r) => r.user.toString() === userId
+        (r) => r.user.toString() === userId,
       );
       userRating = ratingObj ? ratingObj.rating : 0;
       // بررسی خرید محصول
@@ -182,7 +215,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
         image,
         images,
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
     if (!product) return res.status(404).json({ error: "Product not found" });
     res.json(product);
