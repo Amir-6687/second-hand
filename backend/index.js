@@ -19,33 +19,23 @@ cloudinary.config({
 
 // CORS Configuration
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
+  "https://second-hand-vayr.vercel.app",
   "http://localhost:5173",
-  "http://localhost:5174",
-  "http://localhost:5175",
-  "http://localhost:3000",
-  "http://127.0.0.1:5173",
-  "http://127.0.0.1:3000",
 ];
 
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       // Allow requests with no origin (like mobile apps or curl requests)
-//       if (!origin) return callback(null, true);
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"), false);
+    },
+    credentials: true,
+  }),
+);
 
-//       // Check if origin is in allowed list
-//       if (allowedOrigins.indexOf(origin) !== -1) {
-//         return callback(null, true);
-//       }
-
-//       const msg =
-//         "The CORS policy for this site does not allow access from the specified Origin.";
-//       return callback(new Error(msg), false);
-//     },
-//     credentials: true,
-//   }),
-// );
 app.use(
   cors({
     origin: "*",
