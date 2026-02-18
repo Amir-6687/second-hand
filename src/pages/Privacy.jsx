@@ -23,7 +23,7 @@ const Privacy = () => {
                   1. Introduction
                 </h2>
                 <p className="text-[#171717] leading-relaxed">
-                  At The Grrrls Club, we are committed to protecting your
+                  At The Second-Hand Club, we are committed to protecting your
                   privacy and personal information. This Privacy Policy explains
                   how we collect, use, and safeguard your data when you visit
                   our website or make a purchase.
@@ -208,9 +208,9 @@ const Privacy = () => {
                     data practices, please contact us:
                   </p>
                   <p className="text-[#171717]">
-                    Email: jelena.rieke@gmail.com
+                    Email: amirhossein.akbari.de@gmail.com
                     <br />
-                    Website: www.thegrrrlsclub.de
+                    Website: https://second-hand-vayr.vercel.app/
                   </p>
                 </div>
               </section>

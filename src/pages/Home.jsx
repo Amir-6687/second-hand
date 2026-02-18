@@ -165,8 +165,8 @@ export default function Home() {
   return (
     <>
       <SEOHead
-        title="The Grrrls Club - Fashion & Lifestyle"
-        description="Discover unique fashion items, accessories, and lifestyle products at The Grrrls Club. Shop now for the latest trends and exclusive collections."
+        title="The Second-Hand Club - Fashion & Lifestyle"
+        description="Discover unique fashion items, accessories, and lifestyle products at The Second-Hand Club. Shop now for the latest trends and exclusive collections."
         keywords="fashion, lifestyle, clothing, accessories, shopping, women, style, boutique"
       />
 
@@ -286,7 +286,7 @@ export default function Home() {
         <LazyWrapper className={styles.featuresSection}>
           <div className={styles.featuresContainer}>
             <h2 className={styles.featuresTitle}>
-              Why Choose The Grrrls Club?
+              Why Choose The Second-Hand Club?
             </h2>
             <div className={styles.featuresGrid}>
               <div className={styles.featureItem}>
@@ -424,7 +424,7 @@ export default function Home() {
               <h2 className={styles.ctaTitle}>Ready to Start Shopping?</h2>
               <p className={styles.ctaDescription}>
                 Join thousands of fashion lovers who have discovered their style
-                at The Grrrls Club
+                at The Second-Hand Club
               </p>
               <Link to="/products">
                 <button className={styles.ctaButton}>

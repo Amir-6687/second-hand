@@ -5,7 +5,7 @@ import { FaExclamationTriangle, FaHome, FaShoppingCart } from "react-icons/fa";
 export default function PaymentError() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  
+
   const errorMessage = searchParams.get("error") || "Payment was not completed";
   const errorCode = searchParams.get("error_code") || "unknown";
 
@@ -30,16 +30,20 @@ export default function PaymentError() {
 
         {/* Error Details */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Error Details</h2>
-          
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            Error Details
+          </h2>
+
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold text-gray-700 mb-2">Error Message</h3>
+              <h3 className="font-semibold text-gray-700 mb-2">
+                Error Message
+              </h3>
               <p className="text-gray-600 bg-gray-50 p-3 rounded-lg">
                 {errorMessage}
               </p>
             </div>
-            
+
             <div>
               <h3 className="font-semibold text-gray-700 mb-2">Error Code</h3>
               <p className="text-gray-600 bg-gray-50 p-3 rounded-lg font-mono">
@@ -50,7 +54,9 @@ export default function PaymentError() {
 
           {/* Common Solutions */}
           <div className="mt-8">
-            <h3 className="font-semibold text-gray-700 mb-4">What you can do:</h3>
+            <h3 className="font-semibold text-gray-700 mb-4">
+              What you can do:
+            </h3>
             <ul className="space-y-2 text-gray-600">
               <li className="flex items-start gap-2">
                 <span className="text-blue-600 font-bold">•</span>
@@ -95,11 +101,11 @@ export default function PaymentError() {
           <p className="text-gray-500 mb-2">
             Need help? Contact our support team
           </p>
-          <a 
-            href="mailto:support@thegrrrlsclub.de" 
+          <a
+            href="mailto:support@thegrrrlsclub.de"
             className="text-blue-600 hover:text-blue-800 font-medium"
           >
-            support@thegrrrlsclub.de
+            support@the.second-hand.club.de
           </a>
         </div>
       </div>

@@ -26,7 +26,7 @@ const Impressum = () => {
                   <p className="text-[#171717] leading-relaxed">
                     <strong>Elena Rieke</strong>
                     <br />
-                    The Grrrls Club
+                    The Second-Hand Club
                     <br />
                     [Street and house number]
                     <br />
@@ -45,9 +45,10 @@ const Impressum = () => {
                   <p className="text-[#171717] leading-relaxed">
                     <strong>Phone:</strong> [Phone number]
                     <br />
-                    <strong>E-Mail:</strong> jelena.rieke@gmail.com
+                    <strong>E-Mail:</strong> amirhossein.akbari.de@gmail.com
                     <br />
-                    <strong>Website:</strong> www.thegrrrlsclub.de
+                    <strong>Website:</strong>{" "}
+                    https://second-hand-vayr.vercel.app/
                   </p>
                 </div>
               </section>

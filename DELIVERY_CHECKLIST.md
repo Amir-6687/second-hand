@@ -1,4 +1,4 @@
-# 📦 چک‌لیست تحویل پروژه - The Grrrls Club
+# 📦 چک‌لیست تحویل پروژه - The Second-Hand Club
 
 ## ✅ مرحله 1: بررسی نهایی کد
 
@@ -44,12 +44,12 @@ git push origin main
 ### Frontend (Netlify):
 
 - [ ] بررسی که آخرین commit در Netlify deploy شده است
-- [ ] بررسی که سایت آنلاین است: https://thegrrrlsclub.de
+- [ ] بررسی که سایت آنلاین است: https://second-hand-vayr.vercel.app/
 - [ ] تست عملکرد اصلی سایت
 
 ### Backend (Render):
 
-- [ ] بررسی که backend آنلاین است: https://api.thegrrrlsclub.de
+- [ ] بررسی که backend آنلاین است: https://second-hand-vayr.vercel.app/
 - [ ] تست API endpoints
 - [ ] بررسی اتصال به دیتابیس
 
@@ -113,7 +113,7 @@ git push origin main
 
 #### 1. دسترسی‌های Admin:
 
-- **URL Admin Panel**: https://thegrrrlsclub.de/admin-dashboard
+- **URL Admin Panel**: https://second-hand-vayr.vercel.app/admin-dashboard
 - **راهنمای ایجاد Admin User**: در فایل `TESTING_GUIDE.md`
 
 #### 2. دسترسی‌های Hosting:
@@ -192,6 +192,6 @@ git push origin main
 
 پس از تکمیل تمام مراحل بالا، پروژه آماده تحویل به مشتری است.
 
-**تاریخ تحویل**: ******\_\_\_******
+**تاریخ تحویل**: **\*\***\_\_\_**\*\***
 **نسخه**: 1.0.0
 **وضعیت**: ✅ آماده تحویل

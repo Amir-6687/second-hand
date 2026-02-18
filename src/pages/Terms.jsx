@@ -24,8 +24,9 @@ const Terms = () => {
                 </h2>
                 <p className="text-[#171717] leading-relaxed">
                   These Terms and Conditions apply to all orders through our
-                  online shop "The Grrrls Club", represented by Elena Rieke. Our
-                  offer is directed at consumers within the meaning of § 13 BGB.
+                  online shop "The Second-Hand Club", represented by Elena
+                  Rieke. Our offer is directed at consumers within the meaning
+                  of § 13 BGB.
                 </p>
               </section>
 
@@ -37,7 +38,7 @@ const Terms = () => {
                   <p className="text-[#171717]">
                     <strong>The purchase contract is concluded with:</strong>
                     <br />
-                    Elena Rieke – The Grrrls Club
+                    Amir Akbari – The Second-Hand Club
                     <br />
                     [Address to be added]
                     <br />
@@ -184,9 +185,9 @@ const Terms = () => {
                     us:
                   </p>
                   <p className="text-[#171717] mt-2">
-                    Email: jelena.rieke@gmail.com
+                    Email: amirhossein.akbari.de@gmail.com
                     <br />
-                    Website: www.thegrrrlsclub.de
+                    Website: https://second-hand-vayr.vercel.app/
                   </p>
                 </div>
               </section>
